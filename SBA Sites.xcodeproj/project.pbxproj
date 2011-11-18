@@ -71,9 +71,36 @@
 		FF4137B114587EFC00F36E7C /* 73-radar@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = FF41378814587EFC00F36E7C /* 73-radar@2x.png */; };
 		FF4137B214587EFC00F36E7C /* 74-location.png in Resources */ = {isa = PBXBuildFile; fileRef = FF41378914587EFC00F36E7C /* 74-location.png */; };
 		FF4137B314587EFC00F36E7C /* 74-location@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = FF41378A14587EFC00F36E7C /* 74-location@2x.png */; };
+		FF4A11AC1475404C003AC6E0 /* InformationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FF4A11AB1475404C003AC6E0 /* InformationViewController.m */; };
+		FF4A11B01475407D003AC6E0 /* InformationDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FF4A11AF1475407D003AC6E0 /* InformationDetailViewController.m */; };
+		FF4A11B7147540AF003AC6E0 /* ShadowedTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = FF4A11B2147540AF003AC6E0 /* ShadowedTableView.m */; };
+		FF4A11B8147540AF003AC6E0 /* GradientView.m in Sources */ = {isa = PBXBuildFile; fileRef = FF4A11B4147540AF003AC6E0 /* GradientView.m */; };
+		FF4A11B9147540AF003AC6E0 /* ClearLabelsCellView.m in Sources */ = {isa = PBXBuildFile; fileRef = FF4A11B6147540AF003AC6E0 /* ClearLabelsCellView.m */; };
+		FF4A11BD147542D8003AC6E0 /* InfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FF4A11BC147542D8003AC6E0 /* InfoViewController.m */; };
+		FF4A11C114754319003AC6E0 /* InformationDetailViewController-iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = FF4A11BE14754319003AC6E0 /* InformationDetailViewController-iPad.xib */; };
+		FF4A11C214754319003AC6E0 /* InformationViewController-iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = FF4A11BF14754319003AC6E0 /* InformationViewController-iPad.xib */; };
+		FF4A11C314754319003AC6E0 /* InfoViewController-iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = FF4A11C014754319003AC6E0 /* InfoViewController-iPad.xib */; };
+		FF4A11C714754329003AC6E0 /* InformationViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = FF4A11C414754329003AC6E0 /* InformationViewController.xib */; };
+		FF4A11C814754329003AC6E0 /* InformationDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = FF4A11C514754329003AC6E0 /* InformationDetailViewController.xib */; };
+		FF4A11C914754329003AC6E0 /* InfoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = FF4A11C614754329003AC6E0 /* InfoViewController.xib */; };
+		FF4A11CD1475439F003AC6E0 /* LayerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FF4A11CC1475439F003AC6E0 /* LayerViewController.m */; };
+		FF4A11D0147543DB003AC6E0 /* LayerButton.xib in Resources */ = {isa = PBXBuildFile; fileRef = FF4A11CE147543DB003AC6E0 /* LayerButton.xib */; };
+		FF4A11D1147543DB003AC6E0 /* LayerViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = FF4A11CF147543DB003AC6E0 /* LayerViewController.xib */; };
+		FF4A11D414754A7E003AC6E0 /* SBALayer.m in Sources */ = {isa = PBXBuildFile; fileRef = FF4A11D314754A7E003AC6E0 /* SBALayer.m */; };
+		FF52317F14743FE800EB02FA /* DetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = FF52317E14743FE800EB02FA /* DetailViewController.xib */; };
+		FF52318314743FFB00EB02FA /* DetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FF52318214743FFB00EB02FA /* DetailViewController.m */; };
+		FF5231861474406C00EB02FA /* SiteImageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FF5231851474406C00EB02FA /* SiteImageViewController.m */; };
+		FF5231881474407800EB02FA /* SiteImageViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = FF5231871474407800EB02FA /* SiteImageViewController.xib */; };
+		FF52318A14744BED00EB02FA /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FF52318914744BED00EB02FA /* MessageUI.framework */; };
 		FFF040E01474050A00A701A9 /* SBASiteTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FFF040DE1474050A00A701A9 /* SBASiteTableViewController.m */; };
 		FFF040E11474050A00A701A9 /* SBASiteTableViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = FFF040DF1474050A00A701A9 /* SBASiteTableViewController.xib */; };
 		FFF040E71474074100A701A9 /* SBAConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = FFF040E61474074100A701A9 /* SBAConstants.m */; };
+		FFF0853E14769A33001B1C1E /* SBA Owned.png in Resources */ = {isa = PBXBuildFile; fileRef = FFF0853914769A33001B1C1E /* SBA Owned.png */; };
+		FFF0853F14769A33001B1C1E /* New Construction.png in Resources */ = {isa = PBXBuildFile; fileRef = FFF0853A14769A33001B1C1E /* New Construction.png */; };
+		FFF0854014769A33001B1C1E /* SBA Managed.png in Resources */ = {isa = PBXBuildFile; fileRef = FFF0853B14769A33001B1C1E /* SBA Managed.png */; };
+		FFF0854114769A33001B1C1E /* Central America.png in Resources */ = {isa = PBXBuildFile; fileRef = FFF0853C14769A33001B1C1E /* Central America.png */; };
+		FFF0854214769A33001B1C1E /* Canada.png in Resources */ = {isa = PBXBuildFile; fileRef = FFF0853D14769A33001B1C1E /* Canada.png */; };
+		FFF085461476A8A9001B1C1E /* Grey.png in Resources */ = {isa = PBXBuildFile; fileRef = FFF085451476A8A9001B1C1E /* Grey.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -147,11 +174,48 @@
 		FF41378814587EFC00F36E7C /* 73-radar@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "73-radar@2x.png"; sourceTree = "<group>"; };
 		FF41378914587EFC00F36E7C /* 74-location.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "74-location.png"; sourceTree = "<group>"; };
 		FF41378A14587EFC00F36E7C /* 74-location@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "74-location@2x.png"; sourceTree = "<group>"; };
+		FF4A11AA1475404C003AC6E0 /* InformationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InformationViewController.h; sourceTree = "<group>"; };
+		FF4A11AB1475404C003AC6E0 /* InformationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InformationViewController.m; sourceTree = "<group>"; };
+		FF4A11AE1475407D003AC6E0 /* InformationDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InformationDetailViewController.h; sourceTree = "<group>"; };
+		FF4A11AF1475407D003AC6E0 /* InformationDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InformationDetailViewController.m; sourceTree = "<group>"; };
+		FF4A11B1147540AF003AC6E0 /* ShadowedTableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShadowedTableView.h; sourceTree = "<group>"; };
+		FF4A11B2147540AF003AC6E0 /* ShadowedTableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShadowedTableView.m; sourceTree = "<group>"; };
+		FF4A11B3147540AF003AC6E0 /* GradientView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GradientView.h; sourceTree = "<group>"; };
+		FF4A11B4147540AF003AC6E0 /* GradientView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GradientView.m; sourceTree = "<group>"; };
+		FF4A11B5147540AF003AC6E0 /* ClearLabelsCellView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ClearLabelsCellView.h; sourceTree = "<group>"; };
+		FF4A11B6147540AF003AC6E0 /* ClearLabelsCellView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ClearLabelsCellView.m; sourceTree = "<group>"; };
+		FF4A11BB147542D8003AC6E0 /* InfoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InfoViewController.h; sourceTree = "<group>"; };
+		FF4A11BC147542D8003AC6E0 /* InfoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InfoViewController.m; sourceTree = "<group>"; };
+		FF4A11BE14754319003AC6E0 /* InformationDetailViewController-iPad.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = "InformationDetailViewController-iPad.xib"; sourceTree = "<group>"; };
+		FF4A11BF14754319003AC6E0 /* InformationViewController-iPad.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = "InformationViewController-iPad.xib"; sourceTree = "<group>"; };
+		FF4A11C014754319003AC6E0 /* InfoViewController-iPad.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = "InfoViewController-iPad.xib"; sourceTree = "<group>"; };
+		FF4A11C414754329003AC6E0 /* InformationViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = InformationViewController.xib; sourceTree = "<group>"; };
+		FF4A11C514754329003AC6E0 /* InformationDetailViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = InformationDetailViewController.xib; sourceTree = "<group>"; };
+		FF4A11C614754329003AC6E0 /* InfoViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = InfoViewController.xib; sourceTree = "<group>"; };
+		FF4A11CB1475439F003AC6E0 /* LayerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LayerViewController.h; sourceTree = "<group>"; };
+		FF4A11CC1475439F003AC6E0 /* LayerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LayerViewController.m; sourceTree = "<group>"; };
+		FF4A11CE147543DB003AC6E0 /* LayerButton.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LayerButton.xib; sourceTree = "<group>"; };
+		FF4A11CF147543DB003AC6E0 /* LayerViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LayerViewController.xib; sourceTree = "<group>"; };
+		FF4A11D214754A7E003AC6E0 /* SBALayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBALayer.h; sourceTree = "<group>"; };
+		FF4A11D314754A7E003AC6E0 /* SBALayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBALayer.m; sourceTree = "<group>"; };
+		FF52317E14743FE800EB02FA /* DetailViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DetailViewController.xib; sourceTree = "<group>"; };
+		FF52318114743FFB00EB02FA /* DetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DetailViewController.h; sourceTree = "<group>"; };
+		FF52318214743FFB00EB02FA /* DetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DetailViewController.m; sourceTree = "<group>"; };
+		FF5231841474406C00EB02FA /* SiteImageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SiteImageViewController.h; sourceTree = "<group>"; };
+		FF5231851474406C00EB02FA /* SiteImageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SiteImageViewController.m; sourceTree = "<group>"; };
+		FF5231871474407800EB02FA /* SiteImageViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SiteImageViewController.xib; sourceTree = "<group>"; };
+		FF52318914744BED00EB02FA /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
 		FFF040DD1474050A00A701A9 /* SBASiteTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBASiteTableViewController.h; sourceTree = "<group>"; };
 		FFF040DE1474050A00A701A9 /* SBASiteTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBASiteTableViewController.m; sourceTree = "<group>"; };
 		FFF040DF1474050A00A701A9 /* SBASiteTableViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SBASiteTableViewController.xib; sourceTree = "<group>"; };
 		FFF040E51474074100A701A9 /* SBAConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBAConstants.h; sourceTree = "<group>"; };
 		FFF040E61474074100A701A9 /* SBAConstants.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBAConstants.m; sourceTree = "<group>"; };
+		FFF0853914769A33001B1C1E /* SBA Owned.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "SBA Owned.png"; sourceTree = "<group>"; };
+		FFF0853A14769A33001B1C1E /* New Construction.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "New Construction.png"; sourceTree = "<group>"; };
+		FFF0853B14769A33001B1C1E /* SBA Managed.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "SBA Managed.png"; sourceTree = "<group>"; };
+		FFF0853C14769A33001B1C1E /* Central America.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Central America.png"; sourceTree = "<group>"; };
+		FFF0853D14769A33001B1C1E /* Canada.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Canada.png; sourceTree = "<group>"; };
+		FFF085451476A8A9001B1C1E /* Grey.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Grey.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -159,6 +223,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FF52318A14744BED00EB02FA /* MessageUI.framework in Frameworks */,
 				FF413747145840D900F36E7C /* libz.dylib in Frameworks */,
 				FF413743145840C500F36E7C /* libstdc++.dylib in Frameworks */,
 				FF41373514583F8A00F36E7C /* libArcGIS.a in Frameworks */,
@@ -197,6 +262,7 @@
 		FF41371414583ED200F36E7C /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				FF52318914744BED00EB02FA /* MessageUI.framework */,
 				FF413746145840D900F36E7C /* libz.dylib */,
 				FF413742145840C500F36E7C /* libstdc++.dylib */,
 				FF41373414583F8A00F36E7C /* libArcGIS.a */,
@@ -215,6 +281,7 @@
 		FF41371B14583ED200F36E7C /* SBA Sites */ = {
 			isa = PBXGroup;
 			children = (
+				FF4A11BA147540B3003AC6E0 /* Shadowed TableView */,
 				FF41373114583F2800F36E7C /* View Controllers */,
 				FF41372414583ED200F36E7C /* SBAAppDelegate.h */,
 				FF41372514583ED200F36E7C /* SBAAppDelegate.m */,
@@ -222,6 +289,8 @@
 				FF40FF50146D5445007F1D88 /* SBASearchDisplayController.m */,
 				FFF040E51474074100A701A9 /* SBAConstants.h */,
 				FFF040E61474074100A701A9 /* SBAConstants.m */,
+				FF4A11D214754A7E003AC6E0 /* SBALayer.h */,
+				FF4A11D314754A7E003AC6E0 /* SBALayer.m */,
 				FF41371C14583ED200F36E7C /* Supporting Files */,
 			);
 			path = "SBA Sites";
@@ -241,6 +310,7 @@
 		FF41373114583F2800F36E7C /* View Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				FF4A11CA1475435E003AC6E0 /* InstructionViewControllers */,
 				FF41372C14583F1D00F36E7C /* SBARootViewController.h */,
 				FF41372D14583F1D00F36E7C /* SBARootViewController.m */,
 				FF41372E14583F1D00F36E7C /* SBARootViewController_iPhone.xib */,
@@ -248,6 +318,16 @@
 				FFF040DD1474050A00A701A9 /* SBASiteTableViewController.h */,
 				FFF040DE1474050A00A701A9 /* SBASiteTableViewController.m */,
 				FFF040DF1474050A00A701A9 /* SBASiteTableViewController.xib */,
+				FF52318114743FFB00EB02FA /* DetailViewController.h */,
+				FF52318214743FFB00EB02FA /* DetailViewController.m */,
+				FF52317E14743FE800EB02FA /* DetailViewController.xib */,
+				FF5231841474406C00EB02FA /* SiteImageViewController.h */,
+				FF5231851474406C00EB02FA /* SiteImageViewController.m */,
+				FF5231871474407800EB02FA /* SiteImageViewController.xib */,
+				FF4A11CB1475439F003AC6E0 /* LayerViewController.h */,
+				FF4A11CC1475439F003AC6E0 /* LayerViewController.m */,
+				FF4A11CF147543DB003AC6E0 /* LayerViewController.xib */,
+				FF4A11CE147543DB003AC6E0 /* LayerButton.xib */,
 			);
 			name = "View Controllers";
 			sourceTree = "<group>";
@@ -265,6 +345,7 @@
 		FF41375414587E5600F36E7C /* images */ = {
 			isa = PBXGroup;
 			children = (
+				FFF0854414769A3A001B1C1E /* layer icons */,
 				FF41375714587E7C00F36E7C /* app icons */,
 				FF41375614587E7300F36E7C /* icons */,
 				FF41375514587E6400F36E7C /* logos */,
@@ -336,6 +417,51 @@
 				FF41375814587E9F00F36E7C /* icon.png */,
 			);
 			name = "app icons";
+			sourceTree = "<group>";
+		};
+		FF4A11BA147540B3003AC6E0 /* Shadowed TableView */ = {
+			isa = PBXGroup;
+			children = (
+				FF4A11B1147540AF003AC6E0 /* ShadowedTableView.h */,
+				FF4A11B2147540AF003AC6E0 /* ShadowedTableView.m */,
+				FF4A11B3147540AF003AC6E0 /* GradientView.h */,
+				FF4A11B4147540AF003AC6E0 /* GradientView.m */,
+				FF4A11B5147540AF003AC6E0 /* ClearLabelsCellView.h */,
+				FF4A11B6147540AF003AC6E0 /* ClearLabelsCellView.m */,
+			);
+			name = "Shadowed TableView";
+			sourceTree = "<group>";
+		};
+		FF4A11CA1475435E003AC6E0 /* InstructionViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				FF4A11AA1475404C003AC6E0 /* InformationViewController.h */,
+				FF4A11AB1475404C003AC6E0 /* InformationViewController.m */,
+				FF4A11C414754329003AC6E0 /* InformationViewController.xib */,
+				FF4A11BF14754319003AC6E0 /* InformationViewController-iPad.xib */,
+				FF4A11AE1475407D003AC6E0 /* InformationDetailViewController.h */,
+				FF4A11AF1475407D003AC6E0 /* InformationDetailViewController.m */,
+				FF4A11C514754329003AC6E0 /* InformationDetailViewController.xib */,
+				FF4A11BE14754319003AC6E0 /* InformationDetailViewController-iPad.xib */,
+				FF4A11BB147542D8003AC6E0 /* InfoViewController.h */,
+				FF4A11BC147542D8003AC6E0 /* InfoViewController.m */,
+				FF4A11C614754329003AC6E0 /* InfoViewController.xib */,
+				FF4A11C014754319003AC6E0 /* InfoViewController-iPad.xib */,
+			);
+			name = InstructionViewControllers;
+			sourceTree = "<group>";
+		};
+		FFF0854414769A3A001B1C1E /* layer icons */ = {
+			isa = PBXGroup;
+			children = (
+				FFF085451476A8A9001B1C1E /* Grey.png */,
+				FFF0853914769A33001B1C1E /* SBA Owned.png */,
+				FFF0853A14769A33001B1C1E /* New Construction.png */,
+				FFF0853B14769A33001B1C1E /* SBA Managed.png */,
+				FFF0853C14769A33001B1C1E /* Central America.png */,
+				FFF0853D14769A33001B1C1E /* Canada.png */,
+			);
+			name = "layer icons";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -438,6 +564,22 @@
 				FF4137B214587EFC00F36E7C /* 74-location.png in Resources */,
 				FF4137B314587EFC00F36E7C /* 74-location@2x.png in Resources */,
 				FFF040E11474050A00A701A9 /* SBASiteTableViewController.xib in Resources */,
+				FF52317F14743FE800EB02FA /* DetailViewController.xib in Resources */,
+				FF5231881474407800EB02FA /* SiteImageViewController.xib in Resources */,
+				FF4A11C114754319003AC6E0 /* InformationDetailViewController-iPad.xib in Resources */,
+				FF4A11C214754319003AC6E0 /* InformationViewController-iPad.xib in Resources */,
+				FF4A11C314754319003AC6E0 /* InfoViewController-iPad.xib in Resources */,
+				FF4A11C714754329003AC6E0 /* InformationViewController.xib in Resources */,
+				FF4A11C814754329003AC6E0 /* InformationDetailViewController.xib in Resources */,
+				FF4A11C914754329003AC6E0 /* InfoViewController.xib in Resources */,
+				FF4A11D0147543DB003AC6E0 /* LayerButton.xib in Resources */,
+				FF4A11D1147543DB003AC6E0 /* LayerViewController.xib in Resources */,
+				FFF0853E14769A33001B1C1E /* SBA Owned.png in Resources */,
+				FFF0853F14769A33001B1C1E /* New Construction.png in Resources */,
+				FFF0854014769A33001B1C1E /* SBA Managed.png in Resources */,
+				FFF0854114769A33001B1C1E /* Central America.png in Resources */,
+				FFF0854214769A33001B1C1E /* Canada.png in Resources */,
+				FFF085461476A8A9001B1C1E /* Grey.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -454,6 +596,16 @@
 				FF40FF51146D5445007F1D88 /* SBASearchDisplayController.m in Sources */,
 				FFF040E01474050A00A701A9 /* SBASiteTableViewController.m in Sources */,
 				FFF040E71474074100A701A9 /* SBAConstants.m in Sources */,
+				FF52318314743FFB00EB02FA /* DetailViewController.m in Sources */,
+				FF5231861474406C00EB02FA /* SiteImageViewController.m in Sources */,
+				FF4A11AC1475404C003AC6E0 /* InformationViewController.m in Sources */,
+				FF4A11B01475407D003AC6E0 /* InformationDetailViewController.m in Sources */,
+				FF4A11B7147540AF003AC6E0 /* ShadowedTableView.m in Sources */,
+				FF4A11B8147540AF003AC6E0 /* GradientView.m in Sources */,
+				FF4A11B9147540AF003AC6E0 /* ClearLabelsCellView.m in Sources */,
+				FF4A11BD147542D8003AC6E0 /* InfoViewController.m in Sources */,
+				FF4A11CD1475439F003AC6E0 /* LayerViewController.m in Sources */,
+				FF4A11D414754A7E003AC6E0 /* SBALayer.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -522,6 +674,7 @@
 		FF41372A14583ED200F36E7C /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_OBJC_ARC = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: James Chapman (S5TV9Q4TL4)";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "SBA Sites/SBA Sites-Prefix.pch";
@@ -541,6 +694,7 @@
 		FF41372B14583ED200F36E7C /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_OBJC_ARC = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: SBA Communications";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "SBA Sites/SBA Sites-Prefix.pch";
@@ -551,7 +705,7 @@
 					"-all_load",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "C91E7716-AC64-4665-9C61-0E09390B2267";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "65D06CD4-A276-461B-A8B9-06EF2883C756";
 				USER_HEADER_SEARCH_PATHS = "$(HOME)/Library/SDKs/ArcGIS/iOS.sdk/usr/local/include/**";
 				WRAPPER_EXTENSION = app;
 			};

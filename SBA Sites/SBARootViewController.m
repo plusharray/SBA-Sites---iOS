@@ -8,6 +8,10 @@
 
 #import "SBARootViewController.h"
 #import "SBASiteTableViewController.h"
+#import "DetailViewController.h"
+#import "LayerViewController.h"
+#import "InformationViewController.h"
+#import "SBALayer.h"
 
 @implementation SBARootViewController
 
@@ -27,18 +31,27 @@
 @synthesize popoverController = __popoverController;
 @synthesize toolbar = _toolbar;
 @synthesize layers = _layers;
+@synthesize visibleLayers = _visibleLayers;
 
 #pragma mark - Accessors
 
-- (NSMutableArray *)layers
+- (NSArray *)layers
 {
     if (!_layers) {
-        _layers = [[NSMutableArray alloc] initWithCapacity:5];
+        NSMutableArray *allLayers = [[NSMutableArray alloc] initWithCapacity:5];
         for (int i = 0; i < 5; i++) {
-            [_layers addObject:[NSNumber numberWithInt:i]];
+            [allLayers addObject:[SBALayer layerForID:i]];
         }
+        _layers = [NSArray arrayWithArray:allLayers];
     }
     return _layers;
+}
+
+- (NSArray *)visibleLayers
+{
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"isVisible == YES"];
+    NSArray *layers = [self.layers filteredArrayUsingPredicate:predicate];
+    return layers;
 }
 
 #pragma mark - IBActions
@@ -73,14 +86,21 @@
     SBASiteTableViewController *viewController = [[SBASiteTableViewController alloc] initWithNibName:@"SBASiteTableViewController" bundle:nil];
     [self presentViewController:viewController animated:YES completion:^(void){
         [viewController setMapView:self.mapView];
-        [viewController setLayers:self.layers];
+        [viewController setLayers:self.visibleLayers];
         [viewController getSites];
     }];
 }
 
 - (IBAction)showLayerList:(id)sender
 {
-    
+    if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone) {
+		LayerViewController *layerViewController = [[LayerViewController alloc] initWithNibName:@"LayerViewController" bundle:nil];
+        layerViewController.modalPresentationStyle = UIModalPresentationFullScreen;
+		layerViewController.modalTransitionStyle = UIModalTransitionStylePartialCurl;
+        [layerViewController.mapSegmentedControl addTarget:self action:@selector(mapType:) forControlEvents:UIControlEventValueChanged];
+        [layerViewController setLayerArray:self.layers];
+        [self presentViewController:layerViewController animated:YES completion:^(void){}];
+    }
 }
 
 - (IBAction)showSearch:(id)sender
@@ -90,7 +110,41 @@
 
 - (IBAction)showInfo:(id)sender
 {
+    InformationViewController *infoViewController = [[InformationViewController alloc] initWithNibName:@"InformationViewController" bundle:nil];
+    [self.navigationController pushViewController:infoViewController animated:YES];
+}
+
+- (void)layerSelected:(NSNotification *)notification
+{
+    //set visible layers
+	self.dynamicLayer.visibleLayers = [self.visibleLayers valueForKey:@"layerID"];
+}
+
+- (void)siteSelected:(NSNotification *)notification
+{
+    AGSIdentifyResult *result = (AGSIdentifyResult *)[notification object];
+    AGSPoint* point = (AGSPoint *)[[result feature] geometry];
     
+    //clear previous results
+    [self.graphicsLayer removeAllGraphics];
+	
+    //add new results
+    AGSSymbol* symbol = [AGSSimpleFillSymbol simpleFillSymbol];
+    symbol.color = [UIColor colorWithRed:0 green:0 blue:1 alpha:0.5];
+    
+    result.feature.symbol = symbol;
+    [self.graphicsLayer addGraphic:result.feature];
+    
+    //get the site code & name
+    NSString *siteCode = [result.feature.attributes objectForKey:@"SiteCode"];
+    NSString *siteName = [result.feature.attributes objectForKey:@"SiteName"];
+    self.mapView.callout.title = siteCode;
+    self.mapView.callout.detail = siteName;
+    
+    [self.mapView showCalloutAtPoint:point forGraphic:[result feature] animated:YES];
+    
+    //call dataChanged on the graphics layer to redraw the graphics
+    [self.graphicsLayer dataChanged];	
 }
 
 #pragma mark - Init
@@ -110,6 +164,11 @@
     [super didReceiveMemoryWarning];
     
     // Release any cached data, images, etc that aren't in use.
+}
+
+- (void)dealloc
+{
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
 #pragma mark - View lifecycle
@@ -133,9 +192,9 @@
 	
 	//create an instance of a dynmaic map layer
 	self.dynamicLayer = [[AGSDynamicMapServiceLayer alloc] initWithURL:[NSURL URLWithString:DynamicMapServiceURL]];
-	
+
 	//set visible layers
-	self.dynamicLayer.visibleLayers = [NSArray arrayWithArray:self.layers];
+	self.dynamicLayer.visibleLayers = [self.visibleLayers valueForKey:@"layerID"];
 	
 	//name the layer. This is the name that is displayed if there was a property page, tocs, etc...
 	self.dynamicLayerView = [self.mapView addMapLayer:self.dynamicLayer withName:@"Dynamic Layer"];
@@ -179,6 +238,10 @@
     } else {
         [self.navigationController setNavigationBarHidden:YES animated:NO];
     }
+    
+    // Register for Notifications
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(siteSelected:) name:SBASiteSelected object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(layerSelected:) name:SBALayerSelected object:nil];
 }
 
 - (void)viewDidUnload
@@ -188,6 +251,11 @@
     // e.g. self.myOutlet = nil;
     [self.mapView.gps stop];
     self.mapView = nil;
+}
+
+- (void)viewWillAppear:(BOOL)animated
+{
+    [self.navigationController setNavigationBarHidden:YES animated:YES];
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
@@ -209,7 +277,7 @@
     //store for later use
     self.mappoint = mappoint;
     
-	self.identifyParams.layerIds = [NSArray arrayWithArray:self.layers];
+	self.identifyParams.layerIds = [self.visibleLayers valueForKey:@"layerID"];
 	self.identifyParams.tolerance = 3;
 	self.identifyParams.geometry = self.mappoint;
 	self.identifyParams.size = self.mapView.bounds.size;
@@ -225,7 +293,10 @@
 //show the attributes if accessory button is clicked
 - (void)mapView:(AGSMapView *)mapView didClickCalloutAccessoryButtonForGraphic:(AGSGraphic *)graphic
 {
-    
+    DetailViewController *viewController = [[DetailViewController alloc] initWithNibName:@"DetailViewController" bundle:nil];
+    viewController.site = graphic;
+    [self.navigationController pushViewController:viewController animated:YES];
+    [self.navigationController setNavigationBarHidden:NO animated:YES];
 }
 
 
@@ -248,10 +319,12 @@
     }
     if (results.count > 0) {
         //set the callout content for the first result
-        //get the state name
-        NSString *stateName = [((AGSIdentifyResult*)[results objectAtIndex:0]).feature.attributes objectForKey:@"STATE_NAME"]; 
-        self.mapView.callout.title = stateName;
-        self.mapView.callout.detail = @"Click for more detail..";
+        AGSIdentifyResult *result = (AGSIdentifyResult*)[results objectAtIndex:0];
+        //get the site code & name
+        NSString *siteCode = [result.feature.attributes objectForKey:@"SiteCode"];
+        NSString *siteName = [result.feature.attributes objectForKey:@"SiteName"];
+        self.mapView.callout.title = siteCode;
+        self.mapView.callout.detail = siteName;
         
         //show callout
         [self.mapView showCalloutAtPoint:self.mappoint forGraphic:((AGSIdentifyResult*)[results objectAtIndex:0]).feature animated:YES];

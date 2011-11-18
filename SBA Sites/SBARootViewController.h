@@ -25,7 +25,8 @@
 @property (nonatomic, strong) AGSIdentifyTask *identifyTask;
 @property (nonatomic, strong) AGSIdentifyParameters *identifyParams;
 @property (nonatomic, strong) AGSPoint* mappoint;
-@property (nonatomic, strong) NSMutableArray *layers;
+@property (nonatomic, strong) NSArray *layers;
+@property (nonatomic, strong) NSArray *visibleLayers;
 
 - (IBAction)mapType:(UISegmentedControl *)segmentPick;
 - (IBAction)toggleLayer:(id)sender;
@@ -34,5 +35,6 @@
 - (IBAction)showLayerList:(id)sender;
 - (IBAction)showSearch:(id)sender;
 - (IBAction)showInfo:(id)sender;
+- (void)siteSelected:(NSNotification *)notification;
 
 @end

@@ -8,14 +8,16 @@
 
 #import <UIKit/UIKit.h>
 
-@interface SBASiteTableViewController : UITableViewController <AGSIdentifyTaskDelegate>
+@interface SBASiteTableViewController : UIViewController <UITableViewDelegate, UITableViewDataSource, AGSIdentifyTaskDelegate>
 
+@property (nonatomic, strong) IBOutlet UITableView *tableView;
 @property (nonatomic, strong) AGSMapView *mapView;
 @property (nonatomic, strong) AGSIdentifyTask *identifyTask;
 @property (nonatomic, strong) AGSIdentifyParameters *identifyParams;
-@property (nonatomic, strong) NSMutableArray *layers;
+@property (nonatomic, strong) NSArray *layers;
 @property (nonatomic, strong) NSArray *sites;
 
 - (void)getSites;
+- (IBAction)dismissSelf:(id)sender;
 
 @end

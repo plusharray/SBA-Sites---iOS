@@ -36,13 +36,13 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          isPathRelative = "1"
-         filePath = "SBA Sites/SBARootViewController.m"
-         timestampString = "343157298.378172"
+         filePath = "SBA Sites/SBASiteTableViewController.m"
+         timestampString = "343161341.84726"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "224"
-         endingLineNumber = "224"
-         landmarkName = "-mapView:didClickAtPoint:mapPoint:graphics:"
+         startingLineNumber = "145"
+         endingLineNumber = "145"
+         landmarkName = "-tableView:cellForRowAtIndexPath:"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -50,13 +50,13 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          isPathRelative = "1"
-         filePath = "SBA Sites/SBASiteTableViewController.m"
-         timestampString = "343158846.774716"
+         filePath = "SBA Sites/SBARootViewController.m"
+         timestampString = "343322256.844517"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "151"
-         endingLineNumber = "151"
-         landmarkName = "-tableView:cellForRowAtIndexPath:"
+         startingLineNumber = "297"
+         endingLineNumber = "297"
+         landmarkName = "-mapView:didClickCalloutAccessoryButtonForGraphic:"
          landmarkType = "5">
       </FileBreakpoint>
    </FileBreakpoints>

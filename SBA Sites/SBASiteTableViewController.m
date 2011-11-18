@@ -10,6 +10,7 @@
 
 @implementation SBASiteTableViewController
 
+@synthesize tableView = _tableView;
 @synthesize mapView = _mapView;
 @synthesize identifyTask = _identifyTask;
 @synthesize identifyParams = _identifyParams;
@@ -30,7 +31,7 @@
 
 - (void)getSites
 {
-    self.identifyParams.layerIds = [NSArray arrayWithArray:self.layers];
+    self.identifyParams.layerIds = [self.layers valueForKey:@"layerID"];
     self.identifyParams.geometry = self.mapView.envelope;
 	self.identifyParams.tolerance = 1;
 	self.identifyParams.size = self.mapView.bounds.size;
@@ -43,25 +44,18 @@
 	[self.identifyTask executeWithParameters:self.identifyParams];
 }
 
+#pragma mark - IBActions
+
+- (IBAction)dismissSelf:(id)sender
+{
+    [self dismissViewControllerAnimated:YES completion:^(void){}];
+}
+
 #pragma mark - Init
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
-    if (self) {
-        //create identify task
-        self.identifyTask = [AGSIdentifyTask identifyTaskWithURL:[NSURL URLWithString:DynamicMapServiceURL]];
-        self.identifyTask.delegate = self;
-        
-        //create identify parameters
-        self.identifyParams = [[AGSIdentifyParameters alloc] init];
-    }
-    return self;
-}
-
-- (id)initWithStyle:(UITableViewStyle)style
-{
-    self = [super initWithStyle:style];
     if (self) {
         //create identify task
         self.identifyTask = [AGSIdentifyTask identifyTaskWithURL:[NSURL URLWithString:DynamicMapServiceURL]];
@@ -151,6 +145,7 @@
     AGSIdentifyResult *result = [self.sites objectAtIndex:indexPath.row];
     cell.textLabel.text = [result.feature.attributes valueForKey:@"SiteName"];
     cell.detailTextLabel.text = [result.feature.attributes valueForKey:@"SiteCode"];
+    cell.imageView.image = [UIImage imageNamed:[result layerName]];
     
     return cell;
 }
@@ -198,13 +193,8 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    // Navigation logic may go here. Create and push another view controller.
-    /*
-     <#DetailViewController#> *detailViewController = [[<#DetailViewController#> alloc] initWithNibName:@"<#Nib name#>" bundle:nil];
-     // ...
-     // Pass the selected object to the new view controller.
-     [self.navigationController pushViewController:detailViewController animated:YES];
-     */
+    [[NSNotificationCenter defaultCenter] postNotificationName:SBASiteSelected object:[self.sites objectAtIndex:indexPath.row]];
+    [self dismissSelf:self];
 }
 
 #pragma mark - AGSIdentifyTaskDelegate methods
