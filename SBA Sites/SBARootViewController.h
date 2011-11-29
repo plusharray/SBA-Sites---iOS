@@ -7,8 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <AddressBookUI/AddressBookUI.h>
+#import <MapKit/MapKit.h>
+#import "BSForwardGeocoder.h"
 
-@interface SBARootViewController : UIViewController <AGSMapViewLayerDelegate, AGSMapViewCalloutDelegate, AGSMapViewTouchDelegate, AGSIdentifyTaskDelegate>
+@interface SBARootViewController : UIViewController <UITableViewDelegate, UITableViewDataSource, AGSMapViewLayerDelegate, AGSMapViewCalloutDelegate, AGSMapViewTouchDelegate, AGSIdentifyTaskDelegate, UISearchDisplayDelegate, UISearchBarDelegate, ABPeoplePickerNavigationControllerDelegate, ABPersonViewControllerDelegate, MKReverseGeocoderDelegate, BSForwardGeocoderDelegate, AGSFindTaskDelegate>
 
 @property (nonatomic, strong) IBOutlet AGSMapView *mapView;
 @property (nonatomic, strong) IBOutlet UIBarButtonItem *showLayerListPopoverButton;
@@ -19,6 +22,7 @@
 @property (nonatomic, strong) IBOutlet UIToolbar *toolbar;
 @property (nonatomic, strong) NSMutableArray *buttons;
 @property (nonatomic, strong) UIPopoverController *popoverController;
+@property (nonatomic, strong) AGSTiledMapServiceLayer *tiledLayer;
 @property (nonatomic, strong) AGSDynamicMapServiceLayer *dynamicLayer;
 @property (nonatomic, strong) UIView *dynamicLayerView;
 @property (nonatomic, strong) AGSGraphicsLayer *graphicsLayer;
@@ -27,6 +31,19 @@
 @property (nonatomic, strong) AGSPoint* mappoint;
 @property (nonatomic, strong) NSArray *layers;
 @property (nonatomic, strong) NSArray *visibleLayers;
+@property (nonatomic) BOOL addressBookSearch;
+@property (nonatomic) BOOL searchActiveDB;
+@property (nonatomic) BOOL searchActiveForwardGeocode;
+@property (nonatomic) BOOL searchActiveReverseGeocode;
+@property (nonatomic) BOOL searchPerformed;
+@property (nonatomic, strong) NSMutableArray *addressResults;
+@property (nonatomic, strong) NSMutableArray *siteResults;
+@property (nonatomic, strong) NSString *savedSearchTerm;
+@property (nonatomic, strong) MKReverseGeocoder *reverseGeocoder;
+@property (nonatomic, strong) BSForwardGeocoder *forwardGeocoder;
+@property (nonatomic, strong) AGSFindTask *findTask;
+@property (nonatomic, strong) AGSCalloutTemplate *calloutTemplate;
+@property (nonatomic) NSInteger selectedMapType;
 
 - (IBAction)mapType:(UISegmentedControl *)segmentPick;
 - (IBAction)toggleLayer:(id)sender;

@@ -154,14 +154,11 @@
 - (IBAction)presentModalImage:(id)sender
 {
 	NSString *pathString = [NSString stringWithFormat:@"http://map.sbasite.com/Mobile/GetImage?SiteCode=%@&width=600&height=600", [self.site.attributes valueForKey:@"SiteCode"]];
-	//self.siteImageController.imageView.image = self.siteImage.image;
 	SiteImageViewController *imageController;
 	if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
 		imageController = [[SiteImageViewController alloc] initWithNibName:@"SiteImageViewController-iPad" bundle:nil imagePath:pathString];
-		//[imageController setPathString:pathString];
 	} else {
 		imageController = [[SiteImageViewController alloc] initWithNibName:@"SiteImageViewController" bundle:nil imagePath:pathString];
-		//[imageController setPathString:pathString];
 	}
 
 	imageController.modalTransitionStyle = UIModalTransitionStyleCoverVertical;
@@ -179,16 +176,6 @@
 // Displays an email composition interface inside the application. Populates all the Mail fields. 
 - (IBAction)displayMailComposerSheet:(id)sender
 {
-	/*
-	NSError *gaError;
-	if (![[GANTracker sharedTracker] trackEvent:@"Email Event"
-										 action:@"Display email composer"
-										  label:@""
-										  value:-1
-									  withError:&gaError]) {
-		// Handle error here
-	}
-	*/
 	Class mailClass = (NSClassFromString(@"MFMailComposeViewController"));
 	if (mailClass != nil)
 	{
@@ -213,12 +200,14 @@
 	MFMailComposeViewController *picker = [[MFMailComposeViewController alloc] init];
 	picker.mailComposeDelegate = self;
 	
-	//[picker setToRecipients:[NSArray arrayWithObject:[self.site email]]];
-	//[picker setCcRecipients:[NSArray arrayWithObjects:@"siteinquiry@sbasite.com", nil]];
-	//[picker setSubject:[NSString stringWithFormat:@"%@ Site Inquiry", [self.site siteName]]];
+	[picker setToRecipients:[NSArray arrayWithObject:[self.site.attributes valueForKey:@"Email"]]];
+	[picker setCcRecipients:[NSArray arrayWithObjects:@"siteinquiry@sbasite.com", nil]];
+	[picker setSubject:[NSString stringWithFormat:@"%@ Site Inquiry", [self.site.attributes valueForKey:@"SiteName"]]];
 	
 	// Fill out the email body text
-	[picker setMessageBody:[NSString stringWithFormat:@"%@", self.site] isHTML:NO];
+    NSString *tempBody = [[NSString stringWithFormat:@"%@", self.site.attributes] stringByReplacingOccurrencesOfString:@"{" withString:@""];
+    NSString *body = [tempBody stringByReplacingOccurrencesOfString:@"}" withString:@""];
+	[picker setMessageBody:[NSString stringWithFormat:@"%@", body] isHTML:NO];
 	picker.modalTransitionStyle = UIModalTransitionStyleCoverVertical;
 	picker.modalPresentationStyle = UIModalPresentationFormSheet;
 	[self presentModalViewController:picker animated:YES];
@@ -228,14 +217,14 @@
 -(void)launchMailAppOnDevice
 {
 	//NSLog(@"Launch Mail on device");
-	//NSString *recipients = [NSString stringWithFormat:@"mailto:%@&subject=%@ Site Inquiry", [self.site email], [self.site siteName]];
-	//NSString *body = [NSString stringWithFormat:@"%@", self.site];
+	NSString *recipients = [NSString stringWithFormat:@"mailto:%@&subject=%@ Site Inquiry", [self.site.attributes valueForKey:@"Email"], [self.site.attributes valueForKey:@"SiteName"]];
+	NSString *body = [NSString stringWithFormat:@"%@", self.site.attributes];
 	
 	
-	//NSString *email = [NSString stringWithFormat:@"%@%@", recipients, body];
-	//email = [email stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+	NSString *email = [NSString stringWithFormat:@"%@%@", recipients, body];
+	email = [email stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
 	
-	//[[UIApplication sharedApplication] openURL:[NSURL URLWithString:email]];
+	[[UIApplication sharedApplication] openURL:[NSURL URLWithString:email]];
 }
 
 #pragma mark -
@@ -266,17 +255,7 @@
 			feedbackMsg = @"Result: Mail not sent";
 			break;
 	}
-	/*
-			  NSError *gaError;
-			  if (![[GANTracker sharedTracker] trackEvent:@"Email Event"
-												   action:@"Did Finish"
-													label:feedbackMsg
-													value:-1
-												withError:&gaError]) {
-				  // Handle error here
-			  }
-	 */
-	[self dismissModalViewControllerAnimated:YES];
+	[self dismissViewControllerAnimated:YES completion:^(void){}];
 }
 
 @end

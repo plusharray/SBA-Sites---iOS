@@ -9,10 +9,12 @@
 #import <Foundation/Foundation.h>
 
 extern NSString * const TiledMapServiceURL;
+extern NSString * const AerialMapServiceURL;
 extern NSString * const DynamicMapServiceURL;
 // Notifications
 extern NSString * const SBASiteSelected;
 extern NSString * const SBALayerSelected;
+extern NSString * const SBAMapTypeChanged;
 // Layers
 extern NSString * const SBALayerNewConstruction;
 extern NSString * const SBALayerOwned;

@@ -9,10 +9,12 @@
 #import "SBAConstants.h"
 
 NSString * const TiledMapServiceURL = @"http://server.arcgisonline.com/ArcGIS/rest/services/ESRI_StreetMap_World_2D/MapServer";
+NSString * const AerialMapServiceURL = @"http://server.arcgisonline.com/ArcGIS/rest/services/ESRI_Imagery_World_2D/MapServer";
 NSString * const DynamicMapServiceURL = @"http://mapservices.sbasite.com/ArcGIS/rest/services/Google/MobileBing/MapServer";
 // Notifications
 NSString * const SBASiteSelected = @"SBASiteSelected";
 NSString * const SBALayerSelected = @"SBALayerSelected";
+NSString * const SBAMapTypeChanged = @"SBAMapTypeChanged";
 // Layers
 NSString * const SBALayerNewConstruction = @"New Construction";
 NSString * const SBALayerOwned = @"SBA Owned";

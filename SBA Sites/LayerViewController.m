@@ -17,7 +17,7 @@
 @synthesize mapSegmentedControl = _mapSegmentedControl;
 @synthesize tableView = _tableView;
 @synthesize layerArray = _layerArray;
-
+@synthesize selectedMapType = _selectedMapType;
 
 
 - (void) viewDidUnload {
@@ -31,6 +31,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    [self.mapSegmentedControl setSelectedSegmentIndex:self.selectedMapType];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -59,7 +60,8 @@
 
 -(IBAction)mapType:(UISegmentedControl *)segmentPick
 {
-    
+    self.selectedMapType = segmentPick.selectedSegmentIndex;
+    [[NSNotificationCenter defaultCenter] postNotificationName:SBAMapTypeChanged object:[NSNumber numberWithInteger:self.selectedMapType]];
 }
 
 

@@ -67,9 +67,16 @@
 						<string key="NSReuseIdentifierKey">_NS:814</string>
 						<int key="IBUIContentMode">3</int>
 						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
+						<string key="IBPlaceholder">Search</string>
+						<bool key="IBShowsBookmarkButton">YES</bool>
 						<object class="IBUITextInputTraits" key="IBTextInputTraits">
 							<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 						</object>
+						<array key="IBScopeButtonTitles">
+							<string>Site</string>
+							<string>Address</string>
+							<string>Coordinate</string>
+						</array>
 					</object>
 					<object class="IBUIButton" id="474067252">
 						<reference key="NSNextResponder" ref="234395083"/>
@@ -332,6 +339,7 @@
 					<object class="IBObjectRecord">
 						<int key="objectID">1</int>
 						<reference key="object" ref="191373211"/>
+						<array class="NSMutableArray" key="children"/>
 						<reference key="parent" ref="234395083"/>
 					</object>
 					<object class="IBObjectRecord">
@@ -409,7 +417,7 @@
 			<nil key="activeLocalization"/>
 			<dictionary class="NSMutableDictionary" key="localizations"/>
 			<nil key="sourceID"/>
-			<int key="maxID">37</int>
+			<int key="maxID">39</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<array class="NSMutableArray" key="referencedPartialClassDescriptions">

@@ -14,6 +14,7 @@
 @property (nonatomic, strong) IBOutlet UISegmentedControl *mapSegmentedControl;
 @property (nonatomic, strong) IBOutlet ShadowedTableView *tableView;
 @property (nonatomic, strong) NSArray *layerArray;
+@property (nonatomic) NSInteger selectedMapType;
 
 - (IBAction)mapType:(UISegmentedControl *)segmentPick;
 - (IBAction)dismissAction:(id)sender;

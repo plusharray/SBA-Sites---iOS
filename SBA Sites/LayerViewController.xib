@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <archive type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="8.00">
 	<data>
-		<int key="IBDocument.SystemTarget">1056</int>
+		<int key="IBDocument.SystemTarget">1280</int>
 		<string key="IBDocument.SystemVersion">11C74</string>
 		<string key="IBDocument.InterfaceBuilderVersion">1938</string>
 		<string key="IBDocument.AppKitVersion">1138.23</string>
@@ -34,7 +34,7 @@
 				<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 			</object>
 			<object class="IBUIView" id="648894055">
-				<nil key="NSNextResponder"/>
+				<reference key="NSNextResponder"/>
 				<int key="NSvFlags">256</int>
 				<array class="NSMutableArray" key="NSSubviews">
 					<object class="IBUITableView" id="778690188">
@@ -46,14 +46,16 @@
 								<int key="NSvFlags">292</int>
 								<string key="NSFrameSize">{320, 40}</string>
 								<reference key="NSSuperview" ref="778690188"/>
+								<reference key="NSWindow"/>
+								<reference key="NSNextKeyView" ref="155211429"/>
 								<bool key="IBUIOpaque">NO</bool>
 								<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 								<int key="IBSegmentControlStyle">3</int>
 								<int key="IBNumberOfSegments">2</int>
 								<int key="IBSelectedSegmentIndex">0</int>
 								<array key="IBSegmentTitles">
-									<string>Satellite</string>
-									<string>Map</string>
+									<string>Street Map</string>
+									<string>Aerial Map</string>
 								</array>
 								<array class="NSMutableArray" key="IBSegmentWidths">
 									<real value="0.0"/>
@@ -77,6 +79,8 @@
 								<int key="NSvFlags">292</int>
 								<string key="NSFrame">{{0, 276}, {320, 47}}</string>
 								<reference key="NSSuperview" ref="778690188"/>
+								<reference key="NSWindow"/>
+								<reference key="NSNextKeyView"/>
 								<bool key="IBUIOpaque">NO</bool>
 								<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 								<int key="IBUIContentHorizontalAlignment">0</int>
@@ -117,6 +121,8 @@
 						</array>
 						<string key="NSFrame">{{0, 137}, {320, 323}}</string>
 						<reference key="NSSuperview" ref="648894055"/>
+						<reference key="NSWindow"/>
+						<reference key="NSNextKeyView" ref="672316613"/>
 						<object class="NSColor" key="IBUIBackgroundColor">
 							<int key="NSColorSpace">1</int>
 							<bytes key="NSRGB">MC43NjI3ODMyMyAwLjc2Mjc4MzIzIDAuNzYyNzgzMjMAA</bytes>
@@ -137,6 +143,9 @@
 					</object>
 				</array>
 				<string key="NSFrameSize">{320, 460}</string>
+				<reference key="NSSuperview"/>
+				<reference key="NSWindow"/>
+				<reference key="NSNextKeyView" ref="778690188"/>
 				<object class="NSColor" key="IBUIBackgroundColor">
 					<int key="NSColorSpace">10</int>
 					<object class="NSImage" key="NSImage">
@@ -4681,15 +4690,15 @@ AAgAAAAIAAIACAACAAAAAgAAAAEAAQABAAE</bytes>
 					</dictionary>
 					<dictionary class="NSMutableDictionary" key="outlets">
 						<string key="mapSegmentedControl">UISegmentedControl</string>
-						<string key="table">ShadowedTableView</string>
+						<string key="tableView">ShadowedTableView</string>
 					</dictionary>
 					<dictionary class="NSMutableDictionary" key="toOneOutletInfosByName">
 						<object class="IBToOneOutletInfo" key="mapSegmentedControl">
 							<string key="name">mapSegmentedControl</string>
 							<string key="candidateClassName">UISegmentedControl</string>
 						</object>
-						<object class="IBToOneOutletInfo" key="table">
-							<string key="name">table</string>
+						<object class="IBToOneOutletInfo" key="tableView">
+							<string key="name">tableView</string>
 							<string key="candidateClassName">ShadowedTableView</string>
 						</object>
 					</dictionary>
@@ -4712,7 +4721,7 @@ AAgAAAAIAAIACAACAAAAAgAAAAEAAQABAAE</bytes>
 		<string key="IBDocument.TargetRuntimeIdentifier">IBCocoaTouchFramework</string>
 		<object class="NSMutableDictionary" key="IBDocument.PluginDeclaredDependencyDefaults">
 			<string key="NS.key.0">com.apple.InterfaceBuilder.CocoaTouchPlugin.iPhoneOS</string>
-			<integer value="1056" key="NS.object.0"/>
+			<real value="1280" key="NS.object.0"/>
 		</object>
 		<bool key="IBDocument.PluginDeclaredDependenciesTrackSystemTargetVersion">YES</bool>
 		<int key="IBDocument.defaultPropertyAccessControl">3</int>
