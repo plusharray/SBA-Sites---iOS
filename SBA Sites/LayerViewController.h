@@ -11,7 +11,7 @@
 
 @interface LayerViewController : UIViewController <UITableViewDelegate, UITableViewDataSource>
 
-@property (nonatomic, strong) IBOutlet UISegmentedControl *mapSegmentedControl;
+@property (nonatomic, strong) IBOutlet UISegmentedControl *mapTypeSegmentedControl;
 @property (nonatomic, strong) IBOutlet ShadowedTableView *tableView;
 @property (nonatomic, strong) NSArray *layerArray;
 @property (nonatomic) NSInteger selectedMapType;

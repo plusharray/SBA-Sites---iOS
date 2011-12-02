@@ -11,7 +11,7 @@
 #import <MapKit/MapKit.h>
 #import "BSForwardGeocoder.h"
 
-@interface SBARootViewController : UIViewController <UITableViewDelegate, UITableViewDataSource, AGSMapViewLayerDelegate, AGSMapViewCalloutDelegate, AGSMapViewTouchDelegate, AGSIdentifyTaskDelegate, UISearchDisplayDelegate, UISearchBarDelegate, ABPeoplePickerNavigationControllerDelegate, ABPersonViewControllerDelegate, MKReverseGeocoderDelegate, BSForwardGeocoderDelegate, AGSFindTaskDelegate>
+@interface SBARootViewController : UIViewController <UITableViewDelegate, UITableViewDataSource, AGSMapViewLayerDelegate, AGSMapViewCalloutDelegate, AGSMapViewTouchDelegate, AGSIdentifyTaskDelegate, UISearchDisplayDelegate, UISearchBarDelegate, ABPeoplePickerNavigationControllerDelegate, ABPersonViewControllerDelegate, MKReverseGeocoderDelegate, BSForwardGeocoderDelegate, AGSFindTaskDelegate, UIPopoverControllerDelegate>
 
 @property (nonatomic, strong) IBOutlet AGSMapView *mapView;
 @property (nonatomic, strong) IBOutlet UIBarButtonItem *showLayerListPopoverButton;
@@ -19,6 +19,7 @@
 @property (nonatomic, strong) IBOutlet UIBarButtonItem *showSiteListPopoverButton;
 @property (nonatomic, strong) IBOutlet UIBarButtonItem *userLocationButton;
 @property (nonatomic, strong) IBOutlet UIBarButtonItem *showInfoButton;
+@property (strong, nonatomic) IBOutlet UIBarButtonItem *mapTypeSegmentedControl;
 @property (nonatomic, strong) IBOutlet UIToolbar *toolbar;
 @property (nonatomic, strong) NSMutableArray *buttons;
 @property (nonatomic, strong) UIPopoverController *popoverController;
@@ -39,7 +40,6 @@
 @property (nonatomic, strong) NSMutableArray *addressResults;
 @property (nonatomic, strong) NSMutableArray *siteResults;
 @property (nonatomic, strong) NSString *savedSearchTerm;
-@property (nonatomic, strong) MKReverseGeocoder *reverseGeocoder;
 @property (nonatomic, strong) BSForwardGeocoder *forwardGeocoder;
 @property (nonatomic, strong) AGSFindTask *findTask;
 @property (nonatomic, strong) AGSCalloutTemplate *calloutTemplate;

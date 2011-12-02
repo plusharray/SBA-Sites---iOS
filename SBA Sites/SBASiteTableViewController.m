@@ -11,6 +11,7 @@
 @implementation SBASiteTableViewController
 
 @synthesize tableView = _tableView;
+@synthesize toolbar = _toolbar;
 @synthesize mapView = _mapView;
 @synthesize identifyTask = _identifyTask;
 @synthesize identifyParams = _identifyParams;
@@ -86,10 +87,14 @@
  
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
+    if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
+        self.toolbar.hidden = YES;
+    }
 }
 
 - (void)viewDidUnload
 {
+    [self setToolbar:nil];
     [super viewDidUnload];
     // Release any retained subviews of the main view.
     // e.g. self.myOutlet = nil;

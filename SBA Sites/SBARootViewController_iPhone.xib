@@ -72,11 +72,7 @@
 						<object class="IBUITextInputTraits" key="IBTextInputTraits">
 							<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 						</object>
-						<array key="IBScopeButtonTitles">
-							<string>Site</string>
-							<string>Address</string>
-							<string>Coordinate</string>
-						</array>
+						<array key="IBScopeButtonTitles" id="0"/>
 					</object>
 					<object class="IBUIButton" id="474067252">
 						<reference key="NSNextResponder" ref="234395083"/>
@@ -163,7 +159,6 @@
 						<string key="NSFrame">{{117, 424}, {85, 28}}</string>
 						<reference key="NSSuperview" ref="234395083"/>
 						<reference key="NSWindow"/>
-						<reference key="NSNextKeyView"/>
 						<int key="IBUIContentMode">1</int>
 						<bool key="IBUIUserInteractionEnabled">NO</bool>
 						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
@@ -309,7 +304,7 @@
 				<array key="orderedObjects">
 					<object class="IBObjectRecord">
 						<int key="objectID">0</int>
-						<array key="object" id="0"/>
+						<reference key="object" ref="0"/>
 						<reference key="children" ref="1000"/>
 						<nil key="parent"/>
 					</object>

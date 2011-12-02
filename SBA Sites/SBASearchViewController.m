@@ -8,6 +8,8 @@
 
 #import "SBASearchViewController.h"
 #import <AddressBook/AddressBook.h>
+#import "GradientView.h"
+#import "ClearLabelsCellView.h"
 
 @interface SBASearchViewController (Private)
 - (void)searchForString:(NSString *)searchString;
@@ -18,7 +20,8 @@
 
 @synthesize searchBar = _searchBar;
 @synthesize tableView = _tableView;
-@synthesize spatialReference = _spatialReference;
+@synthesize mapView = _mapView;
+@synthesize visibleLayers = _visibleLayers;
 @synthesize addressBookSearch = _addressBookSearch;
 @synthesize searchActiveDB = _searchActiveDB;
 @synthesize searchActiveForwardGeocode = _searchActiveForwardGeocode;
@@ -27,6 +30,8 @@
 @synthesize addressResults = _addressResults;
 @synthesize siteResults = _siteResults;
 @synthesize savedSearchTerm = _savedSearchTerm;
+@synthesize forwardGeocoder = _forwardGeocoder;
+@synthesize findTask = _findTask;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -79,28 +84,204 @@
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    return 1;
+    return 2;
 }
 
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+- (NSString *)tableView:(UITableView *)aTableView titleForHeaderInSection:(NSInteger)section 
 {
-    return 0;
+	if (section == 0) {
+		return @"Site Results";
+	}
+	else if (section == 1) {
+		return @"Address Results";
+	} else {
+		return nil;
+	}
 }
 
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    // Return the number of rows in the section.
+	int rows = 0;
+	if (section == 0) {
+		if (self.siteResults.count < 1) {
+			if (self.searchActiveDB == YES) {
+				rows = 1;
+			} else {
+				if (self.searchPerformed == YES) {
+					rows = 1;
+				} else {
+					rows = 0;
+				}
+			}
+		} else {
+			rows = self.siteResults.count;
+		}
+	}
+	else if (section == 1) {
+		if (self.addressResults.count < 1) {
+			if ((self.searchActiveReverseGeocode == YES) && (self.searchActiveForwardGeocode == YES)) {
+				rows = 1;
+			} else {
+				if (self.searchPerformed == YES) {
+					rows = 1;
+				} else {
+					rows = 0;
+				}
+			}
+			
+		} else {
+			rows = self.addressResults.count;
+		}
+	}
+	return rows;
+}
+
+// Customize the appearance of table view cells.
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    static NSString *cellIdentifier = @"SBASearchTableViewCell";
-
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
+    
+    static NSString *CellIdentifier = @"Cell";
+    
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     if (cell == nil) {
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier];
+        cell = [[[ClearLabelsCellView alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier] autorelease];
+		cell.backgroundView = [[[GradientView alloc] init] autorelease];
     }
-
+    int section = indexPath.section;
+	int row = indexPath.row;
+	
+	if (cell.accessoryView == nil) {
+		UIActivityIndicatorView *searchActivityIndicator = [[[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray] autorelease];
+		searchActivityIndicator.hidesWhenStopped = YES;
+		cell.accessoryView = searchActivityIndicator;
+	}
+	
+	if (section == 0) {
+		if (self.siteResults.count < 1) {
+			if (self.searchActiveDB == YES) {
+				cell.textLabel.text = @"Searching....";
+				[(UIActivityIndicatorView *)cell.accessoryView startAnimating];
+			} else {
+				cell.textLabel.text = @"No Results Found";
+				[(UIActivityIndicatorView *)cell.accessoryView stopAnimating];
+			}
+			cell.detailTextLabel.text = @"";
+		} else {
+			if (self.searchActiveDB == YES) {
+				[(UIActivityIndicatorView *)cell.accessoryView startAnimating];
+			} else {
+				[(UIActivityIndicatorView *)cell.accessoryView stopAnimating];
+			}
+			AGSFindResult *result = [self.siteResults objectAtIndex:row];
+			cell.textLabel.text = [result.feature.attributes valueForKey:@"SiteName"];
+            cell.detailTextLabel.text = [result.feature.attributes valueForKey:@"SiteCode"];
+            cell.imageView.image = [UIImage imageNamed:[result layerName]];
+		}
+	}
+	else if (section == 1) {
+		if (self.addressResults.count < 1) {
+			if ((self.searchActiveReverseGeocode == YES) || (self.searchActiveForwardGeocode == YES)) {
+				cell.textLabel.text = @"Searching....";
+				[(UIActivityIndicatorView *)cell.accessoryView startAnimating];
+			} else {
+				cell.textLabel.text = @"No Results Found";
+				[(UIActivityIndicatorView *)cell.accessoryView stopAnimating];
+			}
+			cell.detailTextLabel.text = @"";
+		} else {
+			if ((self.searchActiveReverseGeocode == YES) || (self.searchActiveForwardGeocode == YES)) {
+				[(UIActivityIndicatorView *)cell.accessoryView startAnimating];
+			} else {
+				[(UIActivityIndicatorView *)cell.accessoryView stopAnimating];
+			}
+			id placemark = [self.addressResults objectAtIndex:indexPath.row];
+            NSString *cellTitle;
+            NSString *cellSubtitle;
+            if ([placemark isKindOfClass:[CLPlacemark class]]) {
+                CLPlacemark *aPlacemark = (CLPlacemark *)placemark;
+                cellTitle = [NSString stringWithFormat:@"%@", aPlacemark.thoroughfare];
+                cellSubtitle = [NSString stringWithFormat:@"%@ , %@", aPlacemark.locality, aPlacemark.administrativeArea];
+            } else if ([placemark isKindOfClass:[MKPlacemark class]]) {
+                MKPlacemark *aPlacemark = (MKPlacemark *)placemark;
+                cellTitle = [NSString stringWithFormat:@"%@", aPlacemark.thoroughfare];
+                cellSubtitle = [NSString stringWithFormat:@"%@ , %@", aPlacemark.locality, aPlacemark.administrativeArea];
+            }
+            cell.textLabel.text = cellTitle;
+            cell.detailTextLabel.text = cellSubtitle;
+		}
+		
+	}
+    // Configure the cell...
+    
     return cell;
 }
 
 #pragma mark - UITableViewDelegate
 
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath 
+{
+    [self.searchDisplayController setActive:NO animated:YES];
+    if (indexPath.section == 0) {
+        [[NSNotificationCenter defaultCenter] postNotificationName:SBASiteSelected object:[self.siteResults objectAtIndex:indexPath.row]];
+    } else if (indexPath.section == 1) {
+        id placemark = [self.addressResults objectAtIndex:indexPath.row];
+        if ([placemark isKindOfClass:[CLPlacemark class]]) {
+            CLPlacemark *aPlacemark = (CLPlacemark *)placemark;
+            double span = 1.0;
+            double xmin, ymin, xmax, ymax;
+            xmin = aPlacemark.location.coordinate.longitude - span;
+            ymin = aPlacemark.location.coordinate.latitude - span;
+            xmax = aPlacemark.location.coordinate.longitude + span;
+            ymax = aPlacemark.location.coordinate.latitude + span;
+            AGSEnvelope *env = [AGSEnvelope envelopeWithXmin:xmin ymin:ymin xmax:xmax ymax:ymax spatialReference:self.mapView.spatialReference];
+            [self.mapView zoomToEnvelope:env animated:YES];
+        } else if ([placemark isKindOfClass:[MKPlacemark class]]) {
+            MKPlacemark *aPlacemark = (MKPlacemark *)placemark;
+            double span = 1.0;
+            double xmin, ymin, xmax, ymax;
+            xmin = aPlacemark.coordinate.longitude - span;
+            ymin = aPlacemark.coordinate.latitude - span;
+            xmax = aPlacemark.coordinate.longitude + span;
+            ymax = aPlacemark.coordinate.latitude + span;
+            AGSEnvelope *env = [AGSEnvelope envelopeWithXmin:xmin ymin:ymin xmax:xmax ymax:ymax spatialReference:self.mapView.spatialReference];
+            [self.mapView zoomToEnvelope:env animated:YES];
+        }
+        
+        /*
+         AGSPoint *point = [[AGSPoint alloc] initWithX:placemark.coordinate.latitude y:placemark.coordinate.longitude spatialReference:self.mapView.spatialReference];
+         
+         
+         //create a marker symbol to use in our graphic
+         AGSPictureMarkerSymbol *marker = [AGSPictureMarkerSymbol pictureMarkerSymbolWithImageNamed:@"BluePushpin.png"];
+         marker.xoffset = 9;
+         marker.yoffset = -16;
+         marker.hotspot = CGPointMake(-9, -11);
+         
+         //create the callout template, used when the user displays the callout
+         self.calloutTemplate = [[AGSCalloutTemplate alloc]init];
+         //set the text and detail text based on 'Name' and 'Descr' fields in the attributes
+         self.calloutTemplate.titleTemplate = placemark.thoroughfare;
+         self.calloutTemplate.detailTemplate = [NSString stringWithFormat:@"%@ , %@", placemark.locality, placemark.administrativeArea];
+         
+         //create the graphic
+         AGSGraphic *graphic = [[AGSGraphic alloc] initWithGeometry:point
+         symbol:marker 
+         attributes:(NSMutableDictionary *)[[placemark addressDictionary] mutableCopy]
+         infoTemplateDelegate:self.calloutTemplate];
+         //add the graphic to the graphics layer
+         [self.graphicsLayer addGraphic:graphic];
+         //we have one result, center at that point
+         [self.mapView centerAtPoint:point animated:NO];
+         
+         // set the width of the callout
+         self.mapView.callout.width = 250;
+         
+         //show the callout
+         [self.mapView showCalloutAtPoint:(AGSPoint *)graphic.geometry forGraphic:graphic animated:YES];
+         
+         //since we've added graphics, make sure to redraw
+         [self.graphicsLayer dataChanged];
+         */
+    }
     
 }
 
@@ -108,13 +289,21 @@
 
 - (void)searchForString:(NSString *)searchString
 {
-    // Address Search
+    self.siteResults = [NSMutableArray array];
+    self.addressResults = [NSMutableArray array];
     
-    NSArray *addressArray = [searchString componentsSeparatedByCharactersInSet:[NSCharacterSet characterSetWithCharactersInString:@","]];
-	if ([addressArray count] > 1) {
-		NSString *addressString = [NSString stringWithFormat:@"%@", [addressArray objectAtIndex:0]];
-        NSString *address2String = [searchString stringByReplacingOccurrencesOfString:addressString withString:@""];
-    }
+    // Address
+	if (self.forwardGeocoder == nil) {
+		self.forwardGeocoder = [[BSForwardGeocoder alloc] initWithDelegate:self];
+	}
+	
+	// Forward geocode!
+	[self.forwardGeocoder findLocation:searchString];
+	self.searchActiveForwardGeocode = YES;
+	
+	if (self.addressBookSearch == YES) {
+		return;
+	}
     
     // Coordinates - Decimal
 	NSArray *coordArray = [searchString componentsSeparatedByCharactersInSet:[NSCharacterSet characterSetWithCharactersInString:@","]];
@@ -129,11 +318,23 @@
 				coord.longitude *= -1.0f;
 			}
 			if ((coord.latitude != 0) && (coord.longitude != 0)) {
-                NSURL *locatorURL = [NSURL URLWithString:@"http://sampleserver1.arcgisonline.com/ArcGIS/rest/services/Locators/ESRI_Geocode_USA/GeocodeServer"];
-                AGSLocator* locator = [[AGSLocator alloc] initWithURL:locatorURL];
-                [locator setDelegate:self];
-				AGSPoint* point = [AGSPoint pointWithX:coord.latitude y:coord.longitude spatialReference:self.spatialReference];
-                [locator addressForLocation:point maxSearchDistance:100];
+                Class geocoderClass = (NSClassFromString(@"CLGeocoder"));
+                if (geocoderClass) {
+                    CLGeocoder *geocoder = [[CLGeocoder alloc] init];
+                    CLLocation *location = [[CLLocation alloc] initWithLatitude:coord.latitude longitude:coord.longitude];
+                    [geocoder reverseGeocodeLocation:location completionHandler:^(NSArray *placemarks, NSError *error) {
+                        self.searchActiveReverseGeocode = NO;
+                        [self.addressResults addObjectsFromArray:placemarks];
+                        [self.searchDisplayController.searchResultsTableView reloadData];
+                    }];
+                } else {
+                    Class reverseGeocoderClass = (NSClassFromString(@"MKReverseGeocoder"));
+                    if (reverseGeocoderClass) {
+                        MKReverseGeocoder *reverseGeocoder = [[MKReverseGeocoder alloc] initWithCoordinate:coord];
+                        reverseGeocoder.delegate = self;
+                        [reverseGeocoder start];
+                    }
+                }
 				self.searchActiveReverseGeocode = YES;
 			} else {
 				self.searchActiveReverseGeocode = NO;
@@ -143,11 +344,34 @@
 	} else {
 		self.searchActiveReverseGeocode = NO;
 	}
+    
+    // Find Task
+    self.searchActiveDB = YES;
+    if (!self.findTask) {
+        self.findTask = [[AGSFindTask alloc] initWithURL:[NSURL URLWithString:DynamicMapServiceURL]];
+        self.findTask.delegate = self;
+    }
+    AGSFindParameters *params = [[AGSFindParameters alloc] init];
+    params.contains = YES;
+    params.layerIds = [self.visibleLayers valueForKey:@"layerID"];
+    params.outSpatialReference = self.mapView.spatialReference;
+    params.returnGeometry = NO;
+    params.searchFields = [NSArray arrayWithObjects:@"SiteName", @"SiteCode", nil];
+    params.searchText = searchString;
+    [self.findTask executeWithParameters:params];
 }
 
 - (void)showPeoplePickerController
 {
-    
+    ABPeoplePickerNavigationController *picker = [[ABPeoplePickerNavigationController alloc] init];
+    picker.peoplePickerDelegate = self;
+	// Display only a person's phone, email, and birthdate
+	NSArray *displayedItems = [NSArray arrayWithObjects:[NSNumber numberWithInt:kABPersonAddressProperty], nil];
+	
+	
+	picker.displayedProperties = displayedItems;
+	// Show the picker
+    [self presentViewController:picker animated:YES completion:^(void){}];
 }
 
 #pragma mark - UISearchBarDelegate
@@ -288,7 +512,8 @@
                    [theDict objectForKey:(NSString *)kABPersonAddressCountryKey]];
 		
         // Return to the main view controller.
-#warning Uncompleted method
+        self.addressBookSearch = YES;
+		[self searchForString:address];
 		
 	}
 	return NO;
@@ -299,6 +524,7 @@
 - (void)peoplePickerNavigationControllerDidCancel:(ABPeoplePickerNavigationController *)peoplePicker;
 {
 	self.addressBookSearch = NO;
+    [self dismissViewControllerAnimated:YES completion:^(void){}];
 }
 
 
@@ -311,16 +537,107 @@
 	return NO;
 }
 
-#pragma mark - AGSLocatorDelegate
+#pragma mark - MKReverseGeocoder
 
-- (void)locator:(AGSLocator*)locator operation:(NSOperation*)op didFindLocationsForAddress:(NSArray*)candidates
+- (void)reverseGeocoder:(MKReverseGeocoder *)geocoder didFailWithError:(NSError *)error
 {
-    
+	self.searchActiveReverseGeocode = NO;
+	[self.searchDisplayController.searchResultsTableView reloadData];
 }
 
-- (void)locator:(AGSLocator*)locator operation:(NSOperation*)op didFailLocationsForAddress:(NSError*)error
+- (void)reverseGeocoder:(MKReverseGeocoder *)geocoder didFindPlacemark:(MKPlacemark *)placemark
 {
-    
+	self.searchActiveReverseGeocode = NO;
+    [self.addressResults addObject:placemark];
+	[self.searchDisplayController.searchResultsTableView reloadData];
+}
+
+#pragma mark - ForwardGeocoderDelegate
+
+-(void)forwardGeocoderError:(NSString *)errorMessage
+{
+	self.searchActiveForwardGeocode = NO;
+	[self.searchDisplayController.searchResultsTableView reloadData];
+}
+
+-(void)forwardGeocoderFoundLocation
+{
+	NSString *message = @"";
+	
+	if (self.forwardGeocoder.status == G_GEO_SUCCESS) {
+		for (int i = 0; i < [self.forwardGeocoder.results count]; i++) {
+			NSMutableDictionary *addressDictionary = [NSMutableDictionary dictionaryWithCapacity:5];
+			BSKmlResult *place = [self.forwardGeocoder.results objectAtIndex:i];
+            NSMutableString *streetAddress = [NSMutableString string];
+            NSString *city;
+            NSString *state;
+            NSString *zip;
+			for (BSAddressComponent *addComponent in [place addressComponents]) {
+				for (NSString *aType in addComponent.types) {
+					if ([aType isEqualToString:@"street_number"]) {
+                        [streetAddress insertString:@" " atIndex:0];
+                        [streetAddress insertString:addComponent.shortName atIndex:0];
+					}
+					else if ([aType isEqualToString:@"route"]) {
+						[streetAddress appendString:addComponent.shortName];
+                        [addressDictionary setValue:streetAddress forKey:(NSString *)kABPersonAddressStreetKey];
+					}
+					else if ([aType isEqualToString:@"locality"]) {
+						city = addComponent.shortName;
+                        [addressDictionary setValue:city forKey:(NSString *)kABPersonAddressCityKey];
+					}
+					else if ([aType isEqualToString:@"administrative_area_level_1"]) {
+						state = addComponent.shortName;
+                        [addressDictionary setValue:state forKey:(NSString *)kABPersonAddressStateKey];
+					}
+					else if ([aType isEqualToString:@"postal_code"]) {
+						zip = addComponent.shortName;
+                        [addressDictionary setValue:zip forKey:(NSString *)kABPersonAddressZIPKey];
+					}
+				}
+			}
+            CLLocationCoordinate2D coord = CLLocationCoordinate2DMake(place.latitude, place.longitude);
+            MKPlacemark *placemark = [[MKPlacemark alloc] initWithCoordinate:coord addressDictionary:addressDictionary];
+            [self.addressResults addObject:placemark];
+		}
+        
+		self.searchActiveForwardGeocode = NO;
+		[self.searchDisplayController.searchResultsTableView reloadData];
+		message = @"Forward Geocoder Success.";
+	}
+	
+	switch (self.forwardGeocoder.status) {
+		case G_GEO_BAD_KEY:
+			message = @"The API key is invalid.";
+			break;
+		case G_GEO_UNKNOWN_ADDRESS:
+			message = [NSString stringWithFormat:@"Could not find %@", self.forwardGeocoder.searchQuery];
+			break;
+		case G_GEO_TOO_MANY_QUERIES:
+			message = @"Too many queries has been made for this API key.";
+			break;
+		case G_GEO_SERVER_ERROR:
+			message = @"Server error, please try again.";
+			break;
+		default:
+			break;
+	}
+	NSLog(@"Foreward Geocoder Status: %@", message);
+}
+
+#pragma mark - AGSFindTaskDelegate
+
+- (void)findTask:(AGSFindTask *)findTask operation:(NSOperation*)op didExecuteWithFindResults:(NSArray *)results
+{
+    self.searchActiveDB = NO;
+    self.siteResults = [NSMutableArray arrayWithArray:results];
+    [self.searchDisplayController.searchResultsTableView reloadData];
+}
+
+
+- (void)findTask:(AGSFindTask *)findTask operation:(NSOperation*)op didFailWithError:(NSError *)error
+{
+    self.searchActiveDB = NO;
 }
 
 @end

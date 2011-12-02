@@ -111,6 +111,9 @@
 		FFF0854114769A33001B1C1E /* Central America.png in Resources */ = {isa = PBXBuildFile; fileRef = FFF0853C14769A33001B1C1E /* Central America.png */; };
 		FFF0854214769A33001B1C1E /* Canada.png in Resources */ = {isa = PBXBuildFile; fileRef = FFF0853D14769A33001B1C1E /* Canada.png */; };
 		FFF085461476A8A9001B1C1E /* Grey.png in Resources */ = {isa = PBXBuildFile; fileRef = FFF085451476A8A9001B1C1E /* Grey.png */; };
+		FFFC4A0014895AC90009EEDE /* DetailViewController-iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = FFFC49FF14895AC90009EEDE /* DetailViewController-iPad.xib */; };
+		FFFC4A0314895B560009EEDE /* SiteImageViewController-iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = FFFC4A0214895B560009EEDE /* SiteImageViewController-iPad.xib */; };
+		FFFC4A0614895FC40009EEDE /* libTestFlight.a in Frameworks */ = {isa = PBXBuildFile; fileRef = FFFC4A0414895FC40009EEDE /* libTestFlight.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -241,6 +244,10 @@
 		FFF0853C14769A33001B1C1E /* Central America.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Central America.png"; sourceTree = "<group>"; };
 		FFF0853D14769A33001B1C1E /* Canada.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Canada.png; sourceTree = "<group>"; };
 		FFF085451476A8A9001B1C1E /* Grey.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Grey.png; sourceTree = "<group>"; };
+		FFFC49FF14895AC90009EEDE /* DetailViewController-iPad.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = "DetailViewController-iPad.xib"; sourceTree = "<group>"; };
+		FFFC4A0214895B560009EEDE /* SiteImageViewController-iPad.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = "SiteImageViewController-iPad.xib"; sourceTree = "<group>"; };
+		FFFC4A0414895FC40009EEDE /* libTestFlight.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libTestFlight.a; sourceTree = "<group>"; };
+		FFFC4A0514895FC40009EEDE /* TestFlight.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TestFlight.h; path = ../TestFlight.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -263,6 +270,7 @@
 				FF413749145840E100F36E7C /* QuartzCore.framework in Frameworks */,
 				FF413745145840CF00F36E7C /* MobileCoreServices.framework in Frameworks */,
 				FF41371A14583ED200F36E7C /* CoreGraphics.framework in Frameworks */,
+				FFFC4A0614895FC40009EEDE /* libTestFlight.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -290,6 +298,7 @@
 		FF41371414583ED200F36E7C /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				FFFC4A0414895FC40009EEDE /* libTestFlight.a */,
 				FF64CE9214851F8D003CC124 /* MapKit.framework */,
 				FF98B8871484096000D62F5A /* AddressBook.framework */,
 				FF98B8881484096000D62F5A /* AddressBookUI.framework */,
@@ -319,8 +328,7 @@
 				FF41372514583ED200F36E7C /* SBAAppDelegate.m */,
 				FFF040E51474074100A701A9 /* SBAConstants.h */,
 				FFF040E61474074100A701A9 /* SBAConstants.m */,
-				FF4A11D214754A7E003AC6E0 /* SBALayer.h */,
-				FF4A11D314754A7E003AC6E0 /* SBALayer.m */,
+				FFE9BEC31489601B00B46F30 /* Model Classes */,
 				FF41371C14583ED200F36E7C /* Supporting Files */,
 			);
 			path = "SBA Sites";
@@ -329,6 +337,7 @@
 		FF41371C14583ED200F36E7C /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				FFFC4A0514895FC40009EEDE /* TestFlight.h */,
 				FF41371D14583ED200F36E7C /* SBA Sites-Info.plist */,
 				FF41371E14583ED200F36E7C /* InfoPlist.strings */,
 				FF41372114583ED200F36E7C /* main.m */,
@@ -351,9 +360,11 @@
 				FF52318114743FFB00EB02FA /* DetailViewController.h */,
 				FF52318214743FFB00EB02FA /* DetailViewController.m */,
 				FF52317E14743FE800EB02FA /* DetailViewController.xib */,
+				FFFC49FF14895AC90009EEDE /* DetailViewController-iPad.xib */,
 				FF5231841474406C00EB02FA /* SiteImageViewController.h */,
 				FF5231851474406C00EB02FA /* SiteImageViewController.m */,
 				FF5231871474407800EB02FA /* SiteImageViewController.xib */,
+				FFFC4A0214895B560009EEDE /* SiteImageViewController-iPad.xib */,
 				FF4A11CB1475439F003AC6E0 /* LayerViewController.h */,
 				FF4A11CC1475439F003AC6E0 /* LayerViewController.m */,
 				FF4A11CF147543DB003AC6E0 /* LayerViewController.xib */,
@@ -502,6 +513,15 @@
 			name = BSForwardGeocoder;
 			sourceTree = "<group>";
 		};
+		FFE9BEC31489601B00B46F30 /* Model Classes */ = {
+			isa = PBXGroup;
+			children = (
+				FF4A11D214754A7E003AC6E0 /* SBALayer.h */,
+				FF4A11D314754A7E003AC6E0 /* SBALayer.m */,
+			);
+			name = "Model Classes";
+			sourceTree = "<group>";
+		};
 		FFF0854414769A3A001B1C1E /* layer icons */ = {
 			isa = PBXGroup;
 			children = (
@@ -633,6 +653,8 @@
 				FFF085461476A8A9001B1C1E /* Grey.png in Resources */,
 				FF98B8901484141600D62F5A /* SBASearchViewController.xib in Resources */,
 				FF41277E148544EF00A9FD80 /* BluePushpin.png in Resources */,
+				FFFC4A0014895AC90009EEDE /* DetailViewController-iPad.xib in Resources */,
+				FFFC4A0314895B560009EEDE /* SiteImageViewController-iPad.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -732,18 +754,26 @@
 		FF41372A14583ED200F36E7C /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ARCHS = (
+					armv6,
+					"$(ARCHS_STANDARD_32_BIT)",
+				);
 				CLANG_ENABLE_OBJC_ARC = YES;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: James Chapman (S5TV9Q4TL4)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Jorge Grau (7QKYLSF3U6)";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "SBA Sites/SBA Sites-Prefix.pch";
 				INFOPLIST_FILE = "SBA Sites/SBA Sites-Info.plist";
-				LIBRARY_SEARCH_PATHS = "$(HOME)/Library/SDKs/ArcGIS/iOS.sdk/usr/local/lib";
+				IPHONEOS_DEPLOYMENT_TARGET = 4.0;
+				LIBRARY_SEARCH_PATHS = (
+					"$(HOME)/Library/SDKs/ArcGIS/iOS.sdk/usr/local/lib",
+					"\"$(SRCROOT)\"",
+				);
 				OTHER_LDFLAGS = (
 					"-ObjC",
 					"-all_load",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "8DFFDB60-8DA1-4C75-B1A7-7E5D23A9B897";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "756BE1E8-7D4B-4D73-B4DC-5282C5977DE4";
 				USER_HEADER_SEARCH_PATHS = "$(HOME)/Library/SDKs/ArcGIS/iOS.sdk/usr/local/include/**";
 				WRAPPER_EXTENSION = app;
 			};
@@ -752,12 +782,21 @@
 		FF41372B14583ED200F36E7C /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ARCHS = (
+					armv6,
+					"$(ARCHS_STANDARD_32_BIT)",
+				);
 				CLANG_ENABLE_OBJC_ARC = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: SBA Communications";
+				COPY_PHASE_STRIP = NO;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "SBA Sites/SBA Sites-Prefix.pch";
 				INFOPLIST_FILE = "SBA Sites/SBA Sites-Info.plist";
-				LIBRARY_SEARCH_PATHS = "$(HOME)/Library/SDKs/ArcGIS/iOS.sdk/usr/local/lib";
+				IPHONEOS_DEPLOYMENT_TARGET = 4.0;
+				LIBRARY_SEARCH_PATHS = (
+					"$(HOME)/Library/SDKs/ArcGIS/iOS.sdk/usr/local/lib",
+					"\"$(SRCROOT)\"",
+				);
 				OTHER_LDFLAGS = (
 					"-ObjC",
 					"-all_load",

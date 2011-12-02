@@ -13,4 +13,5 @@
     #import <Foundation/Foundation.h>
     #import "ArcGIS.h"
     #import "SBAConstants.h"
+    #import "TestFlight.h"
 #endif

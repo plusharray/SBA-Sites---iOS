@@ -8,19 +8,24 @@
 
 #import <UIKit/UIKit.h>
 #import <AddressBookUI/AddressBookUI.h>
+#import <MapKit/MapKit.h>
+#import "BSForwardGeocoder.h"
 
-@interface SBASearchViewController : UIViewController <UITableViewDelegate, UITableViewDataSource, UISearchDisplayDelegate, UISearchBarDelegate, ABPeoplePickerNavigationControllerDelegate, ABPersonViewControllerDelegate, AGSLocatorDelegate>
+@interface SBASearchViewController : UIViewController <UITableViewDelegate, UITableViewDataSource, UISearchDisplayDelegate, UISearchBarDelegate, ABPeoplePickerNavigationControllerDelegate, ABPersonViewControllerDelegate, AGSLocatorDelegate, MKReverseGeocoderDelegate, BSForwardGeocoderDelegate, AGSFindTaskDelegate>
 
 @property (strong, nonatomic) IBOutlet UISearchBar *searchBar;
 @property (strong, nonatomic) IBOutlet UITableView *tableView;
-@property (strong, nonatomic) AGSSpatialReference *spatialReference;
+@property (strong, nonatomic) AGSMapView *mapView;
+@property (strong, nonatomic) NSArray *visibleLayers;
 @property (nonatomic) BOOL addressBookSearch;
 @property (nonatomic) BOOL searchActiveDB;
 @property (nonatomic) BOOL searchActiveForwardGeocode;
 @property (nonatomic) BOOL searchActiveReverseGeocode;
 @property (nonatomic) BOOL searchPerformed;
-@property (nonatomic, retain) NSMutableArray *addressResults;
-@property (nonatomic, retain) NSMutableArray *siteResults;
-@property (nonatomic, retain) NSString *savedSearchTerm;
+@property (nonatomic, strong) NSMutableArray *addressResults;
+@property (nonatomic, strong) NSMutableArray *siteResults;
+@property (nonatomic, strong) NSString *savedSearchTerm;
+@property (nonatomic, strong) BSForwardGeocoder *forwardGeocoder;
+@property (nonatomic, strong) AGSFindTask *findTask;
 
 @end

@@ -11,6 +11,7 @@
 @interface SBASiteTableViewController : UIViewController <UITableViewDelegate, UITableViewDataSource, AGSIdentifyTaskDelegate>
 
 @property (nonatomic, strong) IBOutlet UITableView *tableView;
+@property (strong, nonatomic) IBOutlet UIToolbar *toolbar;
 @property (nonatomic, strong) AGSMapView *mapView;
 @property (nonatomic, strong) AGSIdentifyTask *identifyTask;
 @property (nonatomic, strong) AGSIdentifyParameters *identifyParams;

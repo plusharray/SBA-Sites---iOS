@@ -16,6 +16,7 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
+    [TestFlight takeOff:@"44e08cf8835fb9c0b50b3581e05f5612_MTA2MjEyMDExLTExLTExIDE1OjEzOjE4LjUwNzc5NQ"];
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     SBARootViewController *rootViewController;
     // Override point for customization after application launch.

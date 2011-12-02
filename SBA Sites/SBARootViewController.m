@@ -38,6 +38,7 @@
 @synthesize showSiteListPopoverButton = _showSiteListPopoverButton;
 @synthesize userLocationButton = _userLocationButton;
 @synthesize showInfoButton = _showInfoButton;
+@synthesize mapTypeSegmentedControl = _mapTypeSegmentedControl;
 @synthesize popoverController = __popoverController;
 @synthesize toolbar = _toolbar;
 @synthesize layers = _layers;
@@ -50,7 +51,6 @@
 @synthesize addressResults = _addressResults;
 @synthesize siteResults = _siteResults;
 @synthesize savedSearchTerm = _savedSearchTerm;
-@synthesize reverseGeocoder = _reverseGeocoder;
 @synthesize forwardGeocoder = _forwardGeocoder;
 @synthesize findTask = _findTask;
 @synthesize calloutTemplate = _calloutTemplate;
@@ -69,17 +69,26 @@
 
 - (IBAction)mapType:(UISegmentedControl *)segmentPick
 {
-    
+    self.selectedMapType = segmentPick.selectedSegmentIndex;
+    [[NSNotificationCenter defaultCenter] postNotificationName:SBAMapTypeChanged object:[NSNumber numberWithInteger:self.selectedMapType]];
 }
 
 - (IBAction)toggleLayer:(id)sender
 {
-    
+    UIButton *button = (UIButton *)sender;
+    SBALayer *layer = (SBALayer *)[self.layers objectAtIndex:button.tag];
+    layer.visible = !layer.visible;
+    if (layer.visible) {
+        [button setImage:layer.image forState:UIControlStateNormal];
+    } else {
+        [button setImage:[UIImage imageNamed:@"Grey.png"] forState:UIControlStateNormal];
+    }
+    [[NSNotificationCenter defaultCenter] postNotificationName:SBALayerSelected object:nil];
 }
 
 - (IBAction)userLocationButtonTapped:(id)sender
 {
-    double span = 2.0;
+    double span = 1.0;
 	double xmin, ymin, xmax, ymax;
 	xmin = self.mapView.gps.currentLocation.coordinate.longitude - span;
 	ymin = self.mapView.gps.currentLocation.coordinate.latitude - span;
@@ -92,11 +101,20 @@
 - (IBAction)showSiteList:(id)sender
 {
     SBASiteTableViewController *viewController = [[SBASiteTableViewController alloc] initWithNibName:@"SBASiteTableViewController" bundle:nil];
-    [self presentViewController:viewController animated:YES completion:^(void){
-        [viewController setMapView:self.mapView];
-        [viewController setLayers:self.visibleLayers];
-        [viewController getSites];
-    }];
+    [viewController setMapView:self.mapView];
+    [viewController setLayers:self.visibleLayers];
+    [viewController getSites];
+    if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone) {
+        [self presentViewController:viewController animated:YES completion:^(void){}];
+    } else {
+        if (!self.popoverController.popoverVisible) {
+			self.popoverController = [[UIPopoverController alloc] initWithContentViewController:viewController];
+			self.popoverController.delegate = self;
+			[self.popoverController presentPopoverFromBarButtonItem:self.showSiteListPopoverButton
+                                           permittedArrowDirections:UIPopoverArrowDirectionAny
+                                                           animated:YES];
+		}
+    }
 }
 
 - (IBAction)showLayerList:(id)sender
@@ -105,7 +123,7 @@
 		LayerViewController *layerViewController = [[LayerViewController alloc] initWithNibName:@"LayerViewController" bundle:nil];
         layerViewController.modalPresentationStyle = UIModalPresentationFullScreen;
 		layerViewController.modalTransitionStyle = UIModalTransitionStylePartialCurl;
-        [layerViewController.mapSegmentedControl addTarget:self action:@selector(mapType:) forControlEvents:UIControlEventValueChanged];
+        [layerViewController.mapTypeSegmentedControl addTarget:self action:@selector(mapType:) forControlEvents:UIControlEventValueChanged];
         [layerViewController setLayerArray:self.layers];
         [layerViewController setSelectedMapType:self.selectedMapType];
         [self presentViewController:layerViewController animated:YES completion:^(void){}];
@@ -115,18 +133,37 @@
 - (IBAction)showSearch:(id)sender
 {
     if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone) {
-        SBASearchViewController *viewController = [[SBASearchViewController alloc] initWithNibName:@"SBASearchViewController" bundle:nil];
-        viewController.spatialReference = self.mapView.spatialReference;
-        [self.navigationController pushViewController:viewController animated:YES];
-    } else {
         
+    } else {
+        if (!self.popoverController.popoverVisible) {
+            SBASearchViewController *viewController = [[SBASearchViewController alloc] initWithNibName:@"SBASearchViewController" bundle:nil];
+            viewController.mapView = self.mapView;
+            viewController.visibleLayers = self.visibleLayers;
+			self.popoverController = [[UIPopoverController alloc] initWithContentViewController:viewController];
+			self.popoverController.delegate = self;
+			[self.popoverController presentPopoverFromBarButtonItem:self.showSearchBarButton
+                                           permittedArrowDirections:UIPopoverArrowDirectionAny
+                                                           animated:YES];
+		}
     }
 }
 
 - (IBAction)showInfo:(id)sender
 {
-    InformationViewController *infoViewController = [[InformationViewController alloc] initWithNibName:@"InformationViewController" bundle:nil];
-    [self.navigationController pushViewController:infoViewController animated:YES];
+    InformationViewController *viewController = [[InformationViewController alloc] initWithNibName:@"InformationViewController" bundle:nil];
+    if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone) {
+        [self.navigationController pushViewController:viewController animated:YES];
+    } else {
+        if (!self.popoverController.popoverVisible) {
+			viewController.contentSizeForViewInPopover = CGSizeMake(320.0, 465.0);
+			UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:viewController];
+			self.popoverController = [[UIPopoverController alloc] initWithContentViewController:navController];
+			self.popoverController.delegate = self;
+			[self.popoverController presentPopoverFromBarButtonItem:self.showInfoButton
+                                           permittedArrowDirections:UIPopoverArrowDirectionAny
+                                                           animated:YES];
+		}
+    }
 }
 
 - (void)layerSelected:(NSNotification *)notification
@@ -137,33 +174,31 @@
 
 - (void)siteSelected:(NSNotification *)notification
 {
-    AGSIdentifyResult *result = (AGSIdentifyResult *)[notification object];
-    AGSPoint* point = (AGSPoint *)[[result feature] geometry];
-    
-    //clear previous results
-    [self.graphicsLayer removeAllGraphics];
-	
-    //add new results
-    AGSSymbol* symbol = [AGSSimpleFillSymbol simpleFillSymbol];
-    symbol.color = [UIColor colorWithRed:0 green:0 blue:1 alpha:0.5];
-    
-    result.feature.symbol = symbol;
-    [self.graphicsLayer addGraphic:result.feature];
-    
-    //get the site code & name
-    NSString *siteCode = [result.feature.attributes objectForKey:@"SiteCode"];
-    NSString *siteName = [result.feature.attributes objectForKey:@"SiteName"];
-    self.mapView.callout.title = siteCode;
-    self.mapView.callout.detail = siteName;
-    
-    // Show the callout
-    [self.mapView showCalloutAtPoint:point forGraphic:[result feature] animated:YES];
-    
-    // Zoom to point
-    [self.mapView centerAtPoint:point animated:YES];
-    
-    //call dataChanged on the graphics layer to redraw the graphics
-    [self.graphicsLayer dataChanged];	
+    AGSIdentifyResult *result = (AGSIdentifyResult *)[notification object];;
+    [self.mapView centerAtPoint:(AGSPoint *)[[result feature] geometry] animated:NO];
+    if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
+        [self.popoverController dismissPopoverAnimated:YES];
+        if (!self.popoverController.popoverVisible) {
+            DetailViewController *viewController = [[DetailViewController alloc] initWithNibName:@"DetailViewController-iPad" bundle:nil];
+            viewController.site = result.feature;
+            viewController.contentSizeForViewInPopover = CGSizeMake(320.0, 416.0);
+            self.popoverController = [[UIPopoverController alloc] initWithContentViewController:viewController];
+            self.popoverController.delegate = self;
+            CGPoint point = [self.mapView toScreenPoint:(AGSPoint *)[[result feature] geometry]];
+            [self.popoverController presentPopoverFromRect:CGRectMake(point.x, point.y, 1.0, 1.0) inView:self.mapView permittedArrowDirections:UIPopoverArrowDirectionAny animated:YES];
+        }
+    } else {
+        //get the site code & name
+        NSString *siteCode = [result.feature.attributes objectForKey:@"SiteCode"];
+        NSString *siteName = [result.feature.attributes objectForKey:@"SiteName"];
+        self.mapView.callout.title = siteCode;
+        self.mapView.callout.detail = siteName;
+        //show callout
+        [self.mapView showCalloutAtPoint:self.mappoint forGraphic:result.feature animated:YES];
+        
+        //call dataChanged on the graphics layer to redraw the graphics
+        [self.graphicsLayer dataChanged];
+    }
 }
 
 - (void)mapTypeChanged:(NSNotification *)notification
@@ -275,31 +310,40 @@
 {
     [super viewDidLoad];
     
-    // Hack to make sure scope buttons are hidden
-    [self.searchDisplayController.searchBar setShowsScopeBar:NO];
-    [self.searchDisplayController.searchBar sizeToFit];
-    
     // Set the default mapType
     self.selectedMapType = 0;
     
     // Setup the MapView
     [self setupMapView];
     
-    // Setup Navigation Bar and Toolbars
-    if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone) {
-        [self.navigationController setNavigationBarHidden:YES animated:NO];
-    } else {
-        [self.navigationController setNavigationBarHidden:YES animated:NO];
-    }
-    
     // Register for Notifications
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(siteSelected:) name:SBASiteSelected object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(layerSelected:) name:SBALayerSelected object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(mapTypeChanged:) name:SBAMapTypeChanged object:nil];
+    
+    if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad)
+    {
+        self.selectedMapType = 0;
+        self.buttons = [NSMutableArray arrayWithCapacity:5];
+        for (SBALayer *aLayer in self.layers) {
+            // Make Button to control visibility of layer
+            UIButton *layerButton = [[[NSBundle mainBundle] loadNibNamed:@"LayerButton" owner:self options:nil] objectAtIndex:0];
+            layerButton.titleLabel.font = [UIFont systemFontOfSize: 12];
+            [layerButton setTitle:aLayer.name forState:UIControlStateNormal];
+            [layerButton setImage:aLayer.image forState:UIControlStateNormal];
+            layerButton.tag = [self.layers indexOfObject:aLayer];
+            layerButton.frame = CGRectMake(0.0f, 0.0f, 130.0f, 42.0f);
+            // create a bar button item to hold the new button
+            UIBarButtonItem *buttonBarButton = [[UIBarButtonItem alloc] initWithCustomView:layerButton];
+            [self.buttons addObject:buttonBarButton];
+        }
+        [self.toolbar setItems:self.buttons];
+    }
 }
 
 - (void)viewDidUnload
 {
+    [self setMapTypeSegmentedControl:nil];
     [super viewDidUnload];
     // Release any retained subviews of the main view.
     // e.g. self.myOutlet = nil;
@@ -332,7 +376,7 @@
     self.mappoint = mappoint;
     
 	self.identifyParams.layerIds = [self.visibleLayers valueForKey:@"layerID"];
-	self.identifyParams.tolerance = 3;
+	self.identifyParams.tolerance = 6;
 	self.identifyParams.geometry = self.mappoint;
 	self.identifyParams.size = self.mapView.bounds.size;
 	self.identifyParams.mapEnvelope = self.mapView.envelope;
@@ -349,6 +393,7 @@
 {
     DetailViewController *viewController = [[DetailViewController alloc] initWithNibName:@"DetailViewController" bundle:nil];
     viewController.site = graphic;
+    
     [self.navigationController pushViewController:viewController animated:YES];
     [self.navigationController setNavigationBarHidden:NO animated:YES];
 }
@@ -374,17 +419,29 @@
     if (results.count > 0) {
         //set the callout content for the first result
         AGSIdentifyResult *result = (AGSIdentifyResult*)[results objectAtIndex:0];
-        //get the site code & name
-        NSString *siteCode = [result.feature.attributes objectForKey:@"SiteCode"];
-        NSString *siteName = [result.feature.attributes objectForKey:@"SiteName"];
-        self.mapView.callout.title = siteCode;
-        self.mapView.callout.detail = siteName;
         
-        //show callout
-        [self.mapView showCalloutAtPoint:self.mappoint forGraphic:((AGSIdentifyResult*)[results objectAtIndex:0]).feature animated:YES];
-        
-        //call dataChanged on the graphics layer to redraw the graphics
-        [self.graphicsLayer dataChanged];	
+        if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
+            if (!self.popoverController.popoverVisible) {
+                DetailViewController *viewController = [[DetailViewController alloc] initWithNibName:@"DetailViewController-iPad" bundle:nil];
+                viewController.site = result.feature;
+                viewController.contentSizeForViewInPopover = CGSizeMake(320.0, 416.0);
+                self.popoverController = [[UIPopoverController alloc] initWithContentViewController:viewController];
+                self.popoverController.delegate = self;
+                CGPoint point = [self.mapView toScreenPoint:self.mappoint];
+                [self.popoverController presentPopoverFromRect:CGRectMake(point.x, point.y, 1.0, 1.0) inView:self.mapView permittedArrowDirections:UIPopoverArrowDirectionAny animated:YES];
+            }
+        } else {
+            //get the site code & name
+            NSString *siteCode = [result.feature.attributes objectForKey:@"SiteCode"];
+            NSString *siteName = [result.feature.attributes objectForKey:@"SiteName"];
+            self.mapView.callout.title = siteCode;
+            self.mapView.callout.detail = siteName;
+            //show callout
+            [self.mapView showCalloutAtPoint:self.mappoint forGraphic:((AGSIdentifyResult*)[results objectAtIndex:0]).feature animated:YES];
+            
+            //call dataChanged on the graphics layer to redraw the graphics
+            [self.graphicsLayer dataChanged];
+        }
     }
 }
 
@@ -513,10 +570,18 @@
 			} else {
 				[(UIActivityIndicatorView *)cell.accessoryView stopAnimating];
 			}
-			
-            MKPlacemark *placemark = [self.addressResults objectAtIndex:row];
-            NSString *cellTitle = [NSString stringWithFormat:@"%@", placemark.thoroughfare];
-            NSString *cellSubtitle = [NSString stringWithFormat:@"%@ , %@", placemark.locality, placemark.administrativeArea];
+			id placemark = [self.addressResults objectAtIndex:indexPath.row];
+            NSString *cellTitle;
+            NSString *cellSubtitle;
+            if ([placemark isKindOfClass:[CLPlacemark class]]) {
+                CLPlacemark *aPlacemark = (CLPlacemark *)placemark;
+                cellTitle = [NSString stringWithFormat:@"%@", aPlacemark.thoroughfare];
+                cellSubtitle = [NSString stringWithFormat:@"%@ , %@", aPlacemark.locality, aPlacemark.administrativeArea];
+            } else if ([placemark isKindOfClass:[MKPlacemark class]]) {
+                MKPlacemark *aPlacemark = (MKPlacemark *)placemark;
+                cellTitle = [NSString stringWithFormat:@"%@", aPlacemark.thoroughfare];
+                cellSubtitle = [NSString stringWithFormat:@"%@ , %@", aPlacemark.locality, aPlacemark.administrativeArea];
+            }
             cell.textLabel.text = cellTitle;
             cell.detailTextLabel.text = cellSubtitle;
 		}
@@ -535,52 +600,66 @@
     if (indexPath.section == 0) {
         [[NSNotificationCenter defaultCenter] postNotificationName:SBASiteSelected object:[self.siteResults objectAtIndex:indexPath.row]];
     } else if (indexPath.section == 1) {
-        MKPlacemark *placemark = [self.addressResults objectAtIndex:indexPath.row];
-        double span = 2.0;
-        double xmin, ymin, xmax, ymax;
-        xmin = placemark.coordinate.longitude - span;
-        ymin = placemark.coordinate.latitude - span;
-        xmax = placemark.coordinate.longitude + span;
-        ymax = placemark.coordinate.latitude + span;
-        AGSEnvelope *env = [AGSEnvelope envelopeWithXmin:xmin ymin:ymin xmax:xmax ymax:ymax spatialReference:self.mapView.spatialReference];
-        [self.mapView zoomToEnvelope:env animated:YES];
+        id placemark = [self.addressResults objectAtIndex:indexPath.row];
+        if ([placemark isKindOfClass:[CLPlacemark class]]) {
+            CLPlacemark *aPlacemark = (CLPlacemark *)placemark;
+            double span = 1.0;
+            double xmin, ymin, xmax, ymax;
+            xmin = aPlacemark.location.coordinate.longitude - span;
+            ymin = aPlacemark.location.coordinate.latitude - span;
+            xmax = aPlacemark.location.coordinate.longitude + span;
+            ymax = aPlacemark.location.coordinate.latitude + span;
+            AGSEnvelope *env = [AGSEnvelope envelopeWithXmin:xmin ymin:ymin xmax:xmax ymax:ymax spatialReference:self.mapView.spatialReference];
+            [self.mapView zoomToEnvelope:env animated:YES];
+        } else if ([placemark isKindOfClass:[MKPlacemark class]]) {
+            MKPlacemark *aPlacemark = (MKPlacemark *)placemark;
+            double span = 1.0;
+            double xmin, ymin, xmax, ymax;
+            xmin = aPlacemark.coordinate.longitude - span;
+            ymin = aPlacemark.coordinate.latitude - span;
+            xmax = aPlacemark.coordinate.longitude + span;
+            ymax = aPlacemark.coordinate.latitude + span;
+            AGSEnvelope *env = [AGSEnvelope envelopeWithXmin:xmin ymin:ymin xmax:xmax ymax:ymax spatialReference:self.mapView.spatialReference];
+            [self.mapView zoomToEnvelope:env animated:YES];
+        }
+        
         /*
-        AGSPoint *point = [[AGSPoint alloc] initWithX:placemark.coordinate.latitude y:placemark.coordinate.longitude spatialReference:self.mapView.spatialReference];
-        
-        
-        //create a marker symbol to use in our graphic
-        AGSPictureMarkerSymbol *marker = [AGSPictureMarkerSymbol pictureMarkerSymbolWithImageNamed:@"BluePushpin.png"];
-        marker.xoffset = 9;
-        marker.yoffset = -16;
-        marker.hotspot = CGPointMake(-9, -11);
-        
-        //create the callout template, used when the user displays the callout
-		self.calloutTemplate = [[AGSCalloutTemplate alloc]init];
-        //set the text and detail text based on 'Name' and 'Descr' fields in the attributes
-        self.calloutTemplate.titleTemplate = placemark.thoroughfare;
-        self.calloutTemplate.detailTemplate = [NSString stringWithFormat:@"%@ , %@", placemark.locality, placemark.administrativeArea];
-        
-        //create the graphic
-        AGSGraphic *graphic = [[AGSGraphic alloc] initWithGeometry:point
-                                                            symbol:marker 
-                                                        attributes:(NSMutableDictionary *)[[placemark addressDictionary] mutableCopy]
-                                              infoTemplateDelegate:self.calloutTemplate];
-        //add the graphic to the graphics layer
-        [self.graphicsLayer addGraphic:graphic];
-        //we have one result, center at that point
-        [self.mapView centerAtPoint:point animated:NO];
+         AGSPoint *point = [[AGSPoint alloc] initWithX:placemark.coordinate.latitude y:placemark.coordinate.longitude spatialReference:self.mapView.spatialReference];
          
-        // set the width of the callout
-        self.mapView.callout.width = 250;
-        
-        //show the callout
-        [self.mapView showCalloutAtPoint:(AGSPoint *)graphic.geometry forGraphic:graphic animated:YES];
-        
-        //since we've added graphics, make sure to redraw
-        [self.graphicsLayer dataChanged];
+         
+         //create a marker symbol to use in our graphic
+         AGSPictureMarkerSymbol *marker = [AGSPictureMarkerSymbol pictureMarkerSymbolWithImageNamed:@"BluePushpin.png"];
+         marker.xoffset = 9;
+         marker.yoffset = -16;
+         marker.hotspot = CGPointMake(-9, -11);
+         
+         //create the callout template, used when the user displays the callout
+         self.calloutTemplate = [[AGSCalloutTemplate alloc]init];
+         //set the text and detail text based on 'Name' and 'Descr' fields in the attributes
+         self.calloutTemplate.titleTemplate = placemark.thoroughfare;
+         self.calloutTemplate.detailTemplate = [NSString stringWithFormat:@"%@ , %@", placemark.locality, placemark.administrativeArea];
+         
+         //create the graphic
+         AGSGraphic *graphic = [[AGSGraphic alloc] initWithGeometry:point
+         symbol:marker 
+         attributes:(NSMutableDictionary *)[[placemark addressDictionary] mutableCopy]
+         infoTemplateDelegate:self.calloutTemplate];
+         //add the graphic to the graphics layer
+         [self.graphicsLayer addGraphic:graphic];
+         //we have one result, center at that point
+         [self.mapView centerAtPoint:point animated:NO];
+         
+         // set the width of the callout
+         self.mapView.callout.width = 250;
+         
+         //show the callout
+         [self.mapView showCalloutAtPoint:(AGSPoint *)graphic.geometry forGraphic:graphic animated:YES];
+         
+         //since we've added graphics, make sure to redraw
+         [self.graphicsLayer dataChanged];
          */
     }
-        
+    
 }
 
 #pragma mark - Search Related
@@ -616,9 +695,23 @@
 				coord.longitude *= -1.0f;
 			}
 			if ((coord.latitude != 0) && (coord.longitude != 0)) {
-				self.reverseGeocoder =	[[[MKReverseGeocoder alloc] initWithCoordinate:coord] autorelease];
-				self.reverseGeocoder.delegate = self;
-				[self.reverseGeocoder start];
+                Class geocoderClass = (NSClassFromString(@"CLGeocoder"));
+                if (geocoderClass) {
+                    CLGeocoder *geocoder = [[CLGeocoder alloc] init];
+                    CLLocation *location = [[CLLocation alloc] initWithLatitude:coord.latitude longitude:coord.longitude];
+                    [geocoder reverseGeocodeLocation:location completionHandler:^(NSArray *placemarks, NSError *error) {
+                        self.searchActiveReverseGeocode = NO;
+                        [self.addressResults addObjectsFromArray:placemarks];
+                        [self.searchDisplayController.searchResultsTableView reloadData];
+                    }];
+                } else {
+                    Class reverseGeocoderClass = (NSClassFromString(@"MKReverseGeocoder"));
+                    if (reverseGeocoderClass) {
+                        MKReverseGeocoder *reverseGeocoder = [[MKReverseGeocoder alloc] initWithCoordinate:coord];
+                        reverseGeocoder.delegate = self;
+                        [reverseGeocoder start];
+                    }
+                }
 				self.searchActiveReverseGeocode = YES;
 			} else {
 				self.searchActiveReverseGeocode = NO;

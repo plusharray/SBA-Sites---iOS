@@ -14,14 +14,14 @@
 
 @implementation LayerViewController
 
-@synthesize mapSegmentedControl = _mapSegmentedControl;
+@synthesize mapTypeSegmentedControl = _mapSegmentedControl;
 @synthesize tableView = _tableView;
 @synthesize layerArray = _layerArray;
 @synthesize selectedMapType = _selectedMapType;
 
 
 - (void) viewDidUnload {
-    self.mapSegmentedControl = nil;
+    self.mapTypeSegmentedControl = nil;
     self.tableView = nil;
 	self.layerArray = nil;
 }
@@ -31,7 +31,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    [self.mapSegmentedControl setSelectedSegmentIndex:self.selectedMapType];
+    [self.mapTypeSegmentedControl setSelectedSegmentIndex:self.selectedMapType];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
