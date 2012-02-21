@@ -376,7 +376,7 @@
     self.mappoint = mappoint;
     
 	self.identifyParams.layerIds = [self.visibleLayers valueForKey:@"layerID"];
-	self.identifyParams.tolerance = 6;
+	self.identifyParams.tolerance = 12;
 	self.identifyParams.geometry = self.mappoint;
 	self.identifyParams.size = self.mapView.bounds.size;
 	self.identifyParams.mapEnvelope = self.mapView.envelope;
