@@ -17,8 +17,6 @@
 		FF41372F14583F1D00F36E7C /* SBARootViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FF41372D14583F1D00F36E7C /* SBARootViewController.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		FF41373014583F1D00F36E7C /* SBARootViewController_iPhone.xib in Resources */ = {isa = PBXBuildFile; fileRef = FF41372E14583F1D00F36E7C /* SBARootViewController_iPhone.xib */; };
 		FF41373314583F6A00F36E7C /* SBARootViewController_iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = FF41373214583F6A00F36E7C /* SBARootViewController_iPad.xib */; };
-		FF41373514583F8A00F36E7C /* libArcGIS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = FF41373414583F8A00F36E7C /* libArcGIS.a */; };
-		FF41373C14583FD300F36E7C /* ArcGIS.bundle in Resources */ = {isa = PBXBuildFile; fileRef = FF41373B14583FD300F36E7C /* ArcGIS.bundle */; };
 		FF413743145840C500F36E7C /* libstdc++.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = FF413742145840C500F36E7C /* libstdc++.dylib */; };
 		FF413745145840CF00F36E7C /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FF413744145840CF00F36E7C /* MobileCoreServices.framework */; };
 		FF413747145840D900F36E7C /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = FF413746145840D900F36E7C /* libz.dylib */; };
@@ -87,6 +85,8 @@
 		FF4A11D0147543DB003AC6E0 /* LayerButton.xib in Resources */ = {isa = PBXBuildFile; fileRef = FF4A11CE147543DB003AC6E0 /* LayerButton.xib */; };
 		FF4A11D1147543DB003AC6E0 /* LayerViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = FF4A11CF147543DB003AC6E0 /* LayerViewController.xib */; };
 		FF4A11D414754A7E003AC6E0 /* SBALayer.m in Sources */ = {isa = PBXBuildFile; fileRef = FF4A11D314754A7E003AC6E0 /* SBALayer.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		FF4D5C7B14F27A8E00DBAB5E /* button-highlight.png in Resources */ = {isa = PBXBuildFile; fileRef = FF4D5C7914F27A8E00DBAB5E /* button-highlight.png */; };
+		FF4D5C7C14F27A8E00DBAB5E /* button.png in Resources */ = {isa = PBXBuildFile; fileRef = FF4D5C7A14F27A8E00DBAB5E /* button.png */; };
 		FF52317F14743FE800EB02FA /* DetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = FF52317E14743FE800EB02FA /* DetailViewController.xib */; };
 		FF52318314743FFB00EB02FA /* DetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FF52318214743FFB00EB02FA /* DetailViewController.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		FF5231861474406C00EB02FA /* SiteImageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FF5231851474406C00EB02FA /* SiteImageViewController.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
@@ -98,6 +98,8 @@
 		FF64CEA114851FE6003CC124 /* BSKmlResult.m in Sources */ = {isa = PBXBuildFile; fileRef = FF64CE9A14851FE6003CC124 /* BSKmlResult.m */; };
 		FF64CEA214851FE6003CC124 /* CustomPlacemark.m in Sources */ = {isa = PBXBuildFile; fileRef = FF64CE9C14851FE6003CC124 /* CustomPlacemark.m */; };
 		FF64CEA314851FE6003CC124 /* BSForwardGeocoder.m in Sources */ = {isa = PBXBuildFile; fileRef = FF64CE9E14851FE6003CC124 /* BSForwardGeocoder.m */; };
+		FF75FDB914F3C16400E3B3F6 /* ArcGIS.bundle in Resources */ = {isa = PBXBuildFile; fileRef = FF75FDB814F3C16400E3B3F6 /* ArcGIS.bundle */; };
+		FF75FDBB14F3C27700E3B3F6 /* libArcGIS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = FF75FDBA14F3C27700E3B3F6 /* libArcGIS.a */; };
 		FF98B8891484096000D62F5A /* AddressBook.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FF98B8871484096000D62F5A /* AddressBook.framework */; };
 		FF98B88A1484096000D62F5A /* AddressBookUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FF98B8881484096000D62F5A /* AddressBookUI.framework */; };
 		FF98B88F1484141600D62F5A /* SBASearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FF98B88D1484141600D62F5A /* SBASearchViewController.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
@@ -132,8 +134,6 @@
 		FF41372D14583F1D00F36E7C /* SBARootViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBARootViewController.m; sourceTree = "<group>"; };
 		FF41372E14583F1D00F36E7C /* SBARootViewController_iPhone.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SBARootViewController_iPhone.xib; sourceTree = "<group>"; };
 		FF41373214583F6A00F36E7C /* SBARootViewController_iPad.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SBARootViewController_iPad.xib; sourceTree = "<group>"; };
-		FF41373414583F8A00F36E7C /* libArcGIS.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libArcGIS.a; path = ../../../Library/SDKs/ArcGIS/iOS.sdk/usr/local/lib/libArcGIS.a; sourceTree = "<group>"; };
-		FF41373B14583FD300F36E7C /* ArcGIS.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; name = ArcGIS.bundle; path = ../../../../Library/SDKs/ArcGIS/iOS.sdk/usr/local/resources/ArcGIS.bundle; sourceTree = "<group>"; };
 		FF413742145840C500F36E7C /* libstdc++.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libstdc++.dylib"; path = "usr/lib/libstdc++.dylib"; sourceTree = SDKROOT; };
 		FF413744145840CF00F36E7C /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
 		FF413746145840D900F36E7C /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
@@ -210,6 +210,8 @@
 		FF4A11CF147543DB003AC6E0 /* LayerViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LayerViewController.xib; sourceTree = "<group>"; };
 		FF4A11D214754A7E003AC6E0 /* SBALayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBALayer.h; sourceTree = "<group>"; };
 		FF4A11D314754A7E003AC6E0 /* SBALayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBALayer.m; sourceTree = "<group>"; };
+		FF4D5C7914F27A8E00DBAB5E /* button-highlight.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "button-highlight.png"; sourceTree = "<group>"; };
+		FF4D5C7A14F27A8E00DBAB5E /* button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = button.png; sourceTree = "<group>"; };
 		FF52317E14743FE800EB02FA /* DetailViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DetailViewController.xib; sourceTree = "<group>"; };
 		FF52318114743FFB00EB02FA /* DetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DetailViewController.h; sourceTree = "<group>"; };
 		FF52318214743FFB00EB02FA /* DetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DetailViewController.m; sourceTree = "<group>"; };
@@ -228,6 +230,8 @@
 		FF64CE9C14851FE6003CC124 /* CustomPlacemark.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomPlacemark.m; sourceTree = "<group>"; };
 		FF64CE9D14851FE6003CC124 /* BSForwardGeocoder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BSForwardGeocoder.h; sourceTree = "<group>"; };
 		FF64CE9E14851FE6003CC124 /* BSForwardGeocoder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BSForwardGeocoder.m; sourceTree = "<group>"; };
+		FF75FDB814F3C16400E3B3F6 /* ArcGIS.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = ArcGIS.bundle; sourceTree = "<group>"; };
+		FF75FDBA14F3C27700E3B3F6 /* libArcGIS.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libArcGIS.a; sourceTree = "<group>"; };
 		FF98B8871484096000D62F5A /* AddressBook.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AddressBook.framework; path = System/Library/Frameworks/AddressBook.framework; sourceTree = SDKROOT; };
 		FF98B8881484096000D62F5A /* AddressBookUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AddressBookUI.framework; path = System/Library/Frameworks/AddressBookUI.framework; sourceTree = SDKROOT; };
 		FF98B88C1484141600D62F5A /* SBASearchViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBASearchViewController.h; sourceTree = "<group>"; };
@@ -255,13 +259,14 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FFFC4A0614895FC40009EEDE /* libTestFlight.a in Frameworks */,
+				FF75FDBB14F3C27700E3B3F6 /* libArcGIS.a in Frameworks */,
 				FF64CE9314851F8D003CC124 /* MapKit.framework in Frameworks */,
 				FF98B8891484096000D62F5A /* AddressBook.framework in Frameworks */,
 				FF98B88A1484096000D62F5A /* AddressBookUI.framework in Frameworks */,
 				FF52318A14744BED00EB02FA /* MessageUI.framework in Frameworks */,
 				FF413747145840D900F36E7C /* libz.dylib in Frameworks */,
 				FF413743145840C500F36E7C /* libstdc++.dylib in Frameworks */,
-				FF41373514583F8A00F36E7C /* libArcGIS.a in Frameworks */,
 				FF41371614583ED200F36E7C /* UIKit.framework in Frameworks */,
 				FF41371814583ED200F36E7C /* Foundation.framework in Frameworks */,
 				FF41374F1458410300F36E7C /* CoreLocation.framework in Frameworks */,
@@ -270,7 +275,6 @@
 				FF413749145840E100F36E7C /* QuartzCore.framework in Frameworks */,
 				FF413745145840CF00F36E7C /* MobileCoreServices.framework in Frameworks */,
 				FF41371A14583ED200F36E7C /* CoreGraphics.framework in Frameworks */,
-				FFFC4A0614895FC40009EEDE /* libTestFlight.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -298,6 +302,7 @@
 		FF41371414583ED200F36E7C /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				FF75FDBA14F3C27700E3B3F6 /* libArcGIS.a */,
 				FFFC4A0414895FC40009EEDE /* libTestFlight.a */,
 				FF64CE9214851F8D003CC124 /* MapKit.framework */,
 				FF98B8871484096000D62F5A /* AddressBook.framework */,
@@ -305,7 +310,6 @@
 				FF52318914744BED00EB02FA /* MessageUI.framework */,
 				FF413746145840D900F36E7C /* libz.dylib */,
 				FF413742145840C500F36E7C /* libstdc++.dylib */,
-				FF41373414583F8A00F36E7C /* libArcGIS.a */,
 				FF41374E1458410300F36E7C /* CoreLocation.framework */,
 				FF41374C145840F600F36E7C /* MediaPlayer.framework */,
 				FF41374A145840E900F36E7C /* CoreText.framework */,
@@ -379,8 +383,8 @@
 		FF41373A14583FB400F36E7C /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				FF75FDB814F3C16400E3B3F6 /* ArcGIS.bundle */,
 				FF41375414587E5600F36E7C /* images */,
-				FF41373B14583FD300F36E7C /* ArcGIS.bundle */,
 			);
 			name = Resources;
 			path = "SBA Sites";
@@ -389,6 +393,8 @@
 		FF41375414587E5600F36E7C /* images */ = {
 			isa = PBXGroup;
 			children = (
+				FF4D5C7914F27A8E00DBAB5E /* button-highlight.png */,
+				FF4D5C7A14F27A8E00DBAB5E /* button.png */,
 				FF41277D148544EF00A9FD80 /* BluePushpin.png */,
 				FFF0854414769A3A001B1C1E /* layer icons */,
 				FF41375714587E7C00F36E7C /* app icons */,
@@ -588,7 +594,6 @@
 				FF41372014583ED200F36E7C /* InfoPlist.strings in Resources */,
 				FF41373014583F1D00F36E7C /* SBARootViewController_iPhone.xib in Resources */,
 				FF41373314583F6A00F36E7C /* SBARootViewController_iPad.xib in Resources */,
-				FF41373C14583FD300F36E7C /* ArcGIS.bundle in Resources */,
 				FF41375914587E9F00F36E7C /* icon.png in Resources */,
 				FF41375C14587EB900F36E7C /* logo_small.png in Resources */,
 				FF41375D14587EB900F36E7C /* logo.png in Resources */,
@@ -655,6 +660,9 @@
 				FF41277E148544EF00A9FD80 /* BluePushpin.png in Resources */,
 				FFFC4A0014895AC90009EEDE /* DetailViewController-iPad.xib in Resources */,
 				FFFC4A0314895B560009EEDE /* SiteImageViewController-iPad.xib in Resources */,
+				FF4D5C7B14F27A8E00DBAB5E /* button-highlight.png in Resources */,
+				FF4D5C7C14F27A8E00DBAB5E /* button.png in Resources */,
+				FF75FDB914F3C16400E3B3F6 /* ArcGIS.bundle in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -767,6 +775,7 @@
 				LIBRARY_SEARCH_PATHS = (
 					"$(HOME)/Library/SDKs/ArcGIS/iOS.sdk/usr/local/lib",
 					"\"$(SRCROOT)\"",
+					"\"$(SRCROOT)/SBA Sites\"",
 				);
 				OTHER_LDFLAGS = (
 					"-ObjC",
@@ -774,7 +783,7 @@
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "756BE1E8-7D4B-4D73-B4DC-5282C5977DE4";
-				USER_HEADER_SEARCH_PATHS = "$(HOME)/Library/SDKs/ArcGIS/iOS.sdk/usr/local/include/**";
+				USER_HEADER_SEARCH_PATHS = "\"$(SRCROOT)\"/** $(HOME)/Library/SDKs/ArcGIS/iOS.sdk/usr/local/include/** \"$(SRCROOT)/\"/**";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -796,6 +805,7 @@
 				LIBRARY_SEARCH_PATHS = (
 					"$(HOME)/Library/SDKs/ArcGIS/iOS.sdk/usr/local/lib",
 					"\"$(SRCROOT)\"",
+					"\"$(SRCROOT)/SBA Sites\"",
 				);
 				OTHER_LDFLAGS = (
 					"-ObjC",
@@ -803,7 +813,7 @@
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "65D06CD4-A276-461B-A8B9-06EF2883C756";
-				USER_HEADER_SEARCH_PATHS = "$(HOME)/Library/SDKs/ArcGIS/iOS.sdk/usr/local/include/**";
+				USER_HEADER_SEARCH_PATHS = "\"$(SRCROOT)\"/** $(HOME)/Library/SDKs/ArcGIS/iOS.sdk/usr/local/include/** \"$(SRCROOT)/\"/**";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;
