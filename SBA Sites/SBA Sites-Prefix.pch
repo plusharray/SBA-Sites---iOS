@@ -11,7 +11,7 @@
 #ifdef __OBJC__
     #import <UIKit/UIKit.h>
     #import <Foundation/Foundation.h>
-    #import "ArcGIS.h"
+    #import <ArcGIS/ArcGIS.h>
     #import "SBAConstants.h"
     #import "TestFlight.h"
 #endif

@@ -33,10 +33,10 @@
 - (void)getSites
 {
     self.identifyParams.layerIds = [self.layers valueForKey:@"layerID"];
-    self.identifyParams.geometry = self.mapView.envelope;
+    self.identifyParams.geometry = self.mapView.visibleArea;
 	self.identifyParams.tolerance = 1;
 	self.identifyParams.size = self.mapView.bounds.size;
-	self.identifyParams.mapEnvelope = self.mapView.envelope;
+	self.identifyParams.mapEnvelope = self.mapView.visibleArea.envelope;
 	self.identifyParams.returnGeometry = YES;
 	self.identifyParams.layerOption = AGSIdentifyParametersLayerOptionAll;
 	self.identifyParams.spatialReference = self.mapView.spatialReference;

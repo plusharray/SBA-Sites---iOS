@@ -379,7 +379,7 @@
 	self.identifyParams.tolerance = 12;
 	self.identifyParams.geometry = self.mappoint;
 	self.identifyParams.size = self.mapView.bounds.size;
-	self.identifyParams.mapEnvelope = self.mapView.envelope;
+	self.identifyParams.mapEnvelope = self.mapView.visibleArea.envelope;
 	self.identifyParams.returnGeometry = YES;
 	self.identifyParams.layerOption = AGSIdentifyParametersLayerOptionAll;
 	self.identifyParams.spatialReference = self.mapView.spatialReference;
@@ -464,7 +464,7 @@
     return 2;
 }
 
-- (NSString *)tableView:(UITableView *)aTableView titleForHeaderInSection:(NSInteger)section 
+- (NSString *)tableView:(UITableView *)aTableView titleForHeaderInSection:(NSInteger)section
 {
 	if (section == 0) {
 		return @"Site Results";
@@ -520,14 +520,14 @@
     
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     if (cell == nil) {
-        cell = [[[ClearLabelsCellView alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier] autorelease];
-		cell.backgroundView = [[[GradientView alloc] init] autorelease];
+        cell = [[ClearLabelsCellView alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier];
+		cell.backgroundView = [[GradientView alloc] init];
     }
     int section = indexPath.section;
 	int row = indexPath.row;
 	
 	if (cell.accessoryView == nil) {
-		UIActivityIndicatorView *searchActivityIndicator = [[[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray] autorelease];
+		UIActivityIndicatorView *searchActivityIndicator = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
 		searchActivityIndicator.hidesWhenStopped = YES;
 		cell.accessoryView = searchActivityIndicator;
 	}
@@ -594,7 +594,7 @@
 
 #pragma mark - UITableViewDelegate
 
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath 
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     [self.searchDisplayController setActive:NO animated:YES];
     if (indexPath.section == 0) {
@@ -641,7 +641,7 @@
          
          //create the graphic
          AGSGraphic *graphic = [[AGSGraphic alloc] initWithGeometry:point
-         symbol:marker 
+         symbol:marker
          attributes:(NSMutableDictionary *)[[placemark addressDictionary] mutableCopy]
          infoTemplateDelegate:self.calloutTemplate];
          //add the graphic to the graphics layer
@@ -695,24 +695,16 @@
 				coord.longitude *= -1.0f;
 			}
 			if ((coord.latitude != 0) && (coord.longitude != 0)) {
-                Class geocoderClass = (NSClassFromString(@"CLGeocoder"));
-                if (geocoderClass) {
-                    CLGeocoder *geocoder = [[CLGeocoder alloc] init];
-                    CLLocation *location = [[CLLocation alloc] initWithLatitude:coord.latitude longitude:coord.longitude];
-                    [geocoder reverseGeocodeLocation:location completionHandler:^(NSArray *placemarks, NSError *error) {
-                        self.searchActiveReverseGeocode = NO;
-                        [self.addressResults addObjectsFromArray:placemarks];
-                        [self.searchDisplayController.searchResultsTableView reloadData];
-                    }];
-                } else {
-                    Class reverseGeocoderClass = (NSClassFromString(@"MKReverseGeocoder"));
-                    if (reverseGeocoderClass) {
-                        MKReverseGeocoder *reverseGeocoder = [[MKReverseGeocoder alloc] initWithCoordinate:coord];
-                        reverseGeocoder.delegate = self;
-                        [reverseGeocoder start];
-                    }
-                }
 				self.searchActiveReverseGeocode = YES;
+				CLGeocoder *geocoder = [[CLGeocoder alloc] init];
+				CLLocation *location = [[CLLocation alloc] initWithLatitude:coord.latitude longitude:coord.longitude];
+				[geocoder reverseGeocodeLocation:location completionHandler:^(NSArray *placemarks, NSError *error) {
+					self.searchActiveReverseGeocode = NO;
+					[self.addressResults addObjectsFromArray:placemarks];
+					[self.searchDisplayController.searchResultsTableView reloadData];
+					self.searchActiveReverseGeocode = NO;
+				}];
+				
 			} else {
 				self.searchActiveReverseGeocode = NO;
 			}
@@ -847,7 +839,7 @@
 
 
 // Does not allow users to perform default actions such as dialing a phone number, when they select a person property.
-- (BOOL)peoplePickerNavigationController:(ABPeoplePickerNavigationController *)peoplePicker shouldContinueAfterSelectingPerson:(ABRecordRef)person 
+- (BOOL)peoplePickerNavigationController:(ABPeoplePickerNavigationController *)peoplePicker shouldContinueAfterSelectingPerson:(ABRecordRef)person
 								property:(ABPropertyID)property identifier:(ABMultiValueIdentifier)identifier
 {
 	// Only inspect the value if it's an address.
@@ -897,7 +889,7 @@
 }
 
 
-// Dismisses the people picker and shows the application when users tap Cancel. 
+// Dismisses the people picker and shows the application when users tap Cancel.
 - (void)peoplePickerNavigationControllerDidCancel:(ABPeoplePickerNavigationController *)peoplePicker;
 {
 	self.addressBookSearch = NO;
@@ -907,26 +899,11 @@
 
 #pragma mark ABPersonViewControllerDelegate methods
 // Does not allow users to perform default actions such as dialing a phone number, when they select a contact property.
-- (BOOL)personViewController:(ABPersonViewController *)personViewController shouldPerformDefaultActionForPerson:(ABRecordRef)person 
+- (BOOL)personViewController:(ABPersonViewController *)personViewController shouldPerformDefaultActionForPerson:(ABRecordRef)person
 					property:(ABPropertyID)property identifier:(ABMultiValueIdentifier)identifierForValue
 {
 	self.addressBookSearch = YES;
 	return NO;
-}
-
-#pragma mark - MKReverseGeocoder
-
-- (void)reverseGeocoder:(MKReverseGeocoder *)geocoder didFailWithError:(NSError *)error
-{
-	self.searchActiveReverseGeocode = NO;
-	[self.searchDisplayController.searchResultsTableView reloadData];
-}
-
-- (void)reverseGeocoder:(MKReverseGeocoder *)geocoder didFindPlacemark:(MKPlacemark *)placemark
-{
-	self.searchActiveReverseGeocode = NO;
-    [self.addressResults addObject:placemark];
-	[self.searchDisplayController.searchResultsTableView reloadData];
 }
 
 #pragma mark - ForwardGeocoderDelegate

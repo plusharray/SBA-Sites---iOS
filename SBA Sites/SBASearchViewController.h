@@ -11,7 +11,7 @@
 #import <MapKit/MapKit.h>
 #import "BSForwardGeocoder.h"
 
-@interface SBASearchViewController : UIViewController <UITableViewDelegate, UITableViewDataSource, UISearchDisplayDelegate, UISearchBarDelegate, ABPeoplePickerNavigationControllerDelegate, ABPersonViewControllerDelegate, AGSLocatorDelegate, MKReverseGeocoderDelegate, BSForwardGeocoderDelegate, AGSFindTaskDelegate>
+@interface SBASearchViewController : UIViewController <UITableViewDelegate, UITableViewDataSource, UISearchDisplayDelegate, UISearchBarDelegate, ABPeoplePickerNavigationControllerDelegate, ABPersonViewControllerDelegate, AGSLocatorDelegate, BSForwardGeocoderDelegate, AGSFindTaskDelegate>
 
 @property (strong, nonatomic) IBOutlet UISearchBar *searchBar;
 @property (strong, nonatomic) IBOutlet UITableView *tableView;

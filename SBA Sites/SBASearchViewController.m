@@ -143,14 +143,14 @@
     
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     if (cell == nil) {
-        cell = [[[ClearLabelsCellView alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier] autorelease];
-		cell.backgroundView = [[[GradientView alloc] init] autorelease];
+        cell = [[ClearLabelsCellView alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier];
+		cell.backgroundView = [[GradientView alloc] init];
     }
     int section = indexPath.section;
 	int row = indexPath.row;
 	
 	if (cell.accessoryView == nil) {
-		UIActivityIndicatorView *searchActivityIndicator = [[[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray] autorelease];
+		UIActivityIndicatorView *searchActivityIndicator = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
 		searchActivityIndicator.hidesWhenStopped = YES;
 		cell.accessoryView = searchActivityIndicator;
 	}
@@ -318,8 +318,7 @@
 				coord.longitude *= -1.0f;
 			}
 			if ((coord.latitude != 0) && (coord.longitude != 0)) {
-                Class geocoderClass = (NSClassFromString(@"CLGeocoder"));
-                if (geocoderClass) {
+				self.searchActiveReverseGeocode = YES;
                     CLGeocoder *geocoder = [[CLGeocoder alloc] init];
                     CLLocation *location = [[CLLocation alloc] initWithLatitude:coord.latitude longitude:coord.longitude];
                     [geocoder reverseGeocodeLocation:location completionHandler:^(NSArray *placemarks, NSError *error) {
@@ -327,15 +326,7 @@
                         [self.addressResults addObjectsFromArray:placemarks];
                         [self.searchDisplayController.searchResultsTableView reloadData];
                     }];
-                } else {
-                    Class reverseGeocoderClass = (NSClassFromString(@"MKReverseGeocoder"));
-                    if (reverseGeocoderClass) {
-                        MKReverseGeocoder *reverseGeocoder = [[MKReverseGeocoder alloc] initWithCoordinate:coord];
-                        reverseGeocoder.delegate = self;
-                        [reverseGeocoder start];
-                    }
-                }
-				self.searchActiveReverseGeocode = YES;
+				
 			} else {
 				self.searchActiveReverseGeocode = NO;
 			}
@@ -535,21 +526,6 @@
 {
 	self.addressBookSearch = YES;
 	return NO;
-}
-
-#pragma mark - MKReverseGeocoder
-
-- (void)reverseGeocoder:(MKReverseGeocoder *)geocoder didFailWithError:(NSError *)error
-{
-	self.searchActiveReverseGeocode = NO;
-	[self.searchDisplayController.searchResultsTableView reloadData];
-}
-
-- (void)reverseGeocoder:(MKReverseGeocoder *)geocoder didFindPlacemark:(MKPlacemark *)placemark
-{
-	self.searchActiveReverseGeocode = NO;
-    [self.addressResults addObject:placemark];
-	[self.searchDisplayController.searchResultsTableView reloadData];
 }
 
 #pragma mark - ForwardGeocoderDelegate

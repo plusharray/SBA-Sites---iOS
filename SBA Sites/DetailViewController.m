@@ -64,8 +64,8 @@
 							waitUntilDone:NO];
 	} else {
 		[self performSelectorOnMainThread:@selector(hideImageView)
-										  withObject:nil
-									   waitUntilDone:NO];
+							   withObject:nil
+							waitUntilDone:NO];
 	}
 }
 
@@ -85,18 +85,18 @@
 	[self.siteImage setHidden:YES];
 	[self.imageButton setHidden:YES];
 	/*
-	self.siteName.frame = CGRectMake(10.0, 15.0, 300.0, 15.0);
-	self.siteID.frame = CGRectMake(10.0, 35.0, 300.0, 15.0);
-	self.siteAddress1.frame = CGRectMake(10.0, 55.0, 300.0, 15.0);
-	self.siteAddress2.frame = CGRectMake(10.0, 75.0, 300.0, 15.0);
+	 self.siteName.frame = CGRectMake(10.0, 15.0, 300.0, 15.0);
+	 self.siteID.frame = CGRectMake(10.0, 35.0, 300.0, 15.0);
+	 self.siteAddress1.frame = CGRectMake(10.0, 55.0, 300.0, 15.0);
+	 self.siteAddress2.frame = CGRectMake(10.0, 75.0, 300.0, 15.0);
 	 */
 }
 
-//=========================================================== 
+//===========================================================
 #pragma mark -
 #pragma mark View lifecycle
 #pragma mark -
-//=========================================================== 
+//===========================================================
 
 - (void)viewDidLoad {
 	[super viewDidLoad];
@@ -146,11 +146,11 @@
 	[self dismissModalViewControllerAnimated:YES];
 }
 
-//=========================================================== 
+//===========================================================
 #pragma mark -
 #pragma mark Custom Cell Methods
 #pragma mark -
-//=========================================================== 
+//===========================================================
 - (IBAction)presentModalImage:(id)sender
 {
 	NSString *pathString = [NSString stringWithFormat:@"http://map.sbasite.com/Mobile/GetImage?SiteCode=%@&width=600&height=600", [self.site.attributes valueForKey:@"SiteCode"]];
@@ -160,20 +160,20 @@
 	} else {
 		imageController = [[SiteImageViewController alloc] initWithNibName:@"SiteImageViewController" bundle:nil imagePath:pathString];
 	}
-
+	
 	imageController.modalTransitionStyle = UIModalTransitionStyleCoverVertical;
 	imageController.modalPresentationStyle = UIModalPresentationFormSheet;
 	
 	[self presentModalViewController:imageController animated:YES];
 }
 
-//=========================================================== 
+//===========================================================
 #pragma mark -
 #pragma mark MessageUI Methods
 #pragma mark -
-//=========================================================== 
+//===========================================================
 
-// Displays an email composition interface inside the application. Populates all the Mail fields. 
+// Displays an email composition interface inside the application. Populates all the Mail fields.
 - (IBAction)displayMailComposerSheet:(id)sender
 {
 	Class mailClass = (NSClassFromString(@"MFMailComposeViewController"));
@@ -230,9 +230,9 @@
 #pragma mark -
 #pragma mark Dismiss Mail view controller
 
-// Dismisses the email composition interface when users tap Cancel or Send. Proceeds to update the 
+// Dismisses the email composition interface when users tap Cancel or Send. Proceeds to update the
 // message field with the result of the operation.
-- (void)mailComposeController:(MFMailComposeViewController*)controller 
+- (void)mailComposeController:(MFMailComposeViewController*)controller
 		  didFinishWithResult:(MFMailComposeResult)result error:(NSError*)error {
 	
 	NSString *feedbackMsg;
@@ -255,6 +255,7 @@
 			feedbackMsg = @"Result: Mail not sent";
 			break;
 	}
+	NSLog(@"Mail Composer: %@", feedbackMsg);
 	[self dismissViewControllerAnimated:YES completion:^(void){}];
 }
 
