@@ -16,6 +16,8 @@
 #import <AddressBook/AddressBook.h>
 #import "GradientView.h"
 #import "ClearLabelsCellView.h"
+#import "AwesomeMenuItem.h"
+#import "AwesomeMenu.h"
 
 @interface SBARootViewController (Private)
 - (void)searchForString:(NSString *)searchString;
@@ -55,6 +57,7 @@
 @synthesize findTask = _findTask;
 @synthesize calloutTemplate = _calloutTemplate;
 @synthesize selectedMapType = _selectedMapType;
+@synthesize menu = _menu;
 
 #pragma mark - Accessors
 
@@ -70,7 +73,7 @@
 - (IBAction)mapType:(UISegmentedControl *)segmentPick
 {
     self.selectedMapType = segmentPick.selectedSegmentIndex;
-    [[NSNotificationCenter defaultCenter] postNotificationName:SBAMapTypeChanged object:[NSNumber numberWithInteger:self.selectedMapType]];
+    [[NSNotificationCenter defaultCenter] postNotificationName:SBAMapTypeChanged object:@(self.selectedMapType)];
 }
 
 - (IBAction)toggleLayer:(id)sender
@@ -339,6 +342,19 @@
         }
         [self.toolbar setItems:self.buttons];
     }
+	
+
+	UIImage *storyMenuItemImage = [UIImage imageNamed:@"bg-menuitem.png"];
+	UIImage *storyMenuItemImagePressed = [UIImage imageNamed:@"bg-menuitem-highlighted.png"];
+	UIImage *starImage = [UIImage imageNamed:@"icon-star.png"];
+	AwesomeMenuItem *listItem = [[AwesomeMenuItem alloc] initWithImage:storyMenuItemImage
+												  highlightedImage:storyMenuItemImagePressed
+													  ContentImage:starImage
+										   highlightedContentImage:nil];
+	
+	self.menu = [[AwesomeMenu alloc] initWithFrame:self.view.bounds menus:@[listItem]];
+	self.menu.delegate = self;
+	[self.view addSubview:self.menu];
 }
 
 - (void)viewDidUnload
@@ -725,7 +741,7 @@
     params.layerIds = [self.visibleLayers valueForKey:@"layerID"];
     params.outSpatialReference = self.mapView.spatialReference;
     params.returnGeometry = NO;
-    params.searchFields = [NSArray arrayWithObjects:@"SiteName", @"SiteCode", nil];
+    params.searchFields = @[@"SiteName", @"SiteCode"];
     params.searchText = searchString;
     [self.findTask executeWithParameters:params];
 }
@@ -735,7 +751,7 @@
     ABPeoplePickerNavigationController *picker = [[ABPeoplePickerNavigationController alloc] init];
     picker.peoplePickerDelegate = self;
 	// Display only a person's phone, email, and birthdate
-	NSArray *displayedItems = [NSArray arrayWithObjects:[NSNumber numberWithInt:kABPersonAddressProperty], nil];
+	NSArray *displayedItems = @[@(kABPersonAddressProperty)];
 	
 	
 	picker.displayedProperties = displayedItems;
@@ -996,6 +1012,13 @@
 - (void)findTask:(AGSFindTask *)findTask operation:(NSOperation*)op didFailWithError:(NSError *)error
 {
     self.searchActiveDB = NO;
+}
+
+#pragma mark - AwesomeMenuDelegate
+
+- (void)awesomeMenu:(AwesomeMenu *)menu didSelectIndex:(NSInteger)idx
+{
+	
 }
 
 @end

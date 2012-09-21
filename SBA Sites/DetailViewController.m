@@ -200,8 +200,8 @@
 	MFMailComposeViewController *picker = [[MFMailComposeViewController alloc] init];
 	picker.mailComposeDelegate = self;
 	
-	[picker setToRecipients:[NSArray arrayWithObject:[self.site.attributes valueForKey:@"Email"]]];
-	[picker setCcRecipients:[NSArray arrayWithObjects:@"siteinquiry@sbasite.com", nil]];
+	[picker setToRecipients:@[[self.site.attributes valueForKey:@"Email"]]];
+	[picker setCcRecipients:@[@"siteinquiry@sbasite.com"]];
 	[picker setSubject:[NSString stringWithFormat:@"%@ Site Inquiry", [self.site.attributes valueForKey:@"SiteName"]]];
 	
 	// Fill out the email body text

@@ -37,10 +37,8 @@
 	CGColorRef lightColor =
 		[self.backgroundColor colorWithAlphaComponent:0.0].CGColor;
 	newShadow.colors =
-		[NSArray arrayWithObjects:
-			(__bridge id)(inverse ? lightColor : darkColor),
-			(__bridge id)(inverse ? darkColor : lightColor),
-		nil];
+		@[(__bridge id)(inverse ? lightColor : darkColor),
+			(__bridge id)(inverse ? darkColor : lightColor)];
 	return newShadow;
 }
 

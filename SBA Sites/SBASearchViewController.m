@@ -347,7 +347,7 @@
     params.layerIds = [self.visibleLayers valueForKey:@"layerID"];
     params.outSpatialReference = self.mapView.spatialReference;
     params.returnGeometry = NO;
-    params.searchFields = [NSArray arrayWithObjects:@"SiteName", @"SiteCode", nil];
+    params.searchFields = @[@"SiteName", @"SiteCode"];
     params.searchText = searchString;
     [self.findTask executeWithParameters:params];
 }
@@ -357,7 +357,7 @@
     ABPeoplePickerNavigationController *picker = [[ABPeoplePickerNavigationController alloc] init];
     picker.peoplePickerDelegate = self;
 	// Display only a person's phone, email, and birthdate
-	NSArray *displayedItems = [NSArray arrayWithObjects:[NSNumber numberWithInt:kABPersonAddressProperty], nil];
+	NSArray *displayedItems = @[@(kABPersonAddressProperty)];
 	
 	
 	picker.displayedProperties = displayedItems;

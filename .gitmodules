@@ -1,0 +1,3 @@
+[submodule "Submodules/AwesomeMenu"]
+	path = Submodules/AwesomeMenu
+	url = git://github.com/levey/AwesomeMenu.git

@@ -23,7 +23,7 @@
 - (NSArray *)sites
 {
     if (!_sites) {
-        _sites = [NSArray array];
+        _sites = @[];
     }
     return _sites;
 }

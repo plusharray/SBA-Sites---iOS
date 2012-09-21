@@ -52,7 +52,7 @@
 {
     self = [super init];
     if (self) {
-        self.layerID = [NSNumber numberWithInteger:layerID];
+        self.layerID = @(layerID);
         self.visible = YES;
         self.name = [SBALayer layerNameForID:self.layerID.integerValue];
     }

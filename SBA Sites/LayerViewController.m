@@ -61,7 +61,7 @@
 -(IBAction)mapType:(UISegmentedControl *)segmentPick
 {
     self.selectedMapType = segmentPick.selectedSegmentIndex;
-    [[NSNotificationCenter defaultCenter] postNotificationName:SBAMapTypeChanged object:[NSNumber numberWithInteger:self.selectedMapType]];
+    [[NSNotificationCenter defaultCenter] postNotificationName:SBAMapTypeChanged object:@(self.selectedMapType)];
 }
 
 
@@ -108,7 +108,7 @@
 	[tableView deselectRowAtIndexPath:indexPath animated:NO];
     SBALayer *layer = (SBALayer *)[self.layerArray objectAtIndex:indexPath.row];
     layer.visible = !layer.visible;
-    [self.tableView reloadRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationNone];
+    [self.tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationNone];
     [[NSNotificationCenter defaultCenter] postNotificationName:SBALayerSelected object:nil];
 }
 

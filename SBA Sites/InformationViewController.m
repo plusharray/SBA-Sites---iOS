@@ -241,7 +241,7 @@
 	MFMailComposeViewController *picker = [[MFMailComposeViewController alloc] init];
 	picker.mailComposeDelegate = self;
 	
-	[picker setToRecipients:[NSArray arrayWithObject:@"mobilesupport@sbasite.com"]];
+	[picker setToRecipients:@[@"mobilesupport@sbasite.com"]];
 	[picker setSubject:@"SBA Sites Support Request"];
 	
 	picker.modalTransitionStyle = UIModalTransitionStyleCoverVertical;
