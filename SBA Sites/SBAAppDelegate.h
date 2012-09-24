@@ -7,11 +7,12 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "MHTabBarController.h"
 
-@interface SBAAppDelegate : UIResponder <UIApplicationDelegate>
+@interface SBAAppDelegate : UIResponder <UIApplicationDelegate, MHTabBarControllerDelegate>
 
 @property (strong, nonatomic) UIWindow *window;
-
+@property (strong, nonatomic) MHTabBarController *tabBarController;
 @property (strong, nonatomic) UINavigationController *navigationController;
 
 @end

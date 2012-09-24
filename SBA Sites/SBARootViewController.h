@@ -10,9 +10,8 @@
 #import <AddressBookUI/AddressBookUI.h>
 #import <MapKit/MapKit.h>
 #import "BSForwardGeocoder.h"
-#import "AwesomeMenu.h"
 
-@interface SBARootViewController : UIViewController <UITableViewDelegate, UITableViewDataSource, AGSMapViewLayerDelegate, AGSMapViewCalloutDelegate, AGSMapViewTouchDelegate, AGSIdentifyTaskDelegate, UISearchDisplayDelegate, UISearchBarDelegate, ABPeoplePickerNavigationControllerDelegate, ABPersonViewControllerDelegate, BSForwardGeocoderDelegate, AGSFindTaskDelegate, UIPopoverControllerDelegate, AwesomeMenuDelegate>
+@interface SBARootViewController : UIViewController <UITableViewDelegate, UITableViewDataSource, AGSMapViewLayerDelegate, AGSMapViewCalloutDelegate, AGSMapViewTouchDelegate, AGSIdentifyTaskDelegate, UISearchDisplayDelegate, UISearchBarDelegate, ABPeoplePickerNavigationControllerDelegate, ABPersonViewControllerDelegate, BSForwardGeocoderDelegate, AGSFindTaskDelegate, UIPopoverControllerDelegate>
 
 @property (nonatomic, strong) IBOutlet AGSMapView *mapView;
 @property (nonatomic, strong) IBOutlet UIBarButtonItem *showLayerListPopoverButton;
@@ -45,7 +44,6 @@
 @property (nonatomic, strong) AGSFindTask *findTask;
 @property (nonatomic, strong) AGSCalloutTemplate *calloutTemplate;
 @property (nonatomic) NSInteger selectedMapType;
-@property (nonatomic, strong) AwesomeMenu *menu;
 
 - (IBAction)mapType:(UISegmentedControl *)segmentPick;
 - (IBAction)toggleLayer:(id)sender;

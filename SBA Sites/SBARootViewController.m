@@ -16,8 +16,6 @@
 #import <AddressBook/AddressBook.h>
 #import "GradientView.h"
 #import "ClearLabelsCellView.h"
-#import "AwesomeMenuItem.h"
-#import "AwesomeMenu.h"
 
 @interface SBARootViewController (Private)
 - (void)searchForString:(NSString *)searchString;
@@ -57,7 +55,6 @@
 @synthesize findTask = _findTask;
 @synthesize calloutTemplate = _calloutTemplate;
 @synthesize selectedMapType = _selectedMapType;
-@synthesize menu = _menu;
 
 #pragma mark - Accessors
 
@@ -140,8 +137,8 @@
     } else {
         if (!self.popoverController.popoverVisible) {
             SBASearchViewController *viewController = [[SBASearchViewController alloc] initWithNibName:@"SBASearchViewController" bundle:nil];
-            viewController.mapView = self.mapView;
-            viewController.visibleLayers = self.visibleLayers;
+            //viewController.mapView = self.mapView;
+            //viewController.visibleLayers = self.visibleLayers;
 			self.popoverController = [[UIPopoverController alloc] initWithContentViewController:viewController];
 			self.popoverController.delegate = self;
 			[self.popoverController presentPopoverFromBarButtonItem:self.showSearchBarButton
@@ -342,19 +339,6 @@
         }
         [self.toolbar setItems:self.buttons];
     }
-	
-
-	UIImage *storyMenuItemImage = [UIImage imageNamed:@"bg-menuitem.png"];
-	UIImage *storyMenuItemImagePressed = [UIImage imageNamed:@"bg-menuitem-highlighted.png"];
-	UIImage *starImage = [UIImage imageNamed:@"icon-star.png"];
-	AwesomeMenuItem *listItem = [[AwesomeMenuItem alloc] initWithImage:storyMenuItemImage
-												  highlightedImage:storyMenuItemImagePressed
-													  ContentImage:starImage
-										   highlightedContentImage:nil];
-	
-	self.menu = [[AwesomeMenu alloc] initWithFrame:self.view.bounds menus:@[listItem]];
-	self.menu.delegate = self;
-	[self.view addSubview:self.menu];
 }
 
 - (void)viewDidUnload
@@ -785,21 +769,6 @@
 
 #pragma mark - UISearchDisplayControllerDelegate
 
-- (void)searchDisplayController:(UISearchDisplayController *)controller didHideSearchResultsTableView:(UITableView *)tableView
-{
-    
-}
-
-- (void)searchDisplayController:(UISearchDisplayController *)controller didLoadSearchResultsTableView:(UITableView *)tableView
-{
-    
-}
-
-- (void)searchDisplayController:(UISearchDisplayController *)controller didShowSearchResultsTableView:(UITableView *)tableView
-{
-    
-}
-
 - (BOOL)searchDisplayController:(UISearchDisplayController *)controller shouldReloadTableForSearchScope:(NSInteger)searchOption
 {
     return YES;
@@ -808,41 +777,6 @@
 - (BOOL)searchDisplayController:(UISearchDisplayController *)controller shouldReloadTableForSearchString:(NSString *)searchString
 {
     return YES;
-}
-
-- (void)searchDisplayController:(UISearchDisplayController *)controller willHideSearchResultsTableView:(UITableView *)tableView
-{
-    
-}
-
-- (void)searchDisplayController:(UISearchDisplayController *)controller willShowSearchResultsTableView:(UITableView *)tableView
-{
-    
-}
-
-- (void)searchDisplayController:(UISearchDisplayController *)controller willUnloadSearchResultsTableView:(UITableView *)tableView
-{
-    
-}
-
-- (void)searchDisplayControllerDidBeginSearch:(UISearchDisplayController *)controller
-{
-    
-}
-
-- (void)searchDisplayControllerDidEndSearch:(UISearchDisplayController *)controller
-{
-    
-}
-
-- (void)searchDisplayControllerWillBeginSearch:(UISearchDisplayController *)controller
-{
-    
-}
-
-- (void)searchDisplayControllerWillEndSearch:(UISearchDisplayController *)controller
-{
-    
 }
 
 #pragma mark - ABPeoplePickerNavigationControllerDelegate
@@ -1014,11 +948,5 @@
     self.searchActiveDB = NO;
 }
 
-#pragma mark - AwesomeMenuDelegate
-
-- (void)awesomeMenu:(AwesomeMenu *)menu didSelectIndex:(NSInteger)idx
-{
-	
-}
 
 @end

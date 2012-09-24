@@ -8,8 +8,7 @@
 
 #import "SBASearchViewController.h"
 #import <AddressBook/AddressBook.h>
-#import "GradientView.h"
-#import "ClearLabelsCellView.h"
+#import "SBAMapViewController.h"
 
 @interface SBASearchViewController (Private)
 - (void)searchForString:(NSString *)searchString;
@@ -18,10 +17,8 @@
 
 @implementation SBASearchViewController
 
+@synthesize mapViewController = _mapViewController;
 @synthesize searchBar = _searchBar;
-@synthesize tableView = _tableView;
-@synthesize mapView = _mapView;
-@synthesize visibleLayers = _visibleLayers;
 @synthesize addressBookSearch = _addressBookSearch;
 @synthesize searchActiveDB = _searchActiveDB;
 @synthesize searchActiveForwardGeocode = _searchActiveForwardGeocode;
@@ -42,6 +39,15 @@
     return self;
 }
 
+- (id)initWithSBAMapViewController:(SBAMapViewController *)mapViewController
+{
+	self = [self initWithNibName:@"SBASearchViewController" bundle:nil];
+    if (self) {
+        _mapViewController = mapViewController;
+    }
+    return self;
+}
+
 - (void)didReceiveMemoryWarning
 {
     // Releases the view if it doesn't have a superview.
@@ -56,12 +62,17 @@
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
+	CGRect rect = CGRectMake(0, 44, self.view.bounds.size.width, self.view.bounds.size.height - 44);
+	[self.mapViewController.mapView setFrame:rect];
+	[self.view addSubview:self.mapViewController.mapView];
+	
+	[self.navigationController setNavigationBarHidden:YES animated:NO];
+	[self.navigationController setToolbarHidden:YES animated:NO];
 }
 
 - (void)viewDidUnload
 {
     [self setSearchBar:nil];
-    [self setTableView:nil];
     [super viewDidUnload];
     // Release any retained subviews of the main view.
     // e.g. self.myOutlet = nil;
@@ -70,8 +81,6 @@
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    [[self searchDisplayController] setActive:YES animated:YES];
-    [[self searchBar] becomeFirstResponder];
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
@@ -142,10 +151,9 @@
     static NSString *CellIdentifier = @"Cell";
     
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
-    if (cell == nil) {
-        cell = [[ClearLabelsCellView alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier];
-		cell.backgroundView = [[GradientView alloc] init];
-    }
+	if (cell == nil)
+		cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
+	
     int section = indexPath.section;
 	int row = indexPath.row;
 	
@@ -210,7 +218,6 @@
 		}
 		
 	}
-    // Configure the cell...
     
     return cell;
 }
@@ -232,8 +239,8 @@
             ymin = aPlacemark.location.coordinate.latitude - span;
             xmax = aPlacemark.location.coordinate.longitude + span;
             ymax = aPlacemark.location.coordinate.latitude + span;
-            AGSEnvelope *env = [AGSEnvelope envelopeWithXmin:xmin ymin:ymin xmax:xmax ymax:ymax spatialReference:self.mapView.spatialReference];
-            [self.mapView zoomToEnvelope:env animated:YES];
+            AGSEnvelope *env = [AGSEnvelope envelopeWithXmin:xmin ymin:ymin xmax:xmax ymax:ymax spatialReference:self.mapViewController.mapView.spatialReference];
+            [self.mapViewController.mapView zoomToEnvelope:env animated:YES];
         } else if ([placemark isKindOfClass:[MKPlacemark class]]) {
             MKPlacemark *aPlacemark = (MKPlacemark *)placemark;
             double span = 1.0;
@@ -242,45 +249,9 @@
             ymin = aPlacemark.coordinate.latitude - span;
             xmax = aPlacemark.coordinate.longitude + span;
             ymax = aPlacemark.coordinate.latitude + span;
-            AGSEnvelope *env = [AGSEnvelope envelopeWithXmin:xmin ymin:ymin xmax:xmax ymax:ymax spatialReference:self.mapView.spatialReference];
-            [self.mapView zoomToEnvelope:env animated:YES];
+            AGSEnvelope *env = [AGSEnvelope envelopeWithXmin:xmin ymin:ymin xmax:xmax ymax:ymax spatialReference:self.mapViewController.mapView.spatialReference];
+            [self.mapViewController.mapView zoomToEnvelope:env animated:YES];
         }
-        
-        /*
-         AGSPoint *point = [[AGSPoint alloc] initWithX:placemark.coordinate.latitude y:placemark.coordinate.longitude spatialReference:self.mapView.spatialReference];
-         
-         
-         //create a marker symbol to use in our graphic
-         AGSPictureMarkerSymbol *marker = [AGSPictureMarkerSymbol pictureMarkerSymbolWithImageNamed:@"BluePushpin.png"];
-         marker.xoffset = 9;
-         marker.yoffset = -16;
-         marker.hotspot = CGPointMake(-9, -11);
-         
-         //create the callout template, used when the user displays the callout
-         self.calloutTemplate = [[AGSCalloutTemplate alloc]init];
-         //set the text and detail text based on 'Name' and 'Descr' fields in the attributes
-         self.calloutTemplate.titleTemplate = placemark.thoroughfare;
-         self.calloutTemplate.detailTemplate = [NSString stringWithFormat:@"%@ , %@", placemark.locality, placemark.administrativeArea];
-         
-         //create the graphic
-         AGSGraphic *graphic = [[AGSGraphic alloc] initWithGeometry:point
-         symbol:marker 
-         attributes:(NSMutableDictionary *)[[placemark addressDictionary] mutableCopy]
-         infoTemplateDelegate:self.calloutTemplate];
-         //add the graphic to the graphics layer
-         [self.graphicsLayer addGraphic:graphic];
-         //we have one result, center at that point
-         [self.mapView centerAtPoint:point animated:NO];
-         
-         // set the width of the callout
-         self.mapView.callout.width = 250;
-         
-         //show the callout
-         [self.mapView showCalloutAtPoint:(AGSPoint *)graphic.geometry forGraphic:graphic animated:YES];
-         
-         //since we've added graphics, make sure to redraw
-         [self.graphicsLayer dataChanged];
-         */
     }
     
 }
@@ -344,8 +315,8 @@
     }
     AGSFindParameters *params = [[AGSFindParameters alloc] init];
     params.contains = YES;
-    params.layerIds = [self.visibleLayers valueForKey:@"layerID"];
-    params.outSpatialReference = self.mapView.spatialReference;
+    params.layerIds = [self.mapViewController.visibleLayers valueForKey:@"layerID"];
+    params.outSpatialReference = self.mapViewController.mapView.spatialReference;
     params.returnGeometry = NO;
     params.searchFields = @[@"SiteName", @"SiteCode"];
     params.searchText = searchString;

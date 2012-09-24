@@ -8,15 +8,14 @@
 
 #import <UIKit/UIKit.h>
 #import <AddressBookUI/AddressBookUI.h>
-#import <MapKit/MapKit.h>
 #import "BSForwardGeocoder.h"
 
-@interface SBASearchViewController : UIViewController <UITableViewDelegate, UITableViewDataSource, UISearchDisplayDelegate, UISearchBarDelegate, ABPeoplePickerNavigationControllerDelegate, ABPersonViewControllerDelegate, AGSLocatorDelegate, BSForwardGeocoderDelegate, AGSFindTaskDelegate>
+@class SBAMapViewController;
 
+@interface SBASearchViewController : UIViewController <UITableViewDelegate, UITableViewDataSource,  UISearchDisplayDelegate, UISearchBarDelegate, ABPeoplePickerNavigationControllerDelegate, ABPersonViewControllerDelegate, BSForwardGeocoderDelegate, AGSFindTaskDelegate>
+
+@property (strong, nonatomic) SBAMapViewController *mapViewController;
 @property (strong, nonatomic) IBOutlet UISearchBar *searchBar;
-@property (strong, nonatomic) IBOutlet UITableView *tableView;
-@property (strong, nonatomic) AGSMapView *mapView;
-@property (strong, nonatomic) NSArray *visibleLayers;
 @property (nonatomic) BOOL addressBookSearch;
 @property (nonatomic) BOOL searchActiveDB;
 @property (nonatomic) BOOL searchActiveForwardGeocode;
@@ -27,5 +26,7 @@
 @property (nonatomic, strong) NSString *savedSearchTerm;
 @property (nonatomic, strong) BSForwardGeocoder *forwardGeocoder;
 @property (nonatomic, strong) AGSFindTask *findTask;
+
+- (id)initWithSBAMapViewController:(SBAMapViewController *)mapViewController;
 
 @end
