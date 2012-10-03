@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4AA2A450DA0E432C98482C89 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7DFA8F214F674D1D9F004D89 /* libPods.a */; };
 		FF21FD4F16107CBB0096AADD /* MHTabBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = FF21FD4E16107CBB0096AADD /* MHTabBarController.m */; };
 		FF21FD531610829E0096AADD /* MHTabBarActiveTab.png in Resources */ = {isa = PBXBuildFile; fileRef = FF21FD501610829E0096AADD /* MHTabBarActiveTab.png */; };
 		FF21FD541610829E0096AADD /* MHTabBarInactiveTab.png in Resources */ = {isa = PBXBuildFile; fileRef = FF21FD511610829E0096AADD /* MHTabBarInactiveTab.png */; };
@@ -74,6 +75,9 @@
 		FF4137B114587EFC00F36E7C /* 73-radar@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = FF41378814587EFC00F36E7C /* 73-radar@2x.png */; };
 		FF4137B214587EFC00F36E7C /* 74-location.png in Resources */ = {isa = PBXBuildFile; fileRef = FF41378914587EFC00F36E7C /* 74-location.png */; };
 		FF4137B314587EFC00F36E7C /* 74-location@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = FF41378A14587EFC00F36E7C /* 74-location@2x.png */; };
+		FF45146C1619B9090039F000 /* SBALayerManager.m in Sources */ = {isa = PBXBuildFile; fileRef = FF45146B1619B9090039F000 /* SBALayerManager.m */; };
+		FF4514711619BC3F0039F000 /* SBARouteViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FF45146F1619BC3F0039F000 /* SBARouteViewController.m */; };
+		FF4514721619BC3F0039F000 /* SBARouteViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = FF4514701619BC3F0039F000 /* SBARouteViewController.xib */; };
 		FF4A11AC1475404C003AC6E0 /* InformationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FF4A11AB1475404C003AC6E0 /* InformationViewController.m */; };
 		FF4A11B01475407D003AC6E0 /* InformationDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FF4A11AF1475407D003AC6E0 /* InformationDetailViewController.m */; };
 		FF4A11B7147540AF003AC6E0 /* ShadowedTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = FF4A11B2147540AF003AC6E0 /* ShadowedTableView.m */; };
@@ -294,6 +298,8 @@
 		FF64CEA114851FE6003CC124 /* BSKmlResult.m in Sources */ = {isa = PBXBuildFile; fileRef = FF64CE9A14851FE6003CC124 /* BSKmlResult.m */; };
 		FF64CEA214851FE6003CC124 /* CustomPlacemark.m in Sources */ = {isa = PBXBuildFile; fileRef = FF64CE9C14851FE6003CC124 /* CustomPlacemark.m */; };
 		FF64CEA314851FE6003CC124 /* BSForwardGeocoder.m in Sources */ = {isa = PBXBuildFile; fileRef = FF64CE9E14851FE6003CC124 /* BSForwardGeocoder.m */; };
+		FF879464161BA83600457005 /* route_bar.png in Resources */ = {isa = PBXBuildFile; fileRef = FF879462161BA83600457005 /* route_bar.png */; };
+		FF879465161BA83600457005 /* route_bar@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = FF879463161BA83600457005 /* route_bar@2x.png */; };
 		FF98B8891484096000D62F5A /* AddressBook.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FF98B8871484096000D62F5A /* AddressBook.framework */; };
 		FF98B88A1484096000D62F5A /* AddressBookUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FF98B8881484096000D62F5A /* AddressBookUI.framework */; };
 		FF98B88F1484141600D62F5A /* SBASearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FF98B88D1484141600D62F5A /* SBASearchViewController.m */; };
@@ -316,6 +322,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		5853E82939DF4F3B878DD8A1 /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = SOURCE_ROOT; };
+		7DFA8F214F674D1D9F004D89 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		FF21FD4D16107CBB0096AADD /* MHTabBarController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MHTabBarController.h; sourceTree = "<group>"; };
 		FF21FD4E16107CBB0096AADD /* MHTabBarController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MHTabBarController.m; sourceTree = "<group>"; };
 		FF21FD501610829E0096AADD /* MHTabBarActiveTab.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = MHTabBarActiveTab.png; sourceTree = "<group>"; };
@@ -325,9 +333,9 @@
 		FF21FD9F1610A8DC0096AADD /* SBAMapViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBAMapViewController.m; sourceTree = "<group>"; };
 		FF41277D148544EF00A9FD80 /* BluePushpin.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = BluePushpin.png; sourceTree = "<group>"; };
 		FF41371114583ED200F36E7C /* SBA Sites.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "SBA Sites.app"; sourceTree = BUILT_PRODUCTS_DIR; };
-		FF41371514583ED200F36E7C /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
-		FF41371714583ED200F36E7C /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
-		FF41371914583ED200F36E7C /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		FF41371514583ED200F36E7C /* UIKit.framework */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		FF41371714583ED200F36E7C /* Foundation.framework */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		FF41371914583ED200F36E7C /* CoreGraphics.framework */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		FF41371D14583ED200F36E7C /* SBA Sites-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "SBA Sites-Info.plist"; sourceTree = "<group>"; };
 		FF41371F14583ED200F36E7C /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		FF41372114583ED200F36E7C /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -338,13 +346,13 @@
 		FF41372D14583F1D00F36E7C /* SBARootViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBARootViewController.m; sourceTree = "<group>"; };
 		FF41372E14583F1D00F36E7C /* SBARootViewController_iPhone.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SBARootViewController_iPhone.xib; sourceTree = "<group>"; };
 		FF41373214583F6A00F36E7C /* SBARootViewController_iPad.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SBARootViewController_iPad.xib; sourceTree = "<group>"; };
-		FF413742145840C500F36E7C /* libstdc++.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libstdc++.dylib"; path = "usr/lib/libstdc++.dylib"; sourceTree = SDKROOT; };
-		FF413744145840CF00F36E7C /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
-		FF413746145840D900F36E7C /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
-		FF413748145840E100F36E7C /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
-		FF41374A145840E900F36E7C /* CoreText.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreText.framework; path = System/Library/Frameworks/CoreText.framework; sourceTree = SDKROOT; };
-		FF41374C145840F600F36E7C /* MediaPlayer.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MediaPlayer.framework; path = System/Library/Frameworks/MediaPlayer.framework; sourceTree = SDKROOT; };
-		FF41374E1458410300F36E7C /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
+		FF413742145840C500F36E7C /* libstdc++.dylib */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = "compiled.mach-o.dylib"; name = "libstdc++.dylib"; path = "usr/lib/libstdc++.dylib"; sourceTree = SDKROOT; };
+		FF413744145840CF00F36E7C /* MobileCoreServices.framework */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
+		FF413746145840D900F36E7C /* libz.dylib */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
+		FF413748145840E100F36E7C /* QuartzCore.framework */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		FF41374A145840E900F36E7C /* CoreText.framework */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = wrapper.framework; name = CoreText.framework; path = System/Library/Frameworks/CoreText.framework; sourceTree = SDKROOT; };
+		FF41374C145840F600F36E7C /* MediaPlayer.framework */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = wrapper.framework; name = MediaPlayer.framework; path = System/Library/Frameworks/MediaPlayer.framework; sourceTree = SDKROOT; };
+		FF41374E1458410300F36E7C /* CoreLocation.framework */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		FF41375814587E9F00F36E7C /* icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = icon.png; path = ../icon.png; sourceTree = "<group>"; };
 		FF41375A14587EB900F36E7C /* logo_small.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = logo_small.png; sourceTree = "<group>"; };
 		FF41375B14587EB900F36E7C /* logo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = logo.png; sourceTree = "<group>"; };
@@ -390,6 +398,11 @@
 		FF41378814587EFC00F36E7C /* 73-radar@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "73-radar@2x.png"; sourceTree = "<group>"; };
 		FF41378914587EFC00F36E7C /* 74-location.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "74-location.png"; sourceTree = "<group>"; };
 		FF41378A14587EFC00F36E7C /* 74-location@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "74-location@2x.png"; sourceTree = "<group>"; };
+		FF45146A1619B9090039F000 /* SBALayerManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBALayerManager.h; sourceTree = "<group>"; };
+		FF45146B1619B9090039F000 /* SBALayerManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBALayerManager.m; sourceTree = "<group>"; };
+		FF45146E1619BC3F0039F000 /* SBARouteViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBARouteViewController.h; sourceTree = "<group>"; };
+		FF45146F1619BC3F0039F000 /* SBARouteViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBARouteViewController.m; sourceTree = "<group>"; };
+		FF4514701619BC3F0039F000 /* SBARouteViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SBARouteViewController.xib; sourceTree = "<group>"; };
 		FF4A11AA1475404C003AC6E0 /* InformationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InformationViewController.h; sourceTree = "<group>"; };
 		FF4A11AB1475404C003AC6E0 /* InformationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InformationViewController.m; sourceTree = "<group>"; };
 		FF4A11AE1475407D003AC6E0 /* InformationDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InformationDetailViewController.h; sourceTree = "<group>"; };
@@ -613,8 +626,8 @@
 		FF5231841474406C00EB02FA /* SiteImageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SiteImageViewController.h; sourceTree = "<group>"; };
 		FF5231851474406C00EB02FA /* SiteImageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SiteImageViewController.m; sourceTree = "<group>"; };
 		FF5231871474407800EB02FA /* SiteImageViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SiteImageViewController.xib; sourceTree = "<group>"; };
-		FF52318914744BED00EB02FA /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
-		FF64CE9214851F8D003CC124 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
+		FF52318914744BED00EB02FA /* MessageUI.framework */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
+		FF64CE9214851F8D003CC124 /* MapKit.framework */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		FF64CE9514851FE6003CC124 /* BSAddressComponent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BSAddressComponent.h; sourceTree = "<group>"; };
 		FF64CE9614851FE6003CC124 /* BSAddressComponent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BSAddressComponent.m; sourceTree = "<group>"; };
 		FF64CE9714851FE6003CC124 /* BSGoogleV3KmlParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BSGoogleV3KmlParser.h; sourceTree = "<group>"; };
@@ -625,14 +638,16 @@
 		FF64CE9C14851FE6003CC124 /* CustomPlacemark.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomPlacemark.m; sourceTree = "<group>"; };
 		FF64CE9D14851FE6003CC124 /* BSForwardGeocoder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BSForwardGeocoder.h; sourceTree = "<group>"; };
 		FF64CE9E14851FE6003CC124 /* BSForwardGeocoder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BSForwardGeocoder.m; sourceTree = "<group>"; };
-		FF98B8871484096000D62F5A /* AddressBook.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AddressBook.framework; path = System/Library/Frameworks/AddressBook.framework; sourceTree = SDKROOT; };
-		FF98B8881484096000D62F5A /* AddressBookUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AddressBookUI.framework; path = System/Library/Frameworks/AddressBookUI.framework; sourceTree = SDKROOT; };
+		FF879462161BA83600457005 /* route_bar.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = route_bar.png; sourceTree = "<group>"; };
+		FF879463161BA83600457005 /* route_bar@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "route_bar@2x.png"; sourceTree = "<group>"; };
+		FF98B8871484096000D62F5A /* AddressBook.framework */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = wrapper.framework; name = AddressBook.framework; path = System/Library/Frameworks/AddressBook.framework; sourceTree = SDKROOT; };
+		FF98B8881484096000D62F5A /* AddressBookUI.framework */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = wrapper.framework; name = AddressBookUI.framework; path = System/Library/Frameworks/AddressBookUI.framework; sourceTree = SDKROOT; };
 		FF98B88C1484141600D62F5A /* SBASearchViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBASearchViewController.h; sourceTree = "<group>"; };
 		FF98B88D1484141600D62F5A /* SBASearchViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBASearchViewController.m; sourceTree = "<group>"; };
 		FF98B88E1484141600D62F5A /* SBASearchViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SBASearchViewController.xib; sourceTree = "<group>"; };
-		FF9ABCCB15F540C0001B9B94 /* ArcGIS.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = ArcGIS.framework; sourceTree = "<group>"; };
+		FF9ABCCB15F540C0001B9B94 /* ArcGIS.framework */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = wrapper.framework; path = ArcGIS.framework; sourceTree = "<group>"; };
 		FF9ABCCF15F54343001B9B94 /* ArcGIS.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; name = ArcGIS.bundle; path = ArcGIS.framework/Versions/Current/Resources/ArcGIS.bundle; sourceTree = SOURCE_ROOT; };
-		FF9ABCD115F543EA001B9B94 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
+		FF9ABCD115F543EA001B9B94 /* Security.framework */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 		FFF040DD1474050A00A701A9 /* SBASiteTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBASiteTableViewController.h; sourceTree = "<group>"; };
 		FFF040DE1474050A00A701A9 /* SBASiteTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBASiteTableViewController.m; sourceTree = "<group>"; };
 		FFF040DF1474050A00A701A9 /* SBASiteTableViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SBASiteTableViewController.xib; sourceTree = "<group>"; };
@@ -646,7 +661,7 @@
 		FFF085451476A8A9001B1C1E /* Grey.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Grey.png; sourceTree = "<group>"; };
 		FFFC49FF14895AC90009EEDE /* DetailViewController-iPad.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = "DetailViewController-iPad.xib"; sourceTree = "<group>"; };
 		FFFC4A0214895B560009EEDE /* SiteImageViewController-iPad.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = "SiteImageViewController-iPad.xib"; sourceTree = "<group>"; };
-		FFFC4A0414895FC40009EEDE /* libTestFlight.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libTestFlight.a; sourceTree = "<group>"; };
+		FFFC4A0414895FC40009EEDE /* libTestFlight.a */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = archive.ar; path = libTestFlight.a; sourceTree = "<group>"; };
 		FFFC4A0514895FC40009EEDE /* TestFlight.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TestFlight.h; path = ../TestFlight.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -672,6 +687,7 @@
 				FF413745145840CF00F36E7C /* MobileCoreServices.framework in Frameworks */,
 				FF41371A14583ED200F36E7C /* CoreGraphics.framework in Frameworks */,
 				FF9ABCCC15F540C0001B9B94 /* ArcGIS.framework in Frameworks */,
+				4AA2A450DA0E432C98482C89 /* libPods.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -705,6 +721,7 @@
 				FF41373A14583FB400F36E7C /* Resources */,
 				FF41371414583ED200F36E7C /* Frameworks */,
 				FF41371214583ED200F36E7C /* Products */,
+				5853E82939DF4F3B878DD8A1 /* Pods.xcconfig */,
 			);
 			sourceTree = "<group>";
 		};
@@ -736,6 +753,7 @@
 				FF41371514583ED200F36E7C /* UIKit.framework */,
 				FF41371714583ED200F36E7C /* Foundation.framework */,
 				FF41371914583ED200F36E7C /* CoreGraphics.framework */,
+				7DFA8F214F674D1D9F004D89 /* libPods.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -797,6 +815,9 @@
 				FF98B88E1484141600D62F5A /* SBASearchViewController.xib */,
 				FF21FD9E1610A8DC0096AADD /* SBAMapViewController.h */,
 				FF21FD9F1610A8DC0096AADD /* SBAMapViewController.m */,
+				FF45146E1619BC3F0039F000 /* SBARouteViewController.h */,
+				FF45146F1619BC3F0039F000 /* SBARouteViewController.m */,
+				FF4514701619BC3F0039F000 /* SBARouteViewController.xib */,
 			);
 			name = "View Controllers";
 			sourceTree = "<group>";
@@ -815,6 +836,8 @@
 		FF41375414587E5600F36E7C /* images */ = {
 			isa = PBXGroup;
 			children = (
+				FF879462161BA83600457005 /* route_bar.png */,
+				FF879463161BA83600457005 /* route_bar@2x.png */,
 				FF4D5C7914F27A8E00DBAB5E /* button-highlight.png */,
 				FF4D5C7A14F27A8E00DBAB5E /* button.png */,
 				FF41277D148544EF00A9FD80 /* BluePushpin.png */,
@@ -1168,6 +1191,8 @@
 			children = (
 				FF4A11D214754A7E003AC6E0 /* SBALayer.h */,
 				FF4A11D314754A7E003AC6E0 /* SBALayer.m */,
+				FF45146A1619B9090039F000 /* SBALayerManager.h */,
+				FF45146B1619B9090039F000 /* SBALayerManager.m */,
 			);
 			name = "Model Classes";
 			sourceTree = "<group>";
@@ -1195,6 +1220,7 @@
 				FF41370D14583ED200F36E7C /* Sources */,
 				FF41370E14583ED200F36E7C /* Frameworks */,
 				FF41370F14583ED200F36E7C /* Resources */,
+				684A8BFAD0FF4AC0B289A15F /* Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -1501,10 +1527,30 @@
 				FF21FD531610829E0096AADD /* MHTabBarActiveTab.png in Resources */,
 				FF21FD541610829E0096AADD /* MHTabBarInactiveTab.png in Resources */,
 				FF21FD551610829E0096AADD /* MHTabBarIndicator.png in Resources */,
+				FF4514721619BC3F0039F000 /* SBARouteViewController.xib in Resources */,
+				FF879464161BA83600457005 /* route_bar.png in Resources */,
+				FF879465161BA83600457005 /* route_bar@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		684A8BFAD0FF4AC0B289A15F /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Pods-resources.sh\"\n";
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		FF41370D14583ED200F36E7C /* Sources */ = {
@@ -1534,6 +1580,8 @@
 				FF64CEA314851FE6003CC124 /* BSForwardGeocoder.m in Sources */,
 				FF21FD4F16107CBB0096AADD /* MHTabBarController.m in Sources */,
 				FF21FDA11610A8DC0096AADD /* SBAMapViewController.m in Sources */,
+				FF45146C1619B9090039F000 /* SBALayerManager.m in Sources */,
+				FF4514711619BC3F0039F000 /* SBARouteViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1601,6 +1649,7 @@
 		};
 		FF41372A14583ED200F36E7C /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 5853E82939DF4F3B878DD8A1 /* Pods.xcconfig */;
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
 				CLANG_ENABLE_OBJC_ARC = YES;
@@ -1625,6 +1674,7 @@
 					"-all_load",
 					"-framework",
 					ArcGIS,
+					"$(inherited)",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "756BE1E8-7D4B-4D73-B4DC-5282C5977DE4";
@@ -1636,6 +1686,7 @@
 		};
 		FF41372B14583ED200F36E7C /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 5853E82939DF4F3B878DD8A1 /* Pods.xcconfig */;
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
 				CLANG_ENABLE_OBJC_ARC = YES;
@@ -1661,6 +1712,7 @@
 					"-all_load",
 					"-framework",
 					ArcGIS,
+					"$(inherited)",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "914617E2-5E2D-4B66-811F-ACC76E640BF2";

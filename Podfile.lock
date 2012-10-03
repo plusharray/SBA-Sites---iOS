@@ -1,0 +1,14 @@
+
+COCOAPODS: 0.14.0
+
+SPEC CHECKSUMS: 
+  PrettyKit: 44b8f06f3719579880d2e11cd6498b7464b3b0fa
+  AFNetworking: e9e0911a6afd846691672a4d832fb531e8bae72f
+
+PODS: 
+- AFNetworking (1.0)
+- PrettyKit (0.2.0)
+
+DEPENDENCIES: 
+- AFNetworking
+- PrettyKit

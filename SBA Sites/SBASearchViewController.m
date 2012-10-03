@@ -30,14 +30,6 @@
 @synthesize forwardGeocoder = _forwardGeocoder;
 @synthesize findTask = _findTask;
 
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
-{
-    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
-    if (self) {
-        // Custom initialization
-    }
-    return self;
-}
 
 - (id)initWithSBAMapViewController:(SBAMapViewController *)mapViewController
 {
@@ -48,23 +40,12 @@
     return self;
 }
 
-- (void)didReceiveMemoryWarning
-{
-    // Releases the view if it doesn't have a superview.
-    [super didReceiveMemoryWarning];
-    
-    // Release any cached data, images, etc that aren't in use.
-}
-
 #pragma mark - View lifecycle
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
-	CGRect rect = CGRectMake(0, 44, self.view.bounds.size.width, self.view.bounds.size.height - 44);
-	[self.mapViewController.mapView setFrame:rect];
-	[self.view addSubview:self.mapViewController.mapView];
 	
 	[self.navigationController setNavigationBarHidden:YES animated:NO];
 	[self.navigationController setToolbarHidden:YES animated:NO];
@@ -81,6 +62,11 @@
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
+	CGRect rect = CGRectMake(0, 44, self.view.bounds.size.width, self.view.bounds.size.height - 44);
+	[self.mapViewController.mapView setFrame:rect];
+	if (![self.view.subviews containsObject:self.mapViewController.mapView]) {
+		[self.view addSubview:self.mapViewController.mapView];
+	}
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation

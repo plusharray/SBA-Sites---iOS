@@ -23,15 +23,13 @@
     [super viewDidLoad];
     
 	self.title = @"Info";
-	[self.tableView reloadData];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-    
-	if (UI_USER_INTERFACE_IDIOM() != UIUserInterfaceIdiomPad) {
-		[self.navigationController setNavigationBarHidden:NO animated:YES];
-	}
+	
+	[self.navigationController setNavigationBarHidden:YES animated:NO];
+	[self.tableView reloadData];
 }
 
 #pragma mark -

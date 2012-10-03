@@ -9,6 +9,7 @@
 #import "SBAAppDelegate.h"
 #import "SBAMapViewController.h"
 #import "SBASearchViewController.h"
+#import "SBARouteViewController.h"
 #import "InformationViewController.h"
 
 @implementation SBAAppDelegate
@@ -25,7 +26,7 @@
     SBASearchViewController *searchViewController = [[SBASearchViewController alloc] initWithSBAMapViewController:mapViewController];
 	UINavigationController *searchNavController = [[UINavigationController alloc] initWithRootViewController:searchViewController];
 	
-	SBASearchViewController *routeViewController = [[SBASearchViewController alloc] initWithSBAMapViewController:mapViewController];
+	SBARouteViewController *routeViewController = [[SBARouteViewController alloc] initWithSBAMapViewController:mapViewController];
     // Override point for customization after application launch.
 	UINavigationController *routeNavController = [[UINavigationController alloc] initWithRootViewController:routeViewController];
 	
