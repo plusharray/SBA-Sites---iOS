@@ -16,6 +16,7 @@
 @property (strong, nonatomic) SBAMapViewController *mapViewController;
 @property (strong, nonatomic) IBOutlet UITextField *startingAddressTextField;
 @property (strong, nonatomic) IBOutlet UITextField *destinationAddressTextField;
+@property (strong, nonatomic) IBOutlet AGSMapView *mapView;
 @property (nonatomic, retain) AGSRouteTask *routeTask;
 @property (nonatomic, retain) AGSRouteTaskParameters *routeTaskParams;
 @property (nonatomic, retain) AGSRouteResult *routeResult;
@@ -23,7 +24,6 @@
 @property (nonatomic, strong) AGSStopGraphic *startingGraphic;
 @property (nonatomic, strong) AGSStopGraphic *destinationGraphic;
 
-- (id)initWithSBAMapViewController:(SBAMapViewController *)mapViewController;
 - (AGSCompositeSymbol*)stopSymbolWithNumber:(NSInteger)stopNumber;
 - (AGSCompositeSymbol*)routeSymbol;
 

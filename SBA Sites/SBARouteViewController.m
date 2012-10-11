@@ -28,16 +28,6 @@
 @synthesize startingGraphic = _startingGraphic;
 @synthesize destinationGraphic = _destinationGraphic;
 
-
-- (id)initWithSBAMapViewController:(SBAMapViewController *)mapViewController
-{
-	self = [self initWithNibName:@"SBARouteViewController" bundle:nil];
-    if (self) {
-        _mapViewController = mapViewController;
-    }
-    return self;
-}
-
 - (void)viewDidLoad
 {
     [super viewDidLoad];
@@ -46,6 +36,9 @@
 	[self.navigationController setNavigationBarHidden:YES animated:NO];
 	[self.navigationController setToolbarHidden:YES animated:NO];
 	
+	self.mapViewController = [[SBAMapViewController alloc] init];
+	
+	self.mapViewController.mapView = self.mapView;
 	
 	// Setup the route task
 	NSURL *routeTaskUrl = [NSURL URLWithString:kRouteTaskUrl];
@@ -61,23 +54,13 @@
 	// Setup textfields
 	self.startingAddressTextField.placeholder = @"Start: Current Location";
 	self.destinationAddressTextField.placeholder = @"Please provide destination";
-	
 }
 
 - (void)viewDidUnload {
 	[self setStartingAddressTextField:nil];
 	[self setDestinationAddressTextField:nil];
+	[self setMapView:nil];
 	[super viewDidUnload];
-}
-
-- (void)viewWillAppear:(BOOL)animated
-{
-    [super viewWillAppear:animated];
-	CGRect rect = CGRectMake(0, 78, self.view.bounds.size.width, self.view.bounds.size.height - 78);
-	[self.mapViewController.mapView setFrame:rect];
-	if (![self.view.subviews containsObject:self.mapViewController.mapView]) {
-		[self.view addSubview:self.mapViewController.mapView];
-	}
 }
 
 #pragma mark - AddressBook
@@ -178,7 +161,7 @@
 		[geocoder geocodeAddressString:textField.text completionHandler:^(NSArray *placemarks, NSError *error) {
 			CLPlacemark *placemark = [placemarks lastObject];
 			if (placemark) {
-				AGSPoint *point = [[AGSPoint alloc] initWithX:placemark.location.coordinate.longitude y:placemark.location.coordinate.latitude spatialReference:self.mapViewController.mapView.spatialReference];
+				AGSPoint *point = [[AGSPoint alloc] initWithX:placemark.location.coordinate.longitude y:placemark.location.coordinate.latitude spatialReference:self.mapView.spatialReference];
 				AGSStopGraphic *graphic = [[AGSStopGraphic alloc] initWithGeometry:point symbol:nil attributes:nil infoTemplateDelegate:nil];
 				self.startingGraphic = graphic;
 			} else {
@@ -193,7 +176,7 @@
 		[geocoder geocodeAddressString:textField.text completionHandler:^(NSArray *placemarks, NSError *error) {
 			CLPlacemark *placemark = [placemarks lastObject];
 			if (placemark) {
-				AGSPoint *point = [[AGSPoint alloc] initWithX:placemark.location.coordinate.longitude y:placemark.location.coordinate.latitude spatialReference:self.mapViewController.mapView.spatialReference];
+				AGSPoint *point = [[AGSPoint alloc] initWithX:placemark.location.coordinate.longitude y:placemark.location.coordinate.latitude spatialReference:self.mapView.spatialReference];
 				AGSStopGraphic *graphic = [[AGSStopGraphic alloc] initWithGeometry:point symbol:nil attributes:nil infoTemplateDelegate:nil];
 				self.destinationGraphic = graphic;
 				
@@ -265,6 +248,11 @@
 			}
 		}
 		
+		double xMin = self.mapView.fullEnvelope.xmax;
+		double xMax = self.mapView.fullEnvelope.xmin;
+		double yMin = self.mapView.fullEnvelope.ymax;
+		double yMax = self.mapView.fullEnvelope.ymin;
+		
         // add the returned stops...it's possible these came back in a different order
         // because we specified findBestSequence
 		for (AGSStopGraphic *sg in self.routeResult.stopGraphics) {
@@ -277,10 +265,22 @@
             
             // add the graphic
 			[self.mapViewController.graphicsLayer addGraphic:sg];
+			
+			if (sg.geometry.envelope.xmin < xMin)
+				xMin = sg.geometry.envelope.xmin;
+			if (sg.geometry.envelope.xmax > xMax)
+				xMax = sg.geometry.envelope.xmax;
+			if (sg.geometry.envelope.ymin < yMin)
+				yMin = sg.geometry.envelope.ymin;
+			if (sg.geometry.envelope.ymax > yMax)
+				yMax = sg.geometry.envelope.ymax;
 		}
         
         // tell the graphics layer to redraw
 		[self.mapViewController.graphicsLayer dataChanged];
+		AGSMutableEnvelope *envelope = [[AGSMutableEnvelope alloc] initWithXmin:xMin ymin:yMin xmax:xMax ymax:yMax spatialReference:self.mapView.spatialReference];
+		[envelope expandByFactor:2.0];
+		[self.mapView zoomToEnvelope:envelope animated:YES];
 	}
 }
 
@@ -417,7 +417,7 @@
 	self.routeTaskParams.returnStopGraphics = YES;
 	
 	// ensure the graphics are returned in our map's spatial reference
-	self.routeTaskParams.outSpatialReference = self.mapViewController.mapView.spatialReference;
+	self.routeTaskParams.outSpatialReference = self.mapView.spatialReference;
 	
 	// let's ignore invalid locations
 	self.routeTaskParams.ignoreInvalidLocations = YES;

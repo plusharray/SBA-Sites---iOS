@@ -30,10 +30,8 @@
 		FF41374B145840E900F36E7C /* CoreText.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FF41374A145840E900F36E7C /* CoreText.framework */; };
 		FF41374D145840F600F36E7C /* MediaPlayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FF41374C145840F600F36E7C /* MediaPlayer.framework */; };
 		FF41374F1458410300F36E7C /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FF41374E1458410300F36E7C /* CoreLocation.framework */; };
-		FF41375914587E9F00F36E7C /* icon.png in Resources */ = {isa = PBXBuildFile; fileRef = FF41375814587E9F00F36E7C /* icon.png */; };
 		FF41375C14587EB900F36E7C /* logo_small.png in Resources */ = {isa = PBXBuildFile; fileRef = FF41375A14587EB900F36E7C /* logo_small.png */; };
 		FF41375D14587EB900F36E7C /* logo.png in Resources */ = {isa = PBXBuildFile; fileRef = FF41375B14587EB900F36E7C /* logo.png */; };
-		FF41376114587EE100F36E7C /* icon_iPad.png in Resources */ = {isa = PBXBuildFile; fileRef = FF41376014587EE100F36E7C /* icon_iPad.png */; };
 		FF41378B14587EFC00F36E7C /* 59-info.png in Resources */ = {isa = PBXBuildFile; fileRef = FF41376214587EFC00F36E7C /* 59-info.png */; };
 		FF41378C14587EFC00F36E7C /* 01-refresh.png in Resources */ = {isa = PBXBuildFile; fileRef = FF41376314587EFC00F36E7C /* 01-refresh.png */; };
 		FF41378D14587EFC00F36E7C /* 01-refresh@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = FF41376414587EFC00F36E7C /* 01-refresh@2x.png */; };
@@ -307,6 +305,10 @@
 		FF9ABCCC15F540C0001B9B94 /* ArcGIS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FF9ABCCB15F540C0001B9B94 /* ArcGIS.framework */; };
 		FF9ABCD015F54343001B9B94 /* ArcGIS.bundle in Resources */ = {isa = PBXBuildFile; fileRef = FF9ABCCF15F54343001B9B94 /* ArcGIS.bundle */; };
 		FF9ABCD215F543EA001B9B94 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FF9ABCD115F543EA001B9B94 /* Security.framework */; };
+		FFC7BDA61620F42F0016DAD3 /* Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = FFC7BDA51620F42F0016DAD3 /* Icon.png */; };
+		FFC7BDA81620F4330016DAD3 /* Icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = FFC7BDA71620F4330016DAD3 /* Icon@2x.png */; };
+		FFC7BDAA1620F4410016DAD3 /* Icon-72.png in Resources */ = {isa = PBXBuildFile; fileRef = FFC7BDA91620F4410016DAD3 /* Icon-72.png */; };
+		FFC7BDAC1620F4470016DAD3 /* Icon-72@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = FFC7BDAB1620F4470016DAD3 /* Icon-72@2x.png */; };
 		FFF040E01474050A00A701A9 /* SBASiteTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FFF040DE1474050A00A701A9 /* SBASiteTableViewController.m */; };
 		FFF040E11474050A00A701A9 /* SBASiteTableViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = FFF040DF1474050A00A701A9 /* SBASiteTableViewController.xib */; };
 		FFF040E71474074100A701A9 /* SBAConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = FFF040E61474074100A701A9 /* SBAConstants.m */; };
@@ -353,10 +355,8 @@
 		FF41374A145840E900F36E7C /* CoreText.framework */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = wrapper.framework; name = CoreText.framework; path = System/Library/Frameworks/CoreText.framework; sourceTree = SDKROOT; };
 		FF41374C145840F600F36E7C /* MediaPlayer.framework */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = wrapper.framework; name = MediaPlayer.framework; path = System/Library/Frameworks/MediaPlayer.framework; sourceTree = SDKROOT; };
 		FF41374E1458410300F36E7C /* CoreLocation.framework */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
-		FF41375814587E9F00F36E7C /* icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = icon.png; path = ../icon.png; sourceTree = "<group>"; };
 		FF41375A14587EB900F36E7C /* logo_small.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = logo_small.png; sourceTree = "<group>"; };
 		FF41375B14587EB900F36E7C /* logo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = logo.png; sourceTree = "<group>"; };
-		FF41376014587EE100F36E7C /* icon_iPad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = icon_iPad.png; path = ../icon_iPad.png; sourceTree = "<group>"; };
 		FF41376214587EFC00F36E7C /* 59-info.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "59-info.png"; sourceTree = "<group>"; };
 		FF41376314587EFC00F36E7C /* 01-refresh.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "01-refresh.png"; sourceTree = "<group>"; };
 		FF41376414587EFC00F36E7C /* 01-refresh@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "01-refresh@2x.png"; sourceTree = "<group>"; };
@@ -648,6 +648,10 @@
 		FF9ABCCB15F540C0001B9B94 /* ArcGIS.framework */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = wrapper.framework; path = ArcGIS.framework; sourceTree = "<group>"; };
 		FF9ABCCF15F54343001B9B94 /* ArcGIS.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; name = ArcGIS.bundle; path = ArcGIS.framework/Versions/Current/Resources/ArcGIS.bundle; sourceTree = SOURCE_ROOT; };
 		FF9ABCD115F543EA001B9B94 /* Security.framework */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
+		FFC7BDA51620F42F0016DAD3 /* Icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Icon.png; path = ../Icon.png; sourceTree = "<group>"; };
+		FFC7BDA71620F4330016DAD3 /* Icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Icon@2x.png"; path = "../Icon@2x.png"; sourceTree = "<group>"; };
+		FFC7BDA91620F4410016DAD3 /* Icon-72.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Icon-72.png"; path = "../Icon-72.png"; sourceTree = "<group>"; };
+		FFC7BDAB1620F4470016DAD3 /* Icon-72@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Icon-72@2x.png"; path = "../Icon-72@2x.png"; sourceTree = "<group>"; };
 		FFF040DD1474050A00A701A9 /* SBASiteTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBASiteTableViewController.h; sourceTree = "<group>"; };
 		FFF040DE1474050A00A701A9 /* SBASiteTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBASiteTableViewController.m; sourceTree = "<group>"; };
 		FFF040DF1474050A00A701A9 /* SBASiteTableViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SBASiteTableViewController.xib; sourceTree = "<group>"; };
@@ -909,8 +913,10 @@
 		FF41375714587E7C00F36E7C /* app icons */ = {
 			isa = PBXGroup;
 			children = (
-				FF41376014587EE100F36E7C /* icon_iPad.png */,
-				FF41375814587E9F00F36E7C /* icon.png */,
+				FFC7BDAB1620F4470016DAD3 /* Icon-72@2x.png */,
+				FFC7BDA91620F4410016DAD3 /* Icon-72.png */,
+				FFC7BDA71620F4330016DAD3 /* Icon@2x.png */,
+				FFC7BDA51620F42F0016DAD3 /* Icon.png */,
 			);
 			name = "app icons";
 			sourceTree = "<group>";
@@ -1264,10 +1270,8 @@
 				FF41372014583ED200F36E7C /* InfoPlist.strings in Resources */,
 				FF41373014583F1D00F36E7C /* SBARootViewController_iPhone.xib in Resources */,
 				FF41373314583F6A00F36E7C /* SBARootViewController_iPad.xib in Resources */,
-				FF41375914587E9F00F36E7C /* icon.png in Resources */,
 				FF41375C14587EB900F36E7C /* logo_small.png in Resources */,
 				FF41375D14587EB900F36E7C /* logo.png in Resources */,
-				FF41376114587EE100F36E7C /* icon_iPad.png in Resources */,
 				FF41378B14587EFC00F36E7C /* 59-info.png in Resources */,
 				FF41378C14587EFC00F36E7C /* 01-refresh.png in Resources */,
 				FF41378D14587EFC00F36E7C /* 01-refresh@2x.png in Resources */,
@@ -1530,6 +1534,10 @@
 				FF4514721619BC3F0039F000 /* SBARouteViewController.xib in Resources */,
 				FF879464161BA83600457005 /* route_bar.png in Resources */,
 				FF879465161BA83600457005 /* route_bar@2x.png in Resources */,
+				FFC7BDA61620F42F0016DAD3 /* Icon.png in Resources */,
+				FFC7BDA81620F4330016DAD3 /* Icon@2x.png in Resources */,
+				FFC7BDAA1620F4410016DAD3 /* Icon-72.png in Resources */,
+				FFC7BDAC1620F4470016DAD3 /* Icon-72@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1680,6 +1688,7 @@
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "756BE1E8-7D4B-4D73-B4DC-5282C5977DE4";
 				RUN_CLANG_STATIC_ANALYZER = YES;
 				USER_HEADER_SEARCH_PATHS = "\"$(SRCROOT)\"/** $(HOME)/Library/SDKs/ArcGIS/iOS.sdk/usr/local/include/**/** \"$(SRCROOT)/\"/**";
+				VALID_ARCHS = armv7;
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -1715,9 +1724,10 @@
 					"$(inherited)",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "914617E2-5E2D-4B66-811F-ACC76E640BF2";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
 				RUN_CLANG_STATIC_ANALYZER = YES;
 				USER_HEADER_SEARCH_PATHS = "\"$(SRCROOT)\"/** $(HOME)/Library/SDKs/ArcGIS/iOS.sdk/usr/local/include/**/** \"$(SRCROOT)/\"/**";
+				VALID_ARCHS = armv7;
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;

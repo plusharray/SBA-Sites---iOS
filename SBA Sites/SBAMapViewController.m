@@ -254,7 +254,7 @@
 {
 	
     //clear previous results
-    [self.graphicsLayer removeAllGraphics];
+    //[self.graphicsLayer removeAllGraphics];
 	
     //add new results
     AGSSymbol* symbol = [AGSSimpleFillSymbol simpleFillSymbol];

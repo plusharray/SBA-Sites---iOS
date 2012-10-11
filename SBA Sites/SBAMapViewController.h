@@ -24,6 +24,8 @@
 @property (nonatomic) NSInteger selectedMapType;
 @property (nonatomic, strong) UIPopoverController *popoverController;
 
+- (void)setupMapView;
+
 - (IBAction)mapType:(UISegmentedControl *)segmentPick;
 - (IBAction)toggleLayer:(id)sender;
 - (IBAction)userLocationButtonTapped:(id)sender;
