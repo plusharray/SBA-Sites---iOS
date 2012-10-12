@@ -11,6 +11,9 @@
 extern NSString * const TiledMapServiceURL;
 extern NSString * const AerialMapServiceURL;
 extern NSString * const DynamicMapServiceURL;
+extern NSString * const DynamicMapServiceURLAuthenticated;
+
+
 // Notifications
 extern NSString * const SBASiteSelected;
 extern NSString * const SBALayerSelected;

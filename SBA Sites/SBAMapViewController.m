@@ -9,9 +9,10 @@
 #import "SBAMapViewController.h"
 #import "SBALayer.h"
 #import "DetailViewController.h"
+#import "MKNetworkOperation.h"
+#import "MKNetworkEngine.h"
 
 @interface SBAMapViewController ()
-
 @end
 
 @implementation SBAMapViewController
@@ -53,7 +54,7 @@
 	_mapView = mapView;
 	
     // Setup the MapView
-    [self setupMapView];
+    [self userAuthentication];
 }
 
 - (NSArray *)visibleLayers
@@ -153,7 +154,7 @@
 
 #pragma mark - Setup
 
-- (void)setupMapView
+- (void)setupMapView: (BOOL) userAuthenticated
 {
     // Set up the layers
     NSMutableArray *allLayers = [[NSMutableArray alloc] initWithCapacity:5];
@@ -176,9 +177,15 @@
 	// Setting these two properties lets the map draw while still performing a zoom/pan
 	lyr.drawDuringPanning = YES;
 	lyr.drawDuringZooming = YES;
-	
+    
 	//create an instance of a dynmaic map layer
-	self.dynamicLayer = [[AGSDynamicMapServiceLayer alloc] initWithURL:[NSURL URLWithString:DynamicMapServiceURL]];
+    if(userAuthenticated)
+    {
+        self.dynamicLayer = [[AGSDynamicMapServiceLayer alloc] initWithURL:[NSURL URLWithString:DynamicMapServiceURLAuthenticated]];
+    }
+    else{
+        self.dynamicLayer = [[AGSDynamicMapServiceLayer alloc] initWithURL:[NSURL URLWithString:DynamicMapServiceURL]];
+    }
     
 	//set visible layers
 	self.dynamicLayer.visibleLayers = [self.visibleLayers valueForKey:@"layerID"];
@@ -212,6 +219,27 @@
 	[self.mapView zoomToEnvelope:env animated:YES];
 }
 
+-(void) userAuthentication
+{
+    MKNetworkEngine *myEngine = [[MKNetworkEngine alloc] initWithHostName:@"map.sbasite.com" customHeaderFields:nil];;
+    
+    MKNetworkOperation *op = [myEngine operationWithPath:@"Authentication/"];
+    
+    [op setUsername:@"rchapma" password:@"ross01"];
+    
+    [op onCompletion:^(MKNetworkOperation *operation) {
+        
+        [self setupMapView:YES];
+        DLog(@"%@", [operation responseString]);
+    } onError:^(NSError *error) {
+        
+        [self setupMapView: NO];
+        DLog(@"%@", [error localizedDescription]);
+    }];
+    [myEngine enqueueOperation:op];
+    
+
+}
 #pragma mark AGSMapViewLayerDelegate methods
 
 -(void) mapViewDidLoad:(AGSMapView*)mapView {

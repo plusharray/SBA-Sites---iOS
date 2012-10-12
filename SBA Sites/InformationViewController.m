@@ -11,6 +11,7 @@
 #import "InfoViewController.h"
 #import "GradientView.h"
 #import "ClearLabelsCellView.h"
+#import "UserCredentialsViewController.h"
 
 @implementation InformationViewController
 
@@ -23,33 +24,38 @@
     [super viewDidLoad];
     
 	self.title = @"Info";
+	[self.tableView reloadData];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-	
-	[self.navigationController setNavigationBarHidden:YES animated:NO];
-	[self.tableView reloadData];
+    
+	if (UI_USER_INTERFACE_IDIOM() != UIUserInterfaceIdiomPad) {
+		[self.navigationController setNavigationBarHidden:NO animated:YES];
+	}
 }
 
 #pragma mark -
 #pragma mark Table view data source
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return 3;
+    return 4;
 }
 
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
 	if (section == 0) {
-		return 3;
+		return 1;
 	}
 	else if (section == 1) {
-		return 2;
+		return 3;
 	}
 	else if (section == 2) {
 		return 2;
 	}
+    else if( section == 3) {
+        return 2;
+    }
 	else {
 		return 0;
 	}
@@ -58,7 +64,10 @@
 // Customize section header titles
 - (NSString *)tableView:(UITableView *)aTableView titleForHeaderInSection:(NSInteger)section {
 	
-	if (section == 0) {
+    if (section == 0) {
+		return @"Login Information";
+	}
+	else if (section == 0) {
 		return @"Search Instructions";
 	}
 	else if (section == 1) {
@@ -86,7 +95,16 @@
 		cell.backgroundView = [[GradientView alloc] init];
     }
 	
-	if (section == 0) {
+    if (section == 0) {
+		if (row == 0) {
+			//- login Credentials
+			cell.textLabel.text = @"Credentials";
+			cell.detailTextLabel.text = @"";
+			cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+			
+		}
+    }
+	else if (section == 1) {
 		if (row == 0) {
 			//- Search by Site Name/ID
 			cell.textLabel.text = @"Search by Site Name/ID";
@@ -107,7 +125,7 @@
 			cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
 		}
 	}
-	else if (section == 1) {
+	else if (section == 2) {
 		if (row == 0) {
 			//- About SBA Sites App -> InfoViewController
 			cell.textLabel.text = @"About SBA Communications";
@@ -122,7 +140,7 @@
 			cell.detailTextLabel.text = appVersion;
 		}
 	}
-	else if (section == 2) {
+	else if (section == 3) {
 		if (row == 0) {
 			//- Email support
 			cell.textLabel.text = @"Email Support";
@@ -151,7 +169,14 @@
 	int section = indexPath.section;
 	int row = indexPath.row;
 	
-	if (section == 0) {
+    if (section ==0){
+        if(row == 0){
+            UserCredentialsViewController *userCredentialsViewController = [[UserCredentialsViewController alloc] initWithNibName:@"UserCredentialsViewController" bundle:nil];
+			// Pass the selected object to the new view controller.
+			[self.navigationController pushViewController:userCredentialsViewController animated:YES];
+        }
+    }
+    else if (section == 1) {
 		if (row == 0) {
 			//- Search by Site Name/ID
 			InformationDetailViewController *detailViewController = [[InformationDetailViewController alloc] initWithNibName:@"InformationDetailViewController" bundle:nil];
@@ -177,7 +202,7 @@
 			[self.navigationController pushViewController:detailViewController animated:YES];
 		}
 	}
-	else if (section == 1) {
+	else if (section == 2) {
 		if (row == 0) {
 			//- About SBA Sites App -> InfoViewController
 			if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
@@ -193,7 +218,7 @@
 			}
 		}
 	}
-	else if (section == 2) {
+	else if (section == 3) {
 		if (row == 0) {
 			//- Email support
 			[self displayComposerSheet];
@@ -206,13 +231,13 @@
 }
 
 
-//=========================================================== 
+//===========================================================
 #pragma mark -
 #pragma mark MessageUI Methods
 #pragma mark -
-//=========================================================== 
+//===========================================================
 
-// Displays an email composition interface inside the application. Populates all the Mail fields. 
+// Displays an email composition interface inside the application. Populates all the Mail fields.
 - (void)displayMailComposerSheet
 {
 	Class mailClass = (NSClassFromString(@"MFMailComposeViewController"));
@@ -262,9 +287,9 @@
 #pragma mark -
 #pragma mark Dismiss Mail view controller
 
-// Dismisses the email composition interface when users tap Cancel or Send. Proceeds to update the 
+// Dismisses the email composition interface when users tap Cancel or Send. Proceeds to update the
 // message field with the result of the operation.
-- (void)mailComposeController:(MFMailComposeViewController*)controller 
+- (void)mailComposeController:(MFMailComposeViewController*)controller
 		  didFinishWithResult:(MFMailComposeResult)result error:(NSError*)error {
 	
 	//feedbackMsg.hidden = NO;
