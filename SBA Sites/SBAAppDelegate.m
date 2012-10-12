@@ -20,17 +20,14 @@
 
 - (void)configureTabBarController
 {
-	
-	SBAMapViewController *mapViewController1 = [[SBAMapViewController alloc] init];
-    SBASearchViewController *searchViewController = [[SBASearchViewController alloc] initWithSBAMapViewController:mapViewController1];
+    SBASearchViewController *searchViewController = [[SBASearchViewController alloc] initWithNibName:@"SBASearchViewController" bundle:nil];
 	UINavigationController *searchNavController = [[UINavigationController alloc] initWithRootViewController:searchViewController];
 	
 	SBARouteViewController *routeViewController = [[SBARouteViewController alloc] initWithNibName:@"SBARouteViewController" bundle:nil];
     // Override point for customization after application launch.
 	UINavigationController *routeNavController = [[UINavigationController alloc] initWithRootViewController:routeViewController];
 	
-	SBAMapViewController *mapViewController3 = [[SBAMapViewController alloc] init];
-	SBASearchViewController *measureViewController = [[SBASearchViewController alloc] initWithSBAMapViewController:mapViewController3];
+	SBASearchViewController *measureViewController = [[SBASearchViewController alloc] initWithNibName:@"SBASearchViewController" bundle:nil];
 	UINavigationController *measureNavController = [[UINavigationController alloc] initWithRootViewController:measureViewController];
 	
 	InformationViewController *infoViewController = [[InformationViewController alloc] initWithNibName:@"InformationViewController" bundle:nil];

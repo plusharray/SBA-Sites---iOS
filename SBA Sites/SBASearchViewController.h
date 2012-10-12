@@ -16,6 +16,7 @@
 
 @property (strong, nonatomic) SBAMapViewController *mapViewController;
 @property (strong, nonatomic) IBOutlet UISearchBar *searchBar;
+@property (strong, nonatomic) IBOutlet AGSMapView *mapView;
 @property (nonatomic) BOOL addressBookSearch;
 @property (nonatomic) BOOL searchActiveDB;
 @property (nonatomic) BOOL searchActiveForwardGeocode;
@@ -27,6 +28,5 @@
 @property (nonatomic, strong) BSForwardGeocoder *forwardGeocoder;
 @property (nonatomic, strong) AGSFindTask *findTask;
 
-- (id)initWithSBAMapViewController:(SBAMapViewController *)mapViewController;
 
 @end

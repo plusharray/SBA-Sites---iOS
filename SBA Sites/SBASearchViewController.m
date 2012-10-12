@@ -30,16 +30,6 @@
 @synthesize forwardGeocoder = _forwardGeocoder;
 @synthesize findTask = _findTask;
 
-
-- (id)initWithSBAMapViewController:(SBAMapViewController *)mapViewController
-{
-	self = [self initWithNibName:@"SBASearchViewController" bundle:nil];
-    if (self) {
-        _mapViewController = mapViewController;
-    }
-    return self;
-}
-
 #pragma mark - View lifecycle
 
 - (void)viewDidLoad
@@ -49,24 +39,19 @@
 	
 	[self.navigationController setNavigationBarHidden:YES animated:NO];
 	[self.navigationController setToolbarHidden:YES animated:NO];
+	
+	self.mapViewController = [[SBAMapViewController alloc] init];
+	
+	self.mapViewController.mapView = self.mapView;
 }
 
 - (void)viewDidUnload
 {
     [self setSearchBar:nil];
+    [self setMapView:nil];
     [super viewDidUnload];
     // Release any retained subviews of the main view.
     // e.g. self.myOutlet = nil;
-}
-
-- (void)viewWillAppear:(BOOL)animated
-{
-    [super viewWillAppear:animated];
-	CGRect rect = CGRectMake(0, 44, self.view.bounds.size.width, self.view.bounds.size.height - 44);
-	[self.mapViewController.mapView setFrame:rect];
-	if (![self.view.subviews containsObject:self.mapViewController.mapView]) {
-		[self.view addSubview:self.mapViewController.mapView];
-	}
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
@@ -225,8 +210,8 @@
             ymin = aPlacemark.location.coordinate.latitude - span;
             xmax = aPlacemark.location.coordinate.longitude + span;
             ymax = aPlacemark.location.coordinate.latitude + span;
-            AGSEnvelope *env = [AGSEnvelope envelopeWithXmin:xmin ymin:ymin xmax:xmax ymax:ymax spatialReference:self.mapViewController.mapView.spatialReference];
-            [self.mapViewController.mapView zoomToEnvelope:env animated:YES];
+            AGSEnvelope *env = [AGSEnvelope envelopeWithXmin:xmin ymin:ymin xmax:xmax ymax:ymax spatialReference:self.mapView.spatialReference];
+            [self.mapView zoomToEnvelope:env animated:YES];
         } else if ([placemark isKindOfClass:[MKPlacemark class]]) {
             MKPlacemark *aPlacemark = (MKPlacemark *)placemark;
             double span = 1.0;
@@ -235,8 +220,8 @@
             ymin = aPlacemark.coordinate.latitude - span;
             xmax = aPlacemark.coordinate.longitude + span;
             ymax = aPlacemark.coordinate.latitude + span;
-            AGSEnvelope *env = [AGSEnvelope envelopeWithXmin:xmin ymin:ymin xmax:xmax ymax:ymax spatialReference:self.mapViewController.mapView.spatialReference];
-            [self.mapViewController.mapView zoomToEnvelope:env animated:YES];
+            AGSEnvelope *env = [AGSEnvelope envelopeWithXmin:xmin ymin:ymin xmax:xmax ymax:ymax spatialReference:self.mapView.spatialReference];
+            [self.mapView zoomToEnvelope:env animated:YES];
         }
     }
     
@@ -302,7 +287,7 @@
     AGSFindParameters *params = [[AGSFindParameters alloc] init];
     params.contains = YES;
     params.layerIds = [self.mapViewController.visibleLayers valueForKey:@"layerID"];
-    params.outSpatialReference = self.mapViewController.mapView.spatialReference;
+    params.outSpatialReference = self.mapView.spatialReference;
     params.returnGeometry = NO;
     params.searchFields = @[@"SiteName", @"SiteCode"];
     params.searchText = searchString;

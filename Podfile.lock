@@ -1,14 +1,17 @@
 
-COCOAPODS: 0.14.0
-
-SPEC CHECKSUMS: 
-  PrettyKit: 44b8f06f3719579880d2e11cd6498b7464b3b0fa
-  AFNetworking: e9e0911a6afd846691672a4d832fb531e8bae72f
+DEPENDENCIES: 
+- MKNetworkKit
+- PrettyKit
 
 PODS: 
-- AFNetworking (1.0)
+- MKNetworkKit (0.85): 
+  - Reachability (~> 3.0)
 - PrettyKit (0.2.0)
+- Reachability (3.0.0)
 
-DEPENDENCIES: 
-- AFNetworking
-- PrettyKit
+COCOAPODS: 0.15.1
+
+SPEC CHECKSUMS: 
+  Reachability: 500bd76bf6cd8ff2c6fb715fc5f44ef6e4c024f2
+  PrettyKit: 44b8f06f3719579880d2e11cd6498b7464b3b0fa
+  MKNetworkKit: 300f34b9174c91d0abc6f78f0ceaa7ae9a96e4d1

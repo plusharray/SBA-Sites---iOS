@@ -1,0 +1,4 @@
+Documentation set was installed to Xcode!
+
+Path: /Users/rosschapman/Library/Developer/Shared/Documentation/DocSets/org.cocoapods.MKNetworkKit-0.85.docset
+Time: 2012-10-12 06:25:04 +0000

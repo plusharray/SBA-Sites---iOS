@@ -25,7 +25,7 @@
 #import "MHTabBarController.h"
 
 static const float TAB_BAR_HEIGHT = 44.0f;
-static const float TOOLBAR_HEIGHT = 44.0f;
+static const float TOOLBAR_HEIGHT = 0.0f;
 static const NSInteger TAG_OFFSET = 1000;
 
 @implementation MHTabBarController
@@ -155,11 +155,11 @@ static const NSInteger TAG_OFFSET = 1000;
 	indicatorImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"MHTabBarIndicator"]];
 	[self.view addSubview:indicatorImageView];
 	
-	rect.origin.y = self.view.bounds.size.height - TOOLBAR_HEIGHT;
-	rect.size.height = TOOLBAR_HEIGHT;
-	rect.size.width = self.view.bounds.size.width;
-	toolbar = [[UIToolbar alloc] initWithFrame:rect];
-	[self.view addSubview:toolbar];
+//	rect.origin.y = self.view.bounds.size.height - TOOLBAR_HEIGHT;
+//	rect.size.height = TOOLBAR_HEIGHT;
+//	rect.size.width = self.view.bounds.size.width;
+//	toolbar = [[UIToolbar alloc] initWithFrame:rect];
+//	[self.view addSubview:toolbar];
 	
 }
 
