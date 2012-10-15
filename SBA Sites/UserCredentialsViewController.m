@@ -29,6 +29,12 @@
     if ( ![_password.text isEqualToString:@""] ) {
         [wrapper setObject:[_password text] forKey:(__bridge id)(kSecValueData)];
     }
+    
+    UIAlertView *av = [[UIAlertView alloc] initWithTitle:@"Saved"
+												 message:@"Credentials have been saved"
+												delegate:self
+									   cancelButtonTitle:@"Ok" otherButtonTitles:nil,nil];
+	[av show];
 
 }
 

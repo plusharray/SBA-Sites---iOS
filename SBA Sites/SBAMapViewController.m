@@ -11,6 +11,7 @@
 #import "DetailViewController.h"
 #import "MKNetworkOperation.h"
 #import "MKNetworkEngine.h"
+#import "KeychainItemWrapper.h"
 
 @interface SBAMapViewController ()
 @end
@@ -221,11 +222,12 @@
 
 -(void) userAuthentication
 {
-    MKNetworkEngine *myEngine = [[MKNetworkEngine alloc] initWithHostName:@"map.sbasite.com" customHeaderFields:nil];;
     
+    KeychainItemWrapper *wrapper = [[KeychainItemWrapper alloc] initWithIdentifier:@"Credentials" accessGroup:nil];
+    MKNetworkEngine *myEngine = [[MKNetworkEngine alloc] initWithHostName:@"map.sbasite.com" customHeaderFields:nil];;    
     MKNetworkOperation *op = [myEngine operationWithPath:@"Authentication/"];
     
-    [op setUsername:@"rchapma" password:@"ross01"];
+    [op setUsername:[wrapper objectForKey:(__bridge id)(kSecAttrAccount)] password:[wrapper objectForKey:(__bridge id)(kSecValueData)]];
     
     [op onCompletion:^(MKNetworkOperation *operation) {
         
