@@ -9,6 +9,7 @@
 #import "SBAMapViewController.h"
 #import "SBALayer.h"
 #import "DetailViewController.h"
+#import "SBASiteInfoTemplate.h"
 
 @interface SBAMapViewController ()
 
@@ -280,14 +281,10 @@
                 [self.popoverController presentPopoverFromRect:CGRectMake(point.x, point.y, 1.0, 1.0) inView:self.mapView permittedArrowDirections:UIPopoverArrowDirectionAny animated:YES];
             }
         } else {
-            //get the site code & name
-            NSString *siteCode = [result.feature.attributes objectForKey:@"SiteCode"];
-            NSString *siteName = [result.feature.attributes objectForKey:@"SiteName"];
-            self.mapView.callout.title = siteCode;
-            self.mapView.callout.detail = siteName;
-            //show callout
-            [self.mapView showCalloutAtPoint:self.mappoint forGraphic:((AGSIdentifyResult*)[results objectAtIndex:0]).feature animated:YES];
-            
+			self.infoTemplate = [[SBASiteInfoTemplate alloc] init];
+			AGSGraphic *graphic = ((AGSIdentifyResult *)[results objectAtIndex:0]).feature;
+			graphic.infoTemplateDelegate = self.infoTemplate;
+			[self.mapView showCalloutAtPoint:self.mappoint forGraphic:graphic animated:YES];
             //call dataChanged on the graphics layer to redraw the graphics
             [self.graphicsLayer dataChanged];
         }

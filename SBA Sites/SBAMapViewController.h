@@ -8,6 +8,8 @@
 
 #import <UIKit/UIKit.h>
 
+@class SBASiteInfoTemplate;
+
 @interface SBAMapViewController : NSObject <AGSMapViewLayerDelegate, AGSMapViewCalloutDelegate, AGSMapViewTouchDelegate, AGSIdentifyTaskDelegate, UIPopoverControllerDelegate>
 
 @property (nonatomic, strong) AGSMapView *mapView;
@@ -23,6 +25,7 @@
 @property (nonatomic, strong) AGSCalloutTemplate *calloutTemplate;
 @property (nonatomic) NSInteger selectedMapType;
 @property (nonatomic, strong) UIPopoverController *popoverController;
+@property (nonatomic, strong) SBASiteInfoTemplate *infoTemplate;
 
 - (void)setupMapView;
 
