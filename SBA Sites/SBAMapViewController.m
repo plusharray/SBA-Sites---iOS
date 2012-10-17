@@ -10,9 +10,11 @@
 #import "SBALayer.h"
 #import "DetailViewController.h"
 #import "SBASiteInfoTemplate.h"
+#import "MKNetworkOperation.h"
+#import "MKNetworkEngine.h"
+#import "KeychainItemWrapper.h"
 
 @interface SBAMapViewController ()
-
 @end
 
 @implementation SBAMapViewController
@@ -54,7 +56,7 @@
 	_mapView = mapView;
 	
     // Setup the MapView
-    [self setupMapView];
+    [self userAuthentication];
 }
 
 - (NSArray *)visibleLayers
@@ -154,7 +156,7 @@
 
 #pragma mark - Setup
 
-- (void)setupMapView
+- (void)setupMapView: (BOOL) userAuthenticated
 {
     // Set up the layers
     NSMutableArray *allLayers = [[NSMutableArray alloc] initWithCapacity:5];
@@ -177,9 +179,15 @@
 	// Setting these two properties lets the map draw while still performing a zoom/pan
 	lyr.drawDuringPanning = YES;
 	lyr.drawDuringZooming = YES;
-	
+    
 	//create an instance of a dynmaic map layer
-	self.dynamicLayer = [[AGSDynamicMapServiceLayer alloc] initWithURL:[NSURL URLWithString:DynamicMapServiceURL]];
+    if(userAuthenticated)
+    {
+        self.dynamicLayer = [[AGSDynamicMapServiceLayer alloc] initWithURL:[NSURL URLWithString:DynamicMapServiceURLAuthenticated]];
+    }
+    else{
+        self.dynamicLayer = [[AGSDynamicMapServiceLayer alloc] initWithURL:[NSURL URLWithString:DynamicMapServiceURL]];
+    }
     
 	//set visible layers
 	self.dynamicLayer.visibleLayers = [self.visibleLayers valueForKey:@"layerID"];
@@ -213,6 +221,28 @@
 	[self.mapView zoomToEnvelope:env animated:YES];
 }
 
+-(void) userAuthentication
+{
+    
+    KeychainItemWrapper *wrapper = [[KeychainItemWrapper alloc] initWithIdentifier:@"Credentials" accessGroup:nil];
+    MKNetworkEngine *myEngine = [[MKNetworkEngine alloc] initWithHostName:@"map.sbasite.com" customHeaderFields:nil];;    
+    MKNetworkOperation *op = [myEngine operationWithPath:@"Authentication/"];
+    
+    [op setUsername:[wrapper objectForKey:(__bridge id)(kSecAttrAccount)] password:[wrapper objectForKey:(__bridge id)(kSecValueData)]];
+    
+    [op onCompletion:^(MKNetworkOperation *operation) {
+        
+        [self setupMapView:YES];
+        DLog(@"%@", [operation responseString]);
+    } onError:^(NSError *error) {
+        
+        [self setupMapView: NO];
+        DLog(@"%@", [error localizedDescription]);
+    }];
+    [myEngine enqueueOperation:op];
+    
+
+}
 #pragma mark AGSMapViewLayerDelegate methods
 
 -(void) mapViewDidLoad:(AGSMapView*)mapView {

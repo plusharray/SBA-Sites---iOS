@@ -11,6 +11,9 @@
 NSString * const TiledMapServiceURL = @"http://server.arcgisonline.com/ArcGIS/rest/services/ESRI_StreetMap_World_2D/MapServer";
 NSString * const AerialMapServiceURL = @"http://server.arcgisonline.com/ArcGIS/rest/services/ESRI_Imagery_World_2D/MapServer";
 NSString * const DynamicMapServiceURL = @"http://mapservices.sbasite.com/ArcGIS/rest/services/Google/MobileiOS/MapServer";
+
+NSString * const DynamicMapServiceURLAuthenticated = @"http://mapservices.sbasite.com/ArcGIS/rest/services/Google/MobileiOS2/MapServer";
+
 // Notifications
 NSString * const SBASiteSelected = @"SBASiteSelected";
 NSString * const SBALayerSelected = @"SBALayerSelected";

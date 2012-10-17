@@ -1,17 +1,17 @@
 
-DEPENDENCIES: 
-- MKNetworkKit
-- PrettyKit
-
 PODS: 
 - MKNetworkKit (0.85): 
   - Reachability (~> 3.0)
 - PrettyKit (0.2.0)
 - Reachability (3.0.0)
 
-COCOAPODS: 0.15.1
-
 SPEC CHECKSUMS: 
-  Reachability: 500bd76bf6cd8ff2c6fb715fc5f44ef6e4c024f2
   PrettyKit: 44b8f06f3719579880d2e11cd6498b7464b3b0fa
+  Reachability: 500bd76bf6cd8ff2c6fb715fc5f44ef6e4c024f2
   MKNetworkKit: 300f34b9174c91d0abc6f78f0ceaa7ae9a96e4d1
+
+DEPENDENCIES: 
+- MKNetworkKit
+- PrettyKit
+
+COCOAPODS: 0.15.1

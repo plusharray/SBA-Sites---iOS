@@ -27,7 +27,7 @@
 @property (nonatomic, strong) UIPopoverController *popoverController;
 @property (nonatomic, strong) SBASiteInfoTemplate *infoTemplate;
 
-- (void)setupMapView;
+- (void)setupMapView:(BOOL)userAuthenticated;
 
 - (IBAction)mapType:(UISegmentedControl *)segmentPick;
 - (IBAction)toggleLayer:(id)sender;

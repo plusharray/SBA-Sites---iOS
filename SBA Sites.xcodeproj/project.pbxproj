@@ -8,6 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		4AA2A450DA0E432C98482C89 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7DFA8F214F674D1D9F004D89 /* libPods.a */; };
+		A78D5CC31628A602008EE94E /* UserCredentialsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A78D5CC11628A602008EE94E /* UserCredentialsViewController.m */; };
+		A78D5CC41628A602008EE94E /* UserCredentialsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A78D5CC21628A602008EE94E /* UserCredentialsViewController.xib */; };
+		A78D5CC91628A63E008EE94E /* KeychainItemWrapper.m in Sources */ = {isa = PBXBuildFile; fileRef = A78D5CC81628A63E008EE94E /* KeychainItemWrapper.m */; };
 		FF21FD4F16107CBB0096AADD /* MHTabBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = FF21FD4E16107CBB0096AADD /* MHTabBarController.m */; };
 		FF21FD531610829E0096AADD /* MHTabBarActiveTab.png in Resources */ = {isa = PBXBuildFile; fileRef = FF21FD501610829E0096AADD /* MHTabBarActiveTab.png */; };
 		FF21FD541610829E0096AADD /* MHTabBarInactiveTab.png in Resources */ = {isa = PBXBuildFile; fileRef = FF21FD511610829E0096AADD /* MHTabBarInactiveTab.png */; };
@@ -328,6 +331,11 @@
 /* Begin PBXFileReference section */
 		5853E82939DF4F3B878DD8A1 /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = SOURCE_ROOT; };
 		7DFA8F214F674D1D9F004D89 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		A78D5CC01628A602008EE94E /* UserCredentialsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserCredentialsViewController.h; sourceTree = "<group>"; };
+		A78D5CC11628A602008EE94E /* UserCredentialsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserCredentialsViewController.m; sourceTree = "<group>"; };
+		A78D5CC21628A602008EE94E /* UserCredentialsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UserCredentialsViewController.xib; sourceTree = "<group>"; };
+		A78D5CC71628A63E008EE94E /* KeychainItemWrapper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KeychainItemWrapper.h; sourceTree = "<group>"; };
+		A78D5CC81628A63E008EE94E /* KeychainItemWrapper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KeychainItemWrapper.m; sourceTree = "<group>"; };
 		FF21FD4D16107CBB0096AADD /* MHTabBarController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MHTabBarController.h; sourceTree = "<group>"; };
 		FF21FD4E16107CBB0096AADD /* MHTabBarController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MHTabBarController.m; sourceTree = "<group>"; };
 		FF21FD501610829E0096AADD /* MHTabBarActiveTab.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = MHTabBarActiveTab.png; sourceTree = "<group>"; };
@@ -703,6 +711,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		A78D5CC61628A622008EE94E /* KeychainItemWrapper */ = {
+			isa = PBXGroup;
+			children = (
+				A78D5CC71628A63E008EE94E /* KeychainItemWrapper.h */,
+				A78D5CC81628A63E008EE94E /* KeychainItemWrapper.m */,
+			);
+			name = KeychainItemWrapper;
+			sourceTree = "<group>";
+		};
 		FF21FD4C16107C930096AADD /* MHCustomTabBar */ = {
 			isa = PBXGroup;
 			children = (
@@ -770,6 +787,7 @@
 		FF41371B14583ED200F36E7C /* SBA Sites */ = {
 			isa = PBXGroup;
 			children = (
+				A78D5CC61628A622008EE94E /* KeychainItemWrapper */,
 				FF21FD4C16107C930096AADD /* MHCustomTabBar */,
 				FF64CEA414851FEB003CC124 /* BSForwardGeocoder */,
 				FF4A11BA147540B3003AC6E0 /* Shadowed TableView */,
@@ -957,6 +975,9 @@
 				FF4A11BC147542D8003AC6E0 /* InfoViewController.m */,
 				FF4A11C614754329003AC6E0 /* InfoViewController.xib */,
 				FF4A11C014754319003AC6E0 /* InfoViewController-iPad.xib */,
+				A78D5CC01628A602008EE94E /* UserCredentialsViewController.h */,
+				A78D5CC11628A602008EE94E /* UserCredentialsViewController.m */,
+				A78D5CC21628A602008EE94E /* UserCredentialsViewController.xib */,
 			);
 			name = InstructionViewControllers;
 			sourceTree = "<group>";
@@ -1547,6 +1568,7 @@
 				FFC7BDAA1620F4410016DAD3 /* Icon-72.png in Resources */,
 				FFC7BDAC1620F4470016DAD3 /* Icon-72@2x.png in Resources */,
 				FFF8B2041627F11E0058E08B /* SBASiteInfoTemplateView.xib in Resources */,
+				A78D5CC41628A602008EE94E /* UserCredentialsViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1600,6 +1622,8 @@
 				FF45146C1619B9090039F000 /* SBALayerManager.m in Sources */,
 				FF4514711619BC3F0039F000 /* SBARouteViewController.m in Sources */,
 				FFF8B1FB1627F05B0058E08B /* SBASiteInfoTemplate.m in Sources */,
+				A78D5CC31628A602008EE94E /* UserCredentialsViewController.m in Sources */,
+				A78D5CC91628A63E008EE94E /* KeychainItemWrapper.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
