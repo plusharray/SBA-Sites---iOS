@@ -7,42 +7,12 @@
 //
 
 #import "SBAAppDelegate.h"
-#import "SBAMapViewController.h"
-#import "SBASearchViewController.h"
-#import "SBARouteViewController.h"
-#import "InformationViewController.h"
+#import "SBARootViewController.h"
 
 @implementation SBAAppDelegate
 
 @synthesize window = _window;
-@synthesize tabBarController = _tabBarController;
 @synthesize navigationController = _navigationController;
-
-- (void)configureTabBarController
-{
-    SBASearchViewController *searchViewController = [[SBASearchViewController alloc] initWithNibName:@"SBASearchViewController" bundle:nil];
-	UINavigationController *searchNavController = [[UINavigationController alloc] initWithRootViewController:searchViewController];
-	
-	SBARouteViewController *routeViewController = [[SBARouteViewController alloc] initWithNibName:@"SBARouteViewController" bundle:nil];
-    // Override point for customization after application launch.
-	UINavigationController *routeNavController = [[UINavigationController alloc] initWithRootViewController:routeViewController];
-	
-	SBASearchViewController *measureViewController = [[SBASearchViewController alloc] initWithNibName:@"SBASearchViewController" bundle:nil];
-	UINavigationController *measureNavController = [[UINavigationController alloc] initWithRootViewController:measureViewController];
-	
-	InformationViewController *infoViewController = [[InformationViewController alloc] initWithNibName:@"InformationViewController" bundle:nil];
-	UINavigationController *infoNavController = [[UINavigationController alloc] initWithRootViewController:infoViewController];
-	
-	searchNavController.title = @"Search";
-	routeNavController.title = @"Route";
-	measureNavController.title = @"Measure";
-	infoNavController.title = @"Info";
-	
-	self.tabBarController = [[MHTabBarController alloc] init];
-	
-	self.tabBarController.delegate = self;
-	self.tabBarController.viewControllers = @[searchNavController, routeNavController, measureNavController, infoNavController];
-}
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
@@ -57,10 +27,16 @@
     //        [self customizeiPadTheme];
     //    }
 	
-    [self configureTabBarController];
-	
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
-    self.window.rootViewController = self.tabBarController;
+    SBARootViewController *rootViewController;
+    // Override point for customization after application launch.
+    if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone) {
+        rootViewController = [[SBARootViewController alloc] initWithNibName:@"SBARootViewController_iPhone" bundle:nil];
+    } else {
+        rootViewController = [[SBARootViewController alloc] initWithNibName:@"SBARootViewController_iPad" bundle:nil];
+    }
+    self.navigationController = [[UINavigationController alloc] initWithRootViewController:rootViewController];
+    self.window.rootViewController = self.navigationController;
     [self.window makeKeyAndVisible];
 	
     return YES;
@@ -155,23 +131,6 @@
      Save data if appropriate.
      See also applicationDidEnterBackground:.
      */
-}
-
-#pragma mark - MHTabBarControllerDelegate
-
-- (BOOL)mh_tabBarController:(MHTabBarController *)tabBarController shouldSelectViewController:(UIViewController *)viewController atIndex:(NSUInteger)index
-{
-	NSLog(@"mh_tabBarController %@ shouldSelectViewController %@ at index %u", tabBarController, viewController, index);
-	
-	// Uncomment this to prevent "Tab 3" from being selected.
-	//return (index != 2);
-	
-	return YES;
-}
-
-- (void)mh_tabBarController:(MHTabBarController *)tabBarController didSelectViewController:(UIViewController *)viewController atIndex:(NSUInteger)index
-{
-	NSLog(@"mh_tabBarController %@ didSelectViewController %@ at index %u", tabBarController, viewController, index);
 }
 
 @end
