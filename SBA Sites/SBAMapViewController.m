@@ -8,7 +8,7 @@
 
 #import "SBAMapViewController.h"
 #import "SBALayer.h"
-#import "DetailViewController.h"
+#import "SBASiteDetailViewController.h"
 #import "SBASiteInfoTemplate.h"
 #import "MKNetworkOperation.h"
 #import "MKNetworkEngine.h"
@@ -112,7 +112,7 @@
     if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
         [self.popoverController dismissPopoverAnimated:YES];
         if (!self.popoverController.popoverVisible) {
-            DetailViewController *viewController = [[DetailViewController alloc] initWithNibName:@"DetailViewController-iPad" bundle:nil];
+            SBASiteDetailViewController *viewController = [[SBASiteDetailViewController alloc] initWithNibName:@"DetailViewController-iPad" bundle:nil];
             viewController.site = result.feature;
             viewController.contentSizeForViewInPopover = CGSizeMake(320.0, 416.0);
             self.popoverController = [[UIPopoverController alloc] initWithContentViewController:viewController];
@@ -272,7 +272,7 @@
 //show the attributes if accessory button is clicked
 - (void)mapView:(AGSMapView *)mapView didClickCalloutAccessoryButtonForGraphic:(AGSGraphic *)graphic
 {
-    DetailViewController *viewController = [[DetailViewController alloc] initWithNibName:@"DetailViewController" bundle:nil];
+    SBASiteDetailViewController *viewController = [[SBASiteDetailViewController alloc] initWithNibName:@"DetailViewController" bundle:nil];
     viewController.site = graphic;
     
 //    [self.navigationController pushViewController:viewController animated:YES];
@@ -302,7 +302,7 @@
         
         if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
             if (!self.popoverController.popoverVisible) {
-                DetailViewController *viewController = [[DetailViewController alloc] initWithNibName:@"DetailViewController-iPad" bundle:nil];
+                SBASiteDetailViewController *viewController = [[SBASiteDetailViewController alloc] initWithNibName:@"DetailViewController-iPad" bundle:nil];
                 viewController.site = result.feature;
                 viewController.contentSizeForViewInPopover = CGSizeMake(320.0, 416.0);
                 self.popoverController = [[UIPopoverController alloc] initWithContentViewController:viewController];

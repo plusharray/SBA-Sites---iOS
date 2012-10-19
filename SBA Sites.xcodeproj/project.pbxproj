@@ -11,6 +11,7 @@
 		A78D5CC31628A602008EE94E /* UserCredentialsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A78D5CC11628A602008EE94E /* UserCredentialsViewController.m */; };
 		A78D5CC41628A602008EE94E /* UserCredentialsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A78D5CC21628A602008EE94E /* UserCredentialsViewController.xib */; };
 		A78D5CC91628A63E008EE94E /* KeychainItemWrapper.m in Sources */ = {isa = PBXBuildFile; fileRef = A78D5CC81628A63E008EE94E /* KeychainItemWrapper.m */; };
+		FF18F8DC162F6C5900282B38 /* SwipeView.m in Sources */ = {isa = PBXBuildFile; fileRef = FF18F8DB162F6C5900282B38 /* SwipeView.m */; };
 		FF21FD4F16107CBB0096AADD /* MHTabBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = FF21FD4E16107CBB0096AADD /* MHTabBarController.m */; };
 		FF21FD531610829E0096AADD /* MHTabBarActiveTab.png in Resources */ = {isa = PBXBuildFile; fileRef = FF21FD501610829E0096AADD /* MHTabBarActiveTab.png */; };
 		FF21FD541610829E0096AADD /* MHTabBarInactiveTab.png in Resources */ = {isa = PBXBuildFile; fileRef = FF21FD511610829E0096AADD /* MHTabBarInactiveTab.png */; };
@@ -288,8 +289,8 @@
 		FF4E581215F5845E008FC27B /* user_comment_frame@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = FF4E57F915F5845E008FC27B /* user_comment_frame@2x.png */; };
 		FF4E581315F5845E008FC27B /* user_frame.png in Resources */ = {isa = PBXBuildFile; fileRef = FF4E57FA15F5845E008FC27B /* user_frame.png */; };
 		FF4E581415F5845E008FC27B /* user_frame@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = FF4E57FB15F5845E008FC27B /* user_frame@2x.png */; };
-		FF52317F14743FE800EB02FA /* DetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = FF52317E14743FE800EB02FA /* DetailViewController.xib */; };
-		FF52318314743FFB00EB02FA /* DetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FF52318214743FFB00EB02FA /* DetailViewController.m */; };
+		FF52317F14743FE800EB02FA /* SBASiteDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = FF52317E14743FE800EB02FA /* SBASiteDetailViewController.xib */; };
+		FF52318314743FFB00EB02FA /* SBASiteDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FF52318214743FFB00EB02FA /* SBASiteDetailViewController.m */; };
 		FF5231861474406C00EB02FA /* SiteImageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FF5231851474406C00EB02FA /* SiteImageViewController.m */; };
 		FF5231881474407800EB02FA /* SiteImageViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = FF5231871474407800EB02FA /* SiteImageViewController.xib */; };
 		FF52318A14744BED00EB02FA /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FF52318914744BED00EB02FA /* MessageUI.framework */; };
@@ -323,7 +324,7 @@
 		FFF085461476A8A9001B1C1E /* Grey.png in Resources */ = {isa = PBXBuildFile; fileRef = FFF085451476A8A9001B1C1E /* Grey.png */; };
 		FFF8B1FB1627F05B0058E08B /* SBASiteInfoTemplate.m in Sources */ = {isa = PBXBuildFile; fileRef = FFF8B1FA1627F05B0058E08B /* SBASiteInfoTemplate.m */; };
 		FFF8B2041627F11E0058E08B /* SBASiteInfoTemplateView.xib in Resources */ = {isa = PBXBuildFile; fileRef = FFF8B2031627F11E0058E08B /* SBASiteInfoTemplateView.xib */; };
-		FFFC4A0014895AC90009EEDE /* DetailViewController-iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = FFFC49FF14895AC90009EEDE /* DetailViewController-iPad.xib */; };
+		FFFC4A0014895AC90009EEDE /* SBASiteDetailViewController-iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = FFFC49FF14895AC90009EEDE /* SBASiteDetailViewController-iPad.xib */; };
 		FFFC4A0314895B560009EEDE /* SiteImageViewController-iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = FFFC4A0214895B560009EEDE /* SiteImageViewController-iPad.xib */; };
 		FFFC4A0614895FC40009EEDE /* libTestFlight.a in Frameworks */ = {isa = PBXBuildFile; fileRef = FFFC4A0414895FC40009EEDE /* libTestFlight.a */; };
 /* End PBXBuildFile section */
@@ -336,6 +337,8 @@
 		A78D5CC21628A602008EE94E /* UserCredentialsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UserCredentialsViewController.xib; sourceTree = "<group>"; };
 		A78D5CC71628A63E008EE94E /* KeychainItemWrapper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KeychainItemWrapper.h; sourceTree = "<group>"; };
 		A78D5CC81628A63E008EE94E /* KeychainItemWrapper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KeychainItemWrapper.m; sourceTree = "<group>"; };
+		FF18F8DA162F6C5900282B38 /* SwipeView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SwipeView.h; sourceTree = "<group>"; };
+		FF18F8DB162F6C5900282B38 /* SwipeView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SwipeView.m; sourceTree = "<group>"; };
 		FF21FD4D16107CBB0096AADD /* MHTabBarController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MHTabBarController.h; sourceTree = "<group>"; };
 		FF21FD4E16107CBB0096AADD /* MHTabBarController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MHTabBarController.m; sourceTree = "<group>"; };
 		FF21FD501610829E0096AADD /* MHTabBarActiveTab.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = MHTabBarActiveTab.png; sourceTree = "<group>"; };
@@ -630,9 +633,9 @@
 		FF4E57F915F5845E008FC27B /* user_comment_frame@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "user_comment_frame@2x.png"; sourceTree = "<group>"; };
 		FF4E57FA15F5845E008FC27B /* user_frame.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = user_frame.png; sourceTree = "<group>"; };
 		FF4E57FB15F5845E008FC27B /* user_frame@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "user_frame@2x.png"; sourceTree = "<group>"; };
-		FF52317E14743FE800EB02FA /* DetailViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DetailViewController.xib; sourceTree = "<group>"; };
-		FF52318114743FFB00EB02FA /* DetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DetailViewController.h; sourceTree = "<group>"; };
-		FF52318214743FFB00EB02FA /* DetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DetailViewController.m; sourceTree = "<group>"; };
+		FF52317E14743FE800EB02FA /* SBASiteDetailViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SBASiteDetailViewController.xib; sourceTree = "<group>"; };
+		FF52318114743FFB00EB02FA /* SBASiteDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBASiteDetailViewController.h; sourceTree = "<group>"; };
+		FF52318214743FFB00EB02FA /* SBASiteDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBASiteDetailViewController.m; sourceTree = "<group>"; };
 		FF5231841474406C00EB02FA /* SiteImageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SiteImageViewController.h; sourceTree = "<group>"; };
 		FF5231851474406C00EB02FA /* SiteImageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SiteImageViewController.m; sourceTree = "<group>"; };
 		FF5231871474407800EB02FA /* SiteImageViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SiteImageViewController.xib; sourceTree = "<group>"; };
@@ -676,7 +679,7 @@
 		FFF8B1F91627F05B0058E08B /* SBASiteInfoTemplate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBASiteInfoTemplate.h; sourceTree = "<group>"; };
 		FFF8B1FA1627F05B0058E08B /* SBASiteInfoTemplate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBASiteInfoTemplate.m; sourceTree = "<group>"; };
 		FFF8B2031627F11E0058E08B /* SBASiteInfoTemplateView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SBASiteInfoTemplateView.xib; sourceTree = "<group>"; };
-		FFFC49FF14895AC90009EEDE /* DetailViewController-iPad.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = "DetailViewController-iPad.xib"; sourceTree = "<group>"; };
+		FFFC49FF14895AC90009EEDE /* SBASiteDetailViewController-iPad.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = "SBASiteDetailViewController-iPad.xib"; sourceTree = "<group>"; };
 		FFFC4A0214895B560009EEDE /* SiteImageViewController-iPad.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = "SiteImageViewController-iPad.xib"; sourceTree = "<group>"; };
 		FFFC4A0414895FC40009EEDE /* libTestFlight.a */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = archive.ar; path = libTestFlight.a; sourceTree = "<group>"; };
 		FFFC4A0514895FC40009EEDE /* TestFlight.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TestFlight.h; path = ../TestFlight.h; sourceTree = "<group>"; };
@@ -718,6 +721,30 @@
 				A78D5CC81628A63E008EE94E /* KeychainItemWrapper.m */,
 			);
 			name = KeychainItemWrapper;
+			sourceTree = "<group>";
+		};
+		FF18F8D2162F6A7300282B38 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				FF18F8D4162F6A7E00282B38 /* Table Cells */,
+			);
+			name = Views;
+			sourceTree = "<group>";
+		};
+		FF18F8D4162F6A7E00282B38 /* Table Cells */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = "Table Cells";
+			sourceTree = "<group>";
+		};
+		FF18F8D9162F6C5900282B38 /* SwipeView */ = {
+			isa = PBXGroup;
+			children = (
+				FF18F8DA162F6C5900282B38 /* SwipeView.h */,
+				FF18F8DB162F6C5900282B38 /* SwipeView.m */,
+			);
+			path = SwipeView;
 			sourceTree = "<group>";
 		};
 		FF21FD4C16107C930096AADD /* MHCustomTabBar */ = {
@@ -787,7 +814,9 @@
 		FF41371B14583ED200F36E7C /* SBA Sites */ = {
 			isa = PBXGroup;
 			children = (
+				FF18F8D2162F6A7300282B38 /* Views */,
 				A78D5CC61628A622008EE94E /* KeychainItemWrapper */,
+				FF18F8D9162F6C5900282B38 /* SwipeView */,
 				FF21FD4C16107C930096AADD /* MHCustomTabBar */,
 				FF64CEA414851FEB003CC124 /* BSForwardGeocoder */,
 				FF4A11BA147540B3003AC6E0 /* Shadowed TableView */,
@@ -828,10 +857,10 @@
 				FFF040DD1474050A00A701A9 /* SBASiteTableViewController.h */,
 				FFF040DE1474050A00A701A9 /* SBASiteTableViewController.m */,
 				FFF040DF1474050A00A701A9 /* SBASiteTableViewController.xib */,
-				FF52318114743FFB00EB02FA /* DetailViewController.h */,
-				FF52318214743FFB00EB02FA /* DetailViewController.m */,
-				FF52317E14743FE800EB02FA /* DetailViewController.xib */,
-				FFFC49FF14895AC90009EEDE /* DetailViewController-iPad.xib */,
+				FF52318114743FFB00EB02FA /* SBASiteDetailViewController.h */,
+				FF52318214743FFB00EB02FA /* SBASiteDetailViewController.m */,
+				FF52317E14743FE800EB02FA /* SBASiteDetailViewController.xib */,
+				FFFC49FF14895AC90009EEDE /* SBASiteDetailViewController-iPad.xib */,
 				FF5231841474406C00EB02FA /* SiteImageViewController.h */,
 				FF5231851474406C00EB02FA /* SiteImageViewController.m */,
 				FF5231871474407800EB02FA /* SiteImageViewController.xib */,
@@ -1343,7 +1372,7 @@
 				FF4137B214587EFC00F36E7C /* 74-location.png in Resources */,
 				FF4137B314587EFC00F36E7C /* 74-location@2x.png in Resources */,
 				FFF040E11474050A00A701A9 /* SBASiteTableViewController.xib in Resources */,
-				FF52317F14743FE800EB02FA /* DetailViewController.xib in Resources */,
+				FF52317F14743FE800EB02FA /* SBASiteDetailViewController.xib in Resources */,
 				FF5231881474407800EB02FA /* SiteImageViewController.xib in Resources */,
 				FF4A11C114754319003AC6E0 /* InformationDetailViewController-iPad.xib in Resources */,
 				FF4A11C214754319003AC6E0 /* InformationViewController-iPad.xib in Resources */,
@@ -1361,7 +1390,7 @@
 				FFF085461476A8A9001B1C1E /* Grey.png in Resources */,
 				FF98B8901484141600D62F5A /* SBASearchViewController.xib in Resources */,
 				FF41277E148544EF00A9FD80 /* BluePushpin.png in Resources */,
-				FFFC4A0014895AC90009EEDE /* DetailViewController-iPad.xib in Resources */,
+				FFFC4A0014895AC90009EEDE /* SBASiteDetailViewController-iPad.xib in Resources */,
 				FFFC4A0314895B560009EEDE /* SiteImageViewController-iPad.xib in Resources */,
 				FF4D5C7B14F27A8E00DBAB5E /* button-highlight.png in Resources */,
 				FF4D5C7C14F27A8E00DBAB5E /* button.png in Resources */,
@@ -1601,7 +1630,7 @@
 				FF41372F14583F1D00F36E7C /* SBARootViewController.m in Sources */,
 				FFF040E01474050A00A701A9 /* SBASiteTableViewController.m in Sources */,
 				FFF040E71474074100A701A9 /* SBAConstants.m in Sources */,
-				FF52318314743FFB00EB02FA /* DetailViewController.m in Sources */,
+				FF52318314743FFB00EB02FA /* SBASiteDetailViewController.m in Sources */,
 				FF5231861474406C00EB02FA /* SiteImageViewController.m in Sources */,
 				FF4A11AC1475404C003AC6E0 /* InformationViewController.m in Sources */,
 				FF4A11B01475407D003AC6E0 /* InformationDetailViewController.m in Sources */,
@@ -1624,6 +1653,7 @@
 				FFF8B1FB1627F05B0058E08B /* SBASiteInfoTemplate.m in Sources */,
 				A78D5CC31628A602008EE94E /* UserCredentialsViewController.m in Sources */,
 				A78D5CC91628A63E008EE94E /* KeychainItemWrapper.m in Sources */,
+				FF18F8DC162F6C5900282B38 /* SwipeView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
