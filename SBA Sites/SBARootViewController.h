@@ -10,10 +10,14 @@
 #import <AddressBookUI/AddressBookUI.h>
 #import <MapKit/MapKit.h>
 #import "BSForwardGeocoder.h"
+#import "SBASiteDetailViewController.h"
 
-@interface SBARootViewController : UIViewController <UITableViewDelegate, UITableViewDataSource, AGSMapViewLayerDelegate, AGSMapViewCalloutDelegate, AGSMapViewTouchDelegate, AGSIdentifyTaskDelegate, UISearchDisplayDelegate, UISearchBarDelegate, ABPeoplePickerNavigationControllerDelegate, ABPersonViewControllerDelegate, BSForwardGeocoderDelegate, AGSFindTaskDelegate, UIPopoverControllerDelegate>
+@class PALocationController;
+
+@interface SBARootViewController : UIViewController <UITableViewDelegate, UITableViewDataSource, AGSMapViewLayerDelegate, AGSMapViewCalloutDelegate, AGSMapViewTouchDelegate, AGSIdentifyTaskDelegate, UISearchDisplayDelegate, UISearchBarDelegate, ABPeoplePickerNavigationControllerDelegate, ABPersonViewControllerDelegate, BSForwardGeocoderDelegate, AGSFindTaskDelegate, UIPopoverControllerDelegate, AGSRouteTaskDelegate, SBARouteRequestDelegate>
 
 @property (nonatomic, strong) IBOutlet AGSMapView *mapView;
+@property (nonatomic, strong) PALocationController *locationController;
 @property (nonatomic, strong) IBOutlet UIBarButtonItem *showLayerListPopoverButton;
 @property (nonatomic, strong) IBOutlet UIBarButtonItem *showSearchBarButton;
 @property (nonatomic, strong) IBOutlet UIBarButtonItem *showSiteListPopoverButton;
@@ -21,8 +25,11 @@
 @property (nonatomic, strong) IBOutlet UIBarButtonItem *showInfoButton;
 @property (strong, nonatomic) IBOutlet UIBarButtonItem *mapTypeSegmentedControl;
 @property (nonatomic, strong) IBOutlet UIToolbar *toolbar;
+@property (strong, nonatomic) IBOutlet UIToolbar *routeToolbar;
+@property (strong, nonatomic) IBOutlet UIBarButtonItem *leftArrowButton;
+@property (strong, nonatomic) IBOutlet UIBarButtonItem *rightArrowButton;
 @property (nonatomic, strong) NSMutableArray *buttons;
-@property (nonatomic, strong) UIPopoverController *popoverController;
+@property (nonatomic, strong) UIPopoverController *masterPopoverController;
 @property (nonatomic, strong) AGSTiledMapServiceLayer *tiledLayer;
 @property (nonatomic, strong) AGSDynamicMapServiceLayer *dynamicLayer;
 @property (nonatomic, strong) UIView *dynamicLayerView;
@@ -45,6 +52,16 @@
 @property (nonatomic, strong) AGSCalloutTemplate *calloutTemplate;
 @property (nonatomic) NSInteger selectedMapType;
 
+@property (nonatomic, strong) AGSRouteTask *routeTask;
+@property (nonatomic, strong) AGSRouteTaskParameters *routeTaskParams;
+@property (nonatomic, strong) AGSRouteResult *routeResult;
+@property (nonatomic, strong) NSArray *routeStops;
+@property (nonatomic, strong) AGSStopGraphic *startingGraphic;
+@property (nonatomic, strong) AGSStopGraphic *destinationGraphic;
+@property (nonatomic, strong) AGSDirectionGraphic *currentDirectionGraphic;
+@property (nonatomic, strong) IBOutlet UIView *directionsBannerView;
+@property (nonatomic, strong) IBOutlet UILabel *directionsLabel;
+
 - (IBAction)mapType:(UISegmentedControl *)segmentPick;
 - (IBAction)toggleLayer:(id)sender;
 - (IBAction)userLocationButtonTapped:(id)sender;
@@ -53,5 +70,13 @@
 - (IBAction)showSearch:(id)sender;
 - (IBAction)showInfo:(id)sender;
 - (void)siteSelected:(NSNotification *)notification;
+- (IBAction)resetRoute:(id)sender;
+- (IBAction)previousTurn:(id)sender;
+- (IBAction)nextTurn:(id)sender;
+
+- (AGSCompositeSymbol*)stopSymbolWithNumber:(NSInteger)stopNumber;
+- (AGSCompositeSymbol*)routeSymbol;
+- (AGSCompositeSymbol*)currentDirectionSymbol;
+- (void)updateDirectionsLabel:(NSString*)newLabel;
 
 @end

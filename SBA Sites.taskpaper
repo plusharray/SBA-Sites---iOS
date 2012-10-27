@@ -1,0 +1,18 @@
+SBA Sites:
+	Routing:
+		- Reset route
+		- Route instruction label
+		- Route table view
+		- Forward and Backward buttons
+	Login:
+		- Create button for Login
+		- Add background to login page
+		- Fix 3 alert view confirmations
+		- Handle auth failure
+		- Authenticate when app goes to foreground
+	Measuring:
+		- Add drop pins to LayersViewController
+		- Add reset button
+		- Add label to show distance
+		
+		

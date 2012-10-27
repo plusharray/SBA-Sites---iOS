@@ -1,7 +1,7 @@
-ALWAYS_SEARCH_USER_PATHS = YES
-HEADER_SEARCH_PATHS = ${PODS_HEADERS_SEARCH_PATHS}
-PODS_HEADERS_SEARCH_PATHS = ${PODS_PUBLIC_HEADERS_SEARCH_PATHS}
+PODS_BUILD_HEADERS_SEARCH_PATHS = "${PODS_ROOT}/BuildHeaders" "${PODS_ROOT}/BuildHeaders/MKNetworkKit" "${PODS_ROOT}/BuildHeaders/MKNetworkKit/Categories" "${PODS_ROOT}/BuildHeaders/PrettyKit" "${PODS_ROOT}/BuildHeaders/Reachability" "${PODS_ROOT}/BuildHeaders/UIKitCategoryAdditions" "${PODS_ROOT}/BuildHeaders/UITableView-NXEmptyView"
 OTHER_LDFLAGS = -ObjC -framework CFNetwork -framework CoreGraphics -framework QuartzCore -framework Security -framework SystemConfiguration -framework UIKit
+HEADER_SEARCH_PATHS = ${PODS_HEADERS_SEARCH_PATHS}
+PODS_PUBLIC_HEADERS_SEARCH_PATHS = "${PODS_ROOT}/Headers" "${PODS_ROOT}/Headers/MKNetworkKit" "${PODS_ROOT}/Headers/MKNetworkKit/Categories" "${PODS_ROOT}/Headers/PrettyKit" "${PODS_ROOT}/Headers/Reachability" "${PODS_ROOT}/Headers/UIKitCategoryAdditions" "${PODS_ROOT}/Headers/UITableView-NXEmptyView"
+PODS_HEADERS_SEARCH_PATHS = ${PODS_PUBLIC_HEADERS_SEARCH_PATHS}
 PODS_ROOT = ${SRCROOT}/Pods
-PODS_BUILD_HEADERS_SEARCH_PATHS = "${PODS_ROOT}/BuildHeaders" "${PODS_ROOT}/BuildHeaders/MKNetworkKit" "${PODS_ROOT}/BuildHeaders/MKNetworkKit/Categories" "${PODS_ROOT}/BuildHeaders/PrettyKit" "${PODS_ROOT}/BuildHeaders/Reachability"
-PODS_PUBLIC_HEADERS_SEARCH_PATHS = "${PODS_ROOT}/Headers" "${PODS_ROOT}/Headers/MKNetworkKit" "${PODS_ROOT}/Headers/MKNetworkKit/Categories" "${PODS_ROOT}/Headers/PrettyKit" "${PODS_ROOT}/Headers/Reachability"
+ALWAYS_SEARCH_USER_PATHS = YES

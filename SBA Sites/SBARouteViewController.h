@@ -17,9 +17,9 @@
 @property (strong, nonatomic) IBOutlet UITextField *startingAddressTextField;
 @property (strong, nonatomic) IBOutlet UITextField *destinationAddressTextField;
 @property (strong, nonatomic) IBOutlet AGSMapView *mapView;
-@property (nonatomic, retain) AGSRouteTask *routeTask;
-@property (nonatomic, retain) AGSRouteTaskParameters *routeTaskParams;
-@property (nonatomic, retain) AGSRouteResult *routeResult;
+@property (nonatomic, strong) AGSRouteTask *routeTask;
+@property (nonatomic, strong) AGSRouteTaskParameters *routeTaskParams;
+@property (nonatomic, strong) AGSRouteResult *routeResult;
 @property (nonatomic, strong) NSArray *routeStops;
 @property (nonatomic, strong) AGSStopGraphic *startingGraphic;
 @property (nonatomic, strong) AGSStopGraphic *destinationGraphic;

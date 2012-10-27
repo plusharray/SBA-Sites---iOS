@@ -16,45 +16,22 @@
 #import <AddressBook/AddressBook.h>
 #import "GradientView.h"
 #import "ClearLabelsCellView.h"
+#import "PALocationController.h"
 
-@interface SBARootViewController (Private)
+#define kRouteTaskUrl @"http://sampleserver3.arcgisonline.com/ArcGIS/rest/services/Network/USA/NAServer/Route"
+
+@interface SBARootViewController ()
+{
+	int	_directionIndex;
+}
 - (void)searchForString:(NSString *)searchString;
 - (void)showPeoplePickerController;
+- (void)showRouteToolbar;
+- (void)hideRouteToolbar;
+
 @end
 
 @implementation SBARootViewController
-
-@synthesize mapView = _mapView;
-@synthesize tiledLayer = _tiledLayer;
-@synthesize dynamicLayer = _dynamicLayer;
-@synthesize dynamicLayerView = _dynamicLayerView;
-@synthesize graphicsLayer = _graphicsLayer;
-@synthesize identifyTask = _identifyTask;
-@synthesize identifyParams = _identifyParams;
-@synthesize mappoint = _mappoint;
-@synthesize buttons = _buttons;
-@synthesize showLayerListPopoverButton = _showLayerListPopoverButton;
-@synthesize showSearchBarButton = _showSearchBarButton;
-@synthesize showSiteListPopoverButton = _showSiteListPopoverButton;
-@synthesize userLocationButton = _userLocationButton;
-@synthesize showInfoButton = _showInfoButton;
-@synthesize mapTypeSegmentedControl = _mapTypeSegmentedControl;
-@synthesize popoverController = __popoverController;
-@synthesize toolbar = _toolbar;
-@synthesize layers = _layers;
-@synthesize visibleLayers = _visibleLayers;
-@synthesize addressBookSearch = _addressBookSearch;
-@synthesize searchActiveDB = _searchActiveDB;
-@synthesize searchActiveForwardGeocode = _searchActiveForwardGeocode;
-@synthesize searchActiveReverseGeocode = _searchActiveReverseGeocode;
-@synthesize searchPerformed = _searchPerformed;
-@synthesize addressResults = _addressResults;
-@synthesize siteResults = _siteResults;
-@synthesize savedSearchTerm = _savedSearchTerm;
-@synthesize forwardGeocoder = _forwardGeocoder;
-@synthesize findTask = _findTask;
-@synthesize calloutTemplate = _calloutTemplate;
-@synthesize selectedMapType = _selectedMapType;
 
 #pragma mark - Accessors
 
@@ -88,6 +65,7 @@
 
 - (IBAction)userLocationButtonTapped:(id)sender
 {
+	[self.locationController.locationManager startUpdatingLocation];
     double span = 1.0;
 	double xmin, ymin, xmax, ymax;
 	xmin = self.mapView.gps.currentLocation.coordinate.longitude - span;
@@ -107,12 +85,12 @@
     if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone) {
         [self presentViewController:viewController animated:YES completion:^(void){}];
     } else {
-        if (!self.popoverController.popoverVisible) {
-			self.popoverController = [[UIPopoverController alloc] initWithContentViewController:viewController];
-			self.popoverController.delegate = self;
-			[self.popoverController presentPopoverFromBarButtonItem:self.showSiteListPopoverButton
-                                           permittedArrowDirections:UIPopoverArrowDirectionAny
-                                                           animated:YES];
+        if (!self.masterPopoverController.popoverVisible) {
+			self.masterPopoverController = [[UIPopoverController alloc] initWithContentViewController:viewController];
+			self.masterPopoverController.delegate = self;
+			[self.masterPopoverController presentPopoverFromBarButtonItem:self.showSiteListPopoverButton
+												 permittedArrowDirections:UIPopoverArrowDirectionAny
+																 animated:YES];
 		}
     }
 }
@@ -135,15 +113,15 @@
     if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone) {
         
     } else {
-        if (!self.popoverController.popoverVisible) {
+        if (!self.masterPopoverController.popoverVisible) {
             SBASearchViewController *viewController = [[SBASearchViewController alloc] initWithNibName:@"SBASearchViewController" bundle:nil];
             //viewController.mapView = self.mapView;
             //viewController.visibleLayers = self.visibleLayers;
-			self.popoverController = [[UIPopoverController alloc] initWithContentViewController:viewController];
-			self.popoverController.delegate = self;
-			[self.popoverController presentPopoverFromBarButtonItem:self.showSearchBarButton
-                                           permittedArrowDirections:UIPopoverArrowDirectionAny
-                                                           animated:YES];
+			self.masterPopoverController = [[UIPopoverController alloc] initWithContentViewController:viewController];
+			self.masterPopoverController.delegate = self;
+			[self.masterPopoverController presentPopoverFromBarButtonItem:self.showSearchBarButton
+												 permittedArrowDirections:UIPopoverArrowDirectionAny
+																 animated:YES];
 		}
     }
 }
@@ -154,14 +132,14 @@
     if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone) {
         [self.navigationController pushViewController:viewController animated:YES];
     } else {
-        if (!self.popoverController.popoverVisible) {
+        if (!self.masterPopoverController.popoverVisible) {
 			viewController.contentSizeForViewInPopover = CGSizeMake(320.0, 465.0);
 			UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:viewController];
-			self.popoverController = [[UIPopoverController alloc] initWithContentViewController:navController];
-			self.popoverController.delegate = self;
-			[self.popoverController presentPopoverFromBarButtonItem:self.showInfoButton
-                                           permittedArrowDirections:UIPopoverArrowDirectionAny
-                                                           animated:YES];
+			self.masterPopoverController = [[UIPopoverController alloc] initWithContentViewController:navController];
+			self.masterPopoverController.delegate = self;
+			[self.masterPopoverController presentPopoverFromBarButtonItem:self.showInfoButton
+												 permittedArrowDirections:UIPopoverArrowDirectionAny
+																 animated:YES];
 		}
     }
 }
@@ -177,15 +155,16 @@
     AGSIdentifyResult *result = (AGSIdentifyResult *)[notification object];;
     [self.mapView centerAtPoint:(AGSPoint *)[[result feature] geometry] animated:NO];
     if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
-        [self.popoverController dismissPopoverAnimated:YES];
-        if (!self.popoverController.popoverVisible) {
+        [self.masterPopoverController dismissPopoverAnimated:YES];
+        if (!self.masterPopoverController.popoverVisible) {
             SBASiteDetailViewController *viewController = [[SBASiteDetailViewController alloc] initWithNibName:@"DetailViewController-iPad" bundle:nil];
             viewController.site = result.feature;
+			viewController.delegate = self;
             viewController.contentSizeForViewInPopover = CGSizeMake(320.0, 416.0);
-            self.popoverController = [[UIPopoverController alloc] initWithContentViewController:viewController];
-            self.popoverController.delegate = self;
+            self.masterPopoverController = [[UIPopoverController alloc] initWithContentViewController:viewController];
+            self.masterPopoverController.delegate = self;
             CGPoint point = [self.mapView toScreenPoint:(AGSPoint *)[[result feature] geometry]];
-            [self.popoverController presentPopoverFromRect:CGRectMake(point.x, point.y, 1.0, 1.0) inView:self.mapView permittedArrowDirections:UIPopoverArrowDirectionAny animated:YES];
+            [self.masterPopoverController presentPopoverFromRect:CGRectMake(point.x, point.y, 1.0, 1.0) inView:self.mapView permittedArrowDirections:UIPopoverArrowDirectionAny animated:YES];
         }
     } else {
         //get the site code & name
@@ -199,6 +178,96 @@
         //call dataChanged on the graphics layer to redraw the graphics
         [self.graphicsLayer dataChanged];
     }
+}
+
+- (IBAction)resetRoute:(id)sender
+{
+	// reset index
+	_directionIndex = 0;
+	
+	[self hideRouteToolbar];
+	
+	// remove the stop graphics from the graphics layer
+	// careful not to attempt to mutate the graphics array while
+	// it is being enumerated
+	NSMutableArray *graphics = [self.graphicsLayer.graphics mutableCopy];
+	for (AGSGraphic *g in graphics) {
+		if ([g isKindOfClass:[AGSStopGraphic class]]) {
+			[self.graphicsLayer removeGraphic:g];
+		}
+	}
+	
+	// tell the graphics layer to redraw
+	[self.graphicsLayer dataChanged];
+}
+
+- (IBAction)previousTurn:(id)sender
+{
+	_directionIndex--;
+	
+    // remove current direction
+	if ([self.graphicsLayer.graphics containsObject:self.currentDirectionGraphic]) {
+		[self.graphicsLayer removeGraphic:self.currentDirectionGraphic];
+	}
+    
+	// get next direction
+	AGSDirectionSet *directions = self.routeResult.directions;
+	self.currentDirectionGraphic = [directions.graphics objectAtIndex:_directionIndex];
+	self.currentDirectionGraphic.symbol = [self currentDirectionSymbol];
+	[self.graphicsLayer addGraphic:self.currentDirectionGraphic];
+	[self.graphicsLayer dataChanged];
+	
+    // update banner text
+	[self updateDirectionsLabel:self.currentDirectionGraphic.text];
+	
+    // zoom to env factored by 1.3
+	AGSMutableEnvelope *env = [[self.currentDirectionGraphic.geometry.envelope mutableCopy] autorelease];
+	[env expandByFactor:1.3];
+	[self.mapView zoomToEnvelope:env animated:YES];
+	
+    [self setupNextPreviousButtons];
+}
+
+- (void)setupNextPreviousButtons
+{
+    // determine if we need to disable a next/prev button
+    if (_directionIndex >= self.routeResult.directions.graphics.count - 1) {
+		self.rightArrowButton.enabled = NO;
+	} else {
+		self.rightArrowButton.enabled = YES;
+	}
+	if (_directionIndex > 0) {
+		self.leftArrowButton.enabled = YES;
+	} else {
+		self.leftArrowButton.enabled = NO;
+	}
+}
+
+- (IBAction)nextTurn:(id)sender
+{
+	_directionIndex++;
+	
+    // remove current direction graphic, so we can display next one
+	if ([self.graphicsLayer.graphics containsObject:self.currentDirectionGraphic]) {
+		[self.graphicsLayer removeGraphic:self.currentDirectionGraphic];
+	}
+	
+    // get current direction and add it to the graphics layer
+	AGSDirectionSet *directions = self.routeResult.directions;
+	self.currentDirectionGraphic = [directions.graphics objectAtIndex:_directionIndex];
+	self.currentDirectionGraphic.symbol = [self currentDirectionSymbol];
+	[self.graphicsLayer addGraphic:self.currentDirectionGraphic];
+	[self.graphicsLayer dataChanged];
+	
+    // update banner
+	[self updateDirectionsLabel:self.currentDirectionGraphic.text];
+	
+    // zoom to envelope of the current direction (expanded by factor of 1.3)
+	AGSMutableEnvelope *env = [[self.currentDirectionGraphic.geometry.envelope mutableCopy] autorelease];
+	[env expandByFactor:1.3];
+	[self.mapView zoomToEnvelope:env animated:YES];
+	
+    [self setupNextPreviousButtons];
 }
 
 - (void)mapTypeChanged:(NSNotification *)notification
@@ -310,6 +379,9 @@
 {
     [super viewDidLoad];
     
+	// Start Location Controller
+	self.locationController = [PALocationController sharedController];
+	
     // Set the default mapType
     self.selectedMapType = 0;
     
@@ -344,6 +416,9 @@
 - (void)viewDidUnload
 {
     [self setMapTypeSegmentedControl:nil];
+	[self setRouteToolbar:nil];
+	[self setLeftArrowButton:nil];
+	[self setRightArrowButton:nil];
     [super viewDidUnload];
     // Release any retained subviews of the main view.
     // e.g. self.myOutlet = nil;
@@ -393,6 +468,7 @@
 {
     SBASiteDetailViewController *viewController = [[SBASiteDetailViewController alloc] initWithNibName:@"SBASiteDetailViewController" bundle:nil];
     viewController.site = graphic;
+	viewController.delegate = self;
     
     [self.navigationController pushViewController:viewController animated:YES];
     [self.navigationController setNavigationBarHidden:NO animated:YES];
@@ -421,14 +497,14 @@
         AGSIdentifyResult *result = (AGSIdentifyResult*)[results objectAtIndex:0];
         
         if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
-            if (!self.popoverController.popoverVisible) {
+            if (!self.masterPopoverController.popoverVisible) {
                 SBASiteDetailViewController *viewController = [[SBASiteDetailViewController alloc] initWithNibName:@"DetailViewController-iPad" bundle:nil];
                 viewController.site = result.feature;
                 viewController.contentSizeForViewInPopover = CGSizeMake(320.0, 416.0);
-                self.popoverController = [[UIPopoverController alloc] initWithContentViewController:viewController];
-                self.popoverController.delegate = self;
+                self.masterPopoverController = [[UIPopoverController alloc] initWithContentViewController:viewController];
+                self.masterPopoverController.delegate = self;
                 CGPoint point = [self.mapView toScreenPoint:self.mappoint];
-                [self.popoverController presentPopoverFromRect:CGRectMake(point.x, point.y, 1.0, 1.0) inView:self.mapView permittedArrowDirections:UIPopoverArrowDirectionAny animated:YES];
+                [self.masterPopoverController presentPopoverFromRect:CGRectMake(point.x, point.y, 1.0, 1.0) inView:self.mapView permittedArrowDirections:UIPopoverArrowDirectionAny animated:YES];
             }
         } else {
             //get the site code & name
@@ -946,6 +1022,320 @@
 - (void)findTask:(AGSFindTask *)findTask operation:(NSOperation*)op didFailWithError:(NSError *)error
 {
     self.searchActiveDB = NO;
+}
+
+#pragma mark - AGSRouteTaskDelegate
+
+//
+// we got the default parameters from the service
+//
+- (void)routeTask:(AGSRouteTask *)routeTask operation:(NSOperation *)op didRetrieveDefaultRouteTaskParameters:(AGSRouteTaskParameters *)routeParams {
+	self.routeTaskParams = routeParams;
+}
+
+//
+// an error was encountered while getting defaults
+//
+- (void)routeTask:(AGSRouteTask *)routeTask operation:(NSOperation *)op didFailToRetrieveDefaultRouteTaskParametersWithError:(NSError *)error {
+	
+	[self hideRouteToolbar];
+	
+	// Create an alert to let the user know the retrieval failed
+	// Click Retry to attempt to retrieve the defaults again
+	UIAlertView *av = [[UIAlertView alloc] initWithTitle:@"Error"
+												 message:@"Failed to retrieve default route parameters"
+												delegate:self
+									   cancelButtonTitle:@"Ok" otherButtonTitles:@"Retry",nil];
+	[av show];
+}
+
+
+//
+// route was solved
+//
+- (void)routeTask:(AGSRouteTask *)routeTask operation:(NSOperation *)op didSolveWithResult:(AGSRouteTaskResult *)routeTaskResult {
+	
+    // update our banner with status
+    [self updateDirectionsLabel:@"Routing completed"];
+	
+	// we know that we are only dealing with 1 route...
+	self.routeResult = [routeTaskResult.routeResults lastObject];
+	if (self.routeResult) {
+		[self showRouteToolbar];
+		
+		// symbolize the returned route graphic
+		self.routeResult.routeGraphic.symbol = [self routeSymbol];
+        
+        // add the route graphic to the graphic's layer
+		[self.graphicsLayer addGraphic:self.routeResult.routeGraphic];
+		
+		// enable the next button so the user can traverse directions
+		self.rightArrowButton.enabled = YES;
+		
+		// reset index
+		_directionIndex = 0;
+		
+		[self setupNextPreviousButtons];
+		
+        // remove the stop graphics from the graphics layer
+        // careful not to attempt to mutate the graphics array while
+        // it is being enumerated
+		NSMutableArray *graphics = [self.graphicsLayer.graphics mutableCopy];
+		for (AGSGraphic *g in graphics) {
+			if ([g isKindOfClass:[AGSStopGraphic class]]) {
+				[self.graphicsLayer removeGraphic:g];
+			}
+		}
+		
+		double xMin = self.mapView.fullEnvelope.xmax;
+		double xMax = self.mapView.fullEnvelope.xmin;
+		double yMin = self.mapView.fullEnvelope.ymax;
+		double yMax = self.mapView.fullEnvelope.ymin;
+		
+        // add the returned stops...it's possible these came back in a different order
+        // because we specified findBestSequence
+		for (AGSStopGraphic *sg in self.routeResult.stopGraphics) {
+            
+            // get the sequence from the attribetus
+			NSInteger sequence = [[sg.attributes valueForKey:@"Sequence"] integerValue];
+            
+            // create a composite symbol using the sequence number
+			sg.symbol = [self stopSymbolWithNumber:sequence];
+            
+            // add the graphic
+			[self.graphicsLayer addGraphic:sg];
+			
+			if (sg.geometry.envelope.xmin < xMin)
+				xMin = sg.geometry.envelope.xmin;
+			if (sg.geometry.envelope.xmax > xMax)
+				xMax = sg.geometry.envelope.xmax;
+			if (sg.geometry.envelope.ymin < yMin)
+				yMin = sg.geometry.envelope.ymin;
+			if (sg.geometry.envelope.ymax > yMax)
+				yMax = sg.geometry.envelope.ymax;
+		}
+        
+        // tell the graphics layer to redraw
+		[self.graphicsLayer dataChanged];
+		AGSMutableEnvelope *envelope = [[AGSMutableEnvelope alloc] initWithXmin:xMin ymin:yMin xmax:xMax ymax:yMax spatialReference:self.mapView.spatialReference];
+		[envelope expandByFactor:2.0];
+		[self.mapView zoomToEnvelope:envelope animated:YES];
+	}
+}
+
+//
+// solve failed
+//
+- (void)routeTask:(AGSRouteTask *)routeTask operation:(NSOperation *)op didFailSolveWithError:(NSError *)error {
+	
+	[self updateDirectionsLabel:@"Routing failed"];
+	
+	[self hideRouteToolbar];
+	
+	// the solve route failed...
+	// let the user know
+	UIAlertView *av = [[UIAlertView alloc] initWithTitle:@"Solve Route Failed"
+												 message:[NSString stringWithFormat:@"Error: %@", error]
+												delegate:nil
+									   cancelButtonTitle:@"Ok"
+									   otherButtonTitles:nil];
+	[av show];
+}
+
+#pragma mark - Routing
+
+//
+// represents the current direction
+//
+- (AGSCompositeSymbol*)currentDirectionSymbol {
+	AGSCompositeSymbol *cs = [AGSCompositeSymbol compositeSymbol];
+	
+	AGSSimpleLineSymbol *sls1 = [AGSSimpleLineSymbol simpleLineSymbol];
+	sls1.color = [UIColor whiteColor];
+	sls1.style = AGSSimpleLineSymbolStyleSolid;
+	sls1.width = 8;
+	[cs.symbols addObject:sls1];
+	
+	AGSSimpleLineSymbol *sls2 = [AGSSimpleLineSymbol simpleLineSymbol];
+	sls2.color = [UIColor redColor];
+	sls2.style = AGSSimpleLineSymbolStyleDash;
+	sls2.width = 4;
+	[cs.symbols addObject:sls2];
+	
+	return cs;
+}
+
+//
+// create a composite symbol with a number
+//
+- (AGSCompositeSymbol*)stopSymbolWithNumber:(NSInteger)stopNumber {
+	AGSCompositeSymbol *cs = [AGSCompositeSymbol compositeSymbol];
+	
+    // create outline
+	AGSSimpleLineSymbol *sls = [AGSSimpleLineSymbol simpleLineSymbol];
+	sls.color = [UIColor blackColor];
+	sls.width = 2;
+	sls.style = AGSSimpleLineSymbolStyleSolid;
+	
+    // create main circle
+	AGSSimpleMarkerSymbol *sms = [AGSSimpleMarkerSymbol simpleMarkerSymbol];
+	sms.color = [UIColor greenColor];
+	sms.outline = sls;
+	sms.size = 20;
+	sms.style = AGSSimpleMarkerSymbolStyleCircle;
+	[cs.symbols addObject:sms];
+	
+    // add number as a text symbol
+	AGSTextSymbol *ts = [[AGSTextSymbol alloc] initWithTextTemplate:[NSString stringWithFormat:@"%d", stopNumber]
+															  color:[UIColor blackColor]];
+	ts.vAlignment = AGSTextSymbolVAlignmentMiddle;
+	ts.hAlignment = AGSTextSymbolHAlignmentCenter;
+	ts.fontSize	= 16;
+	ts.fontWeight = AGSTextSymbolFontWeightBold;
+	[cs.symbols addObject:ts];
+	
+	return cs;
+}
+
+//
+// create our route symbol
+//
+- (AGSCompositeSymbol*)routeSymbol {
+	AGSCompositeSymbol *cs = [AGSCompositeSymbol compositeSymbol];
+	
+	AGSSimpleLineSymbol *sls1 = [AGSSimpleLineSymbol simpleLineSymbol];
+	sls1.color = [UIColor yellowColor];
+	sls1.style = AGSSimpleLineSymbolStyleSolid;
+	sls1.width = 8;
+	[cs.symbols addObject:sls1];
+	
+	AGSSimpleLineSymbol *sls2 = [AGSSimpleLineSymbol simpleLineSymbol];
+	sls2.color = [UIColor blueColor];
+	sls2.style = AGSSimpleLineSymbolStyleSolid;
+	sls2.width = 4;
+	[cs.symbols addObject:sls2];
+	
+	return cs;
+}
+
+
+- (void)updateDirectionsLabel:(NSString*)newLabel {
+	self.directionsLabel.text = newLabel;
+}
+
+- (void)showRouteToolbar
+{
+	if (![self.view.subviews containsObject:self.routeToolbar]) {
+		[self.routeToolbar setFrame:CGRectMake(0, 0, self.view.bounds.size.width, 44)];
+		[self.view addSubview:self.routeToolbar];
+	}
+	[self.searchDisplayController.searchBar setHidden:YES];
+}
+
+- (void)hideRouteToolbar
+{
+	[self.searchDisplayController.searchBar setHidden:NO];
+	[self.routeToolbar removeFromSuperview];
+	self.directionsBannerView.hidden = YES;
+}
+
+//
+// perform the route task's solve operation
+//
+- (void)requestRoute:(AGSGraphic *)site {
+	
+	self.directionsBannerView.hidden = NO;
+	
+    // update our banner
+	[self updateDirectionsLabel:@"Routing..."];
+	
+	// Create the starting graphic here
+	if (self.locationController.location) {
+		AGSPoint *point = [[AGSPoint alloc] initWithX:self.locationController.location.coordinate.longitude y:self.locationController.location.coordinate.latitude spatialReference:self.mapView.spatialReference];
+		AGSStopGraphic *graphic = [[AGSStopGraphic alloc] initWithGeometry:point symbol:nil attributes:nil infoTemplateDelegate:nil];
+		self.startingGraphic = graphic;
+		[self.graphicsLayer addGraphic:self.startingGraphic];
+		[self.graphicsLayer dataChanged];
+	} else {
+		self.startingGraphic = nil;
+		UIAlertView *alertView = [UIAlertView alertViewWithTitle:@"Location Error" message:@"Please make sure you have Location Services enabled for this app."];
+		[alertView show];
+		return;
+	}
+	
+	// Create the stopping graphic here
+	if (site) {
+		AGSPoint *point = [[AGSPoint alloc] initWithX:[[site.attributes valueForKey:@"Longitude"] floatValue] y:[[site.attributes valueForKey:@"Latitude"] floatValue] spatialReference:self.mapView.spatialReference];
+		AGSStopGraphic *graphic = [[AGSStopGraphic alloc] initWithGeometry:point symbol:nil attributes:nil infoTemplateDelegate:nil];
+		self.destinationGraphic = graphic;
+		[self.graphicsLayer addGraphic:self.destinationGraphic];
+		[self.graphicsLayer dataChanged];
+	} else {
+		self.destinationGraphic = nil;
+		UIAlertView *alertView = [UIAlertView alertViewWithTitle:@"Location Error" message:@"Please select a site to get directions to."];
+		[alertView show];
+		return;
+	}
+	
+	// Setup the route task
+	NSURL *routeTaskUrl = [NSURL URLWithString:kRouteTaskUrl];
+	self.routeTask = [AGSRouteTask routeTaskWithURL:routeTaskUrl];
+    
+    // assign delegate to this view controller
+	self.routeTask.delegate = self;
+	
+	// kick off asynchronous method to retrieve default parameters
+	// for the route task
+	[self.routeTask retrieveDefaultRouteTaskParameters];
+	
+	NSMutableArray *stops = [NSMutableArray array];
+	NSMutableArray *polygonBarriers = [NSMutableArray array];
+	
+	[stops addObject:self.startingGraphic];
+	[stops addObject:self.destinationGraphic];
+	
+	// set the stop and polygon barriers on the parameters object
+	if (stops.count > 0) {
+		[self.routeTaskParams setStopsWithFeatures:stops];
+	}
+	
+	if (polygonBarriers.count > 0) {
+		[self.routeTaskParams setPolygonBarriersWithFeatures:polygonBarriers];
+	}
+	
+	// this generalizes the route graphics that are returned
+	self.routeTaskParams.outputGeometryPrecision = 5.0;
+	self.routeTaskParams.outputGeometryPrecisionUnits = AGSUnitsMeters;
+    
+    // return the graphic representing the entire route, generalized by the previous
+    // 2 properties: outputGeometryPrecision and outputGeometryPrecisionUnits
+	self.routeTaskParams.returnRouteGraphics = YES;
+	
+	// this returns turn-by-turn directions
+	self.routeTaskParams.returnDirections = YES;
+	
+	// the next 3 lines will cause the task to find the
+	// best route regardless of the stop input order
+	self.routeTaskParams.findBestSequence = YES;
+	self.routeTaskParams.preserveFirstStop = YES;
+	self.routeTaskParams.preserveLastStop = YES;
+	
+	// since we used "findBestSequence" we need to
+	// get the newly reordered stops
+	self.routeTaskParams.returnStopGraphics = YES;
+	
+	// ensure the graphics are returned in our map's spatial reference
+	self.routeTaskParams.outSpatialReference = self.mapView.spatialReference;
+	
+	// let's ignore invalid locations
+	self.routeTaskParams.ignoreInvalidLocations = YES;
+	
+	// you can also set additional properties here that should
+	// be considered during analysis.
+	// See the conceptual help for Routing task.
+	
+	// execute the route task
+	[self.routeTask solveWithParameters:self.routeTaskParams];
 }
 
 

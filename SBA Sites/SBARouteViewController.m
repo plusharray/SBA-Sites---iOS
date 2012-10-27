@@ -10,7 +10,7 @@
 #import "SBAMapViewController.h"
 #import <CoreLocation/CoreLocation.h>
 
-#define kRouteTaskUrl			@"http://sampleserver3.arcgisonline.com/ArcGIS/rest/services/Network/USA/NAServer/Route"
+#define kRouteTaskUrl @"http://sampleserver3.arcgisonline.com/ArcGIS/rest/services/Network/USA/NAServer/Route"
 
 @interface SBARouteViewController ()
 
@@ -156,19 +156,7 @@
 {
 	if ([textField isEqual:self.startingAddressTextField]) {
 		
-		// Create the starting graphic here
-		CLGeocoder *geocoder = [[CLGeocoder alloc] init];
-		[geocoder geocodeAddressString:textField.text completionHandler:^(NSArray *placemarks, NSError *error) {
-			CLPlacemark *placemark = [placemarks lastObject];
-			if (placemark) {
-				AGSPoint *point = [[AGSPoint alloc] initWithX:placemark.location.coordinate.longitude y:placemark.location.coordinate.latitude spatialReference:self.mapView.spatialReference];
-				AGSStopGraphic *graphic = [[AGSStopGraphic alloc] initWithGeometry:point symbol:nil attributes:nil infoTemplateDelegate:nil];
-				self.startingGraphic = graphic;
-			} else {
-				self.startingGraphic = nil;
-			}
-			
-		}];
+		
 		[self.destinationAddressTextField becomeFirstResponder];
 	} else {
 		// Create the destination graphic here
@@ -181,7 +169,7 @@
 				self.destinationGraphic = graphic;
 				
 				if (self.startingGraphic) {
-					[self requestRoute];
+					[self requestRoute:self];
 				}
 				
 			} else {
@@ -374,7 +362,7 @@
 //
 // perform the route task's solve operation
 //
-- (IBAction)requestRoute {
+- (IBAction)requestRoute:(id)sender {
 	
     // update our banner
 	//[self updateDirectionsLabel:@"Routing..."];

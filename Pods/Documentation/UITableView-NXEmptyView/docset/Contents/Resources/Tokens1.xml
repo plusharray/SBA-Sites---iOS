@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Tokens version="1.0">
+	<File path="Categories/UITableView+NXEmptyView.html">
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/cat/UITableView(NXEmptyView)</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>UITableView+NXEmptyView.h</DeclaredIn>
+			
+			<NodeRef refid="1"/>
+		</Token>
+		
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/intfm/UITableView(NXEmptyView)/setNxEV_emptyView:</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>UITableView+NXEmptyView.h</DeclaredIn>			
+			
+			<Declaration>@property (nonatomic, strong) IBOutlet UIView *nxEV_emptyView</Declaration>
+			
+			
+			<Anchor>//api/name/nxEV_emptyView</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/intfp/UITableView(NXEmptyView)/nxEV_emptyView</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>UITableView+NXEmptyView.h</DeclaredIn>			
+			
+			<Declaration>@property (nonatomic, strong) IBOutlet UIView *nxEV_emptyView</Declaration>
+			
+			
+			<Anchor>//api/name/nxEV_emptyView</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/intfm/UITableView(NXEmptyView)/setNxEV_hideSeparatorLinesWheyShowingEmptyView:</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>UITableView+NXEmptyView.h</DeclaredIn>			
+			
+			<Declaration>@property (nonatomic, assign) BOOL nxEV_hideSeparatorLinesWheyShowingEmptyView</Declaration>
+			
+			
+			<Anchor>//api/name/nxEV_hideSeparatorLinesWheyShowingEmptyView</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/intfp/UITableView(NXEmptyView)/nxEV_hideSeparatorLinesWheyShowingEmptyView</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>UITableView+NXEmptyView.h</DeclaredIn>			
+			
+			<Declaration>@property (nonatomic, assign) BOOL nxEV_hideSeparatorLinesWheyShowingEmptyView</Declaration>
+			
+			
+			<Anchor>//api/name/nxEV_hideSeparatorLinesWheyShowingEmptyView</Anchor>
+		</Token>
+		
+	</File>
+</Tokens>

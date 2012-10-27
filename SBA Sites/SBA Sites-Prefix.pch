@@ -14,4 +14,5 @@
     #import <ArcGIS/ArcGIS.h>
     #import "SBAConstants.h"
     #import "TestFlight.h"
+	#import "UIAlertView+MKBlockAdditions.h"
 #endif

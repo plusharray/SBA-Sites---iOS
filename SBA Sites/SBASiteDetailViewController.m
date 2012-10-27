@@ -6,15 +6,16 @@
 //  Copyright 2010 Bingaling Apps All rights reserved.
 //
 
-#import "DetailViewController.h"
+#import "SBASiteDetailViewController.h"
 #import "SiteImageViewController.h"
+#import "SBARootViewController.h"
 
-@implementation DetailViewController
+@implementation SBASiteDetailViewController
 
-#pragma mark -
-#pragma mark Properties
-@synthesize retrieverQueue = _retrieverQueue;
 @synthesize site = _site;
+@synthesize images = _images;
+@synthesize scrollView = _scrollView;
+@synthesize swipeView = _swipeView;
 @synthesize imageButton = _imageButton;
 @synthesize siteImage = _siteImage;
 @synthesize siteAddress1 = _siteAddress1;
@@ -22,15 +23,19 @@
 @synthesize siteBTA = _siteBTA;
 @synthesize siteCoordinates = _siteCoordinates;
 @synthesize siteID = _siteID;
-@synthesize siteLayer = _siteLayer;
 @synthesize siteMTA = _siteMTA;
 @synthesize siteName = _siteName;
 @synthesize siteStatus = _siteStatus;
 @synthesize structureAGL = _structureAGL;
 @synthesize structureHeight = _structureHeight;
 @synthesize structureType = _structureType;
+@synthesize pageControl = _pageControl;
+
 
 - (void) viewDidUnload {
+	[self setPageControl:nil];
+    [self setSwipeView:nil];
+	[self setScrollView:nil];
     self.imageButton = nil;
     self.siteImage = nil;
     self.siteAddress1 = nil;
@@ -38,7 +43,6 @@
     self.siteBTA = nil;
     self.siteCoordinates = nil;
     self.siteID = nil;
-    self.siteLayer = nil;
     self.siteMTA = nil;
     self.siteName = nil;
     self.siteStatus = nil;
@@ -47,59 +51,11 @@
     self.structureType = nil;
 }
 
-- (NSOperationQueue *)retrieverQueue {
-	if(nil == _retrieverQueue) {
-		_retrieverQueue = [[NSOperationQueue alloc] init];
-		_retrieverQueue.maxConcurrentOperationCount = 1;
-	}
-	return _retrieverQueue;
-}
-
-- (void)getImageForPath:(NSString *)imagePath
-{
-	UIImage *downloadedImage = [UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:imagePath]]];
-	if ((downloadedImage.size.width > 1.0) || (downloadedImage.size.height > 1.0)) {
-		[self performSelectorOnMainThread:@selector(showImageViewWithImage:)
-							   withObject:downloadedImage
-							waitUntilDone:NO];
-	} else {
-		[self performSelectorOnMainThread:@selector(hideImageView)
-							   withObject:nil
-							waitUntilDone:NO];
-	}
-}
-
-- (void)showImageViewWithImage:(UIImage *)anImage
-{
-	self.siteImage.image = anImage;
-	[self.siteImage setHidden:NO];
-	[self.imageButton setHidden:NO];
-	self.siteName.frame = CGRectMake(108.0, 15.0, 300.0, 15.0);
-	self.siteID.frame = CGRectMake(108.0, 35.0, 300.0, 15.0);
-	self.siteAddress1.frame = CGRectMake(108.0, 55.0, 300.0, 15.0);
-	self.siteAddress2.frame = CGRectMake(108.0, 75.0, 300.0, 15.0);
-}
-
-- (void)hideImageView
-{
-	[self.siteImage setHidden:YES];
-	[self.imageButton setHidden:YES];
-	/*
-	 self.siteName.frame = CGRectMake(10.0, 15.0, 300.0, 15.0);
-	 self.siteID.frame = CGRectMake(10.0, 35.0, 300.0, 15.0);
-	 self.siteAddress1.frame = CGRectMake(10.0, 55.0, 300.0, 15.0);
-	 self.siteAddress2.frame = CGRectMake(10.0, 75.0, 300.0, 15.0);
-	 */
-}
-
-//===========================================================
-#pragma mark -
-#pragma mark View lifecycle
-#pragma mark -
-//===========================================================
 
 - (void)viewDidLoad {
 	[super viewDidLoad];
+	[self.view setBackgroundColor:[UIColor colorWithPatternImage:[UIImage imageNamed:@"grey-background.png"]]];
+	//[self.scrollView setContentSize:CGSizeMake(320, 634)];
 	self.title = [self.site.attributes valueForKey:@"SiteName"];
 	self.siteName.text = [self.site.attributes valueForKey:@"SiteName"];
 	self.siteID.text = [self.site.attributes valueForKey:@"SiteCode"];
@@ -114,10 +70,10 @@
 	self.siteMTA.text = [self.site.attributes valueForKey:@"MtaName"];
 	self.siteBTA.text = [self.site.attributes valueForKey:@"BtaName"];
 	
-	NSString *pathString = [NSString stringWithFormat:@"http://map.sbasite.com/Mobile/GetImage?SiteCode=%@&width=600&height=600", [self.site.attributes valueForKey:@"SiteCode"]];
-	SEL method = @selector(getImageForPath:);
-	NSInvocationOperation *op = [[NSInvocationOperation alloc] initWithTarget:self selector:method object:pathString];
-	[[self retrieverQueue] addOperation:op];
+//	NSString *pathString = [NSString stringWithFormat:@"http://map.sbasite.com/Mobile/GetImage?SiteCode=%@&width=600&height=600", [self.site.attributes valueForKey:@"SiteCode"]];
+//	SEL method = @selector(getImageForPath:);
+//	NSInvocationOperation *op = [[NSInvocationOperation alloc] initWithTarget:self selector:method object:pathString];
+//	[[self retrieverQueue] addOperation:op];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -146,11 +102,12 @@
 	[self dismissModalViewControllerAnimated:YES];
 }
 
-//===========================================================
-#pragma mark -
-#pragma mark Custom Cell Methods
-#pragma mark -
-//===========================================================
+- (IBAction)pageControlTapped:(id)sender
+{
+    //update swipe view page
+    [self.swipeView scrollToPage:self.pageControl.currentPage duration:0.4];
+}
+
 - (IBAction)presentModalImage:(id)sender
 {
 	NSString *pathString = [NSString stringWithFormat:@"http://map.sbasite.com/Mobile/GetImage?SiteCode=%@&width=600&height=600", [self.site.attributes valueForKey:@"SiteCode"]];
@@ -166,12 +123,6 @@
 	
 	[self presentModalViewController:imageController animated:YES];
 }
-
-//===========================================================
-#pragma mark -
-#pragma mark MessageUI Methods
-#pragma mark -
-//===========================================================
 
 // Displays an email composition interface inside the application. Populates all the Mail fields.
 - (IBAction)displayMailComposerSheet:(id)sender
@@ -227,6 +178,12 @@
 	[[UIApplication sharedApplication] openURL:[NSURL URLWithString:email]];
 }
 
+- (IBAction)showDrivingDirections:(id)sender
+{
+	[self.navigationController popViewControllerAnimated:YES];
+	[self.delegate performSelector:@selector(requestRoute:) withObject:self.site afterDelay:0.3];
+}
+
 #pragma mark -
 #pragma mark Dismiss Mail view controller
 
@@ -257,6 +214,45 @@
 	}
 	NSLog(@"Mail Composer: %@", feedbackMsg);
 	[self dismissViewControllerAnimated:YES completion:^(void){}];
+}
+
+#pragma mark - SwipeViewDataSource
+
+- (NSInteger)numberOfItemsInSwipeView:(SwipeView *)swipeView
+{
+    return [self.images count];
+}
+
+- (UIView *)swipeView:(SwipeView *)swipeView viewForItemAtIndex:(NSInteger)index reusingView:(UIView *)view
+{
+    UIImageView *imageView = (UIImageView *)view;
+    
+    //create or reuse view
+    if (view == nil)
+    {
+		
+        imageView = [[UIImageView alloc] initWithFrame:CGRectMake(0.0f, 10.0f, 90.0f, 90.0f)];
+        view = imageView;
+    }
+    
+    //configure view
+    [imageView setImage:[self.images objectAtIndex:index]];
+    
+    //return view
+    return view;
+}
+
+- (void)swipeViewCurrentItemIndexDidChange:(SwipeView *)swipeView
+{
+    //update page control page
+    self.pageControl.currentPage = swipeView.currentPage;
+}
+
+#pragma mark - SwipeViewDelegate
+
+- (void)swipeView:(SwipeView *)swipeView didSelectItemAtIndex:(NSInteger)index
+{
+    NSLog(@"Selected item at index %i", index);
 }
 
 @end

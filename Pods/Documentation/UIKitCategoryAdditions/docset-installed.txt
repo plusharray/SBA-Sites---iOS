@@ -1,0 +1,4 @@
+Documentation set was installed to Xcode!
+
+Path: /Users/rosschapman/Library/Developer/Shared/Documentation/DocSets/org.cocoapods.UIKitCategoryAdditions-0.0.1.docset
+Time: 2012-10-27 06:32:05 +0000

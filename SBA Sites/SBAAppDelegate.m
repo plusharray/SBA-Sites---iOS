@@ -9,6 +9,8 @@
 #import "SBAAppDelegate.h"
 #import "SBARootViewController.h"
 
+#import "ADVTheme.h"
+
 @implementation SBAAppDelegate
 
 @synthesize window = _window;
@@ -16,6 +18,8 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
+	[ADVThemeManager customizeAppAppearance];
+	
     //[TestFlight takeOff:@"44e08cf8835fb9c0b50b3581e05f5612_MTA2MjEyMDExLTExLTExIDE1OjEzOjE4LjUwNzc5NQ"];
 	
 	//	[self customizeGlobalTheme];
