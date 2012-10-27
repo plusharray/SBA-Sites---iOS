@@ -304,6 +304,7 @@
 		FF64CEA314851FE6003CC124 /* BSForwardGeocoder.m in Sources */ = {isa = PBXBuildFile; fileRef = FF64CE9E14851FE6003CC124 /* BSForwardGeocoder.m */; };
 		FF74E900163C37C600EFC510 /* PAAuthorizationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = FF74E8FF163C37C600EFC510 /* PAAuthorizationManager.m */; };
 		FF74E903163C436B00EFC510 /* Competitors.png in Resources */ = {isa = PBXBuildFile; fileRef = FF74E902163C436B00EFC510 /* Competitors.png */; };
+		FF74E905163C4C9400EFC510 /* login_background.png in Resources */ = {isa = PBXBuildFile; fileRef = FF74E904163C4C9400EFC510 /* login_background.png */; };
 		FF879464161BA83600457005 /* route_bar.png in Resources */ = {isa = PBXBuildFile; fileRef = FF879462161BA83600457005 /* route_bar.png */; };
 		FF879465161BA83600457005 /* route_bar@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = FF879463161BA83600457005 /* route_bar@2x.png */; };
 		FF98B8891484096000D62F5A /* AddressBook.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FF98B8871484096000D62F5A /* AddressBook.framework */; };
@@ -851,6 +852,7 @@
 		FF74E8FE163C37C600EFC510 /* PAAuthorizationManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PAAuthorizationManager.h; sourceTree = "<group>"; };
 		FF74E8FF163C37C600EFC510 /* PAAuthorizationManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PAAuthorizationManager.m; sourceTree = "<group>"; };
 		FF74E902163C436B00EFC510 /* Competitors.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Competitors.png; sourceTree = "<group>"; };
+		FF74E904163C4C9400EFC510 /* login_background.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = login_background.png; sourceTree = "<group>"; };
 		FF879462161BA83600457005 /* route_bar.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = route_bar.png; sourceTree = "<group>"; };
 		FF879463161BA83600457005 /* route_bar@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "route_bar@2x.png"; sourceTree = "<group>"; };
 		FF98B8871484096000D62F5A /* AddressBook.framework */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = wrapper.framework; name = AddressBook.framework; path = System/Library/Frameworks/AddressBook.framework; sourceTree = SDKROOT; };
@@ -1677,6 +1679,7 @@
 		FFB963B0163B5EA000167719 /* Backgrounds */ = {
 			isa = PBXGroup;
 			children = (
+				FF74E904163C4C9400EFC510 /* login_background.png */,
 				FFB963B1163B5EA000167719 /* grey-background.png */,
 				FFB963B2163B5EA000167719 /* grey-background@2x.png */,
 			);
@@ -2609,6 +2612,7 @@
 				FFB9656E163BFCEA00167719 /* map_pin_icon.png in Resources */,
 				FFB9656F163BFCEA00167719 /* right-direction-arrow.png in Resources */,
 				FF74E903163C436B00EFC510 /* Competitors.png in Resources */,
+				FF74E905163C4C9400EFC510 /* login_background.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
