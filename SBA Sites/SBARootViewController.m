@@ -17,6 +17,7 @@
 #import "GradientView.h"
 #import "ClearLabelsCellView.h"
 #import "PALocationController.h"
+#import "PAAuthorizationManager.h"
 
 #define kRouteTaskUrl @"http://sampleserver3.arcgisonline.com/ArcGIS/rest/services/Network/USA/NAServer/Route"
 
@@ -319,8 +320,18 @@
 - (void)setupMapView
 {
     // Set up the layers
-    NSMutableArray *allLayers = [[NSMutableArray alloc] initWithCapacity:5];
-    for (int i = 0; i < 5; i++) {
+	NSInteger layerCount = 0;
+	NSURL *dynamicServiceURL = nil;
+	if ([[PAAuthorizationManager sharedManager] isLoggedIn]) {
+		layerCount = 6;
+		dynamicServiceURL = [NSURL URLWithString:DynamicMapServiceURLAuthenticated];
+	} else {
+		layerCount = 5;
+		dynamicServiceURL = [NSURL URLWithString:DynamicMapServiceURL];
+	}
+	
+    NSMutableArray *allLayers = [[NSMutableArray alloc] initWithCapacity:layerCount];
+    for (int i = 0; i < layerCount; i++) {
         [allLayers addObject:[SBALayer layerForID:i]];
     }
     self.layers = [NSArray arrayWithArray:allLayers];
@@ -341,7 +352,7 @@
 	lyr.drawDuringZooming = YES;
 	
 	//create an instance of a dynmaic map layer
-	self.dynamicLayer = [[AGSDynamicMapServiceLayer alloc] initWithURL:[NSURL URLWithString:DynamicMapServiceURL]];
+	self.dynamicLayer = [[AGSDynamicMapServiceLayer alloc] initWithURL:dynamicServiceURL];
     
 	//set visible layers
 	self.dynamicLayer.visibleLayers = [self.visibleLayers valueForKey:@"layerID"];
@@ -392,7 +403,10 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(siteSelected:) name:SBASiteSelected object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(layerSelected:) name:SBALayerSelected object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(mapTypeChanged:) name:SBAMapTypeChanged object:nil];
-    
+	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(setupMapView) name:PAAuthorizationManagerDidLogin object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(setupMapView) name:PAAuthorizationManagerDidFailLogin object:nil];
+	
+	
     if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad)
     {
         self.selectedMapType = 0;

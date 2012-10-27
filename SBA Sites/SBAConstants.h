@@ -24,11 +24,13 @@ extern NSString * const SBALayerOwned;
 extern NSString * const SBALayerManaged;
 extern NSString * const SBALayerCanada;
 extern NSString * const SBALayerCentralAmerica;
+extern NSString * const SBALayerCompetitors;
 
-typedef enum {
-	kNewConstruction = 0,
-	kOwned,
-	kManaged,
-    kCanada,
-    kCentralAmerica
+typedef enum SBALayerID {
+	NewConstruction = 0,
+	Owned,
+	Managed,
+    Canada,
+    CentralAmerica,
+	Competitors
 } SBALayerID;

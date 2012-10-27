@@ -8,7 +8,7 @@
 
 #import "SBAAppDelegate.h"
 #import "SBARootViewController.h"
-
+#import "PAAuthorizationManager.h"
 #import "ADVTheme.h"
 
 @implementation SBAAppDelegate
@@ -18,18 +18,9 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-	[ADVThemeManager customizeAppAppearance];
+	//[ADVThemeManager customizeAppAppearance];
 	
-    //[TestFlight takeOff:@"44e08cf8835fb9c0b50b3581e05f5612_MTA2MjEyMDExLTExLTExIDE1OjEzOjE4LjUwNzc5NQ"];
-	
-	//	[self customizeGlobalTheme];
-    //
-    //    UIUserInterfaceIdiom idiom = [[UIDevice currentDevice] userInterfaceIdiom];
-    //
-    //    if (idiom == UIUserInterfaceIdiomPad)
-    //    {
-    //        [self customizeiPadTheme];
-    //    }
+    [TestFlight takeOff:@"44e08cf8835fb9c0b50b3581e05f5612_MTA2MjEyMDExLTExLTExIDE1OjEzOjE4LjUwNzc5NQ"];
 	
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     SBARootViewController *rootViewController;
@@ -126,6 +117,7 @@
     /*
      Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
      */
+	[[PAAuthorizationManager sharedManager] authenticateWithStoredCredentials];
 }
 
 - (void)applicationWillTerminate:(UIApplication *)application

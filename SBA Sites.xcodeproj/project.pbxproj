@@ -302,6 +302,8 @@
 		FF64CEA114851FE6003CC124 /* BSKmlResult.m in Sources */ = {isa = PBXBuildFile; fileRef = FF64CE9A14851FE6003CC124 /* BSKmlResult.m */; };
 		FF64CEA214851FE6003CC124 /* CustomPlacemark.m in Sources */ = {isa = PBXBuildFile; fileRef = FF64CE9C14851FE6003CC124 /* CustomPlacemark.m */; };
 		FF64CEA314851FE6003CC124 /* BSForwardGeocoder.m in Sources */ = {isa = PBXBuildFile; fileRef = FF64CE9E14851FE6003CC124 /* BSForwardGeocoder.m */; };
+		FF74E900163C37C600EFC510 /* PAAuthorizationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = FF74E8FF163C37C600EFC510 /* PAAuthorizationManager.m */; };
+		FF74E903163C436B00EFC510 /* Competitors.png in Resources */ = {isa = PBXBuildFile; fileRef = FF74E902163C436B00EFC510 /* Competitors.png */; };
 		FF879464161BA83600457005 /* route_bar.png in Resources */ = {isa = PBXBuildFile; fileRef = FF879462161BA83600457005 /* route_bar.png */; };
 		FF879465161BA83600457005 /* route_bar@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = FF879463161BA83600457005 /* route_bar@2x.png */; };
 		FF98B8891484096000D62F5A /* AddressBook.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FF98B8871484096000D62F5A /* AddressBook.framework */; };
@@ -846,6 +848,9 @@
 		FF64CE9C14851FE6003CC124 /* CustomPlacemark.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomPlacemark.m; sourceTree = "<group>"; };
 		FF64CE9D14851FE6003CC124 /* BSForwardGeocoder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BSForwardGeocoder.h; sourceTree = "<group>"; };
 		FF64CE9E14851FE6003CC124 /* BSForwardGeocoder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BSForwardGeocoder.m; sourceTree = "<group>"; };
+		FF74E8FE163C37C600EFC510 /* PAAuthorizationManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PAAuthorizationManager.h; sourceTree = "<group>"; };
+		FF74E8FF163C37C600EFC510 /* PAAuthorizationManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PAAuthorizationManager.m; sourceTree = "<group>"; };
+		FF74E902163C436B00EFC510 /* Competitors.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Competitors.png; sourceTree = "<group>"; };
 		FF879462161BA83600457005 /* route_bar.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = route_bar.png; sourceTree = "<group>"; };
 		FF879463161BA83600457005 /* route_bar@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "route_bar@2x.png"; sourceTree = "<group>"; };
 		FF98B8871484096000D62F5A /* AddressBook.framework */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = wrapper.framework; name = AddressBook.framework; path = System/Library/Frameworks/AddressBook.framework; sourceTree = SDKROOT; };
@@ -1683,6 +1688,8 @@
 			children = (
 				FFB963B7163B8C9300167719 /* PALocationController.h */,
 				FFB963B8163B8C9300167719 /* PALocationController.m */,
+				FF74E8FE163C37C600EFC510 /* PAAuthorizationManager.h */,
+				FF74E8FF163C37C600EFC510 /* PAAuthorizationManager.m */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -2099,6 +2106,7 @@
 		FFF0854414769A3A001B1C1E /* layer icons */ = {
 			isa = PBXGroup;
 			children = (
+				FF74E902163C436B00EFC510 /* Competitors.png */,
 				FFF085451476A8A9001B1C1E /* Grey.png */,
 				FFF0853914769A33001B1C1E /* SBA Owned.png */,
 				FFF0853A14769A33001B1C1E /* New Construction.png */,
@@ -2600,6 +2608,7 @@
 				FFB9656D163BFCEA00167719 /* left-direction-arrow.png in Resources */,
 				FFB9656E163BFCEA00167719 /* map_pin_icon.png in Resources */,
 				FFB9656F163BFCEA00167719 /* right-direction-arrow.png in Resources */,
+				FF74E903163C436B00EFC510 /* Competitors.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2708,6 +2717,7 @@
 				FFB96563163BC26700167719 /* ADVDefaultTheme.m in Sources */,
 				FFB96564163BC26700167719 /* ADVRemindersTheme.m in Sources */,
 				FFB96565163BC26700167719 /* ADVTheme.m in Sources */,
+				FF74E900163C37C600EFC510 /* PAAuthorizationManager.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

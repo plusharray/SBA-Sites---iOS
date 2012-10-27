@@ -19,20 +19,23 @@
 {
     NSString *name;
     switch (layerID) {
-        case kNewConstruction:
+        case NewConstruction:
             name = SBALayerNewConstruction;
             break;
-        case kOwned:
+        case Owned:
             name = SBALayerOwned;
             break;
-        case kManaged:
+        case Managed:
             name = SBALayerManaged;
             break;
-        case kCanada:
+        case Canada:
             name = SBALayerCanada;
             break;
-        case kCentralAmerica:
+        case CentralAmerica:
             name = SBALayerCentralAmerica;
+            break;
+		case Competitors:
+            name = SBALayerCompetitors;
             break;
         default:
             name = SBALayerOwned;

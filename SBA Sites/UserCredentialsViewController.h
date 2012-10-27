@@ -13,5 +13,5 @@
 @property (strong, nonatomic) IBOutlet UITextField *username;
 @property (strong, nonatomic) IBOutlet UITextField *password;
 
--(IBAction)saveCred:(id)sender;
+-(IBAction)login:(id)sender;
 @end
