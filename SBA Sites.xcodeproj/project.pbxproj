@@ -19,6 +19,20 @@
 		FF21FD541610829E0096AADD /* MHTabBarInactiveTab.png in Resources */ = {isa = PBXBuildFile; fileRef = FF21FD511610829E0096AADD /* MHTabBarInactiveTab.png */; };
 		FF21FD551610829E0096AADD /* MHTabBarIndicator.png in Resources */ = {isa = PBXBuildFile; fileRef = FF21FD521610829E0096AADD /* MHTabBarIndicator.png */; };
 		FF21FDA11610A8DC0096AADD /* SBAMapViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FF21FD9F1610A8DC0096AADD /* SBAMapViewController.m */; };
+		FF29360116517012004ACCFB /* 1420-ruler.png in Resources */ = {isa = PBXBuildFile; fileRef = FF29360016517012004ACCFB /* 1420-ruler.png */; };
+		FF29361616517927004ACCFB /* clearsketch.gif in Resources */ = {isa = PBXBuildFile; fileRef = FF29360A16517926004ACCFB /* clearsketch.gif */; };
+		FF29361716517927004ACCFB /* clearsketchX.gif in Resources */ = {isa = PBXBuildFile; fileRef = FF29360B16517926004ACCFB /* clearsketchX.gif */; };
+		FF29361816517927004ACCFB /* line.gif in Resources */ = {isa = PBXBuildFile; fileRef = FF29360C16517926004ACCFB /* line.gif */; };
+		FF29361916517927004ACCFB /* point.gif in Resources */ = {isa = PBXBuildFile; fileRef = FF29360D16517926004ACCFB /* point.gif */; };
+		FF29361A16517927004ACCFB /* polygon.gif in Resources */ = {isa = PBXBuildFile; fileRef = FF29360E16517926004ACCFB /* polygon.gif */; };
+		FF29361B16517927004ACCFB /* redo.gif in Resources */ = {isa = PBXBuildFile; fileRef = FF29360F16517926004ACCFB /* redo.gif */; };
+		FF29361C16517927004ACCFB /* redoX.gif in Resources */ = {isa = PBXBuildFile; fileRef = FF29361016517926004ACCFB /* redoX.gif */; };
+		FF29361D16517927004ACCFB /* savesketch.gif in Resources */ = {isa = PBXBuildFile; fileRef = FF29361116517927004ACCFB /* savesketch.gif */; };
+		FF29361E16517927004ACCFB /* savesketchX.gif in Resources */ = {isa = PBXBuildFile; fileRef = FF29361216517927004ACCFB /* savesketchX.gif */; };
+		FF29361F16517927004ACCFB /* selectfeature.gif in Resources */ = {isa = PBXBuildFile; fileRef = FF29361316517927004ACCFB /* selectfeature.gif */; };
+		FF29362016517927004ACCFB /* undo.gif in Resources */ = {isa = PBXBuildFile; fileRef = FF29361416517927004ACCFB /* undo.gif */; };
+		FF29362116517927004ACCFB /* undoX.gif in Resources */ = {isa = PBXBuildFile; fileRef = FF29361516517927004ACCFB /* undoX.gif */; };
+		FF2936F416517CB8004ACCFB /* SketchToolbar.m in Sources */ = {isa = PBXBuildFile; fileRef = FF2936F316517CB8004ACCFB /* SketchToolbar.m */; };
 		FF41277E148544EF00A9FD80 /* BluePushpin.png in Resources */ = {isa = PBXBuildFile; fileRef = FF41277D148544EF00A9FD80 /* BluePushpin.png */; };
 		FF41371614583ED200F36E7C /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FF41371514583ED200F36E7C /* UIKit.framework */; };
 		FF41371814583ED200F36E7C /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FF41371714583ED200F36E7C /* Foundation.framework */; };
@@ -296,6 +310,7 @@
 		FF5231861474406C00EB02FA /* SiteImageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FF5231851474406C00EB02FA /* SiteImageViewController.m */; };
 		FF5231881474407800EB02FA /* SiteImageViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = FF5231871474407800EB02FA /* SiteImageViewController.xib */; };
 		FF52318A14744BED00EB02FA /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FF52318914744BED00EB02FA /* MessageUI.framework */; };
+		FF5CC7AD16484D16008A4F5B /* libTestFlight.a in Frameworks */ = {isa = PBXBuildFile; fileRef = FF5CC7AC16484D16008A4F5B /* libTestFlight.a */; };
 		FF64CE9314851F8D003CC124 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FF64CE9214851F8D003CC124 /* MapKit.framework */; };
 		FF64CE9F14851FE6003CC124 /* BSAddressComponent.m in Sources */ = {isa = PBXBuildFile; fileRef = FF64CE9614851FE6003CC124 /* BSAddressComponent.m */; };
 		FF64CEA014851FE6003CC124 /* BSGoogleV3KmlParser.m in Sources */ = {isa = PBXBuildFile; fileRef = FF64CE9814851FE6003CC124 /* BSGoogleV3KmlParser.m */; };
@@ -314,6 +329,7 @@
 		FF9ABCCC15F540C0001B9B94 /* ArcGIS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FF9ABCCB15F540C0001B9B94 /* ArcGIS.framework */; };
 		FF9ABCD015F54343001B9B94 /* ArcGIS.bundle in Resources */ = {isa = PBXBuildFile; fileRef = FF9ABCCF15F54343001B9B94 /* ArcGIS.bundle */; };
 		FF9ABCD215F543EA001B9B94 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FF9ABCD115F543EA001B9B94 /* Security.framework */; };
+		FFB936F41646E3730094DCDB /* map.png in Resources */ = {isa = PBXBuildFile; fileRef = FFB936F31646E3730094DCDB /* map.png */; };
 		FFB963B3163B5EA000167719 /* grey-background.png in Resources */ = {isa = PBXBuildFile; fileRef = FFB963B1163B5EA000167719 /* grey-background.png */; };
 		FFB963B4163B5EA000167719 /* grey-background@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = FFB963B2163B5EA000167719 /* grey-background@2x.png */; };
 		FFB963B9163B8C9300167719 /* PALocationController.m in Sources */ = {isa = PBXBuildFile; fileRef = FFB963B8163B8C9300167719 /* PALocationController.m */; };
@@ -520,7 +536,6 @@
 		FFF8B2041627F11E0058E08B /* SBASiteInfoTemplateView.xib in Resources */ = {isa = PBXBuildFile; fileRef = FFF8B2031627F11E0058E08B /* SBASiteInfoTemplateView.xib */; };
 		FFFC4A0014895AC90009EEDE /* SBASiteDetailViewController-iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = FFFC49FF14895AC90009EEDE /* SBASiteDetailViewController-iPad.xib */; };
 		FFFC4A0314895B560009EEDE /* SiteImageViewController-iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = FFFC4A0214895B560009EEDE /* SiteImageViewController-iPad.xib */; };
-		FFFC4A0614895FC40009EEDE /* libTestFlight.a in Frameworks */ = {isa = PBXBuildFile; fileRef = FFFC4A0414895FC40009EEDE /* libTestFlight.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -544,6 +559,21 @@
 		FF21FD521610829E0096AADD /* MHTabBarIndicator.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = MHTabBarIndicator.png; sourceTree = "<group>"; };
 		FF21FD9E1610A8DC0096AADD /* SBAMapViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBAMapViewController.h; sourceTree = "<group>"; };
 		FF21FD9F1610A8DC0096AADD /* SBAMapViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBAMapViewController.m; sourceTree = "<group>"; };
+		FF29360016517012004ACCFB /* 1420-ruler.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "1420-ruler.png"; sourceTree = "<group>"; };
+		FF29360A16517926004ACCFB /* clearsketch.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = clearsketch.gif; sourceTree = "<group>"; };
+		FF29360B16517926004ACCFB /* clearsketchX.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = clearsketchX.gif; sourceTree = "<group>"; };
+		FF29360C16517926004ACCFB /* line.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = line.gif; sourceTree = "<group>"; };
+		FF29360D16517926004ACCFB /* point.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = point.gif; sourceTree = "<group>"; };
+		FF29360E16517926004ACCFB /* polygon.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = polygon.gif; sourceTree = "<group>"; };
+		FF29360F16517926004ACCFB /* redo.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = redo.gif; sourceTree = "<group>"; };
+		FF29361016517926004ACCFB /* redoX.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = redoX.gif; sourceTree = "<group>"; };
+		FF29361116517927004ACCFB /* savesketch.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = savesketch.gif; sourceTree = "<group>"; };
+		FF29361216517927004ACCFB /* savesketchX.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = savesketchX.gif; sourceTree = "<group>"; };
+		FF29361316517927004ACCFB /* selectfeature.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = selectfeature.gif; sourceTree = "<group>"; };
+		FF29361416517927004ACCFB /* undo.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = undo.gif; sourceTree = "<group>"; };
+		FF29361516517927004ACCFB /* undoX.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = undoX.gif; sourceTree = "<group>"; };
+		FF2936F216517CB8004ACCFB /* SketchToolbar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SketchToolbar.h; sourceTree = "<group>"; };
+		FF2936F316517CB8004ACCFB /* SketchToolbar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SketchToolbar.m; sourceTree = "<group>"; };
 		FF41277D148544EF00A9FD80 /* BluePushpin.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = BluePushpin.png; sourceTree = "<group>"; };
 		FF41371114583ED200F36E7C /* SBA Sites.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "SBA Sites.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		FF41371514583ED200F36E7C /* UIKit.framework */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
@@ -838,6 +868,8 @@
 		FF5231851474406C00EB02FA /* SiteImageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SiteImageViewController.m; sourceTree = "<group>"; };
 		FF5231871474407800EB02FA /* SiteImageViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SiteImageViewController.xib; sourceTree = "<group>"; };
 		FF52318914744BED00EB02FA /* MessageUI.framework */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
+		FF5CC7AC16484D16008A4F5B /* libTestFlight.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libTestFlight.a; sourceTree = "<group>"; };
+		FF5CC7AE16484D4D008A4F5B /* TestFlight.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TestFlight.h; sourceTree = "<group>"; };
 		FF64CE9214851F8D003CC124 /* MapKit.framework */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		FF64CE9514851FE6003CC124 /* BSAddressComponent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BSAddressComponent.h; sourceTree = "<group>"; };
 		FF64CE9614851FE6003CC124 /* BSAddressComponent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BSAddressComponent.m; sourceTree = "<group>"; };
@@ -863,6 +895,7 @@
 		FF9ABCCB15F540C0001B9B94 /* ArcGIS.framework */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = wrapper.framework; path = ArcGIS.framework; sourceTree = "<group>"; };
 		FF9ABCCF15F54343001B9B94 /* ArcGIS.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; name = ArcGIS.bundle; path = ArcGIS.framework/Versions/Current/Resources/ArcGIS.bundle; sourceTree = SOURCE_ROOT; };
 		FF9ABCD115F543EA001B9B94 /* Security.framework */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
+		FFB936F31646E3730094DCDB /* map.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = map.png; sourceTree = "<group>"; };
 		FFB963B1163B5EA000167719 /* grey-background.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "grey-background.png"; sourceTree = "<group>"; };
 		FFB963B2163B5EA000167719 /* grey-background@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "grey-background@2x.png"; sourceTree = "<group>"; };
 		FFB963B7163B8C9300167719 /* PALocationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PALocationController.h; sourceTree = "<group>"; };
@@ -1096,8 +1129,6 @@
 		FFF8B2031627F11E0058E08B /* SBASiteInfoTemplateView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SBASiteInfoTemplateView.xib; sourceTree = "<group>"; };
 		FFFC49FF14895AC90009EEDE /* SBASiteDetailViewController-iPad.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = "SBASiteDetailViewController-iPad.xib"; sourceTree = "<group>"; };
 		FFFC4A0214895B560009EEDE /* SiteImageViewController-iPad.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = "SiteImageViewController-iPad.xib"; sourceTree = "<group>"; };
-		FFFC4A0414895FC40009EEDE /* libTestFlight.a */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = archive.ar; path = libTestFlight.a; sourceTree = "<group>"; };
-		FFFC4A0514895FC40009EEDE /* TestFlight.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TestFlight.h; path = ../TestFlight.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -1107,7 +1138,6 @@
 			files = (
 				FF9ABCD215F543EA001B9B94 /* Security.framework in Frameworks */,
 				FF41374D145840F600F36E7C /* MediaPlayer.framework in Frameworks */,
-				FFFC4A0614895FC40009EEDE /* libTestFlight.a in Frameworks */,
 				FF64CE9314851F8D003CC124 /* MapKit.framework in Frameworks */,
 				FF98B8891484096000D62F5A /* AddressBook.framework in Frameworks */,
 				FF98B88A1484096000D62F5A /* AddressBookUI.framework in Frameworks */,
@@ -1125,6 +1155,7 @@
 				4AA2A450DA0E432C98482C89 /* libPods.a in Frameworks */,
 				0EB9C9EA8A69421295DA5CF2 /* libPods.a in Frameworks */,
 				83339669777049278C3888FB /* libPods.a in Frameworks */,
+				FF5CC7AD16484D16008A4F5B /* libTestFlight.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1208,9 +1239,9 @@
 		FF41371414583ED200F36E7C /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				FF5CC7AC16484D16008A4F5B /* libTestFlight.a */,
 				FF9ABCD115F543EA001B9B94 /* Security.framework */,
 				FF9ABCCB15F540C0001B9B94 /* ArcGIS.framework */,
-				FFFC4A0414895FC40009EEDE /* libTestFlight.a */,
 				FF64CE9214851F8D003CC124 /* MapKit.framework */,
 				FF98B8871484096000D62F5A /* AddressBook.framework */,
 				FF98B8881484096000D62F5A /* AddressBookUI.framework */,
@@ -1260,7 +1291,7 @@
 		FF41371C14583ED200F36E7C /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				FFFC4A0514895FC40009EEDE /* TestFlight.h */,
+				FF5CC7AE16484D4D008A4F5B /* TestFlight.h */,
 				FF41371D14583ED200F36E7C /* SBA Sites-Info.plist */,
 				FF41371E14583ED200F36E7C /* InfoPlist.strings */,
 				FF41372114583ED200F36E7C /* main.m */,
@@ -1679,6 +1710,7 @@
 		FFB963B0163B5EA000167719 /* Backgrounds */ = {
 			isa = PBXGroup;
 			children = (
+				FFB936F31646E3730094DCDB /* map.png */,
 				FF74E904163C4C9400EFC510 /* login_background.png */,
 				FFB963B1163B5EA000167719 /* grey-background.png */,
 				FFB963B2163B5EA000167719 /* grey-background@2x.png */,
@@ -1689,6 +1721,8 @@
 		FFB963B6163B8C2600167719 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				FF2936F216517CB8004ACCFB /* SketchToolbar.h */,
+				FF2936F316517CB8004ACCFB /* SketchToolbar.m */,
 				FFB963B7163B8C9300167719 /* PALocationController.h */,
 				FFB963B8163B8C9300167719 /* PALocationController.m */,
 				FF74E8FE163C37C600EFC510 /* PAAuthorizationManager.h */,
@@ -2087,6 +2121,19 @@
 		FFB96567163BFCEA00167719 /* Bar Button Icons */ = {
 			isa = PBXGroup;
 			children = (
+				FF29360A16517926004ACCFB /* clearsketch.gif */,
+				FF29360B16517926004ACCFB /* clearsketchX.gif */,
+				FF29360C16517926004ACCFB /* line.gif */,
+				FF29360D16517926004ACCFB /* point.gif */,
+				FF29360E16517926004ACCFB /* polygon.gif */,
+				FF29360F16517926004ACCFB /* redo.gif */,
+				FF29361016517926004ACCFB /* redoX.gif */,
+				FF29361116517927004ACCFB /* savesketch.gif */,
+				FF29361216517927004ACCFB /* savesketchX.gif */,
+				FF29361316517927004ACCFB /* selectfeature.gif */,
+				FF29361416517927004ACCFB /* undo.gif */,
+				FF29361516517927004ACCFB /* undoX.gif */,
+				FF29360016517012004ACCFB /* 1420-ruler.png */,
 				FFB96568163BFCEA00167719 /* key_icon.png */,
 				FFB96569163BFCEA00167719 /* left-direction-arrow.png */,
 				FFB9656A163BFCEA00167719 /* map_pin_icon.png */,
@@ -2613,6 +2660,20 @@
 				FFB9656F163BFCEA00167719 /* right-direction-arrow.png in Resources */,
 				FF74E903163C436B00EFC510 /* Competitors.png in Resources */,
 				FF74E905163C4C9400EFC510 /* login_background.png in Resources */,
+				FFB936F41646E3730094DCDB /* map.png in Resources */,
+				FF29360116517012004ACCFB /* 1420-ruler.png in Resources */,
+				FF29361616517927004ACCFB /* clearsketch.gif in Resources */,
+				FF29361716517927004ACCFB /* clearsketchX.gif in Resources */,
+				FF29361816517927004ACCFB /* line.gif in Resources */,
+				FF29361916517927004ACCFB /* point.gif in Resources */,
+				FF29361A16517927004ACCFB /* polygon.gif in Resources */,
+				FF29361B16517927004ACCFB /* redo.gif in Resources */,
+				FF29361C16517927004ACCFB /* redoX.gif in Resources */,
+				FF29361D16517927004ACCFB /* savesketch.gif in Resources */,
+				FF29361E16517927004ACCFB /* savesketchX.gif in Resources */,
+				FF29361F16517927004ACCFB /* selectfeature.gif in Resources */,
+				FF29362016517927004ACCFB /* undo.gif in Resources */,
+				FF29362116517927004ACCFB /* undoX.gif in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2722,6 +2783,7 @@
 				FFB96564163BC26700167719 /* ADVRemindersTheme.m in Sources */,
 				FFB96565163BC26700167719 /* ADVTheme.m in Sources */,
 				FF74E900163C37C600EFC510 /* PAAuthorizationManager.m in Sources */,
+				FF2936F416517CB8004ACCFB /* SketchToolbar.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2856,7 +2918,7 @@
 					"$(inherited)",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "5732EC3F-B6D3-41EB-9177-7B8866A5328F";
 				RUN_CLANG_STATIC_ANALYZER = YES;
 				USER_HEADER_SEARCH_PATHS = "\"$(SRCROOT)\"/** $(HOME)/Library/SDKs/ArcGIS/iOS.sdk/usr/local/include/**/** \"$(SRCROOT)/\"/**";
 				VALID_ARCHS = armv7;

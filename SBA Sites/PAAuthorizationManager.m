@@ -48,8 +48,11 @@ NSString * const PAAuthorizationManagerDidFailLogin = @"PAAuthorizationManagerDi
 {
 	self.username = [self.wrapper objectForKey:(__bridge id)(kSecAttrAccount)];
     NSString *password = [self.wrapper objectForKey:(__bridge id)(kSecValueData)];
-	
-	[self authenticateWithUser:self.username andPassword:password onCompletion:nil onError:nil];
+	if (self.username.length > 0 && password.length > 0) {
+		[self authenticateWithUser:self.username andPassword:password onCompletion:nil onError:nil];
+	} else {
+		self.loggedIn = NO;
+	}
 }
 
 - (void)authenticateWithUser:(NSString *)username andPassword:(NSString *)password onCompletion:(MKNKResponseBlock)response onError:(MKNKErrorBlock)error
@@ -65,7 +68,7 @@ NSString * const PAAuthorizationManagerDidFailLogin = @"PAAuthorizationManagerDi
 			// Save credentials
 			self.username = username;
 			[self.wrapper setObject:self.username forKey:(__bridge id)(kSecAttrAccount)];
-			[self.wrapper setObject:password forKey:(__bridge id)(kSecAttrAccount)];
+			[self.wrapper setObject:password forKey:(__bridge id)(kSecValueData)];
 			
 			[self setLoggedIn:YES];
 			
@@ -77,7 +80,7 @@ NSString * const PAAuthorizationManagerDidFailLogin = @"PAAuthorizationManagerDi
 		dispatch_async(dispatch_get_main_queue(), ^{
 			// Clear credentials from keychain
 			[self.wrapper setObject:@"" forKey:(__bridge id)(kSecAttrAccount)];
-			[self.wrapper setObject:@"" forKey:(__bridge id)(kSecAttrAccount)];
+			[self.wrapper setObject:@"" forKey:(__bridge id)(kSecValueData)];
 			
 			[self setLoggedIn:NO];
 			

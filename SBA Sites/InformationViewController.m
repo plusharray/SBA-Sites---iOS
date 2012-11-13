@@ -173,7 +173,7 @@
         if(row == 0){
             UserCredentialsViewController *userCredentialsViewController = [[UserCredentialsViewController alloc] initWithNibName:@"UserCredentialsViewController" bundle:nil];
 			// Pass the selected object to the new view controller.
-			[self.navigationController pushViewController:userCredentialsViewController animated:YES];
+			[self.navigationController presentViewController:userCredentialsViewController animated:YES completion:nil];
         }
     }
     else if (section == 1) {

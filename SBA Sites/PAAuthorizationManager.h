@@ -14,7 +14,7 @@ extern NSString * const PAAuthorizationManagerDidFailLogin;
 
 @interface PAAuthorizationManager : NSObject
 
-@property (nonatomic, readonly, getter = isLoggedIn) BOOL loggedIn;
+@property (nonatomic, readonly, getter = isLoggedIn) __block BOOL loggedIn;
 @property (nonatomic, readonly, strong) NSString *username;
 
 + (id)sharedManager;

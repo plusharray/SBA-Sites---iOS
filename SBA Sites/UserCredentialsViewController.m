@@ -17,30 +17,6 @@
 @synthesize username = _username;
 @synthesize password = _password;
 
--(IBAction)login:(id)sender
-{
-    [self.view endEditing:YES];
-	
-    //if empty set your credentials
-    if (!self.username.text || !self.password.text)
-		return;
-	
-	[[PAAuthorizationManager sharedManager] authenticateWithUser:self.username.text
-													 andPassword:self.password.text
-													onCompletion:^(MKNetworkOperation *operation) {
-														dispatch_async(dispatch_get_main_queue(), ^{
-															[[UIAlertView alertViewWithTitle:@"Successful Login" message:@"Your credentials have been saved and you are now logged in."] show];
-														});
-													}
-														 onError:^(NSError *error) {
-															 dispatch_async(dispatch_get_main_queue(), ^{
-																 self.password.text = nil;
-																 [[UIAlertView alertViewWithTitle:@"Login Failed" message:@"Please check your credentials and try again."] show];
-															 });
-														 }];
-	
-}
-
 - (void)viewDidLoad
 {
     self.title= @"Login Credentials";
@@ -55,6 +31,64 @@
 - (void)viewDidUnload {
     [self setUsername:nil];
     [self setPassword:nil];
+    [self setScrollView:nil];
     [super viewDidUnload];
 }
+
+- (void)viewDidAppear:(BOOL)animated
+{
+	[super viewDidAppear:animated];
+	if (self.username.text.length == 0) {
+		[self.username becomeFirstResponder];
+	} else {
+		[self.password becomeFirstResponder];
+	}
+	
+}
+
+-(IBAction)login:(id)sender
+{
+    [self.view endEditing:YES];
+	
+    //if empty set your credentials
+    if (!self.username.text || !self.password.text)
+		return;
+	
+	[[PAAuthorizationManager sharedManager] authenticateWithUser:self.username.text
+													 andPassword:self.password.text
+													onCompletion:^(MKNetworkOperation *operation) {
+														dispatch_async(dispatch_get_main_queue(), ^{
+															[[UIAlertView alertViewWithTitle:@"Successful Login" message:@"Your credentials have been saved and you are now logged in." cancelButtonTitle:@"OK" otherButtonTitles:nil onDismiss:nil onCancel:^{
+																[self done:self];
+															}] show];
+														});
+													}
+														 onError:^(NSError *error) {
+															 dispatch_async(dispatch_get_main_queue(), ^{
+																 self.password.text = nil;
+																 [[UIAlertView alertViewWithTitle:@"Login Failed" message:@"Please check your credentials and try again."] show];
+															 });
+														 }];
+	
+}
+
+- (IBAction)done:(id)sender
+{
+	[self dismissViewControllerAnimated:YES completion:nil];
+}
+
+- (BOOL)textFieldShouldReturn:(UITextField *)textField
+{
+	if ([textField isEqual:self.username]) {
+		[self.password becomeFirstResponder];
+	} else {
+		if (self.username.text && self.username.text.length > 0) {
+			[self login:self];
+		} else {
+			[self.username becomeFirstResponder];
+		}
+	}
+	return YES;
+}
+
 @end
