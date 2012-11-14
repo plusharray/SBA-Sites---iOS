@@ -19,13 +19,6 @@
 @synthesize layerArray = _layerArray;
 @synthesize selectedMapType = _selectedMapType;
 
-
-- (void) viewDidUnload {
-    self.mapTypeSegmentedControl = nil;
-    self.tableView = nil;
-	self.layerArray = nil;
-}
-
 #pragma mark -
 #pragma mark View lifecycle
 
@@ -109,7 +102,7 @@
     SBALayer *layer = (SBALayer *)[self.layerArray objectAtIndex:indexPath.row];
     layer.visible = !layer.visible;
     [self.tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationNone];
-    [[NSNotificationCenter defaultCenter] postNotificationName:SBALayerSelected object:nil];
+    [[NSNotificationCenter defaultCenter] postNotificationName:SBALayerSelected object:layer];
 }
 
 

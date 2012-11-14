@@ -42,7 +42,7 @@
 - (NSArray *)visibleLayers
 {
     NSPredicate *predicate = [NSPredicate predicateWithFormat:@"isVisible == YES"];
-    NSArray *layers = [self.layers filteredArrayUsingPredicate:predicate];
+    NSArray *layers = [_layers filteredArrayUsingPredicate:predicate];
     return layers;
 }
 
@@ -64,7 +64,7 @@
     } else {
         [button setImage:[UIImage imageNamed:@"Grey.png"] forState:UIControlStateNormal];
     }
-    [[NSNotificationCenter defaultCenter] postNotificationName:SBALayerSelected object:nil];
+    [[NSNotificationCenter defaultCenter] postNotificationName:SBALayerSelected object:layer];
 }
 
 - (IBAction)userLocationButtonTapped:(id)sender
@@ -101,15 +101,15 @@
 
 - (IBAction)showLayerList:(id)sender
 {
-    if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone) {
+	if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone) {
 		LayerViewController *layerViewController = [[LayerViewController alloc] initWithNibName:@"LayerViewController" bundle:nil];
-        layerViewController.modalPresentationStyle = UIModalPresentationFullScreen;
+		layerViewController.modalPresentationStyle = UIModalPresentationFullScreen;
 		layerViewController.modalTransitionStyle = UIModalTransitionStylePartialCurl;
-        [layerViewController.mapTypeSegmentedControl addTarget:self action:@selector(mapType:) forControlEvents:UIControlEventValueChanged];
-        [layerViewController setLayerArray:self.layers];
-        [layerViewController setSelectedMapType:self.selectedMapType];
-        [self presentViewController:layerViewController animated:YES completion:^(void){}];
-    }
+		[layerViewController setSelectedMapType:self.selectedMapType];
+		[layerViewController.mapTypeSegmentedControl addTarget:self action:@selector(mapType:) forControlEvents:UIControlEventValueChanged];
+		layerViewController.layerArray = self.layers;
+		[self presentViewController:layerViewController animated:YES completion:nil];
+	}
 }
 
 - (IBAction)showSearch:(id)sender
@@ -152,9 +152,6 @@
 {
     //set visible layers
 	self.dynamicLayer.visibleLayers = [self.visibleLayers valueForKey:@"layerID"];
-	
-	//call dataChanged on the graphics layer to redraw the graphics
-	[self.graphicsLayer dataChanged];
 }
 
 - (void)siteSelected:(NSNotification *)notification
@@ -488,11 +485,10 @@
 	[self setRightArrowButton:nil];
 	[self setMeasureButton:nil];
 	[self setMeasureToolbar:nil];
-    [super viewDidUnload];
-    // Release any retained subviews of the main view.
+	// Release any retained subviews of the main view.
     // e.g. self.myOutlet = nil;
     [self.mapView.gps stop];
-    self.mapView = nil;
+    [super viewDidUnload];
 }
 
 - (void)viewWillAppear:(BOOL)animated
