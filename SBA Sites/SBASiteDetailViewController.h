@@ -33,11 +33,18 @@
 @property (nonatomic, strong) IBOutlet UILabel* structureHeight;
 @property (nonatomic, strong) IBOutlet UILabel* structureType;
 @property (strong, nonatomic) IBOutlet UIPageControl *pageControl;
+@property (strong, nonatomic) IBOutlet UILabel *statusLabel;
+@property (strong, nonatomic) IBOutlet UILabel *coordinatesLabel;
+@property (strong, nonatomic) IBOutlet UILabel *typeLabel;
+@property (strong, nonatomic) IBOutlet UILabel *heightLabel;
+@property (strong, nonatomic) IBOutlet UILabel *elevationLabel;
+@property (strong, nonatomic) IBOutlet UILabel *mtaLabel;
+@property (strong, nonatomic) IBOutlet UILabel *btaLabel;
 
 - (IBAction)pageControlTapped:(id)sender;
 - (IBAction)presentModalImage:(id)sender;
 - (IBAction)dismissAction:(id)sender;
-- (IBAction)displayMailComposerSheet:(id)sender;
+- (IBAction)displayContactPrompt:(id)sender;
 - (void)displayComposerSheet;
 - (void)launchMailAppOnDevice;
 - (IBAction)showDrivingDirections:(id)sender;

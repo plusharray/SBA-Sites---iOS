@@ -7,13 +7,12 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "ShadowedTableView.h"
 
 @interface LayerViewController : UIViewController <UITableViewDelegate, UITableViewDataSource>
 
 @property (nonatomic, strong) IBOutlet UISegmentedControl *mapTypeSegmentedControl;
-@property (nonatomic, strong) IBOutlet ShadowedTableView *tableView;
-@property (nonatomic, strong) NSArray *layerArray;
+@property (nonatomic, strong) IBOutlet UITableView *tableView;
+@property (nonatomic, strong) NSMutableArray *layerArray;
 @property (nonatomic) NSInteger selectedMapType;
 
 - (IBAction)mapType:(UISegmentedControl *)segmentPick;

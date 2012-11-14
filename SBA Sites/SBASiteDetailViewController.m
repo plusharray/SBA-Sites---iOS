@@ -9,30 +9,18 @@
 #import "SBASiteDetailViewController.h"
 #import "SiteImageViewController.h"
 #import "SBARootViewController.h"
+#import "UIActionSheet+MKBlockAdditions.h"
 
 @implementation SBASiteDetailViewController
 
-@synthesize site = _site;
-@synthesize images = _images;
-@synthesize scrollView = _scrollView;
-@synthesize swipeView = _swipeView;
-@synthesize imageButton = _imageButton;
-@synthesize siteImage = _siteImage;
-@synthesize siteAddress1 = _siteAddress1;
-@synthesize siteAddress2 = _siteAddress2;
-@synthesize siteBTA = _siteBTA;
-@synthesize siteCoordinates = _siteCoordinates;
-@synthesize siteID = _siteID;
-@synthesize siteMTA = _siteMTA;
-@synthesize siteName = _siteName;
-@synthesize siteStatus = _siteStatus;
-@synthesize structureAGL = _structureAGL;
-@synthesize structureHeight = _structureHeight;
-@synthesize structureType = _structureType;
-@synthesize pageControl = _pageControl;
-
-
 - (void) viewDidUnload {
+	[self setBtaLabel:nil];
+	[self setMtaLabel:nil];
+	[self setElevationLabel:nil];
+	[self setHeightLabel:nil];
+	[self setTypeLabel:nil];
+	[self setCoordinatesLabel:nil];
+	[self setStatusLabel:nil];
 	[self setPageControl:nil];
     [self setSwipeView:nil];
 	[self setScrollView:nil];
@@ -55,25 +43,49 @@
 - (void)viewDidLoad {
 	[super viewDidLoad];
 	[self.view setBackgroundColor:[UIColor colorWithPatternImage:[UIImage imageNamed:@"grey-background.png"]]];
-	//[self.scrollView setContentSize:CGSizeMake(320, 634)];
-	self.title = [self.site.attributes valueForKey:@"SiteName"];
-	self.siteName.text = [self.site.attributes valueForKey:@"SiteName"];
-	self.siteID.text = [self.site.attributes valueForKey:@"SiteCode"];
-	self.siteAddress1.text = [self.site.attributes valueForKey:@"Address1"];
-	self.siteAddress2.text = [NSString stringWithFormat:@"%@, %@ %@", [self.site.attributes valueForKey:@"City"], [self.site.attributes valueForKey:@"State"], [self.site.attributes valueForKey:@"Zip"]];
-	//self.siteLayer.text = [self.site layerName];
-	self.siteStatus.text = [self.site.attributes valueForKey:@"Status"];
-	self.siteCoordinates.text = [NSString stringWithFormat:@"%@, %@", [self.site.attributes valueForKey:@"Latitude"], [self.site.attributes valueForKey:@"Longitude"]];
-    self.structureType.text = [self.site.attributes valueForKey:@"Type"];
-	self.structureHeight.text = [self.site.attributes valueForKey:@"Height"];
-	self.structureAGL.text = [self.site.attributes valueForKey:@"AGL"];
-	self.siteMTA.text = [self.site.attributes valueForKey:@"MtaName"];
-	self.siteBTA.text = [self.site.attributes valueForKey:@"BtaName"];
+	[self.scrollView setContentSize:CGSizeMake(320, 404)];
+	if ([self.site.attributes valueForKey:@"SiteName"]) {
+		self.title = [self.site.attributes valueForKey:@"SiteName"];
+		self.siteName.text = [self.site.attributes valueForKey:@"SiteName"];
+		self.siteID.text = [self.site.attributes valueForKey:@"SiteCode"];
+		self.siteAddress1.text = [self.site.attributes valueForKey:@"Address1"];
+		self.siteAddress2.text = [NSString stringWithFormat:@"%@, %@ %@", [self.site.attributes valueForKey:@"City"], [self.site.attributes valueForKey:@"State"], [self.site.attributes valueForKey:@"Zip"]];
+		self.statusLabel.text = @"Status:";
+		self.siteStatus.text = [self.site.attributes valueForKey:@"Status"];
+		self.siteCoordinates.text = [NSString stringWithFormat:@"%@, %@", [self.site.attributes valueForKey:@"Latitude"], [self.site.attributes valueForKey:@"Longitude"]];
+		self.structureType.text = [self.site.attributes valueForKey:@"Type"];
+		self.heightLabel.text = @"Height(ft):";
+		self.structureHeight.text = [self.site.attributes valueForKey:@"Height"];
+		self.elevationLabel.text = @"Grd Elev(ft):";
+		self.structureAGL.text = [self.site.attributes valueForKey:@"AGL"];
+		self.mtaLabel.text = @"MTA:";
+		self.siteMTA.text = [self.site.attributes valueForKey:@"MtaName"];
+		self.btaLabel.text = @"FCC Reg. #:";
+		self.siteBTA.text = [self.site.attributes valueForKey:@"BtaName"];
+	} else {
+		self.title = [self.site.attributes valueForKey:@"identifier"];
+		self.siteName.text = [self.site.attributes valueForKey:@"company"];
+		self.siteID.text = [self.site.attributes valueForKey:@"identifier"];
+		self.siteAddress1.text = [self.site.attributes valueForKey:@"contactaddress_1"];
+		self.siteAddress2.text = [NSString stringWithFormat:@"%@, %@ %@", [self.site.attributes valueForKey:@"city"], [self.site.attributes valueForKey:@"state"], [self.site.attributes valueForKey:@"zip"]];
+		self.statusLabel.text = @"";
+		self.siteStatus.text = @"";
+		self.siteCoordinates.text = [NSString stringWithFormat:@"%@, %@", [self.site.attributes valueForKey:@"latitude"], [self.site.attributes valueForKey:@"longitude"]];
+		self.structureType.text = [self.site.attributes valueForKey:@"Type"];
+		self.heightLabel.text = @"Height(meters):";
+		self.structureHeight.text = [self.site.attributes valueForKey:@"Grnd_meters"];
+		self.elevationLabel.text = @"Grd Elev(meters):";
+		self.structureAGL.text = [self.site.attributes valueForKey:@"AGL_meters"];
+		self.mtaLabel.text = @"Proximity:";
+		self.siteMTA.text = [self.site.attributes valueForKey:@"proximity"];
+		self.btaLabel.text = @"FCC Reg. #:";
+		self.siteBTA.text = [self.site.attributes valueForKey:@"fcc_reg_num"];
+	}
 	
-//	NSString *pathString = [NSString stringWithFormat:@"http://map.sbasite.com/Mobile/GetImage?SiteCode=%@&width=600&height=600", [self.site.attributes valueForKey:@"SiteCode"]];
-//	SEL method = @selector(getImageForPath:);
-//	NSInvocationOperation *op = [[NSInvocationOperation alloc] initWithTarget:self selector:method object:pathString];
-//	[[self retrieverQueue] addOperation:op];
+	//	NSString *pathString = [NSString stringWithFormat:@"http://map.sbasite.com/Mobile/GetImage?SiteCode=%@&width=600&height=600", [self.site.attributes valueForKey:@"SiteCode"]];
+	//	SEL method = @selector(getImageForPath:);
+	//	NSInvocationOperation *op = [[NSInvocationOperation alloc] initWithTarget:self selector:method object:pathString];
+	//	[[self retrieverQueue] addOperation:op];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -124,10 +136,9 @@
 	[self presentModalViewController:imageController animated:YES];
 }
 
-// Displays an email composition interface inside the application. Populates all the Mail fields.
-- (IBAction)displayMailComposerSheet:(id)sender
+- (void)displayMailComposer
 {
-	Class mailClass = (NSClassFromString(@"MFMailComposeViewController"));
+    Class mailClass = (NSClassFromString(@"MFMailComposeViewController"));
 	if (mailClass != nil)
 	{
 		// We must always check whether the current device is configured for sending emails
@@ -146,14 +157,49 @@
 	}
 }
 
+// Displays an email composition interface inside the application. Populates all the Mail fields.
+- (IBAction)displayContactPrompt:(id)sender
+{
+	if ([self.site.attributes valueForKey:@"SiteName"]) {
+		[self displayMailComposer];
+	} else {
+		DismissBlock dismissBlock = ^(int buttonIndex) {
+			if (buttonIndex == 0) {
+				[self displayMailComposer];
+			} else {
+				NSString *phoneNumber = [@"tel://" stringByAppendingString:[self.site.attributes valueForKey:@"contactphone"]];
+				[[UIApplication sharedApplication] openURL:[NSURL URLWithString:phoneNumber]];
+			}
+		};
+		[UIActionSheet actionSheetWithTitle:@"Contact"
+									message:@"Email or Call"
+									buttons:@[@"Email", @"Call"]
+								 showInView:self.view
+								  onDismiss:dismissBlock
+								   onCancel:nil];
+	}
+}
+
 -(void)displayComposerSheet
 {
 	MFMailComposeViewController *picker = [[MFMailComposeViewController alloc] init];
 	picker.mailComposeDelegate = self;
-	
-	[picker setToRecipients:@[[self.site.attributes valueForKey:@"Email"]]];
+	NSString *recipients = nil;
+	NSString *subject = nil;
+	if ([self.site.attributes valueForKey:@"SiteName"]) {
+		recipients = [self.site.attributes valueForKey:@"Email"];
+		subject = [NSString stringWithFormat:@"%@ Site Inquiry", [self.site.attributes valueForKey:@"SiteName"]];
+	} else {
+		recipients = [self.site.attributes valueForKey:@"contactemail"];
+		if ([recipients isEqualToString:@"Null"]) {
+			[UIAlertView alertViewWithTitle:@"Error" message:@"There is no contact email address available for this site"];
+			return;
+		}
+		subject = [NSString stringWithFormat:@"%@ Site Inquiry", [self.site.attributes valueForKey:@"identifier"]];
+	}
+	[picker setToRecipients:@[recipients]];
 	[picker setCcRecipients:@[@"siteinquiry@sbasite.com"]];
-	[picker setSubject:[NSString stringWithFormat:@"%@ Site Inquiry", [self.site.attributes valueForKey:@"SiteName"]]];
+	[picker setSubject:subject];
 	
 	// Fill out the email body text
     NSString *tempBody = [[NSString stringWithFormat:@"%@", self.site.attributes] stringByReplacingOccurrencesOfString:@"{" withString:@""];
@@ -168,7 +214,20 @@
 -(void)launchMailAppOnDevice
 {
 	//NSLog(@"Launch Mail on device");
-	NSString *recipients = [NSString stringWithFormat:@"mailto:%@&subject=%@ Site Inquiry", [self.site.attributes valueForKey:@"Email"], [self.site.attributes valueForKey:@"SiteName"]];
+	NSString *recipient = nil;
+	NSString *subject = nil;
+	if ([self.site.attributes valueForKey:@"SiteName"]) {
+		recipient = [self.site.attributes valueForKey:@"Email"];
+		subject = [NSString stringWithFormat:@"%@ Site Inquiry", [self.site.attributes valueForKey:@"SiteName"]];
+	} else {
+		recipient = [self.site.attributes valueForKey:@"contactemail"];
+		if ([recipient isEqualToString:@"Null"]) {
+			[UIAlertView alertViewWithTitle:@"Error" message:@"There is no contact email address available for this site"];
+			return;
+		}
+		subject = [NSString stringWithFormat:@"%@ Site Inquiry", [self.site.attributes valueForKey:@"identifier"]];
+	}
+	NSString *recipients = [NSString stringWithFormat:@"mailto:%@&subject=%@", recipient, subject];
 	NSString *body = [NSString stringWithFormat:@"%@", self.site.attributes];
 	
 	

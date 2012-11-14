@@ -10,6 +10,7 @@
 #import "SBARootViewController.h"
 #import "PAAuthorizationManager.h"
 #import "ADVTheme.h"
+#import "TestFlight.h"
 
 @implementation SBAAppDelegate
 

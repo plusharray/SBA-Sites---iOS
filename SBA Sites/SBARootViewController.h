@@ -13,6 +13,7 @@
 #import "SBASiteDetailViewController.h"
 
 @class PALocationController;
+@class SketchToolbar;
 
 @interface SBARootViewController : UIViewController <UITableViewDelegate, UITableViewDataSource, AGSMapViewLayerDelegate, AGSMapViewCalloutDelegate, AGSMapViewTouchDelegate, AGSIdentifyTaskDelegate, UISearchDisplayDelegate, UISearchBarDelegate, ABPeoplePickerNavigationControllerDelegate, ABPersonViewControllerDelegate, BSForwardGeocoderDelegate, AGSFindTaskDelegate, UIPopoverControllerDelegate, AGSRouteTaskDelegate, SBARouteRequestDelegate>
 
@@ -28,6 +29,8 @@
 @property (strong, nonatomic) IBOutlet UIToolbar *routeToolbar;
 @property (strong, nonatomic) IBOutlet UIBarButtonItem *leftArrowButton;
 @property (strong, nonatomic) IBOutlet UIBarButtonItem *rightArrowButton;
+@property (strong, nonatomic) IBOutlet UIBarButtonItem *measureButton;
+@property (strong, nonatomic) IBOutlet UIToolbar *measureToolbar;
 @property (nonatomic, strong) NSMutableArray *buttons;
 @property (nonatomic, strong) UIPopoverController *masterPopoverController;
 @property (nonatomic, strong) AGSTiledMapServiceLayer *tiledLayer;
@@ -37,7 +40,7 @@
 @property (nonatomic, strong) AGSIdentifyTask *identifyTask;
 @property (nonatomic, strong) AGSIdentifyParameters *identifyParams;
 @property (nonatomic, strong) AGSPoint* mappoint;
-@property (nonatomic, strong) NSArray *layers;
+@property (nonatomic, strong) NSMutableArray *layers;
 @property (nonatomic, strong) NSArray *visibleLayers;
 @property (nonatomic) BOOL addressBookSearch;
 @property (nonatomic) BOOL searchActiveDB;
@@ -51,6 +54,7 @@
 @property (nonatomic, strong) AGSFindTask *findTask;
 @property (nonatomic, strong) AGSCalloutTemplate *calloutTemplate;
 @property (nonatomic) NSInteger selectedMapType;
+@property (nonatomic, strong) NSURL *dynamicServiceURL;
 
 @property (nonatomic, strong) AGSRouteTask *routeTask;
 @property (nonatomic, strong) AGSRouteTaskParameters *routeTaskParams;
@@ -61,6 +65,8 @@
 @property (nonatomic, strong) AGSDirectionGraphic *currentDirectionGraphic;
 @property (nonatomic, strong) IBOutlet UIView *directionsBannerView;
 @property (nonatomic, strong) IBOutlet UILabel *directionsLabel;
+
+@property (nonatomic, strong) SketchToolbar *sketchToolbar;
 
 - (IBAction)mapType:(UISegmentedControl *)segmentPick;
 - (IBAction)toggleLayer:(id)sender;
@@ -73,6 +79,7 @@
 - (IBAction)resetRoute:(id)sender;
 - (IBAction)previousTurn:(id)sender;
 - (IBAction)nextTurn:(id)sender;
+- (IBAction)showMeasuringTools:(id)sender;
 
 - (AGSCompositeSymbol*)stopSymbolWithNumber:(NSInteger)stopNumber;
 - (AGSCompositeSymbol*)routeSymbol;

@@ -12,9 +12,23 @@
 #import "GradientView.h"
 #import "ClearLabelsCellView.h"
 #import "UserCredentialsViewController.h"
+#import "PAAuthorizationManager.h"
 
 @implementation InformationViewController
 
+- (void)showLogin:(id)sender
+{
+	UIBarButtonItem *item = (UIBarButtonItem *)sender;
+	if ([[PAAuthorizationManager sharedManager] isLoggedIn]) {
+		[[PAAuthorizationManager sharedManager] logout:item];
+		[item setStyle:UIBarButtonItemStyleBordered];
+		[UIAlertView alertViewWithTitle:@"Logged Out" message:@"You have successfully logged out."];
+	} else {
+		UserCredentialsViewController *userCredentialsViewController = [[UserCredentialsViewController alloc] initWithNibName:@"UserCredentialsViewController" bundle:nil];
+		// Pass the selected object to the new view controller.
+		[self.navigationController presentViewController:userCredentialsViewController animated:YES completion:nil];
+	}
+}
 
 #pragma mark -
 #pragma mark View lifecycle
@@ -24,6 +38,7 @@
     [super viewDidLoad];
     
 	self.title = @"Info";
+	
 	[self.tableView reloadData];
 }
 
@@ -33,29 +48,30 @@
 	if (UI_USER_INTERFACE_IDIOM() != UIUserInterfaceIdiomPad) {
 		[self.navigationController setNavigationBarHidden:NO animated:YES];
 	}
+	
+	UIBarButtonItemStyle style = [[PAAuthorizationManager sharedManager] isLoggedIn] ? UIBarButtonItemStyleDone : UIBarButtonItemStyleBordered;
+	UIBarButtonItem *button = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"key_icon.png"] style:style target:self action:@selector(showLogin:)];
+	self.navigationItem.rightBarButtonItem = button;
 }
 
 #pragma mark -
 #pragma mark Table view data source
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return 4;
+    return 3;
 }
 
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
 	if (section == 0) {
-		return 1;
+		return 3;
 	}
 	else if (section == 1) {
-		return 3;
+		return 2;
 	}
 	else if (section == 2) {
 		return 2;
 	}
-    else if( section == 3) {
-        return 2;
-    }
 	else {
 		return 0;
 	}
@@ -64,10 +80,7 @@
 // Customize section header titles
 - (NSString *)tableView:(UITableView *)aTableView titleForHeaderInSection:(NSInteger)section {
 	
-    if (section == 0) {
-		return @"Login Information";
-	}
-	else if (section == 0) {
+	if (section == 0) {
 		return @"Search Instructions";
 	}
 	else if (section == 1) {
@@ -94,17 +107,7 @@
         cell = [[ClearLabelsCellView alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:CellIdentifier];
 		cell.backgroundView = [[GradientView alloc] init];
     }
-	
-    if (section == 0) {
-		if (row == 0) {
-			//- login Credentials
-			cell.textLabel.text = @"Credentials";
-			cell.detailTextLabel.text = @"";
-			cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
-			
-		}
-    }
-	else if (section == 1) {
+	if (section == 0) {
 		if (row == 0) {
 			//- Search by Site Name/ID
 			cell.textLabel.text = @"Search by Site Name/ID";
@@ -125,7 +128,7 @@
 			cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
 		}
 	}
-	else if (section == 2) {
+	else if (section == 1) {
 		if (row == 0) {
 			//- About SBA Sites App -> InfoViewController
 			cell.textLabel.text = @"About SBA Communications";
@@ -140,7 +143,7 @@
 			cell.detailTextLabel.text = appVersion;
 		}
 	}
-	else if (section == 3) {
+	else if (section == 2) {
 		if (row == 0) {
 			//- Email support
 			cell.textLabel.text = @"Email Support";
@@ -168,15 +171,7 @@
     // Navigation logic may go here. Create and push another view controller.
 	int section = indexPath.section;
 	int row = indexPath.row;
-	
-    if (section ==0){
-        if(row == 0){
-            UserCredentialsViewController *userCredentialsViewController = [[UserCredentialsViewController alloc] initWithNibName:@"UserCredentialsViewController" bundle:nil];
-			// Pass the selected object to the new view controller.
-			[self.navigationController pushViewController:userCredentialsViewController animated:YES];
-        }
-    }
-    else if (section == 1) {
+	if (section == 0) {
 		if (row == 0) {
 			//- Search by Site Name/ID
 			InformationDetailViewController *detailViewController = [[InformationDetailViewController alloc] initWithNibName:@"InformationDetailViewController" bundle:nil];
@@ -202,7 +197,7 @@
 			[self.navigationController pushViewController:detailViewController animated:YES];
 		}
 	}
-	else if (section == 2) {
+	else if (section == 1) {
 		if (row == 0) {
 			//- About SBA Sites App -> InfoViewController
 			if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
@@ -218,7 +213,7 @@
 			}
 		}
 	}
-	else if (section == 3) {
+	else if (section == 2) {
 		if (row == 0) {
 			//- Email support
 			[self displayComposerSheet];

@@ -18,6 +18,7 @@
 #import "ClearLabelsCellView.h"
 #import "PALocationController.h"
 #import "PAAuthorizationManager.h"
+#import "SketchToolbar.h"
 
 #define kRouteTaskUrl @"http://sampleserver3.arcgisonline.com/ArcGIS/rest/services/Network/USA/NAServer/Route"
 
@@ -29,6 +30,8 @@
 - (void)showPeoplePickerController;
 - (void)showRouteToolbar;
 - (void)hideRouteToolbar;
+- (void)showMeasureToolbar;
+- (void)hideMeasureToolbar;
 
 @end
 
@@ -39,7 +42,7 @@
 - (NSArray *)visibleLayers
 {
     NSPredicate *predicate = [NSPredicate predicateWithFormat:@"isVisible == YES"];
-    NSArray *layers = [self.layers filteredArrayUsingPredicate:predicate];
+    NSArray *layers = [_layers filteredArrayUsingPredicate:predicate];
     return layers;
 }
 
@@ -61,7 +64,7 @@
     } else {
         [button setImage:[UIImage imageNamed:@"Grey.png"] forState:UIControlStateNormal];
     }
-    [[NSNotificationCenter defaultCenter] postNotificationName:SBALayerSelected object:nil];
+    [[NSNotificationCenter defaultCenter] postNotificationName:SBALayerSelected object:layer];
 }
 
 - (IBAction)userLocationButtonTapped:(id)sender
@@ -98,15 +101,15 @@
 
 - (IBAction)showLayerList:(id)sender
 {
-    if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone) {
+	if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone) {
 		LayerViewController *layerViewController = [[LayerViewController alloc] initWithNibName:@"LayerViewController" bundle:nil];
-        layerViewController.modalPresentationStyle = UIModalPresentationFullScreen;
+		layerViewController.modalPresentationStyle = UIModalPresentationFullScreen;
 		layerViewController.modalTransitionStyle = UIModalTransitionStylePartialCurl;
-        [layerViewController.mapTypeSegmentedControl addTarget:self action:@selector(mapType:) forControlEvents:UIControlEventValueChanged];
-        [layerViewController setLayerArray:self.layers];
-        [layerViewController setSelectedMapType:self.selectedMapType];
-        [self presentViewController:layerViewController animated:YES completion:^(void){}];
-    }
+		[layerViewController setSelectedMapType:self.selectedMapType];
+		[layerViewController.mapTypeSegmentedControl addTarget:self action:@selector(mapType:) forControlEvents:UIControlEventValueChanged];
+		layerViewController.layerArray = self.layers;
+		[self presentViewController:layerViewController animated:YES completion:nil];
+	}
 }
 
 - (IBAction)showSearch:(id)sender
@@ -191,12 +194,7 @@
 	// remove the stop graphics from the graphics layer
 	// careful not to attempt to mutate the graphics array while
 	// it is being enumerated
-	NSMutableArray *graphics = [self.graphicsLayer.graphics mutableCopy];
-	for (AGSGraphic *g in graphics) {
-		if ([g isKindOfClass:[AGSStopGraphic class]]) {
-			[self.graphicsLayer removeGraphic:g];
-		}
-	}
+	[self.graphicsLayer removeAllGraphics];
 	
 	// tell the graphics layer to redraw
 	[self.graphicsLayer dataChanged];
@@ -271,6 +269,18 @@
     [self setupNextPreviousButtons];
 }
 
+- (IBAction)showMeasuringTools:(id)sender
+{
+	UIBarButtonItem *button = (UIBarButtonItem *)sender;
+	if (button.style == UIBarButtonItemStyleDone) {
+		button.style = UIBarButtonItemStyleBordered;
+		[self hideMeasureToolbar];
+	} else {
+		button.style = UIBarButtonItemStyleDone;
+		[self showMeasureToolbar];
+	}
+}
+
 - (void)mapTypeChanged:(NSNotification *)notification
 {
     NSNumber *mapType = (NSNumber *)notification.object;
@@ -291,6 +301,35 @@
 	lyr.drawDuringZooming = YES;
 }
 
+- (void)loginEvent:(NSNotification *)notification
+{
+	// Set up the layers
+	if ([[PAAuthorizationManager sharedManager] isLoggedIn]) {
+		if ([[self.layers lastObject] layerID] != @(5)) {
+			[self.layers addObject:[SBALayer layerForID:5]];
+		}
+		_dynamicServiceURL = [NSURL URLWithString:DynamicMapServiceURLAuthenticated];
+	} else {
+		if ([[self.layers lastObject] layerID] == @(5)) {
+			[self.layers removeObject:[self.layers lastObject]];
+		}
+		_dynamicServiceURL = [NSURL URLWithString:DynamicMapServiceURL];
+	}
+	[self.mapView removeMapLayerWithName:@"Dynamic Layer"];
+	
+	//create an instance of a dynmaic map layer
+	self.dynamicLayer = [[AGSDynamicMapServiceLayer alloc] initWithURL:self.dynamicServiceURL];
+    
+	//set visible layers
+	self.dynamicLayer.visibleLayers = [self.visibleLayers valueForKey:@"layerID"];
+	
+	//name the layer. This is the name that is displayed if there was a property page, tocs, etc...
+	self.dynamicLayerView = [self.mapView addMapLayer:self.dynamicLayer withName:@"Dynamic Layer"];
+	
+	//set transparency
+	self.dynamicLayerView.alpha = 0.5;
+}
+
 #pragma mark - Init
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
@@ -298,6 +337,22 @@
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         // Custom initialization
+		
+		// Set up the layers
+		NSInteger layerCount = 0;
+		if ([[PAAuthorizationManager sharedManager] isLoggedIn]) {
+			layerCount = 6;
+			_dynamicServiceURL = [NSURL URLWithString:DynamicMapServiceURLAuthenticated];
+		} else {
+			layerCount = 5;
+			_dynamicServiceURL = [NSURL URLWithString:DynamicMapServiceURL];
+		}
+		
+		NSMutableArray *allLayers = [[NSMutableArray alloc] initWithCapacity:layerCount];
+		for (int i = 0; i < layerCount; i++) {
+			[allLayers addObject:[SBALayer layerForID:i]];
+		}
+		_layers = [NSMutableArray arrayWithArray:allLayers];
     }
     return self;
 }
@@ -319,23 +374,12 @@
 
 - (void)setupMapView
 {
-    // Set up the layers
-	NSInteger layerCount = 0;
-	NSURL *dynamicServiceURL = nil;
 	if ([[PAAuthorizationManager sharedManager] isLoggedIn]) {
-		layerCount = 6;
-		dynamicServiceURL = [NSURL URLWithString:DynamicMapServiceURLAuthenticated];
+		self.dynamicServiceURL = [NSURL URLWithString:DynamicMapServiceURLAuthenticated];
 	} else {
-		layerCount = 5;
-		dynamicServiceURL = [NSURL URLWithString:DynamicMapServiceURL];
+		self.dynamicServiceURL = [NSURL URLWithString:DynamicMapServiceURL];
 	}
 	
-    NSMutableArray *allLayers = [[NSMutableArray alloc] initWithCapacity:layerCount];
-    for (int i = 0; i < layerCount; i++) {
-        [allLayers addObject:[SBALayer layerForID:i]];
-    }
-    self.layers = [NSArray arrayWithArray:allLayers];
-    
     // set the delegate for the map view
     self.mapView.layerDelegate = self;
     self.mapView.touchDelegate = self;
@@ -352,7 +396,7 @@
 	lyr.drawDuringZooming = YES;
 	
 	//create an instance of a dynmaic map layer
-	self.dynamicLayer = [[AGSDynamicMapServiceLayer alloc] initWithURL:dynamicServiceURL];
+	self.dynamicLayer = [[AGSDynamicMapServiceLayer alloc] initWithURL:self.dynamicServiceURL];
     
 	//set visible layers
 	self.dynamicLayer.visibleLayers = [self.visibleLayers valueForKey:@"layerID"];
@@ -367,12 +411,19 @@
 	self.graphicsLayer = [AGSGraphicsLayer graphicsLayer];
 	[self.mapView addMapLayer:self.graphicsLayer withName:@"Graphics Layer"];
 	
-	//create identify task
-	self.identifyTask = [AGSIdentifyTask identifyTaskWithURL:[NSURL URLWithString:DynamicMapServiceURL]];
-	self.identifyTask.delegate = self;
-	
 	//create identify parameters
 	self.identifyParams = [[AGSIdentifyParameters alloc] init];
+	
+	// Setup the route task
+	NSURL *routeTaskUrl = [NSURL URLWithString:kRouteTaskUrl];
+	self.routeTask = [AGSRouteTask routeTaskWithURL:routeTaskUrl];
+    
+    // assign delegate to this view controller
+	self.routeTask.delegate = self;
+	
+	// kick off asynchronous method to retrieve default parameters
+	// for the route task
+	[self.routeTask retrieveDefaultRouteTaskParameters];
     
     AGSSpatialReference *sr = [AGSSpatialReference spatialReferenceWithWKID:4326];
 	double xmin, ymin, xmax, ymax;
@@ -390,6 +441,13 @@
 {
     [super viewDidLoad];
     
+	// Register for Notifications
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(siteSelected:) name:SBASiteSelected object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(layerSelected:) name:SBALayerSelected object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(mapTypeChanged:) name:SBAMapTypeChanged object:nil];
+	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(loginEvent:) name:PAAuthorizationManagerDidLogin object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(loginEvent:) name:PAAuthorizationManagerDidLogout object:nil];
+	
 	// Start Location Controller
 	self.locationController = [PALocationController sharedController];
 	
@@ -398,14 +456,6 @@
     
     // Setup the MapView
     [self setupMapView];
-    
-    // Register for Notifications
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(siteSelected:) name:SBASiteSelected object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(layerSelected:) name:SBALayerSelected object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(mapTypeChanged:) name:SBAMapTypeChanged object:nil];
-	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(setupMapView) name:PAAuthorizationManagerDidLogin object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(setupMapView) name:PAAuthorizationManagerDidFailLogin object:nil];
-	
 	
     if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad)
     {
@@ -433,11 +483,12 @@
 	[self setRouteToolbar:nil];
 	[self setLeftArrowButton:nil];
 	[self setRightArrowButton:nil];
-    [super viewDidUnload];
-    // Release any retained subviews of the main view.
+	[self setMeasureButton:nil];
+	[self setMeasureToolbar:nil];
+	// Release any retained subviews of the main view.
     // e.g. self.myOutlet = nil;
     [self.mapView.gps stop];
-    self.mapView = nil;
+    [super viewDidUnload];
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -464,13 +515,17 @@
     //store for later use
     self.mappoint = mappoint;
     
+	//create identify task
+	self.identifyTask = [AGSIdentifyTask identifyTaskWithURL:self.dynamicServiceURL];
+	self.identifyTask.delegate = self;
+	
 	self.identifyParams.layerIds = [self.visibleLayers valueForKey:@"layerID"];
 	self.identifyParams.tolerance = 12;
 	self.identifyParams.geometry = self.mappoint;
 	self.identifyParams.size = self.mapView.bounds.size;
 	self.identifyParams.mapEnvelope = self.mapView.visibleArea.envelope;
 	self.identifyParams.returnGeometry = YES;
-	self.identifyParams.layerOption = AGSIdentifyParametersLayerOptionAll;
+	self.identifyParams.layerOption = AGSIdentifyParametersLayerOptionVisible;
 	self.identifyParams.spatialReference = self.mapView.spatialReference;
     
 	//execute the task
@@ -495,7 +550,14 @@
 {
 	
     //clear previous results
-    [self.graphicsLayer removeAllGraphics];
+	// careful not to attempt to mutate the graphics array while
+	// it is being enumerated
+	NSMutableArray *graphics = [self.graphicsLayer.graphics mutableCopy];
+	for (AGSGraphic *g in graphics) {
+		if (![g isKindOfClass:[AGSGraphic class]]) {
+			[self.graphicsLayer removeGraphic:g];
+		}
+	}
 	
     //add new results
     AGSSymbol* symbol = [AGSSimpleFillSymbol simpleFillSymbol];
@@ -522,10 +584,17 @@
             }
         } else {
             //get the site code & name
-            NSString *siteCode = [result.feature.attributes objectForKey:@"SiteCode"];
-            NSString *siteName = [result.feature.attributes objectForKey:@"SiteName"];
-            self.mapView.callout.title = siteCode;
-            self.mapView.callout.detail = siteName;
+            NSString *title = nil;
+            NSString *subtitle = nil;
+			if (result.layerId != 5) {
+				title = [result.feature.attributes objectForKey:@"SiteCode"];
+				subtitle = [result.feature.attributes objectForKey:@"SiteName"];
+			} else {
+				title = [result.feature.attributes objectForKey:@"company"];
+				subtitle = [result.feature.attributes objectForKey:@"identifier"];
+			}
+            self.mapView.callout.title = title;
+            self.mapView.callout.detail = subtitle;
             //show callout
             [self.mapView showCalloutAtPoint:self.mappoint forGraphic:((AGSIdentifyResult*)[results objectAtIndex:0]).feature animated:YES];
             
@@ -1291,17 +1360,6 @@
 		return;
 	}
 	
-	// Setup the route task
-	NSURL *routeTaskUrl = [NSURL URLWithString:kRouteTaskUrl];
-	self.routeTask = [AGSRouteTask routeTaskWithURL:routeTaskUrl];
-    
-    // assign delegate to this view controller
-	self.routeTask.delegate = self;
-	
-	// kick off asynchronous method to retrieve default parameters
-	// for the route task
-	[self.routeTask retrieveDefaultRouteTaskParameters];
-	
 	NSMutableArray *stops = [NSMutableArray array];
 	NSMutableArray *polygonBarriers = [NSMutableArray array];
 	
@@ -1350,6 +1408,68 @@
 	
 	// execute the route task
 	[self.routeTask solveWithParameters:self.routeTaskParams];
+}
+
+#pragma mark - Measurements
+
+- (void)showMeasureToolbar
+{
+	if (![self.view.subviews containsObject:self.measureToolbar]) {
+		[self.measureToolbar setFrame:CGRectMake(0, 0, self.view.bounds.size.width, 44)];
+		[self.view addSubview:self.measureToolbar];
+	}
+	[self.searchDisplayController.searchBar setHidden:YES];
+	self.directionsLabel.text = @"";
+	self.directionsBannerView.hidden = NO;
+	//Show magnifier to help with sketching
+	self.mapView.showMagnifierOnTapAndHold = YES;
+	
+	//Graphics layer to hold all sketches (points, polylines, and polygons)
+	AGSGraphicsLayer* graphicsLayer = [AGSGraphicsLayer graphicsLayer];
+	[self.mapView addMapLayer:graphicsLayer withName:@"Sketch Graphics Layer"];
+	
+	//A composite symbol for the graphics layer's renderer to symbolize the sketches
+	AGSCompositeSymbol* composite = [AGSCompositeSymbol compositeSymbol];
+	AGSSimpleMarkerSymbol* markerSymbol = [[AGSSimpleMarkerSymbol alloc] init];
+	markerSymbol.style = AGSSimpleMarkerSymbolStyleSquare;
+	markerSymbol.color = [UIColor greenColor];
+	[composite.symbols addObject:markerSymbol];
+	AGSSimpleLineSymbol* lineSymbol = [[AGSSimpleLineSymbol alloc] init];
+	lineSymbol.color= [UIColor grayColor];
+	lineSymbol.width = 4;
+	[composite.symbols addObject:lineSymbol];
+	AGSSimpleFillSymbol* fillSymbol = [[AGSSimpleFillSymbol alloc] init];
+	fillSymbol.color = [UIColor colorWithRed:1.0 green:1.0 blue:0 alpha:0.5] ;
+	[composite.symbols addObject:fillSymbol];
+	AGSSimpleRenderer* renderer = [AGSSimpleRenderer simpleRendererWithSymbol:composite];
+	graphicsLayer.renderer = renderer;
+	
+	//Sketch layer
+	AGSSketchGraphicsLayer* sketchLayer = [[AGSSketchGraphicsLayer alloc] initWithGeometry:nil];
+	[self.mapView addMapLayer:sketchLayer withName:@"Sketch Layer"];
+	
+	//Helper class to manage the UI toolbar, Sketch Layer, and Graphics Layer
+	//Basically, where the magic happens
+	self.sketchToolbar = [[SketchToolbar alloc] initWithToolbar:self.measureToolbar
+													sketchLayer:sketchLayer
+														mapView:self.mapView
+												  graphicsLayer:graphicsLayer
+													   andLabel:_directionsLabel];
+}
+
+- (void)hideMeasureToolbar
+{
+	//Remove sketch layers
+	[self.mapView removeMapLayerWithName:@"Sketch Graphics Layer"];
+	[self.mapView removeMapLayerWithName:@"Sketch Layer"];
+	[self.searchDisplayController.searchBar setHidden:NO];
+	[self.measureToolbar removeFromSuperview];
+	self.directionsLabel.text = @"";
+	self.directionsBannerView.hidden = YES;
+	
+	//Don't show magnifier to help with sketching
+	self.mapView.showMagnifierOnTapAndHold = NO;
+	self.mapView.touchDelegate = self;
 }
 
 

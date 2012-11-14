@@ -10,14 +10,16 @@
 #import "MKNetworkEngine.h"
 
 extern NSString * const PAAuthorizationManagerDidLogin;
-extern NSString * const PAAuthorizationManagerDidFailLogin;
+extern NSString * const PAAuthorizationManagerDidLogout;
 
 @interface PAAuthorizationManager : NSObject
 
-@property (nonatomic, readonly, getter = isLoggedIn) BOOL loggedIn;
+@property (nonatomic, readonly, getter = isLoggedIn) __block BOOL loggedIn;
 @property (nonatomic, readonly, strong) NSString *username;
 
 + (id)sharedManager;
+
+- (void)logout:(id)sender;
 
 - (void)authenticateWithStoredCredentials;
 
