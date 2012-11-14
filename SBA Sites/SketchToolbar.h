@@ -13,22 +13,23 @@
 #import <Foundation/Foundation.h>
 #import <ArcGIS/ArcGIS.h>
 
-@interface SketchToolbar : NSObject <AGSMapViewTouchDelegate> {
+@interface SketchToolbar : NSObject <AGSMapViewTouchDelegate>{
 	AGSSketchGraphicsLayer* _sketchLayer;
 	AGSMapView* _mapView;
 	AGSGraphicsLayer* _graphicsLayer;
 	AGSGraphic* _activeGraphic;
 	
-	UISegmentedControl* _sketchTools ;
 	UIButton* _undoTool;
 	UIButton* _redoTool;
 	UIButton* _saveTool;
 	UIButton* _clearTool;
+	UILabel *_distanceLabel;
 }
 
-@property (nonatomic,strong) AGSGraphic* activeGraphic;
+@property (nonatomic, strong) AGSGraphic* activeGraphic;
+@property (nonatomic, strong) AGSSketchGraphicsLayer *sketchLayer;
 
-- (id)initWithToolbar:(UIToolbar*)toolbar sketchLayer:(AGSSketchGraphicsLayer*)sketchLayer mapView:(AGSMapView*) mapView graphicsLayer:(AGSGraphicsLayer*)graphicsLayer;
+- (id)initWithToolbar:(UIToolbar*)toolbar sketchLayer:(AGSSketchGraphicsLayer*)sketchLayer mapView:(AGSMapView*) mapView graphicsLayer:(AGSGraphicsLayer*)graphicsLayer andLabel:(UILabel *)label;
 
 - (void) mapView:(AGSMapView*)mapView
  didClickAtPoint:(CGPoint)screen

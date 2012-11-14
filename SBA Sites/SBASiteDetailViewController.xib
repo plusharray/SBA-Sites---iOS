@@ -3,12 +3,12 @@
 	<data>
 		<int key="IBDocument.SystemTarget">1536</int>
 		<string key="IBDocument.SystemVersion">12C60</string>
-		<string key="IBDocument.InterfaceBuilderVersion">2843</string>
+		<string key="IBDocument.InterfaceBuilderVersion">2844</string>
 		<string key="IBDocument.AppKitVersion">1187.34</string>
 		<string key="IBDocument.HIToolboxVersion">625.00</string>
 		<object class="NSMutableDictionary" key="IBDocument.PluginVersions">
 			<string key="NS.key.0">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
-			<string key="NS.object.0">1929</string>
+			<string key="NS.object.0">1930</string>
 		</object>
 		<object class="NSArray" key="IBDocument.IntegratedClassDependencies">
 			<bool key="EncodedWithXMLCoder">YES</bool>
@@ -144,7 +144,7 @@
 								<string key="NSFrame">{{10, 108}, {300, 29}}</string>
 								<reference key="NSSuperview" ref="900854125"/>
 								<reference key="NSWindow"/>
-								<reference key="NSNextKeyView" ref="1016874767"/>
+								<reference key="NSNextKeyView"/>
 								<bool key="IBUIOpaque">NO</bool>
 								<bool key="IBUIClipsSubviews">YES</bool>
 								<int key="IBUIContentMode">7</int>
@@ -189,7 +189,6 @@
 								<string key="NSFrame">{{164, 348}, {136, 37}}</string>
 								<reference key="NSSuperview" ref="900854125"/>
 								<reference key="NSWindow"/>
-								<reference key="NSNextKeyView"/>
 								<bool key="IBUIOpaque">NO</bool>
 								<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 								<int key="IBUIContentHorizontalAlignment">0</int>
@@ -608,7 +607,7 @@
 						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 					</object>
 				</object>
-				<string key="NSFrame">{{0, 44}, {320, 436}}</string>
+				<string key="NSFrame">{{0, 44}, {320, 404}}</string>
 				<reference key="NSSuperview"/>
 				<reference key="NSWindow"/>
 				<reference key="NSNextKeyView" ref="900854125"/>
@@ -616,24 +615,9 @@
 				<object class="IBUISimulatedNavigationBarMetrics" key="IBUISimulatedTopBarMetrics">
 					<bool key="IBUIPrompted">NO</bool>
 				</object>
-				<object class="IBUIScreenMetrics" key="IBUISimulatedDestinationMetrics">
-					<string key="IBUISimulatedSizeMetricsClass">IBUIScreenMetrics</string>
-					<object class="NSMutableDictionary" key="IBUINormalizedOrientationToSizeMap">
-						<bool key="EncodedWithXMLCoder">YES</bool>
-						<object class="NSArray" key="dict.sortedKeys">
-							<bool key="EncodedWithXMLCoder">YES</bool>
-							<integer value="1"/>
-							<integer value="3"/>
-						</object>
-						<object class="NSArray" key="dict.values">
-							<bool key="EncodedWithXMLCoder">YES</bool>
-							<string>{320, 480}</string>
-							<string>{480, 320}</string>
-						</object>
-					</object>
-					<string key="IBUITargetRuntime">IBCocoaTouchFramework</string>
-					<string key="IBUIDisplayName">Retina 3.5 Full Screen</string>
-					<int key="IBUIType">0</int>
+				<object class="IBUISimulatedSizeMetrics" key="IBUISimulatedDestinationMetrics">
+					<string key="IBUISimulatedSizeMetricsClass">IBUISimulatedFreeformSizeMetricsSentinel</string>
+					<string key="IBUIDisplayName">Freeform</string>
 				</object>
 				<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 			</object>
@@ -762,13 +746,69 @@
 					<int key="connectionID">202</int>
 				</object>
 				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchOutletConnection" key="connection">
+						<string key="label">statusLabel</string>
+						<reference key="source" ref="841351856"/>
+						<reference key="destination" ref="1016874767"/>
+					</object>
+					<int key="connectionID">214</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchOutletConnection" key="connection">
+						<string key="label">coordinatesLabel</string>
+						<reference key="source" ref="841351856"/>
+						<reference key="destination" ref="856956716"/>
+					</object>
+					<int key="connectionID">215</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchOutletConnection" key="connection">
+						<string key="label">typeLabel</string>
+						<reference key="source" ref="841351856"/>
+						<reference key="destination" ref="276510428"/>
+					</object>
+					<int key="connectionID">216</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchOutletConnection" key="connection">
+						<string key="label">heightLabel</string>
+						<reference key="source" ref="841351856"/>
+						<reference key="destination" ref="213079364"/>
+					</object>
+					<int key="connectionID">217</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchOutletConnection" key="connection">
+						<string key="label">elevationLabel</string>
+						<reference key="source" ref="841351856"/>
+						<reference key="destination" ref="512317785"/>
+					</object>
+					<int key="connectionID">218</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchOutletConnection" key="connection">
+						<string key="label">mtaLabel</string>
+						<reference key="source" ref="841351856"/>
+						<reference key="destination" ref="771479449"/>
+					</object>
+					<int key="connectionID">219</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchOutletConnection" key="connection">
+						<string key="label">btaLabel</string>
+						<reference key="source" ref="841351856"/>
+						<reference key="destination" ref="219050827"/>
+					</object>
+					<int key="connectionID">220</int>
+				</object>
+				<object class="IBConnectionRecord">
 					<object class="IBCocoaTouchEventConnection" key="connection">
-						<string key="label">displayMailComposerSheet:</string>
+						<string key="label">displayContactPrompt:</string>
 						<reference key="source" ref="959421578"/>
 						<reference key="destination" ref="841351856"/>
 						<int key="IBEventType">7</int>
 					</object>
-					<int key="connectionID">183</int>
+					<int key="connectionID">221</int>
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBCocoaTouchEventConnection" key="connection">
@@ -1055,7 +1095,7 @@
 				<reference key="dict.values" ref="0"/>
 			</object>
 			<nil key="sourceID"/>
-			<int key="maxID">209</int>
+			<int key="maxID">221</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<object class="NSMutableArray" key="referencedPartialClassDescriptions">
@@ -1068,7 +1108,7 @@
 						<object class="NSArray" key="dict.sortedKeys">
 							<bool key="EncodedWithXMLCoder">YES</bool>
 							<string>dismissAction:</string>
-							<string>displayMailComposerSheet:</string>
+							<string>displayContactPrompt:</string>
 							<string>pageControlTapped:</string>
 							<string>presentModalImage:</string>
 							<string>showDrivingDirections:</string>
@@ -1087,7 +1127,7 @@
 						<object class="NSArray" key="dict.sortedKeys">
 							<bool key="EncodedWithXMLCoder">YES</bool>
 							<string>dismissAction:</string>
-							<string>displayMailComposerSheet:</string>
+							<string>displayContactPrompt:</string>
 							<string>pageControlTapped:</string>
 							<string>presentModalImage:</string>
 							<string>showDrivingDirections:</string>
@@ -1099,7 +1139,7 @@
 								<string key="candidateClassName">id</string>
 							</object>
 							<object class="IBActionInfo">
-								<string key="name">displayMailComposerSheet:</string>
+								<string key="name">displayContactPrompt:</string>
 								<string key="candidateClassName">id</string>
 							</object>
 							<object class="IBActionInfo">
@@ -1120,7 +1160,12 @@
 						<bool key="EncodedWithXMLCoder">YES</bool>
 						<object class="NSArray" key="dict.sortedKeys">
 							<bool key="EncodedWithXMLCoder">YES</bool>
+							<string>btaLabel</string>
+							<string>coordinatesLabel</string>
+							<string>elevationLabel</string>
+							<string>heightLabel</string>
 							<string>imageButton</string>
+							<string>mtaLabel</string>
 							<string>pageControl</string>
 							<string>scrollView</string>
 							<string>siteAddress1</string>
@@ -1132,14 +1177,21 @@
 							<string>siteMTA</string>
 							<string>siteName</string>
 							<string>siteStatus</string>
+							<string>statusLabel</string>
 							<string>structureAGL</string>
 							<string>structureHeight</string>
 							<string>structureType</string>
 							<string>swipeView</string>
+							<string>typeLabel</string>
 						</object>
 						<object class="NSArray" key="dict.values">
 							<bool key="EncodedWithXMLCoder">YES</bool>
+							<string>UILabel</string>
+							<string>UILabel</string>
+							<string>UILabel</string>
+							<string>UILabel</string>
 							<string>UIButton</string>
+							<string>UILabel</string>
 							<string>UIPageControl</string>
 							<string>UIScrollView</string>
 							<string>UILabel</string>
@@ -1154,14 +1206,21 @@
 							<string>UILabel</string>
 							<string>UILabel</string>
 							<string>UILabel</string>
+							<string>UILabel</string>
 							<string>SwipeView</string>
+							<string>UILabel</string>
 						</object>
 					</object>
 					<object class="NSMutableDictionary" key="toOneOutletInfosByName">
 						<bool key="EncodedWithXMLCoder">YES</bool>
 						<object class="NSArray" key="dict.sortedKeys">
 							<bool key="EncodedWithXMLCoder">YES</bool>
+							<string>btaLabel</string>
+							<string>coordinatesLabel</string>
+							<string>elevationLabel</string>
+							<string>heightLabel</string>
 							<string>imageButton</string>
+							<string>mtaLabel</string>
 							<string>pageControl</string>
 							<string>scrollView</string>
 							<string>siteAddress1</string>
@@ -1173,16 +1232,38 @@
 							<string>siteMTA</string>
 							<string>siteName</string>
 							<string>siteStatus</string>
+							<string>statusLabel</string>
 							<string>structureAGL</string>
 							<string>structureHeight</string>
 							<string>structureType</string>
 							<string>swipeView</string>
+							<string>typeLabel</string>
 						</object>
 						<object class="NSArray" key="dict.values">
 							<bool key="EncodedWithXMLCoder">YES</bool>
 							<object class="IBToOneOutletInfo">
+								<string key="name">btaLabel</string>
+								<string key="candidateClassName">UILabel</string>
+							</object>
+							<object class="IBToOneOutletInfo">
+								<string key="name">coordinatesLabel</string>
+								<string key="candidateClassName">UILabel</string>
+							</object>
+							<object class="IBToOneOutletInfo">
+								<string key="name">elevationLabel</string>
+								<string key="candidateClassName">UILabel</string>
+							</object>
+							<object class="IBToOneOutletInfo">
+								<string key="name">heightLabel</string>
+								<string key="candidateClassName">UILabel</string>
+							</object>
+							<object class="IBToOneOutletInfo">
 								<string key="name">imageButton</string>
 								<string key="candidateClassName">UIButton</string>
+							</object>
+							<object class="IBToOneOutletInfo">
+								<string key="name">mtaLabel</string>
+								<string key="candidateClassName">UILabel</string>
 							</object>
 							<object class="IBToOneOutletInfo">
 								<string key="name">pageControl</string>
@@ -1229,6 +1310,10 @@
 								<string key="candidateClassName">UILabel</string>
 							</object>
 							<object class="IBToOneOutletInfo">
+								<string key="name">statusLabel</string>
+								<string key="candidateClassName">UILabel</string>
+							</object>
+							<object class="IBToOneOutletInfo">
 								<string key="name">structureAGL</string>
 								<string key="candidateClassName">UILabel</string>
 							</object>
@@ -1243,6 +1328,10 @@
 							<object class="IBToOneOutletInfo">
 								<string key="name">swipeView</string>
 								<string key="candidateClassName">SwipeView</string>
+							</object>
+							<object class="IBToOneOutletInfo">
+								<string key="name">typeLabel</string>
+								<string key="candidateClassName">UILabel</string>
 							</object>
 						</object>
 					</object>
@@ -1305,6 +1394,6 @@
 			<string key="NS.key.0">logo_small.png</string>
 			<string key="NS.object.0">{85, 28}</string>
 		</object>
-		<string key="IBCocoaTouchPluginVersion">1929</string>
+		<string key="IBCocoaTouchPluginVersion">1930</string>
 	</data>
 </archive>

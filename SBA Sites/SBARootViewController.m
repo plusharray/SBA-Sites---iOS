@@ -18,6 +18,7 @@
 #import "ClearLabelsCellView.h"
 #import "PALocationController.h"
 #import "PAAuthorizationManager.h"
+#import "SketchToolbar.h"
 
 #define kRouteTaskUrl @"http://sampleserver3.arcgisonline.com/ArcGIS/rest/services/Network/USA/NAServer/Route"
 
@@ -315,7 +316,7 @@
 		if ([[self.layers lastObject] layerID] == @(5)) {
 			[self.layers removeObject:[self.layers lastObject]];
 		}
-		_dynamicServiceURL = [NSURL URLWithString:DynamicMapServiceURLAuthenticated];
+		_dynamicServiceURL = [NSURL URLWithString:DynamicMapServiceURL];
 	}
 	[self.mapView removeMapLayerWithName:@"Dynamic Layer"];
 	
@@ -347,7 +348,7 @@
 			_dynamicServiceURL = [NSURL URLWithString:DynamicMapServiceURLAuthenticated];
 		} else {
 			layerCount = 5;
-			_dynamicServiceURL = [NSURL URLWithString:DynamicMapServiceURLAuthenticated];
+			_dynamicServiceURL = [NSURL URLWithString:DynamicMapServiceURL];
 		}
 		
 		NSMutableArray *allLayers = [[NSMutableArray alloc] initWithCapacity:layerCount];
@@ -379,7 +380,7 @@
 	if ([[PAAuthorizationManager sharedManager] isLoggedIn]) {
 		self.dynamicServiceURL = [NSURL URLWithString:DynamicMapServiceURLAuthenticated];
 	} else {
-		self.dynamicServiceURL = [NSURL URLWithString:DynamicMapServiceURLAuthenticated];
+		self.dynamicServiceURL = [NSURL URLWithString:DynamicMapServiceURL];
 	}
 	
     // set the delegate for the map view
@@ -413,12 +414,19 @@
 	self.graphicsLayer = [AGSGraphicsLayer graphicsLayer];
 	[self.mapView addMapLayer:self.graphicsLayer withName:@"Graphics Layer"];
 	
-	//create identify task
-	self.identifyTask = [AGSIdentifyTask identifyTaskWithURL:[NSURL URLWithString:DynamicMapServiceURL]];
-	self.identifyTask.delegate = self;
-	
 	//create identify parameters
 	self.identifyParams = [[AGSIdentifyParameters alloc] init];
+	
+	// Setup the route task
+	NSURL *routeTaskUrl = [NSURL URLWithString:kRouteTaskUrl];
+	self.routeTask = [AGSRouteTask routeTaskWithURL:routeTaskUrl];
+    
+    // assign delegate to this view controller
+	self.routeTask.delegate = self;
+	
+	// kick off asynchronous method to retrieve default parameters
+	// for the route task
+	[self.routeTask retrieveDefaultRouteTaskParameters];
     
     AGSSpatialReference *sr = [AGSSpatialReference spatialReferenceWithWKID:4326];
 	double xmin, ymin, xmax, ymax;
@@ -441,7 +449,7 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(layerSelected:) name:SBALayerSelected object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(mapTypeChanged:) name:SBAMapTypeChanged object:nil];
 	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(loginEvent:) name:PAAuthorizationManagerDidLogin object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(loginEvent:) name:PAAuthorizationManagerDidFailLogin object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(loginEvent:) name:PAAuthorizationManagerDidLogout object:nil];
 	
 	// Start Location Controller
 	self.locationController = [PALocationController sharedController];
@@ -511,13 +519,17 @@
     //store for later use
     self.mappoint = mappoint;
     
+	//create identify task
+	self.identifyTask = [AGSIdentifyTask identifyTaskWithURL:self.dynamicServiceURL];
+	self.identifyTask.delegate = self;
+	
 	self.identifyParams.layerIds = [self.visibleLayers valueForKey:@"layerID"];
 	self.identifyParams.tolerance = 12;
 	self.identifyParams.geometry = self.mappoint;
 	self.identifyParams.size = self.mapView.bounds.size;
 	self.identifyParams.mapEnvelope = self.mapView.visibleArea.envelope;
 	self.identifyParams.returnGeometry = YES;
-	self.identifyParams.layerOption = AGSIdentifyParametersLayerOptionAll;
+	self.identifyParams.layerOption = AGSIdentifyParametersLayerOptionVisible;
 	self.identifyParams.spatialReference = self.mapView.spatialReference;
     
 	//execute the task
@@ -576,10 +588,17 @@
             }
         } else {
             //get the site code & name
-            NSString *siteCode = [result.feature.attributes objectForKey:@"SiteCode"];
-            NSString *siteName = [result.feature.attributes objectForKey:@"SiteName"];
-            self.mapView.callout.title = siteCode;
-            self.mapView.callout.detail = siteName;
+            NSString *title = nil;
+            NSString *subtitle = nil;
+			if (result.layerId != 5) {
+				title = [result.feature.attributes objectForKey:@"SiteCode"];
+				subtitle = [result.feature.attributes objectForKey:@"SiteName"];
+			} else {
+				title = [result.feature.attributes objectForKey:@"company"];
+				subtitle = [result.feature.attributes objectForKey:@"identifier"];
+			}
+            self.mapView.callout.title = title;
+            self.mapView.callout.detail = subtitle;
             //show callout
             [self.mapView showCalloutAtPoint:self.mappoint forGraphic:((AGSIdentifyResult*)[results objectAtIndex:0]).feature animated:YES];
             
@@ -1345,17 +1364,6 @@
 		return;
 	}
 	
-	// Setup the route task
-	NSURL *routeTaskUrl = [NSURL URLWithString:kRouteTaskUrl];
-	self.routeTask = [AGSRouteTask routeTaskWithURL:routeTaskUrl];
-    
-    // assign delegate to this view controller
-	self.routeTask.delegate = self;
-	
-	// kick off asynchronous method to retrieve default parameters
-	// for the route task
-	[self.routeTask retrieveDefaultRouteTaskParameters];
-	
 	NSMutableArray *stops = [NSMutableArray array];
 	NSMutableArray *polygonBarriers = [NSMutableArray array];
 	
@@ -1415,13 +1423,57 @@
 		[self.view addSubview:self.measureToolbar];
 	}
 	[self.searchDisplayController.searchBar setHidden:YES];
+	self.directionsLabel.text = @"";
+	self.directionsBannerView.hidden = NO;
+	//Show magnifier to help with sketching
+	self.mapView.showMagnifierOnTapAndHold = YES;
+	
+	//Graphics layer to hold all sketches (points, polylines, and polygons)
+	AGSGraphicsLayer* graphicsLayer = [AGSGraphicsLayer graphicsLayer];
+	[self.mapView addMapLayer:graphicsLayer withName:@"Sketch Graphics Layer"];
+	
+	//A composite symbol for the graphics layer's renderer to symbolize the sketches
+	AGSCompositeSymbol* composite = [AGSCompositeSymbol compositeSymbol];
+	AGSSimpleMarkerSymbol* markerSymbol = [[AGSSimpleMarkerSymbol alloc] init];
+	markerSymbol.style = AGSSimpleMarkerSymbolStyleSquare;
+	markerSymbol.color = [UIColor greenColor];
+	[composite.symbols addObject:markerSymbol];
+	AGSSimpleLineSymbol* lineSymbol = [[AGSSimpleLineSymbol alloc] init];
+	lineSymbol.color= [UIColor grayColor];
+	lineSymbol.width = 4;
+	[composite.symbols addObject:lineSymbol];
+	AGSSimpleFillSymbol* fillSymbol = [[AGSSimpleFillSymbol alloc] init];
+	fillSymbol.color = [UIColor colorWithRed:1.0 green:1.0 blue:0 alpha:0.5] ;
+	[composite.symbols addObject:fillSymbol];
+	AGSSimpleRenderer* renderer = [AGSSimpleRenderer simpleRendererWithSymbol:composite];
+	graphicsLayer.renderer = renderer;
+	
+	//Sketch layer
+	AGSSketchGraphicsLayer* sketchLayer = [[AGSSketchGraphicsLayer alloc] initWithGeometry:nil];
+	[self.mapView addMapLayer:sketchLayer withName:@"Sketch Layer"];
+	
+	//Helper class to manage the UI toolbar, Sketch Layer, and Graphics Layer
+	//Basically, where the magic happens
+	self.sketchToolbar = [[SketchToolbar alloc] initWithToolbar:self.measureToolbar
+													sketchLayer:sketchLayer
+														mapView:self.mapView
+												  graphicsLayer:graphicsLayer
+													   andLabel:_directionsLabel];
 }
 
 - (void)hideMeasureToolbar
 {
+	//Remove sketch layers
+	[self.mapView removeMapLayerWithName:@"Sketch Graphics Layer"];
+	[self.mapView removeMapLayerWithName:@"Sketch Layer"];
 	[self.searchDisplayController.searchBar setHidden:NO];
 	[self.measureToolbar removeFromSuperview];
+	self.directionsLabel.text = @"";
 	self.directionsBannerView.hidden = YES;
+	
+	//Don't show magnifier to help with sketching
+	self.mapView.showMagnifierOnTapAndHold = NO;
+	self.mapView.touchDelegate = self;
 }
 
 

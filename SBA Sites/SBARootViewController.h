@@ -13,6 +13,7 @@
 #import "SBASiteDetailViewController.h"
 
 @class PALocationController;
+@class SketchToolbar;
 
 @interface SBARootViewController : UIViewController <UITableViewDelegate, UITableViewDataSource, AGSMapViewLayerDelegate, AGSMapViewCalloutDelegate, AGSMapViewTouchDelegate, AGSIdentifyTaskDelegate, UISearchDisplayDelegate, UISearchBarDelegate, ABPeoplePickerNavigationControllerDelegate, ABPersonViewControllerDelegate, BSForwardGeocoderDelegate, AGSFindTaskDelegate, UIPopoverControllerDelegate, AGSRouteTaskDelegate, SBARouteRequestDelegate>
 
@@ -64,6 +65,8 @@
 @property (nonatomic, strong) AGSDirectionGraphic *currentDirectionGraphic;
 @property (nonatomic, strong) IBOutlet UIView *directionsBannerView;
 @property (nonatomic, strong) IBOutlet UILabel *directionsLabel;
+
+@property (nonatomic, strong) SketchToolbar *sketchToolbar;
 
 - (IBAction)mapType:(UISegmentedControl *)segmentPick;
 - (IBAction)toggleLayer:(id)sender;

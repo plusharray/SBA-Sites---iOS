@@ -11,7 +11,7 @@
 #import "MKNetworkOperation.h"
 
 NSString * const PAAuthorizationManagerDidLogin = @"PAAuthorizationManagerDidLogin";
-NSString * const PAAuthorizationManagerDidFailLogin = @"PAAuthorizationManagerDidFailLogin";
+NSString * const PAAuthorizationManagerDidLogout = @"PAAuthorizationManagerDidFailLogin";
 
 @interface PAAuthorizationManager ()
 
@@ -42,6 +42,18 @@ NSString * const PAAuthorizationManagerDidFailLogin = @"PAAuthorizationManagerDi
 		_username = [_wrapper objectForKey:(__bridge id)(kSecAttrAccount)];
     }
     return self;
+}
+
+- (void)logout:(id)sender
+{
+	self.username = @"";
+	// Clear credentials from keychain
+	[self.wrapper setObject:@"" forKey:(__bridge id)(kSecAttrAccount)];
+	[self.wrapper setObject:@"" forKey:(__bridge id)(kSecValueData)];
+	
+	[self setLoggedIn:NO];
+	
+	[[NSNotificationCenter defaultCenter] postNotificationName:PAAuthorizationManagerDidLogout object:nil];
 }
 
 - (void)authenticateWithStoredCredentials
@@ -78,13 +90,14 @@ NSString * const PAAuthorizationManagerDidFailLogin = @"PAAuthorizationManagerDi
 			response(operation);
 	} onError:^(NSError *theError) {
 		dispatch_async(dispatch_get_main_queue(), ^{
+			self.username = @"";
 			// Clear credentials from keychain
 			[self.wrapper setObject:@"" forKey:(__bridge id)(kSecAttrAccount)];
 			[self.wrapper setObject:@"" forKey:(__bridge id)(kSecValueData)];
 			
 			[self setLoggedIn:NO];
 			
-			[[NSNotificationCenter defaultCenter] postNotificationName:PAAuthorizationManagerDidFailLogin object:theError];
+			[[NSNotificationCenter defaultCenter] postNotificationName:PAAuthorizationManagerDidLogout object:theError];
 		});
 		if (error)
 			error(theError);
