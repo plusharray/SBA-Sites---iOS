@@ -19,13 +19,22 @@
 
 - (void)viewDidLoad
 {
+	[super viewDidLoad];
     self.title= @"Login Credentials";
     //get the latest credentials - now you have the set values
     self.username.text = [[PAAuthorizationManager sharedManager] username];
     self.password.text = @"";
-    
-    [super viewDidLoad];
-    // Do any additional setup after loading the view from its nib.
+	
+	if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
+		
+	} else {
+		UIToolbar *toolbar = [[UIToolbar alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, 44)];
+		UIBarButtonItem *flexibleSpace = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil];
+		UIBarButtonItem *doneButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(done:)];
+		[toolbar setItems:@[flexibleSpace, doneButton]];
+		self.view.frame = CGRectMake(0, 44, 320, self.view.window.bounds.size.height - 44);
+		[self.view addSubview:toolbar];
+	}
 }
 
 - (void)viewDidUnload {
@@ -74,7 +83,11 @@
 
 - (IBAction)done:(id)sender
 {
-	[self dismissViewControllerAnimated:YES completion:nil];
+	if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
+		[self.navigationController popToRootViewControllerAnimated:YES];
+	} else {
+		[self dismissViewControllerAnimated:YES completion:nil];
+	}
 }
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField

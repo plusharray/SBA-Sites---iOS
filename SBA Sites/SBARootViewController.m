@@ -84,6 +84,7 @@
 {
     SBASiteTableViewController *viewController = [[SBASiteTableViewController alloc] initWithNibName:@"SBASiteTableViewController" bundle:nil];
     [viewController setMapView:self.mapView];
+	[viewController setDynamicServiceURL:self.dynamicServiceURL];
     [viewController setLayers:self.visibleLayers];
     [viewController getSites];
     if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone) {
@@ -119,8 +120,8 @@
     } else {
         if (!self.masterPopoverController.popoverVisible) {
             SBASearchViewController *viewController = [[SBASearchViewController alloc] initWithNibName:@"SBASearchViewController" bundle:nil];
-            //viewController.mapView = self.mapView;
-            //viewController.visibleLayers = self.visibleLayers;
+            viewController.mapView = self.mapView;
+            viewController.visibleLayers = self.visibleLayers;
 			self.masterPopoverController = [[UIPopoverController alloc] initWithContentViewController:viewController];
 			self.masterPopoverController.delegate = self;
 			[self.masterPopoverController presentPopoverFromBarButtonItem:self.showSearchBarButton
@@ -301,6 +302,32 @@
 	lyr.drawDuringZooming = YES;
 }
 
+- (void)setupToolbar
+{
+    if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad)
+    {
+        self.selectedMapType = 0;
+        self.buttons = [NSMutableArray arrayWithCapacity:5];
+        for (SBALayer *aLayer in self.layers) {
+            // Make Button to control visibility of layer
+            UIButton *layerButton = [[[NSBundle mainBundle] loadNibNamed:@"LayerButton" owner:self options:nil] objectAtIndex:0];
+            layerButton.titleLabel.font = [UIFont systemFontOfSize: 12];
+            [layerButton setTitle:aLayer.name forState:UIControlStateNormal];
+            [layerButton setImage:aLayer.image forState:UIControlStateNormal];
+            layerButton.tag = [self.layers indexOfObject:aLayer];
+            if (aLayer.layerID.intValue == 0) {
+                layerButton.frame = CGRectMake(0.0f, 0.0f, 124.0f, 42.0f);
+            } else {
+                layerButton.frame = CGRectMake(0.0f, 0.0f, 120.0f, 42.0f);
+            }
+            // create a bar button item to hold the new button
+            UIBarButtonItem *buttonBarButton = [[UIBarButtonItem alloc] initWithCustomView:layerButton];
+            [self.buttons addObject:buttonBarButton];
+        }
+        [self.toolbar setItems:self.buttons];
+    }
+}
+
 - (void)loginEvent:(NSNotification *)notification
 {
 	// Set up the layers
@@ -309,11 +336,13 @@
 			[self.layers addObject:[SBALayer layerForID:5]];
 		}
 		_dynamicServiceURL = [NSURL URLWithString:DynamicMapServiceURLAuthenticated];
+		[self setupToolbar];
 	} else {
 		if ([[self.layers lastObject] layerID] == @(5)) {
 			[self.layers removeObject:[self.layers lastObject]];
 		}
 		_dynamicServiceURL = [NSURL URLWithString:DynamicMapServiceURL];
+		[self setupToolbar];
 	}
 	[self.mapView removeMapLayerWithName:@"Dynamic Layer"];
 	
@@ -457,24 +486,7 @@
     // Setup the MapView
     [self setupMapView];
 	
-    if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad)
-    {
-        self.selectedMapType = 0;
-        self.buttons = [NSMutableArray arrayWithCapacity:5];
-        for (SBALayer *aLayer in self.layers) {
-            // Make Button to control visibility of layer
-            UIButton *layerButton = [[[NSBundle mainBundle] loadNibNamed:@"LayerButton" owner:self options:nil] objectAtIndex:0];
-            layerButton.titleLabel.font = [UIFont systemFontOfSize: 12];
-            [layerButton setTitle:aLayer.name forState:UIControlStateNormal];
-            [layerButton setImage:aLayer.image forState:UIControlStateNormal];
-            layerButton.tag = [self.layers indexOfObject:aLayer];
-            layerButton.frame = CGRectMake(0.0f, 0.0f, 130.0f, 42.0f);
-            // create a bar button item to hold the new button
-            UIBarButtonItem *buttonBarButton = [[UIBarButtonItem alloc] initWithCustomView:layerButton];
-            [self.buttons addObject:buttonBarButton];
-        }
-        [self.toolbar setItems:self.buttons];
-    }
+    [self setupToolbar];
 }
 
 - (void)viewDidUnload
@@ -574,7 +586,7 @@
         
         if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
             if (!self.masterPopoverController.popoverVisible) {
-                SBASiteDetailViewController *viewController = [[SBASiteDetailViewController alloc] initWithNibName:@"DetailViewController-iPad" bundle:nil];
+                SBASiteDetailViewController *viewController = [[SBASiteDetailViewController alloc] initWithNibName:@"SBASiteDetailViewController" bundle:nil];
                 viewController.site = result.feature;
                 viewController.contentSizeForViewInPopover = CGSizeMake(320.0, 416.0);
                 self.masterPopoverController = [[UIPopoverController alloc] initWithContentViewController:viewController];
@@ -1309,15 +1321,25 @@
 - (void)showRouteToolbar
 {
 	if (![self.view.subviews containsObject:self.routeToolbar]) {
-		[self.routeToolbar setFrame:CGRectMake(0, 0, self.view.bounds.size.width, 44)];
-		[self.view addSubview:self.routeToolbar];
+		if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
+			[self.routeToolbar setFrame:self.toolbar.frame];
+			[self.view addSubview:self.routeToolbar];
+			[self.toolbar setHidden:YES];
+		} else {
+			[self.routeToolbar setFrame:self.searchDisplayController.searchBar.frame];
+			[self.view addSubview:self.routeToolbar];
+			[self.searchDisplayController.searchBar setHidden:YES];
+		}
 	}
-	[self.searchDisplayController.searchBar setHidden:YES];
 }
 
 - (void)hideRouteToolbar
 {
-	[self.searchDisplayController.searchBar setHidden:NO];
+	if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
+		[self.toolbar setHidden:NO];
+	} else {
+		[self.searchDisplayController.searchBar setHidden:NO];
+	}
 	[self.routeToolbar removeFromSuperview];
 	self.directionsBannerView.hidden = YES;
 }
@@ -1415,10 +1437,17 @@
 - (void)showMeasureToolbar
 {
 	if (![self.view.subviews containsObject:self.measureToolbar]) {
-		[self.measureToolbar setFrame:CGRectMake(0, 0, self.view.bounds.size.width, 44)];
-		[self.view addSubview:self.measureToolbar];
+		if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
+			[self.measureToolbar setFrame:self.toolbar.frame];
+			[self.view addSubview:self.measureToolbar];
+			[self.toolbar setHidden:YES];
+		} else {
+			[self.measureToolbar setFrame:self.searchDisplayController.searchBar.frame];
+			[self.view addSubview:self.measureToolbar];
+			[self.searchDisplayController.searchBar setHidden:YES];
+		}
 	}
-	[self.searchDisplayController.searchBar setHidden:YES];
+	
 	self.directionsLabel.text = @"";
 	self.directionsBannerView.hidden = NO;
 	//Show magnifier to help with sketching
@@ -1459,10 +1488,15 @@
 
 - (void)hideMeasureToolbar
 {
+	if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
+		[self.toolbar setHidden:NO];
+	} else {
+		[self.searchDisplayController.searchBar setHidden:NO];
+	}
 	//Remove sketch layers
 	[self.mapView removeMapLayerWithName:@"Sketch Graphics Layer"];
 	[self.mapView removeMapLayerWithName:@"Sketch Layer"];
-	[self.searchDisplayController.searchBar setHidden:NO];
+	
 	[self.measureToolbar removeFromSuperview];
 	self.directionsLabel.text = @"";
 	self.directionsBannerView.hidden = YES;
@@ -1471,6 +1505,5 @@
 	self.mapView.showMagnifierOnTapAndHold = NO;
 	self.mapView.touchDelegate = self;
 }
-
 
 @end

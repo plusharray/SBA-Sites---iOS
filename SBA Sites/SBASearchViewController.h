@@ -27,7 +27,8 @@
 @property (nonatomic, strong) NSString *savedSearchTerm;
 @property (nonatomic, strong) BSForwardGeocoder *forwardGeocoder;
 @property (nonatomic, strong) AGSFindTask *findTask;
-
+@property (nonatomic, strong) NSURL *dynamicServiceURL;
+@property (nonatomic, strong) NSArray *visibleLayers;
 
 
 @end

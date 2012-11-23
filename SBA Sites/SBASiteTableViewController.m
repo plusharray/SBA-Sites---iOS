@@ -32,6 +32,13 @@
 
 - (void)getSites
 {
+	//create identify task
+	self.identifyTask = [AGSIdentifyTask identifyTaskWithURL:self.dynamicServiceURL];
+	self.identifyTask.delegate = self;
+	
+	//create identify parameters
+	self.identifyParams = [[AGSIdentifyParameters alloc] init];
+	
     self.identifyParams.layerIds = [self.layers valueForKey:@"layerID"];
     self.identifyParams.geometry = self.mapView.visibleArea;
 	self.identifyParams.tolerance = 1;
@@ -58,12 +65,7 @@
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
-        //create identify task
-        self.identifyTask = [AGSIdentifyTask identifyTaskWithURL:[NSURL URLWithString:DynamicMapServiceURL]];
-        self.identifyTask.delegate = self;
         
-        //create identify parameters
-        self.identifyParams = [[AGSIdentifyParameters alloc] init];
     }
     return self;
 }

@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <archive type="com.apple.InterfaceBuilder3.CocoaTouch.iPad.XIB" version="7.10">
 	<data>
-		<int key="IBDocument.SystemTarget">1280</int>
-		<string key="IBDocument.SystemVersion">11C74</string>
-		<string key="IBDocument.InterfaceBuilderVersion">1938</string>
-		<string key="IBDocument.AppKitVersion">1138.23</string>
-		<string key="IBDocument.HIToolboxVersion">567.00</string>
+		<int key="IBDocument.SystemTarget">1536</int>
+		<string key="IBDocument.SystemVersion">12C60</string>
+		<string key="IBDocument.InterfaceBuilderVersion">2844</string>
+		<string key="IBDocument.AppKitVersion">1187.34</string>
+		<string key="IBDocument.HIToolboxVersion">625.00</string>
 		<object class="NSMutableDictionary" key="IBDocument.PluginVersions">
 			<string key="NS.key.0">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
-			<string key="NS.object.0">933</string>
+			<string key="NS.object.0">1930</string>
 		</object>
 		<object class="NSArray" key="IBDocument.IntegratedClassDependencies">
 			<bool key="EncodedWithXMLCoder">YES</bool>
@@ -36,10 +36,9 @@
 			<object class="IBUIButton" id="688830122">
 				<reference key="NSNextResponder"/>
 				<int key="NSvFlags">319</int>
-				<string key="NSFrameSize">{139, 42}</string>
+				<string key="NSFrameSize">{122, 42}</string>
 				<reference key="NSSuperview"/>
 				<reference key="NSWindow"/>
-				<reference key="NSNextKeyView"/>
 				<object class="NSColor" key="IBUIBackgroundColor">
 					<int key="NSColorSpace">3</int>
 					<bytes key="NSWhite">MCAwAA</bytes>
@@ -70,14 +69,12 @@
 					<string key="NSResourceName">Owned.png</string>
 				</object>
 				<object class="IBUIFontDescription" key="IBUIFontDescription">
-					<string key="name">Helvetica</string>
-					<string key="family">Helvetica</string>
-					<int key="traits">0</int>
-					<double key="pointSize">13</double>
+					<int key="type">1</int>
+					<double key="pointSize">10</double>
 				</object>
 				<object class="NSFont" key="IBUIFont">
 					<string key="NSName">Helvetica</string>
-					<double key="NSSize">13</double>
+					<double key="NSSize">10</double>
 					<int key="NSfFlags">16</int>
 				</object>
 			</object>
@@ -133,14 +130,16 @@
 					<string>-2.CustomClassName</string>
 					<string>-2.IBPluginDependency</string>
 					<string>6.IBPluginDependency</string>
+					<string>6.IBUIButtonInspectorSelectedStateConfigurationMetadataKey</string>
 				</object>
-				<object class="NSMutableArray" key="dict.values">
+				<object class="NSArray" key="dict.values">
 					<bool key="EncodedWithXMLCoder">YES</bool>
 					<string>SBARootViewController</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<string>UIResponder</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
+					<real value="0.0"/>
 				</object>
 			</object>
 			<object class="NSMutableDictionary" key="unlocalizedProperties">
@@ -176,16 +175,24 @@
 						<object class="NSArray" key="dict.sortedKeys">
 							<bool key="EncodedWithXMLCoder">YES</bool>
 							<string>mapType:</string>
+							<string>nextTurn:</string>
+							<string>previousTurn:</string>
+							<string>resetRoute:</string>
 							<string>showInfo:</string>
 							<string>showLayerList:</string>
+							<string>showMeasuringTools:</string>
 							<string>showSearch:</string>
 							<string>showSiteList:</string>
 							<string>toggleLayer:</string>
 							<string>userLocationButtonTapped:</string>
 						</object>
-						<object class="NSMutableArray" key="dict.values">
+						<object class="NSArray" key="dict.values">
 							<bool key="EncodedWithXMLCoder">YES</bool>
 							<string>UISegmentedControl</string>
+							<string>id</string>
+							<string>id</string>
+							<string>id</string>
+							<string>id</string>
 							<string>id</string>
 							<string>id</string>
 							<string>id</string>
@@ -199,18 +206,34 @@
 						<object class="NSArray" key="dict.sortedKeys">
 							<bool key="EncodedWithXMLCoder">YES</bool>
 							<string>mapType:</string>
+							<string>nextTurn:</string>
+							<string>previousTurn:</string>
+							<string>resetRoute:</string>
 							<string>showInfo:</string>
 							<string>showLayerList:</string>
+							<string>showMeasuringTools:</string>
 							<string>showSearch:</string>
 							<string>showSiteList:</string>
 							<string>toggleLayer:</string>
 							<string>userLocationButtonTapped:</string>
 						</object>
-						<object class="NSMutableArray" key="dict.values">
+						<object class="NSArray" key="dict.values">
 							<bool key="EncodedWithXMLCoder">YES</bool>
 							<object class="IBActionInfo">
 								<string key="name">mapType:</string>
 								<string key="candidateClassName">UISegmentedControl</string>
+							</object>
+							<object class="IBActionInfo">
+								<string key="name">nextTurn:</string>
+								<string key="candidateClassName">id</string>
+							</object>
+							<object class="IBActionInfo">
+								<string key="name">previousTurn:</string>
+								<string key="candidateClassName">id</string>
+							</object>
+							<object class="IBActionInfo">
+								<string key="name">resetRoute:</string>
+								<string key="candidateClassName">id</string>
 							</object>
 							<object class="IBActionInfo">
 								<string key="name">showInfo:</string>
@@ -218,6 +241,10 @@
 							</object>
 							<object class="IBActionInfo">
 								<string key="name">showLayerList:</string>
+								<string key="candidateClassName">id</string>
+							</object>
+							<object class="IBActionInfo">
+								<string key="name">showMeasuringTools:</string>
 								<string key="candidateClassName">id</string>
 							</object>
 							<object class="IBActionInfo">
@@ -242,7 +269,15 @@
 						<bool key="EncodedWithXMLCoder">YES</bool>
 						<object class="NSArray" key="dict.sortedKeys">
 							<bool key="EncodedWithXMLCoder">YES</bool>
+							<string>directionsBannerView</string>
+							<string>directionsLabel</string>
+							<string>leftArrowButton</string>
+							<string>mapTypeSegmentedControl</string>
 							<string>mapView</string>
+							<string>measureButton</string>
+							<string>measureToolbar</string>
+							<string>rightArrowButton</string>
+							<string>routeToolbar</string>
 							<string>showInfoButton</string>
 							<string>showLayerListPopoverButton</string>
 							<string>showSearchBarButton</string>
@@ -250,9 +285,17 @@
 							<string>toolbar</string>
 							<string>userLocationButton</string>
 						</object>
-						<object class="NSMutableArray" key="dict.values">
+						<object class="NSArray" key="dict.values">
 							<bool key="EncodedWithXMLCoder">YES</bool>
+							<string>UIView</string>
+							<string>UILabel</string>
+							<string>UIBarButtonItem</string>
+							<string>UIBarButtonItem</string>
 							<string>AGSMapView</string>
+							<string>UIBarButtonItem</string>
+							<string>UIToolbar</string>
+							<string>UIBarButtonItem</string>
+							<string>UIToolbar</string>
 							<string>UIBarButtonItem</string>
 							<string>UIBarButtonItem</string>
 							<string>UIBarButtonItem</string>
@@ -265,7 +308,15 @@
 						<bool key="EncodedWithXMLCoder">YES</bool>
 						<object class="NSArray" key="dict.sortedKeys">
 							<bool key="EncodedWithXMLCoder">YES</bool>
+							<string>directionsBannerView</string>
+							<string>directionsLabel</string>
+							<string>leftArrowButton</string>
+							<string>mapTypeSegmentedControl</string>
 							<string>mapView</string>
+							<string>measureButton</string>
+							<string>measureToolbar</string>
+							<string>rightArrowButton</string>
+							<string>routeToolbar</string>
 							<string>showInfoButton</string>
 							<string>showLayerListPopoverButton</string>
 							<string>showSearchBarButton</string>
@@ -273,11 +324,43 @@
 							<string>toolbar</string>
 							<string>userLocationButton</string>
 						</object>
-						<object class="NSMutableArray" key="dict.values">
+						<object class="NSArray" key="dict.values">
 							<bool key="EncodedWithXMLCoder">YES</bool>
+							<object class="IBToOneOutletInfo">
+								<string key="name">directionsBannerView</string>
+								<string key="candidateClassName">UIView</string>
+							</object>
+							<object class="IBToOneOutletInfo">
+								<string key="name">directionsLabel</string>
+								<string key="candidateClassName">UILabel</string>
+							</object>
+							<object class="IBToOneOutletInfo">
+								<string key="name">leftArrowButton</string>
+								<string key="candidateClassName">UIBarButtonItem</string>
+							</object>
+							<object class="IBToOneOutletInfo">
+								<string key="name">mapTypeSegmentedControl</string>
+								<string key="candidateClassName">UIBarButtonItem</string>
+							</object>
 							<object class="IBToOneOutletInfo">
 								<string key="name">mapView</string>
 								<string key="candidateClassName">AGSMapView</string>
+							</object>
+							<object class="IBToOneOutletInfo">
+								<string key="name">measureButton</string>
+								<string key="candidateClassName">UIBarButtonItem</string>
+							</object>
+							<object class="IBToOneOutletInfo">
+								<string key="name">measureToolbar</string>
+								<string key="candidateClassName">UIToolbar</string>
+							</object>
+							<object class="IBToOneOutletInfo">
+								<string key="name">rightArrowButton</string>
+								<string key="candidateClassName">UIBarButtonItem</string>
+							</object>
+							<object class="IBToOneOutletInfo">
+								<string key="name">routeToolbar</string>
+								<string key="candidateClassName">UIToolbar</string>
 							</object>
 							<object class="IBToOneOutletInfo">
 								<string key="name">showInfoButton</string>
@@ -316,7 +399,7 @@
 		<string key="IBDocument.TargetRuntimeIdentifier">IBIPadFramework</string>
 		<object class="NSMutableDictionary" key="IBDocument.PluginDeclaredDependencyDefaults">
 			<string key="NS.key.0">com.apple.InterfaceBuilder.CocoaTouchPlugin.iPhoneOS</string>
-			<real value="1280" key="NS.object.0"/>
+			<real value="1536" key="NS.object.0"/>
 		</object>
 		<object class="NSMutableDictionary" key="IBDocument.PluginDeclaredDevelopmentDependencies">
 			<string key="NS.key.0">com.apple.InterfaceBuilder.CocoaTouchPlugin.InterfaceBuilder3</string>
@@ -331,12 +414,12 @@
 				<string>Disabled.png</string>
 				<string>Owned.png</string>
 			</object>
-			<object class="NSMutableArray" key="dict.values">
+			<object class="NSArray" key="dict.values">
 				<bool key="EncodedWithXMLCoder">YES</bool>
 				<string>{32, 39}</string>
 				<string>{32, 39}</string>
 			</object>
 		</object>
-		<string key="IBCocoaTouchPluginVersion">933</string>
+		<string key="IBCocoaTouchPluginVersion">1930</string>
 	</data>
 </archive>

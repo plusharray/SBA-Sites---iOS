@@ -25,8 +25,13 @@
 		[UIAlertView alertViewWithTitle:@"Logged Out" message:@"You have successfully logged out."];
 	} else {
 		UserCredentialsViewController *userCredentialsViewController = [[UserCredentialsViewController alloc] initWithNibName:@"UserCredentialsViewController" bundle:nil];
-		// Pass the selected object to the new view controller.
-		[self.navigationController presentViewController:userCredentialsViewController animated:YES completion:nil];
+		if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
+			[userCredentialsViewController setContentSizeForViewInPopover:CGSizeMake(320, 504)];
+			[self.navigationController pushViewController:userCredentialsViewController animated:YES];
+		} else {
+			[self.navigationController presentViewController:userCredentialsViewController animated:YES completion:nil];
+		}
+		
 	}
 }
 

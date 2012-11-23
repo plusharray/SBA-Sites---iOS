@@ -8,7 +8,6 @@
 
 #import "SBASearchViewController.h"
 #import <AddressBook/AddressBook.h>
-#import "SBAMapViewController.h"
 
 @interface SBASearchViewController (Private)
 - (void)searchForString:(NSString *)searchString;
@@ -39,10 +38,10 @@
 	
 	[self.navigationController setNavigationBarHidden:YES animated:NO];
 	[self.navigationController setToolbarHidden:YES animated:NO];
-	
-	self.mapViewController = [[SBAMapViewController alloc] init];
-	
-	self.mapViewController.mapView = self.mapView;
+//	
+//	self.mapViewController = [[SBAMapViewController alloc] init];
+//	
+//	self.mapViewController.mapView = self.mapView;
 }
 
 - (void)viewDidUnload
@@ -281,12 +280,12 @@
     // Find Task
     self.searchActiveDB = YES;
     if (!self.findTask) {
-        self.findTask = [[AGSFindTask alloc] initWithURL:[NSURL URLWithString:DynamicMapServiceURL]];
+        self.findTask = [[AGSFindTask alloc] initWithURL:self.dynamicServiceURL];
         self.findTask.delegate = self;
     }
     AGSFindParameters *params = [[AGSFindParameters alloc] init];
     params.contains = YES;
-    params.layerIds = [self.mapViewController.visibleLayers valueForKey:@"layerID"];
+    params.layerIds = [self.visibleLayers valueForKey:@"layerID"];
     params.outSpatialReference = self.mapView.spatialReference;
     params.returnGeometry = NO;
     params.searchFields = @[@"SiteName", @"SiteCode"];

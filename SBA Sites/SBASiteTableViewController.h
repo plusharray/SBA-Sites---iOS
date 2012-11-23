@@ -17,6 +17,7 @@
 @property (nonatomic, strong) AGSIdentifyParameters *identifyParams;
 @property (nonatomic, strong) NSArray *layers;
 @property (nonatomic, strong) NSArray *sites;
+@property (nonatomic, strong) NSURL *dynamicServiceURL;
 
 - (void)getSites;
 - (IBAction)dismissSelf:(id)sender;
