@@ -62,6 +62,11 @@
 		self.siteMTA.text = [self.site.attributes valueForKey:@"MtaName"];
 		self.btaLabel.text = @"FCC Reg. #:";
 		self.siteBTA.text = [self.site.attributes valueForKey:@"BtaName"];
+		
+		NSString *pathString = [NSString stringWithFormat:@"http://map.sbasite.com/Mobile/GetImage?SiteCode=%@&width=600&height=600", [self.site.attributes valueForKey:@"SiteCode"]];
+		SEL method = @selector(getImageForPath:);
+		NSInvocationOperation *op = [[NSInvocationOperation alloc] initWithTarget:self selector:method object:pathString];
+		[[self retrieverQueue] addOperation:op];
 	} else {
 		self.title = [self.site.attributes valueForKey:@"identifier"];
 		self.siteName.text = [self.site.attributes valueForKey:@"company"];
@@ -81,11 +86,6 @@
 		self.btaLabel.text = @"FCC Reg. #:";
 		self.siteBTA.text = [self.site.attributes valueForKey:@"fcc_reg_num"];
 	}
-	
-	//	NSString *pathString = [NSString stringWithFormat:@"http://map.sbasite.com/Mobile/GetImage?SiteCode=%@&width=600&height=600", [self.site.attributes valueForKey:@"SiteCode"]];
-	//	SEL method = @selector(getImageForPath:);
-	//	NSInvocationOperation *op = [[NSInvocationOperation alloc] initWithTarget:self selector:method object:pathString];
-	//	[[self retrieverQueue] addOperation:op];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -107,6 +107,52 @@
 			return NO;
 		}
 	}
+}
+
+- (NSOperationQueue *)retrieverQueue {
+	if(nil == _retrieverQueue) {
+		_retrieverQueue = [[NSOperationQueue alloc] init];
+		_retrieverQueue.maxConcurrentOperationCount = 1;
+	}
+	return _retrieverQueue;
+}
+
+- (void)getImageForPath:(NSString *)imagePath
+{
+	UIImage *downloadedImage = [UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:imagePath]]];
+	if ((downloadedImage.size.width > 1.0) || (downloadedImage.size.height > 1.0)) {
+		[self performSelectorOnMainThread:@selector(showImageViewWithImage:)
+							   withObject:downloadedImage
+							waitUntilDone:NO];
+	} else {
+		[self performSelectorOnMainThread:@selector(hideImageView)
+							   withObject:nil
+							waitUntilDone:NO];
+	}
+}
+
+- (void)showImageViewWithImage:(UIImage *)anImage
+{
+	self.siteImage.image = anImage;
+	[self.siteImage setHidden:NO];
+	[self.imageButton setHidden:NO];
+	self.siteName.frame = CGRectMake(108.0, 15.0, 300.0, 15.0);
+	self.siteID.frame = CGRectMake(108.0, 35.0, 300.0, 15.0);
+	self.siteAddress1.frame = CGRectMake(108.0, 55.0, 300.0, 15.0);
+	self.siteAddress2.frame = CGRectMake(108.0, 75.0, 300.0, 15.0);
+
+}
+
+- (void)hideImageView
+{
+	[self.siteImage setHidden:YES];
+	[self.imageButton setHidden:YES];
+	/*
+	 self.siteName.frame = CGRectMake(10.0, 15.0, 300.0, 15.0);
+	 self.siteID.frame = CGRectMake(10.0, 35.0, 300.0, 15.0);
+	 self.siteAddress1.frame = CGRectMake(10.0, 55.0, 300.0, 15.0);
+	 self.siteAddress2.frame = CGRectMake(10.0, 75.0, 300.0, 15.0);
+	 */
 }
 
 - (IBAction)dismissAction:(id)sender

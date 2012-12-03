@@ -124,6 +124,8 @@
 		FF74E903163C436B00EFC510 /* Competitors.png in Resources */ = {isa = PBXBuildFile; fileRef = FF74E902163C436B00EFC510 /* Competitors.png */; };
 		FF7AC397166905C400B1CC11 /* toolbarBackground.png in Resources */ = {isa = PBXBuildFile; fileRef = FF7AC395166905C400B1CC11 /* toolbarBackground.png */; };
 		FF7AC398166905C400B1CC11 /* toolbarBackground@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = FF7AC396166905C400B1CC11 /* toolbarBackground@2x.png */; };
+		FF7AC3B4166D210200B1CC11 /* grey-background.png in Resources */ = {isa = PBXBuildFile; fileRef = FF7AC3B2166D210200B1CC11 /* grey-background.png */; };
+		FF7AC3B5166D210200B1CC11 /* grey-background@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = FF7AC3B3166D210200B1CC11 /* grey-background@2x.png */; };
 		FF879464161BA83600457005 /* route_bar.png in Resources */ = {isa = PBXBuildFile; fileRef = FF879462161BA83600457005 /* route_bar.png */; };
 		FF879465161BA83600457005 /* route_bar@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = FF879463161BA83600457005 /* route_bar@2x.png */; };
 		FF98B8891484096000D62F5A /* AddressBook.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FF98B8871484096000D62F5A /* AddressBook.framework */; };
@@ -489,6 +491,8 @@
 		FF74E902163C436B00EFC510 /* Competitors.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Competitors.png; sourceTree = "<group>"; };
 		FF7AC395166905C400B1CC11 /* toolbarBackground.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = toolbarBackground.png; sourceTree = "<group>"; };
 		FF7AC396166905C400B1CC11 /* toolbarBackground@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "toolbarBackground@2x.png"; sourceTree = "<group>"; };
+		FF7AC3B2166D210200B1CC11 /* grey-background.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "grey-background.png"; path = "SBA Sites/Common/Backgrounds/grey-background.png"; sourceTree = SOURCE_ROOT; };
+		FF7AC3B3166D210200B1CC11 /* grey-background@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "grey-background@2x.png"; path = "SBA Sites/Common/Backgrounds/grey-background@2x.png"; sourceTree = SOURCE_ROOT; };
 		FF879462161BA83600457005 /* route_bar.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = route_bar.png; sourceTree = "<group>"; };
 		FF879463161BA83600457005 /* route_bar@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "route_bar@2x.png"; sourceTree = "<group>"; };
 		FF98B8871484096000D62F5A /* AddressBook.framework */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = wrapper.framework; name = AddressBook.framework; path = System/Library/Frameworks/AddressBook.framework; sourceTree = SDKROOT; };
@@ -1086,6 +1090,8 @@
 		FFD6B85016639D22009CC18A /* theme */ = {
 			isa = PBXGroup;
 			children = (
+				FF7AC3B2166D210200B1CC11 /* grey-background.png */,
+				FF7AC3B3166D210200B1CC11 /* grey-background@2x.png */,
 				FF7AC395166905C400B1CC11 /* toolbarBackground.png */,
 				FF7AC396166905C400B1CC11 /* toolbarBackground@2x.png */,
 				FFD6B85116639D22009CC18A /* backButton.png */,
@@ -1803,6 +1809,8 @@
 				FFD6BA631663A895009CC18A /* barButtonDone@2x.png in Resources */,
 				FF7AC397166905C400B1CC11 /* toolbarBackground.png in Resources */,
 				FF7AC398166905C400B1CC11 /* toolbarBackground@2x.png in Resources */,
+				FF7AC3B4166D210200B1CC11 /* grey-background.png in Resources */,
+				FF7AC3B5166D210200B1CC11 /* grey-background@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

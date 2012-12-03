@@ -41,6 +41,9 @@
 @property (strong, nonatomic) IBOutlet UILabel *mtaLabel;
 @property (strong, nonatomic) IBOutlet UILabel *btaLabel;
 
+@property (nonatomic, strong) NSOperationQueue* retrieverQueue;
+
+
 - (IBAction)pageControlTapped:(id)sender;
 - (IBAction)presentModalImage:(id)sender;
 - (IBAction)dismissAction:(id)sender;
