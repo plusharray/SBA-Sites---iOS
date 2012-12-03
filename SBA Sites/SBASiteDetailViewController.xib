@@ -176,6 +176,7 @@
 								<reference key="NSSuperview" ref="900854125"/>
 								<reference key="NSWindow"/>
 								<reference key="NSNextKeyView" ref="433152810"/>
+								<int key="IBUIContentMode">1</int>
 								<bool key="IBUIUserInteractionEnabled">NO</bool>
 								<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 								<object class="NSCustomResource" key="IBUIImage">
@@ -189,7 +190,6 @@
 								<string key="NSFrame">{{164, 348}, {136, 37}}</string>
 								<reference key="NSSuperview" ref="900854125"/>
 								<reference key="NSWindow"/>
-								<reference key="NSNextKeyView"/>
 								<bool key="IBUIOpaque">NO</bool>
 								<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 								<int key="IBUIContentHorizontalAlignment">0</int>
@@ -1393,7 +1393,7 @@
 		<int key="IBDocument.defaultPropertyAccessControl">3</int>
 		<object class="NSMutableDictionary" key="IBDocument.LastKnownImageSizes">
 			<string key="NS.key.0">logo_small.png</string>
-			<string key="NS.object.0">{85, 28}</string>
+			<string key="NS.object.0">{156, 28}</string>
 		</object>
 		<string key="IBCocoaTouchPluginVersion">1930</string>
 	</data>

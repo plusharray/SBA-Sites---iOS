@@ -68,6 +68,7 @@
 	@catch (NSException * e) {
 		NSLog(@"IntelligentSplitViewController DE-OBSERVING CRASHED: %@ ... error:%@", self.title, [e description]);
 	}
+
 }
 
 

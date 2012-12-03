@@ -218,6 +218,7 @@
 						<string key="NSFrame">{{117, 424}, {85, 28}}</string>
 						<reference key="NSSuperview" ref="234395083"/>
 						<reference key="NSWindow"/>
+						<reference key="NSNextKeyView"/>
 						<int key="IBUIContentMode">1</int>
 						<bool key="IBUIUserInteractionEnabled">NO</bool>
 						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
@@ -252,6 +253,7 @@
 						<string key="NSFrame">{{12, 8}, {30, 28}}</string>
 						<reference key="NSSuperview" ref="163296584"/>
 						<reference key="NSWindow"/>
+						<reference key="NSNextKeyView"/>
 						<bool key="IBUIOpaque">NO</bool>
 						<int key="IBUITag">59</int>
 						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
@@ -396,6 +398,7 @@
 						<string key="NSFrame">{{278, 8}, {30, 28}}</string>
 						<reference key="NSSuperview" ref="835269961"/>
 						<reference key="NSWindow"/>
+						<reference key="NSNextKeyView"/>
 						<bool key="IBUIOpaque">NO</bool>
 						<int key="IBUITag">59</int>
 						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
@@ -1093,7 +1096,7 @@
 			<string key="clearsketch.gif">{28, 28}</string>
 			<string key="clearsketchX.gif">{28, 28}</string>
 			<string key="left-direction-arrow.png">{20, 20}</string>
-			<string key="logo_small.png">{85, 28}</string>
+			<string key="logo_small.png">{156, 28}</string>
 			<string key="redo.gif">{28, 28}</string>
 			<string key="redoX.gif">{28, 28}</string>
 			<string key="right-direction-arrow.png">{20, 20}</string>

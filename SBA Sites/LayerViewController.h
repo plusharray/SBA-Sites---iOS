@@ -14,6 +14,7 @@
 @property (nonatomic, strong) IBOutlet UITableView *tableView;
 @property (nonatomic, strong) NSMutableArray *layerArray;
 @property (nonatomic) NSInteger selectedMapType;
+@property (strong, nonatomic) IBOutlet UIButton *doneButton;
 
 - (IBAction)mapType:(UISegmentedControl *)segmentPick;
 - (IBAction)dismissAction:(id)sender;

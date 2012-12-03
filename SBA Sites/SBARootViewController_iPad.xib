@@ -64,7 +64,6 @@
 						<string key="NSFrame">{{0, 916}, {768, 44}}</string>
 						<reference key="NSSuperview" ref="980413674"/>
 						<reference key="NSWindow"/>
-						<reference key="NSNextKeyView"/>
 						<string key="NSReuseIdentifierKey">_NS:372</string>
 						<bool key="IBUIOpaque">NO</bool>
 						<bool key="IBUIClearsContextBeforeDrawing">NO</bool>
@@ -196,7 +195,7 @@
 					<object class="IBUIImageView" id="856276891">
 						<reference key="NSNextResponder" ref="980413674"/>
 						<int key="NSvFlags">292</int>
-						<string key="NSFrame">{{332, 5}, {105, 34}}</string>
+						<string key="NSFrame">{{281, 5}, {207, 34}}</string>
 						<reference key="NSSuperview" ref="980413674"/>
 						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="191373211"/>
@@ -204,7 +203,7 @@
 							<int key="NSColorSpace">3</int>
 							<bytes key="NSWhite">MCAwAA</bytes>
 						</object>
-						<int key="IBUIContentMode">2</int>
+						<int key="IBUIContentMode">1</int>
 						<bool key="IBUIUserInteractionEnabled">NO</bool>
 						<string key="targetRuntimeIdentifier">IBIPadFramework</string>
 						<object class="NSCustomResource" key="IBUIImage">
@@ -235,7 +234,6 @@
 						<string key="NSFrame">{{12, 8}, {30, 28}}</string>
 						<reference key="NSSuperview" ref="158262789"/>
 						<reference key="NSWindow"/>
-						<reference key="NSNextKeyView"/>
 						<bool key="IBUIOpaque">NO</bool>
 						<int key="IBUITag">59</int>
 						<string key="targetRuntimeIdentifier">IBIPadFramework</string>
@@ -395,7 +393,6 @@
 						<string key="NSFrame">{{278, 8}, {30, 28}}</string>
 						<reference key="NSSuperview" ref="779394436"/>
 						<reference key="NSWindow"/>
-						<reference key="NSNextKeyView"/>
 						<bool key="IBUIOpaque">NO</bool>
 						<int key="IBUITag">59</int>
 						<string key="targetRuntimeIdentifier">IBIPadFramework</string>
@@ -1092,7 +1089,7 @@
 			<string key="clearsketch.gif">{28, 28}</string>
 			<string key="clearsketchX.gif">{28, 28}</string>
 			<string key="left-direction-arrow.png">{20, 20}</string>
-			<string key="logo.png">{200, 66}</string>
+			<string key="logo.png">{340, 61}</string>
 			<string key="redo.gif">{28, 28}</string>
 			<string key="redoX.gif">{28, 28}</string>
 			<string key="right-direction-arrow.png">{20, 20}</string>

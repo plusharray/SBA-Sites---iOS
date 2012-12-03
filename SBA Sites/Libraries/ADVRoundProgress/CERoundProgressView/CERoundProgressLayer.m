@@ -35,6 +35,7 @@
     return self;
 }
 
+
 + (BOOL) needsDisplayForKey:(NSString *)key
 {
     if([key isEqualToString:@"progress"])

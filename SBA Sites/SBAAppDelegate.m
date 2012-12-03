@@ -19,7 +19,7 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-	//[ADVThemeManager customizeAppAppearance];
+	[ADVThemeManager customizeAppAppearance];
 	
     [TestFlight takeOff:@"44e08cf8835fb9c0b50b3581e05f5612_MTA2MjEyMDExLTExLTExIDE1OjEzOjE4LjUwNzc5NQ"];
 	

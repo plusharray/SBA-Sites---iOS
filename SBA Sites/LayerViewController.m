@@ -25,6 +25,13 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self.mapTypeSegmentedControl setSelectedSegmentIndex:self.selectedMapType];
+	UIImage *normalImage = [UIImage imageNamed:@"button-gray.png"];
+    normalImage = [normalImage resizableImageWithCapInsets:UIEdgeInsetsMake(0.0, 53.0, 0.0, 53.0)];
+	[self.doneButton setBackgroundImage:normalImage forState:UIControlStateNormal];
+	
+	UIImage *highlightedImage = [UIImage imageNamed:@"button-gray-pressed.png"];
+    highlightedImage = [highlightedImage resizableImageWithCapInsets:UIEdgeInsetsMake(0.0, 53.0, 0.0, 53.0)];
+	[self.doneButton setBackgroundImage:highlightedImage forState:UIControlStateHighlighted];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -117,5 +124,9 @@
 }
 
 
+- (void)viewDidUnload {
+    [self setDoneButton:nil];
+    [super viewDidUnload];
+}
 @end
 
