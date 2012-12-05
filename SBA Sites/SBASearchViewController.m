@@ -396,7 +396,7 @@
         // Return to the main view controller.
         self.addressBookSearch = YES;
 		[self searchForString:address];
-		
+		[self dismissViewControllerAnimated:YES completion:^(void){}];
 	}
 	return NO;
 }
@@ -469,6 +469,9 @@
 		}
         
 		self.searchActiveForwardGeocode = NO;
+		if (![self.searchDisplayController isActive]) {
+			[self.searchDisplayController setActive:YES animated:YES];
+		}
 		[self.searchDisplayController.searchResultsTableView reloadData];
 		message = @"Forward Geocoder Success.";
 	}
