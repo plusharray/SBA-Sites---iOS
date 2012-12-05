@@ -150,8 +150,20 @@
     }
     
     AGSIdentifyResult *result = [self.sites objectAtIndex:indexPath.row];
-    cell.textLabel.text = [result.feature.attributes valueForKey:@"SiteName"];
-    cell.detailTextLabel.text = [result.feature.attributes valueForKey:@"SiteCode"];
+	
+	//get the site code & name
+	NSString *title = nil;
+	NSString *subtitle = nil;
+	if (result.layerId != 5) {
+		title = [result.feature.attributes objectForKey:@"SiteCode"];
+		subtitle = [result.feature.attributes objectForKey:@"SiteName"];
+	} else {
+		title = [result.feature.attributes objectForKey:@"company"];
+		subtitle = [result.feature.attributes objectForKey:@"identifier"];
+	}
+	
+    cell.textLabel.text = subtitle;
+    cell.detailTextLabel.text = title;
     cell.imageView.image = [UIImage imageNamed:[result layerName]];
     
     return cell;
