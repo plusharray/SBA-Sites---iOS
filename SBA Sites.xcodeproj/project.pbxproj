@@ -120,13 +120,13 @@
 		FF64CEA114851FE6003CC124 /* BSKmlResult.m in Sources */ = {isa = PBXBuildFile; fileRef = FF64CE9A14851FE6003CC124 /* BSKmlResult.m */; };
 		FF64CEA214851FE6003CC124 /* CustomPlacemark.m in Sources */ = {isa = PBXBuildFile; fileRef = FF64CE9C14851FE6003CC124 /* CustomPlacemark.m */; };
 		FF64CEA314851FE6003CC124 /* BSForwardGeocoder.m in Sources */ = {isa = PBXBuildFile; fileRef = FF64CE9E14851FE6003CC124 /* BSForwardGeocoder.m */; };
+		FF650052168236FE00073A6D /* map.png in Resources */ = {isa = PBXBuildFile; fileRef = FF650051168236FE00073A6D /* map.png */; };
 		FF74E900163C37C600EFC510 /* PAAuthorizationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = FF74E8FF163C37C600EFC510 /* PAAuthorizationManager.m */; };
 		FF74E903163C436B00EFC510 /* Competitors.png in Resources */ = {isa = PBXBuildFile; fileRef = FF74E902163C436B00EFC510 /* Competitors.png */; };
 		FF7AC397166905C400B1CC11 /* toolbarBackground.png in Resources */ = {isa = PBXBuildFile; fileRef = FF7AC395166905C400B1CC11 /* toolbarBackground.png */; };
 		FF7AC398166905C400B1CC11 /* toolbarBackground@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = FF7AC396166905C400B1CC11 /* toolbarBackground@2x.png */; };
 		FF7AC3B4166D210200B1CC11 /* grey-background.png in Resources */ = {isa = PBXBuildFile; fileRef = FF7AC3B2166D210200B1CC11 /* grey-background.png */; };
 		FF7AC3B5166D210200B1CC11 /* grey-background@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = FF7AC3B3166D210200B1CC11 /* grey-background@2x.png */; };
-		FF7C7287167002D900452662 /* Icon-512.jpg in Resources */ = {isa = PBXBuildFile; fileRef = FF7C7286167002D900452662 /* Icon-512.jpg */; };
 		FF879464161BA83600457005 /* route_bar.png in Resources */ = {isa = PBXBuildFile; fileRef = FF879462161BA83600457005 /* route_bar.png */; };
 		FF879465161BA83600457005 /* route_bar@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = FF879463161BA83600457005 /* route_bar@2x.png */; };
 		FF98B8891484096000D62F5A /* AddressBook.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FF98B8871484096000D62F5A /* AddressBook.framework */; };
@@ -329,6 +329,7 @@
 		FFD6BA5F1663A16F009CC18A /* ADVTheme.m in Sources */ = {isa = PBXBuildFile; fileRef = FFD6BA3C1663A16F009CC18A /* ADVTheme.m */; };
 		FFD6BA621663A895009CC18A /* barButtonDone.png in Resources */ = {isa = PBXBuildFile; fileRef = FFD6BA601663A894009CC18A /* barButtonDone.png */; };
 		FFD6BA631663A895009CC18A /* barButtonDone@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = FFD6BA611663A894009CC18A /* barButtonDone@2x.png */; };
+		FFE97332167FD8A400733A25 /* Icon-512.png in Resources */ = {isa = PBXBuildFile; fileRef = FFE97331167FD8A400733A25 /* Icon-512.png */; };
 		FFF040E01474050A00A701A9 /* SBASiteTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FFF040DE1474050A00A701A9 /* SBASiteTableViewController.m */; };
 		FFF040E11474050A00A701A9 /* SBASiteTableViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = FFF040DF1474050A00A701A9 /* SBASiteTableViewController.xib */; };
 		FFF040E71474074100A701A9 /* SBAConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = FFF040E61474074100A701A9 /* SBAConstants.m */; };
@@ -487,6 +488,7 @@
 		FF64CE9C14851FE6003CC124 /* CustomPlacemark.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomPlacemark.m; sourceTree = "<group>"; };
 		FF64CE9D14851FE6003CC124 /* BSForwardGeocoder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BSForwardGeocoder.h; sourceTree = "<group>"; };
 		FF64CE9E14851FE6003CC124 /* BSForwardGeocoder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BSForwardGeocoder.m; sourceTree = "<group>"; };
+		FF650051168236FE00073A6D /* map.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = map.png; sourceTree = "<group>"; };
 		FF74E8FE163C37C600EFC510 /* PAAuthorizationManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PAAuthorizationManager.h; sourceTree = "<group>"; };
 		FF74E8FF163C37C600EFC510 /* PAAuthorizationManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PAAuthorizationManager.m; sourceTree = "<group>"; };
 		FF74E902163C436B00EFC510 /* Competitors.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Competitors.png; sourceTree = "<group>"; };
@@ -494,7 +496,6 @@
 		FF7AC396166905C400B1CC11 /* toolbarBackground@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "toolbarBackground@2x.png"; sourceTree = "<group>"; };
 		FF7AC3B2166D210200B1CC11 /* grey-background.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "grey-background.png"; path = "SBA Sites/Common/Backgrounds/grey-background.png"; sourceTree = SOURCE_ROOT; };
 		FF7AC3B3166D210200B1CC11 /* grey-background@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "grey-background@2x.png"; path = "SBA Sites/Common/Backgrounds/grey-background@2x.png"; sourceTree = SOURCE_ROOT; };
-		FF7C7286167002D900452662 /* Icon-512.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "Icon-512.jpg"; sourceTree = SOURCE_ROOT; };
 		FF879462161BA83600457005 /* route_bar.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = route_bar.png; sourceTree = "<group>"; };
 		FF879463161BA83600457005 /* route_bar@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "route_bar@2x.png"; sourceTree = "<group>"; };
 		FF98B8871484096000D62F5A /* AddressBook.framework */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = wrapper.framework; name = AddressBook.framework; path = System/Library/Frameworks/AddressBook.framework; sourceTree = SDKROOT; };
@@ -722,6 +723,7 @@
 		FFD6BA3C1663A16F009CC18A /* ADVTheme.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ADVTheme.m; sourceTree = "<group>"; };
 		FFD6BA601663A894009CC18A /* barButtonDone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = barButtonDone.png; sourceTree = "<group>"; };
 		FFD6BA611663A894009CC18A /* barButtonDone@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "barButtonDone@2x.png"; sourceTree = "<group>"; };
+		FFE97331167FD8A400733A25 /* Icon-512.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-512.png"; sourceTree = "<group>"; };
 		FFF040DD1474050A00A701A9 /* SBASiteTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBASiteTableViewController.h; sourceTree = "<group>"; };
 		FFF040DE1474050A00A701A9 /* SBASiteTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBASiteTableViewController.m; sourceTree = "<group>"; };
 		FFF040DF1474050A00A701A9 /* SBASiteTableViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SBASiteTableViewController.xib; sourceTree = "<group>"; };
@@ -916,6 +918,7 @@
 		FF41375414587E5600F36E7C /* images */ = {
 			isa = PBXGroup;
 			children = (
+				FF650051168236FE00073A6D /* map.png */,
 				FFD6B85016639D22009CC18A /* theme */,
 				FFB96567163BFCEA00167719 /* Bar Button Icons */,
 				FF879462161BA83600457005 /* route_bar.png */,
@@ -991,7 +994,7 @@
 		FF41375714587E7C00F36E7C /* app icons */ = {
 			isa = PBXGroup;
 			children = (
-				FF7C7286167002D900452662 /* Icon-512.jpg */,
+				FFE97331167FD8A400733A25 /* Icon-512.png */,
 				FFC7BDAB1620F4470016DAD3 /* Icon-72@2x.png */,
 				FFC7BDA91620F4410016DAD3 /* Icon-72.png */,
 				FFC7BDA71620F4330016DAD3 /* Icon@2x.png */,
@@ -1814,7 +1817,8 @@
 				FF7AC398166905C400B1CC11 /* toolbarBackground@2x.png in Resources */,
 				FF7AC3B4166D210200B1CC11 /* grey-background.png in Resources */,
 				FF7AC3B5166D210200B1CC11 /* grey-background@2x.png in Resources */,
-				FF7C7287167002D900452662 /* Icon-512.jpg in Resources */,
+				FFE97332167FD8A400733A25 /* Icon-512.png in Resources */,
+				FF650052168236FE00073A6D /* map.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2056,7 +2060,7 @@
 					"$(inherited)",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "381FA7F0-2859-44F3-B9CC-9ABE27292743";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "CFBCF9B4-9B85-465F-9019-7894C3C2C002";
 				RUN_CLANG_STATIC_ANALYZER = YES;
 				USER_HEADER_SEARCH_PATHS = "\"$(SRCROOT)\"/** $(HOME)/Library/SDKs/ArcGIS/iOS.sdk/usr/local/include/**/** \"$(SRCROOT)/\"/**";
 				VALID_ARCHS = armv7;
