@@ -164,6 +164,7 @@
 {
     //update swipe view page
     [self.swipeView scrollToPage:self.pageControl.currentPage duration:0.4];
+
 }
 
 - (IBAction)presentModalImage:(id)sender

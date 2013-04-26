@@ -330,18 +330,17 @@
 		FFD6BA621663A895009CC18A /* barButtonDone.png in Resources */ = {isa = PBXBuildFile; fileRef = FFD6BA601663A894009CC18A /* barButtonDone.png */; };
 		FFD6BA631663A895009CC18A /* barButtonDone@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = FFD6BA611663A894009CC18A /* barButtonDone@2x.png */; };
 		FFE97332167FD8A400733A25 /* Icon-512.png in Resources */ = {isa = PBXBuildFile; fileRef = FFE97331167FD8A400733A25 /* Icon-512.png */; };
+		FFE98979172583B400C4EEE4 /* Central\South America.png in Resources */ = {isa = PBXBuildFile; fileRef = FFE98978172583B400C4EEE4 /* Central\South America.png */; };
 		FFF040E01474050A00A701A9 /* SBASiteTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FFF040DE1474050A00A701A9 /* SBASiteTableViewController.m */; };
 		FFF040E11474050A00A701A9 /* SBASiteTableViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = FFF040DF1474050A00A701A9 /* SBASiteTableViewController.xib */; };
 		FFF040E71474074100A701A9 /* SBAConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = FFF040E61474074100A701A9 /* SBAConstants.m */; };
 		FFF0853E14769A33001B1C1E /* SBA Owned.png in Resources */ = {isa = PBXBuildFile; fileRef = FFF0853914769A33001B1C1E /* SBA Owned.png */; };
 		FFF0853F14769A33001B1C1E /* New Construction.png in Resources */ = {isa = PBXBuildFile; fileRef = FFF0853A14769A33001B1C1E /* New Construction.png */; };
 		FFF0854014769A33001B1C1E /* SBA Managed.png in Resources */ = {isa = PBXBuildFile; fileRef = FFF0853B14769A33001B1C1E /* SBA Managed.png */; };
-		FFF0854114769A33001B1C1E /* Central America.png in Resources */ = {isa = PBXBuildFile; fileRef = FFF0853C14769A33001B1C1E /* Central America.png */; };
 		FFF0854214769A33001B1C1E /* Canada.png in Resources */ = {isa = PBXBuildFile; fileRef = FFF0853D14769A33001B1C1E /* Canada.png */; };
 		FFF085461476A8A9001B1C1E /* Grey.png in Resources */ = {isa = PBXBuildFile; fileRef = FFF085451476A8A9001B1C1E /* Grey.png */; };
 		FFF8B1FB1627F05B0058E08B /* SBASiteInfoTemplate.m in Sources */ = {isa = PBXBuildFile; fileRef = FFF8B1FA1627F05B0058E08B /* SBASiteInfoTemplate.m */; };
 		FFF8B2041627F11E0058E08B /* SBASiteInfoTemplateView.xib in Resources */ = {isa = PBXBuildFile; fileRef = FFF8B2031627F11E0058E08B /* SBASiteInfoTemplateView.xib */; };
-		FFFC4A0014895AC90009EEDE /* SBASiteDetailViewController-iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = FFFC49FF14895AC90009EEDE /* SBASiteDetailViewController-iPad.xib */; };
 		FFFC4A0314895B560009EEDE /* SiteImageViewController-iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = FFFC4A0214895B560009EEDE /* SiteImageViewController-iPad.xib */; };
 /* End PBXBuildFile section */
 
@@ -724,6 +723,7 @@
 		FFD6BA601663A894009CC18A /* barButtonDone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = barButtonDone.png; sourceTree = "<group>"; };
 		FFD6BA611663A894009CC18A /* barButtonDone@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "barButtonDone@2x.png"; sourceTree = "<group>"; };
 		FFE97331167FD8A400733A25 /* Icon-512.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-512.png"; sourceTree = "<group>"; };
+		FFE98978172583B400C4EEE4 /* Central\South America.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Central\\South America.png"; sourceTree = "<group>"; };
 		FFF040DD1474050A00A701A9 /* SBASiteTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBASiteTableViewController.h; sourceTree = "<group>"; };
 		FFF040DE1474050A00A701A9 /* SBASiteTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBASiteTableViewController.m; sourceTree = "<group>"; };
 		FFF040DF1474050A00A701A9 /* SBASiteTableViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SBASiteTableViewController.xib; sourceTree = "<group>"; };
@@ -732,13 +732,11 @@
 		FFF0853914769A33001B1C1E /* SBA Owned.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "SBA Owned.png"; sourceTree = "<group>"; };
 		FFF0853A14769A33001B1C1E /* New Construction.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "New Construction.png"; sourceTree = "<group>"; };
 		FFF0853B14769A33001B1C1E /* SBA Managed.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "SBA Managed.png"; sourceTree = "<group>"; };
-		FFF0853C14769A33001B1C1E /* Central America.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Central America.png"; sourceTree = "<group>"; };
 		FFF0853D14769A33001B1C1E /* Canada.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Canada.png; sourceTree = "<group>"; };
 		FFF085451476A8A9001B1C1E /* Grey.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Grey.png; sourceTree = "<group>"; };
 		FFF8B1F91627F05B0058E08B /* SBASiteInfoTemplate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBASiteInfoTemplate.h; sourceTree = "<group>"; };
 		FFF8B1FA1627F05B0058E08B /* SBASiteInfoTemplate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBASiteInfoTemplate.m; sourceTree = "<group>"; };
 		FFF8B2031627F11E0058E08B /* SBASiteInfoTemplateView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SBASiteInfoTemplateView.xib; sourceTree = "<group>"; };
-		FFFC49FF14895AC90009EEDE /* SBASiteDetailViewController-iPad.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = "SBASiteDetailViewController-iPad.xib"; sourceTree = "<group>"; };
 		FFFC4A0214895B560009EEDE /* SiteImageViewController-iPad.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = "SiteImageViewController-iPad.xib"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -889,7 +887,6 @@
 				FF52318114743FFB00EB02FA /* SBASiteDetailViewController.h */,
 				FF52318214743FFB00EB02FA /* SBASiteDetailViewController.m */,
 				FF52317E14743FE800EB02FA /* SBASiteDetailViewController.xib */,
-				FFFC49FF14895AC90009EEDE /* SBASiteDetailViewController-iPad.xib */,
 				FF5231841474406C00EB02FA /* SiteImageViewController.h */,
 				FF5231851474406C00EB02FA /* SiteImageViewController.m */,
 				FF5231871474407800EB02FA /* SiteImageViewController.xib */,
@@ -1491,12 +1488,12 @@
 		FFF0854414769A3A001B1C1E /* layer icons */ = {
 			isa = PBXGroup;
 			children = (
+				FFE98978172583B400C4EEE4 /* Central\South America.png */,
 				FF74E902163C436B00EFC510 /* Competitors.png */,
 				FFF085451476A8A9001B1C1E /* Grey.png */,
 				FFF0853914769A33001B1C1E /* SBA Owned.png */,
 				FFF0853A14769A33001B1C1E /* New Construction.png */,
 				FFF0853B14769A33001B1C1E /* SBA Managed.png */,
-				FFF0853C14769A33001B1C1E /* Central America.png */,
 				FFF0853D14769A33001B1C1E /* Canada.png */,
 			);
 			name = "layer icons";
@@ -1615,12 +1612,10 @@
 				FFF0853E14769A33001B1C1E /* SBA Owned.png in Resources */,
 				FFF0853F14769A33001B1C1E /* New Construction.png in Resources */,
 				FFF0854014769A33001B1C1E /* SBA Managed.png in Resources */,
-				FFF0854114769A33001B1C1E /* Central America.png in Resources */,
 				FFF0854214769A33001B1C1E /* Canada.png in Resources */,
 				FFF085461476A8A9001B1C1E /* Grey.png in Resources */,
 				FF98B8901484141600D62F5A /* SBASearchViewController.xib in Resources */,
 				FF41277E148544EF00A9FD80 /* BluePushpin.png in Resources */,
-				FFFC4A0014895AC90009EEDE /* SBASiteDetailViewController-iPad.xib in Resources */,
 				FFFC4A0314895B560009EEDE /* SiteImageViewController-iPad.xib in Resources */,
 				FF4D5C7B14F27A8E00DBAB5E /* button-highlight.png in Resources */,
 				FF4D5C7C14F27A8E00DBAB5E /* button.png in Resources */,
@@ -1819,6 +1814,7 @@
 				FF7AC3B5166D210200B1CC11 /* grey-background@2x.png in Resources */,
 				FFE97332167FD8A400733A25 /* Icon-512.png in Resources */,
 				FF650052168236FE00073A6D /* map.png in Resources */,
+				FFE98979172583B400C4EEE4 /* Central\South America.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2035,7 +2031,7 @@
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
 				CLANG_ENABLE_OBJC_ARC = YES;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: SBA Communications";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: SBA Communications (FWPDNSNE4B)";
 				COPY_PHASE_STRIP = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -2060,7 +2056,7 @@
 					"$(inherited)",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "CFBCF9B4-9B85-465F-9019-7894C3C2C002";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "E9E1DC74-DF3A-4F5E-AE22-98530BA02895";
 				RUN_CLANG_STATIC_ANALYZER = YES;
 				USER_HEADER_SEARCH_PATHS = "\"$(SRCROOT)\"/** $(HOME)/Library/SDKs/ArcGIS/iOS.sdk/usr/local/include/**/** \"$(SRCROOT)/\"/**";
 				VALID_ARCHS = armv7;

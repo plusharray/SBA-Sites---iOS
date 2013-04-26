@@ -122,6 +122,7 @@
             SBASearchViewController *viewController = [[SBASearchViewController alloc] initWithNibName:@"SBASearchViewController" bundle:nil];
             viewController.mapView = self.mapView;
             viewController.visibleLayers = self.visibleLayers;
+            viewController.dynamicServiceURL = self.dynamicServiceURL;
 			self.masterPopoverController = [[UIPopoverController alloc] initWithContentViewController:viewController];
 			self.masterPopoverController.delegate = self;
 			[self.masterPopoverController presentPopoverFromBarButtonItem:self.showSearchBarButton
@@ -161,8 +162,8 @@
     [self.mapView centerAtPoint:(AGSPoint *)[[result feature] geometry] animated:NO];
     if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
         [self.masterPopoverController dismissPopoverAnimated:YES];
-        if (!self.masterPopoverController.popoverVisible) {
-            SBASiteDetailViewController *viewController = [[SBASiteDetailViewController alloc] initWithNibName:@"DetailViewController-iPad" bundle:nil];
+        //if (!self.masterPopoverController.popoverVisible) {
+            SBASiteDetailViewController *viewController = [[SBASiteDetailViewController alloc] initWithNibName:@"SBASiteDetailViewController" bundle:nil];
             viewController.site = result.feature;
 			viewController.delegate = self;
             viewController.contentSizeForViewInPopover = CGSizeMake(320.0, 416.0);
@@ -170,7 +171,7 @@
             self.masterPopoverController.delegate = self;
             CGPoint point = [self.mapView toScreenPoint:(AGSPoint *)[[result feature] geometry]];
             [self.masterPopoverController presentPopoverFromRect:CGRectMake(point.x, point.y, 1.0, 1.0) inView:self.mapView permittedArrowDirections:UIPopoverArrowDirectionAny animated:YES];
-        }
+        //}
     } else {
         //get the site code & name
         NSString *siteCode = [result.feature.attributes objectForKey:@"SiteCode"];
@@ -332,13 +333,13 @@
 {
 	// Set up the layers
 	if ([[PAAuthorizationManager sharedManager] isLoggedIn]) {
-		if ([[self.layers lastObject] layerID] != @(5)) {
+		if (![[[self.layers lastObject] layerID] isEqual: @(5)]) {
 			[self.layers addObject:[SBALayer layerForID:5]];
 		}
 		_dynamicServiceURL = [NSURL URLWithString:DynamicMapServiceURLAuthenticated];
 		[self setupToolbar];
 	} else {
-		if ([[self.layers lastObject] layerID] == @(5)) {
+		if ([[[self.layers lastObject] layerID] isEqual: @(5)]) {
 			[self.layers removeObject:[self.layers lastObject]];
 		}
 		_dynamicServiceURL = [NSURL URLWithString:DynamicMapServiceURL];
@@ -907,7 +908,7 @@
     params.contains = YES;
     params.layerIds = [self.visibleLayers valueForKey:@"layerID"];
     params.outSpatialReference = self.mapView.spatialReference;
-    params.returnGeometry = NO;
+    params.returnGeometry = YES;
     params.searchFields = @[@"SiteName", @"SiteCode"];
     params.searchText = searchString;
     [self.findTask executeWithParameters:params];
