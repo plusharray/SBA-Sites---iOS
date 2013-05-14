@@ -341,7 +341,6 @@
 		FFF085461476A8A9001B1C1E /* Grey.png in Resources */ = {isa = PBXBuildFile; fileRef = FFF085451476A8A9001B1C1E /* Grey.png */; };
 		FFF8B1FB1627F05B0058E08B /* SBASiteInfoTemplate.m in Sources */ = {isa = PBXBuildFile; fileRef = FFF8B1FA1627F05B0058E08B /* SBASiteInfoTemplate.m */; };
 		FFF8B2041627F11E0058E08B /* SBASiteInfoTemplateView.xib in Resources */ = {isa = PBXBuildFile; fileRef = FFF8B2031627F11E0058E08B /* SBASiteInfoTemplateView.xib */; };
-		FFFC4A0014895AC90009EEDE /* SBASiteDetailViewController-iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = FFFC49FF14895AC90009EEDE /* SBASiteDetailViewController-iPad.xib */; };
 		FFFC4A0314895B560009EEDE /* SiteImageViewController-iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = FFFC4A0214895B560009EEDE /* SiteImageViewController-iPad.xib */; };
 /* End PBXBuildFile section */
 
@@ -738,7 +737,6 @@
 		FFF8B1F91627F05B0058E08B /* SBASiteInfoTemplate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBASiteInfoTemplate.h; sourceTree = "<group>"; };
 		FFF8B1FA1627F05B0058E08B /* SBASiteInfoTemplate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBASiteInfoTemplate.m; sourceTree = "<group>"; };
 		FFF8B2031627F11E0058E08B /* SBASiteInfoTemplateView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SBASiteInfoTemplateView.xib; sourceTree = "<group>"; };
-		FFFC49FF14895AC90009EEDE /* SBASiteDetailViewController-iPad.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = "SBASiteDetailViewController-iPad.xib"; sourceTree = "<group>"; };
 		FFFC4A0214895B560009EEDE /* SiteImageViewController-iPad.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = "SiteImageViewController-iPad.xib"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -889,7 +887,6 @@
 				FF52318114743FFB00EB02FA /* SBASiteDetailViewController.h */,
 				FF52318214743FFB00EB02FA /* SBASiteDetailViewController.m */,
 				FF52317E14743FE800EB02FA /* SBASiteDetailViewController.xib */,
-				FFFC49FF14895AC90009EEDE /* SBASiteDetailViewController-iPad.xib */,
 				FF5231841474406C00EB02FA /* SiteImageViewController.h */,
 				FF5231851474406C00EB02FA /* SiteImageViewController.m */,
 				FF5231871474407800EB02FA /* SiteImageViewController.xib */,
@@ -1620,7 +1617,6 @@
 				FFF085461476A8A9001B1C1E /* Grey.png in Resources */,
 				FF98B8901484141600D62F5A /* SBASearchViewController.xib in Resources */,
 				FF41277E148544EF00A9FD80 /* BluePushpin.png in Resources */,
-				FFFC4A0014895AC90009EEDE /* SBASiteDetailViewController-iPad.xib in Resources */,
 				FFFC4A0314895B560009EEDE /* SiteImageViewController-iPad.xib in Resources */,
 				FF4D5C7B14F27A8E00DBAB5E /* button-highlight.png in Resources */,
 				FF4D5C7C14F27A8E00DBAB5E /* button.png in Resources */,

@@ -196,6 +196,10 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath 
 {
+    if ([[tableView cellForRowAtIndexPath:indexPath].textLabel.text isEqualToString:@"No Results Found"]) {
+        [tableView deselectRowAtIndexPath:indexPath animated:YES];
+        return;
+    }
     [self.searchDisplayController setActive:NO animated:YES];
     if (indexPath.section == 0) {
         [[NSNotificationCenter defaultCenter] postNotificationName:SBASiteSelected object:[self.siteResults objectAtIndex:indexPath.row]];
@@ -287,7 +291,7 @@
     params.contains = YES;
     params.layerIds = [self.visibleLayers valueForKey:@"layerID"];
     params.outSpatialReference = self.mapView.spatialReference;
-    params.returnGeometry = NO;
+    params.returnGeometry = YES;
     params.searchFields = @[@"SiteName", @"SiteCode"];
     params.searchText = searchString;
     [self.findTask executeWithParameters:params];

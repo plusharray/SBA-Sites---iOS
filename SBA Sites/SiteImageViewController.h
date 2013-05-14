@@ -19,7 +19,7 @@
 #pragma mark Properties
 #pragma mark -
 //=========================================================== 
-@property (nonatomic, strong) NSString *pathString;
+@property (nonatomic, strong) IBOutlet NSString *pathString;
 @property (nonatomic, strong) IBOutlet UIImageView *imageView;
 
 
