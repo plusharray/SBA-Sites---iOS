@@ -23,5 +23,5 @@ NSString * const SBALayerNewConstruction = @"New Construction";
 NSString * const SBALayerOwned = @"SBA Owned";
 NSString * const SBALayerManaged = @"SBA Managed";
 NSString * const SBALayerCanada = @"Canada";
-NSString * const SBALayerCentralAmerica = @"Central America";
+NSString * const SBALayerCentralAmerica = @"South\\Central America";
 NSString * const SBALayerCompetitors = @"Competitors";

@@ -336,7 +336,7 @@
 		FFF0853E14769A33001B1C1E /* SBA Owned.png in Resources */ = {isa = PBXBuildFile; fileRef = FFF0853914769A33001B1C1E /* SBA Owned.png */; };
 		FFF0853F14769A33001B1C1E /* New Construction.png in Resources */ = {isa = PBXBuildFile; fileRef = FFF0853A14769A33001B1C1E /* New Construction.png */; };
 		FFF0854014769A33001B1C1E /* SBA Managed.png in Resources */ = {isa = PBXBuildFile; fileRef = FFF0853B14769A33001B1C1E /* SBA Managed.png */; };
-		FFF0854114769A33001B1C1E /* Central America.png in Resources */ = {isa = PBXBuildFile; fileRef = FFF0853C14769A33001B1C1E /* Central America.png */; };
+		FFF0854114769A33001B1C1E /* South\Central America.png in Resources */ = {isa = PBXBuildFile; fileRef = FFF0853C14769A33001B1C1E /* South\Central America.png */; };
 		FFF0854214769A33001B1C1E /* Canada.png in Resources */ = {isa = PBXBuildFile; fileRef = FFF0853D14769A33001B1C1E /* Canada.png */; };
 		FFF085461476A8A9001B1C1E /* Grey.png in Resources */ = {isa = PBXBuildFile; fileRef = FFF085451476A8A9001B1C1E /* Grey.png */; };
 		FFF8B1FB1627F05B0058E08B /* SBASiteInfoTemplate.m in Sources */ = {isa = PBXBuildFile; fileRef = FFF8B1FA1627F05B0058E08B /* SBASiteInfoTemplate.m */; };
@@ -731,7 +731,7 @@
 		FFF0853914769A33001B1C1E /* SBA Owned.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "SBA Owned.png"; sourceTree = "<group>"; };
 		FFF0853A14769A33001B1C1E /* New Construction.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "New Construction.png"; sourceTree = "<group>"; };
 		FFF0853B14769A33001B1C1E /* SBA Managed.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "SBA Managed.png"; sourceTree = "<group>"; };
-		FFF0853C14769A33001B1C1E /* Central America.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Central America.png"; sourceTree = "<group>"; };
+		FFF0853C14769A33001B1C1E /* South\Central America.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "South\\Central America.png"; sourceTree = "<group>"; };
 		FFF0853D14769A33001B1C1E /* Canada.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Canada.png; sourceTree = "<group>"; };
 		FFF085451476A8A9001B1C1E /* Grey.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Grey.png; sourceTree = "<group>"; };
 		FFF8B1F91627F05B0058E08B /* SBASiteInfoTemplate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBASiteInfoTemplate.h; sourceTree = "<group>"; };
@@ -1493,7 +1493,7 @@
 				FFF0853914769A33001B1C1E /* SBA Owned.png */,
 				FFF0853A14769A33001B1C1E /* New Construction.png */,
 				FFF0853B14769A33001B1C1E /* SBA Managed.png */,
-				FFF0853C14769A33001B1C1E /* Central America.png */,
+				FFF0853C14769A33001B1C1E /* South\Central America.png */,
 				FFF0853D14769A33001B1C1E /* Canada.png */,
 			);
 			name = "layer icons";
@@ -1528,7 +1528,7 @@
 		FF41370814583ED200F36E7C /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0450;
+				LastUpgradeCheck = 0460;
 			};
 			buildConfigurationList = FF41370B14583ED200F36E7C /* Build configuration list for PBXProject "SBA Sites" */;
 			compatibilityVersion = "Xcode 3.2";
@@ -1612,7 +1612,7 @@
 				FFF0853E14769A33001B1C1E /* SBA Owned.png in Resources */,
 				FFF0853F14769A33001B1C1E /* New Construction.png in Resources */,
 				FFF0854014769A33001B1C1E /* SBA Managed.png in Resources */,
-				FFF0854114769A33001B1C1E /* Central America.png in Resources */,
+				FFF0854114769A33001B1C1E /* South\Central America.png in Resources */,
 				FFF0854214769A33001B1C1E /* Canada.png in Resources */,
 				FFF085461476A8A9001B1C1E /* Grey.png in Resources */,
 				FF98B8901484141600D62F5A /* SBASearchViewController.xib in Resources */,
@@ -1945,6 +1945,10 @@
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
 				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
@@ -1958,6 +1962,7 @@
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				SDKROOT = iphoneos;
@@ -1971,12 +1976,17 @@
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
 				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: SBA Communications";
 				COPY_PHASE_STRIP = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
@@ -2056,7 +2066,7 @@
 					"$(inherited)",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "CFBCF9B4-9B85-465F-9019-7894C3C2C002";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "E909A570-045A-4435-8298-70CA455B47A3";
 				RUN_CLANG_STATIC_ANALYZER = YES;
 				USER_HEADER_SEARCH_PATHS = "\"$(SRCROOT)\"/** $(HOME)/Library/SDKs/ArcGIS/iOS.sdk/usr/local/include/**/** \"$(SRCROOT)/\"/**";
 				VALID_ARCHS = armv7;
