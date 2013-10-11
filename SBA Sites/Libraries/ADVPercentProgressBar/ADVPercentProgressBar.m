@@ -65,7 +65,7 @@
         [percentLabel setBackgroundColor:[UIColor clearColor]];
         [percentLabel setTextColor:[UIColor blackColor]];
         [percentLabel setFont:[UIFont boldSystemFontOfSize:11]];
-        [percentLabel setTextAlignment:UITextAlignmentCenter];
+        [percentLabel setTextAlignment:NSTextAlignmentCenter];
         [percentLabel setAdjustsFontSizeToFitWidth:YES];        
         [percentView addSubview:percentLabel];
         [self addSubview:percentView];
